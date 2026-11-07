@@ -1,0 +1,5 @@
+# Build & Scratch directory
+scratch/
+*.bak
+.DS_Store
+Thumbs.db

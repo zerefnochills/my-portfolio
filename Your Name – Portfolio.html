@@ -4,10 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="A hand-crafted developer and designer portfolio sketched in ink and paper with interactive doodles, live projects, and playful animations.">
+<meta name="theme-color" content="#fcf3c6">
+<!-- OpenGraph / Social Metadata -->
+<meta property="og:title" content="Portfolio &amp; Digital Sketchbook">
+<meta property="og:description" content="A hand-crafted developer and designer portfolio sketched in ink and paper with interactive One Piece wanted poster, sound effects, and digital sketchbook studio.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23fcf3c6' stroke='%232d2a9c' stroke-width='2'/><path d='M6 18c0-4 6-6 10-6s10 2 10 6-5 5-10 5-10-1-10-5z' fill='%23eab308' stroke='%232d2a9c' stroke-width='1.5'/><path d='M10 16c0-6 12-6 12 0' fill='%23eab308' stroke='%232d2a9c' stroke-width='1.5'/><path d='M10 15c4 2 8 2 12 0' stroke='%23dc2626' stroke-width='1.8'/></svg>">
 <title>Your Name – Portfolio &amp; Digital Sketchbook</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Patrick+Hand&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400;500;700&family=Mrs+Saint+Delafield&family=Patrick+Hand&family=Space+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root, [data-theme="parchment"] {
   --paper: #fcf3c6;
@@ -85,6 +91,11 @@
   --script: "Mrs Saint Delafield", "Brush Script MT", cursive;
   --hand: "Patrick Hand", "Comic Sans MS", cursive;
   --badge: "Caveat", cursive;
+  --sans: "Space Grotesk", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", monospace;
+  --accent-pink: #f43f5e;
+  --accent-yellow: #facc15;
+  --accent-cyan: #38bdf8;
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -1563,6 +1574,1251 @@ footer {
   .ink { opacity: 1; filter: none; }
   .draw path, .draw ellipse, .draw line, .draw polygon, .draw rect { stroke-dashoffset: 0; }
 }
+
+/* ==========================================================================
+   NEO-BRUTALIST & KURIAN-STYLE ENHANCEMENTS
+   ========================================================================== */
+
+/* Brand & Header */
+.brand-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--ink);
+}
+.brand-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  background: var(--accent-yellow);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 1rem;
+  color: #111;
+  box-shadow: 2.5px 2.5px 0 var(--ink);
+  flex-shrink: 0;
+}
+.brand-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.brand-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.brand-name {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--ink);
+}
+.brand-tag {
+  font-family: var(--badge);
+  font-size: 1.05rem;
+  padding: 1px 7px;
+  border: 1.5px solid var(--ink);
+  border-radius: 12px 4px 14px 3px;
+  transform: rotate(-3deg);
+  color: var(--ink);
+}
+.irl-nav-btn {
+  background: none;
+  border: none;
+  font-family: var(--hand);
+  font-size: 1.35rem;
+  color: var(--ink);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.irl-nav-btn:hover {
+  transform: translateY(-2px);
+  color: var(--accent);
+}
+.nav-irl-badge {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 1px 5px;
+  background: #f43f5e;
+  color: #fff;
+  border-radius: 4px;
+  box-shadow: 1px 1px 0 var(--ink);
+}
+.header-resume-btn {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 0.88rem;
+  text-decoration: none;
+  background: var(--accent-yellow);
+  color: #111 !important;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  padding: 6px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 2.5px 2.5px 0 var(--ink);
+  transition: all 0.15s ease;
+  letter-spacing: 0.04em;
+}
+.header-resume-btn:hover {
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.terminal-toggle-btn {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 1.05rem;
+  background: var(--paper-card);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: all 0.15s ease;
+}
+.terminal-toggle-btn:hover {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* HERO SECTION NEO-BRUTALIST UPGRADE */
+.hero-role-badge {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 12px;
+  display: inline-block;
+}
+.hero-brutalist-title {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: clamp(3.2rem, 7.5vw, 5.4rem);
+  line-height: 0.96;
+  letter-spacing: -0.04em;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
+.hero-brutalist-title .accent-text {
+  color: #f43f5e;
+  display: inline-block;
+}
+.hero-typewriter-box {
+  font-family: var(--mono);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--ink);
+  min-height: 2.5em;
+  display: flex;
+  align-items: center;
+  margin-bottom: 22px;
+  line-height: 1.4;
+}
+.typewriter-cursor {
+  font-weight: 700;
+  animation: blinkCursor 0.8s infinite;
+  margin-left: 2px;
+  color: #f43f5e;
+}
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.brutalist-btn {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px 22px;
+  border: 2.5px solid var(--ink);
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+  box-shadow: 4px 4px 0 var(--ink);
+  cursor: pointer;
+}
+.brutalist-btn.btn-yellow {
+  background: var(--accent-yellow);
+  color: #111 !important;
+}
+.brutalist-btn.btn-white {
+  background: #ffffff;
+  color: var(--ink) !important;
+}
+.brutalist-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.brutalist-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.hero-social-strip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 22px 0 18px;
+}
+.social-sq-btn {
+  width: 42px;
+  height: 42px;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  background: var(--paper-card);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 2.5px 2.5px 0 var(--ink);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+.social-sq-btn:hover {
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: 4px 4px 0 var(--ink);
+  background: var(--paper-card-hover);
+}
+.telemetry-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 16px;
+  background: var(--paper-card);
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  box-shadow: 3px 3px 0 var(--ink);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.telemetry-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+}
+.telemetry-divider {
+  width: 1px;
+  height: 18px;
+  background: var(--ink-faint);
+}
+.pulsing-led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.pulsing-led.green {
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+  animation: ledPulseGreen 2s infinite ease-in-out;
+}
+.pulsing-led.pink {
+  background: #ec4899;
+  box-shadow: 0 0 8px #ec4899;
+  animation: ledPulsePink 2s infinite ease-in-out;
+}
+@keyframes ledPulseGreen {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.85); }
+}
+@keyframes ledPulsePink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(0.85); }
+}
+.visits-counter {
+  background: #111;
+  color: #22c55e;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-family: var(--mono);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+/* DUAL FRAME CONTAINER (Polaroid vs Wanted) */
+.hero-frame-area {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+}
+.frame-mode-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.frame-toggle-btn {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  background: var(--paper-card);
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.frame-toggle-btn.active {
+  background: var(--accent-yellow);
+  color: #111;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+
+/* POLAROID SNAP FRAME (Kurian style) */
+.polaroid-frame-card {
+  position: relative;
+  width: 100%;
+  padding-bottom: 12px;
+}
+.polaroid-backer-cyan {
+  position: absolute;
+  inset: 0;
+  background: #38bdf8;
+  border: 2.5px solid var(--ink);
+  border-radius: 6px;
+  transform: rotate(-3.5deg) scale(0.98);
+  box-shadow: 6px 6px 0 var(--ink);
+  z-index: 1;
+}
+.polaroid-front {
+  position: relative;
+  z-index: 2;
+  background: #ffffff;
+  border: 2.5px solid var(--ink);
+  border-radius: 4px;
+  padding: 16px 16px 20px 16px;
+  transform: rotate(2deg);
+  box-shadow: 5px 5px 0 var(--ink);
+  transition: transform 0.25s ease;
+}
+.polaroid-front:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+.polaroid-masking-tape {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 110px;
+  height: 26px;
+  background: rgba(250, 204, 21, 0.88);
+  border: 1px dashed rgba(0,0,0,0.25);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+  z-index: 10;
+}
+.polaroid-photo-box {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #f8fafc;
+  border: 2px solid var(--ink);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.polaroid-photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.polaroid-caption {
+  font-family: var(--badge);
+  font-size: 1.8rem;
+  color: var(--ink);
+  text-align: center;
+  margin-top: 14px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.polaroid-caption:hover {
+  color: var(--accent);
+}
+.polaroid-edit-hint {
+  font-size: 0.95rem;
+  opacity: 0.6;
+}
+
+/* Wanted bounty click easter egg */
+.wanted-bounty-row {
+  cursor: pointer;
+  transition: transform 0.15s ease;
+  user-select: none;
+}
+.wanted-bounty-row:hover {
+  transform: scale(1.04);
+}
+.bounty-click-floater {
+  position: absolute;
+  color: #dc2626;
+  font-family: var(--badge), sans-serif;
+  font-weight: 800;
+  font-size: 1.8rem;
+  pointer-events: none;
+  animation: floatUpFade 1.2s forwards ease-out;
+  z-index: 50;
+  text-shadow: 1px 1px 0 #fff;
+}
+@keyframes floatUpFade {
+  0% { opacity: 1; transform: translateY(0) scale(0.9); }
+  50% { opacity: 1; transform: translateY(-35px) scale(1.2); }
+  100% { opacity: 0; transform: translateY(-60px) scale(1); }
+}
+
+/* CONTACT SECTION REDESIGN (KURIAN STYLE) */
+.contact-section-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 36px;
+  max-width: 980px;
+  margin: 30px auto;
+  align-items: start;
+}
+.contact-meta-header {
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.contact-main-title {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: clamp(2.8rem, 6vw, 4.2rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+.contact-sub-motto {
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  margin-bottom: 26px;
+}
+.speech-bubble-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.speech-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2.5px solid var(--ink);
+  background: var(--accent-yellow);
+  overflow: hidden;
+  flex-shrink: 0;
+  box-shadow: 2.5px 2.5px 0 var(--ink);
+}
+.speech-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.speech-bubble {
+  position: relative;
+  background: #ffffff;
+  border: 2.5px solid var(--ink);
+  border-radius: 12px;
+  padding: 12px 18px;
+  font-family: var(--sans);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.35;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.speech-bubble::before {
+  content: "";
+  position: absolute;
+  top: 16px;
+  left: -12px;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 12px solid var(--ink);
+}
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  top: 17px;
+  left: -8px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 10px solid #ffffff;
+}
+.contact-email-card {
+  margin-bottom: 26px;
+}
+.contact-email-label {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.contact-email-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 2.5px solid var(--ink);
+  border-radius: 4px;
+  padding: 10px 14px;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.contact-email-box span {
+  font-family: var(--mono);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink);
+  user-select: all;
+}
+.email-copy-icon-btn {
+  background: none;
+  border: none;
+  color: var(--ink);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: all 0.15s ease;
+}
+.email-copy-icon-btn:hover {
+  background: var(--ink-faint);
+}
+.contact-stickies-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.contact-sticky-note {
+  position: relative;
+  flex: 1;
+  min-width: 120px;
+  padding: 22px 12px 14px 12px;
+  border: 2.5px solid var(--ink);
+  border-radius: 3px;
+  text-decoration: none;
+  color: var(--ink) !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 1.1rem;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+.contact-sticky-note.sticky-blue {
+  background: #7dd3fc;
+  transform: rotate(-2.5deg);
+}
+.contact-sticky-note.sticky-yellow {
+  background: #fde047;
+  transform: rotate(2deg);
+}
+.contact-sticky-note.sticky-pink {
+  background: #f9a8d4;
+  transform: rotate(-1.5deg);
+}
+.contact-sticky-note:hover {
+  transform: translateY(-4px) rotate(0deg);
+  box-shadow: 6px 8px 0 var(--ink);
+}
+.sticky-tape-strip {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 55px;
+  height: 18px;
+  background: rgba(254, 240, 138, 0.85);
+  border: 1px dashed rgba(0,0,0,0.2);
+}
+.transmission-card {
+  background: #ffffff;
+  border: 2.5px solid var(--ink);
+  border-radius: 4px;
+  padding: 26px 24px;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.transmission-title {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-transform: uppercase;
+  margin: 0 0 18px;
+}
+.transmission-field {
+  margin-bottom: 14px;
+}
+.transmission-label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.transmission-input, .transmission-textarea {
+  width: 100%;
+  background: #ffffff;
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  padding: 10px 12px;
+  font-family: var(--hand);
+  font-size: 1.25rem;
+  color: var(--ink);
+  box-sizing: border-box;
+}
+.transmission-input:focus, .transmission-textarea:focus {
+  outline: none;
+  background: #fdfae5;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.transmission-textarea {
+  height: 115px;
+  resize: vertical;
+}
+.transmission-submit-btn {
+  width: 100%;
+  padding: 13px 20px;
+  background: var(--accent-yellow);
+  color: #111;
+  border: 2.5px solid var(--ink);
+  border-radius: 4px;
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 4px 4px 0 var(--ink);
+  transition: all 0.15s ease;
+  margin-top: 8px;
+}
+.transmission-submit-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink);
+}
+
+/* ==========================================================================
+   OFF-SCREEN BOARD (IRL EVENTS & PERSONAL INSIGHTS)
+   ========================================================================== */
+
+/* Edge Tab Button (like ARCADE tab in Kurian's site) */
+.edge-irl-tab {
+  position: fixed;
+  left: 0;
+  top: 54%;
+  transform: translateY(-50%);
+  z-index: 55;
+  background: var(--ink);
+  color: var(--paper);
+  border: 2.5px solid var(--ink);
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+  padding: 14px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 4px 4px 15px rgba(0,0,0,0.25);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.edge-irl-tab:hover {
+  transform: translateY(-50%) translateX(6px);
+  background: #111;
+}
+.edge-irl-tab .tab-icon {
+  font-size: 1.3rem;
+}
+.edge-irl-tab .tab-label {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  text-transform: uppercase;
+}
+.edge-irl-tab .tab-pulse-badge {
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  background: #f43f5e;
+  color: #fff;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* Off-Screen Board Drawer Overlay & Drawer */
+.board-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 998;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.board-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.offscreen-board-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(1040px, 94vw);
+  height: 100vh;
+  z-index: 999;
+  background-color: var(--paper);
+  background-image: 
+    radial-gradient(var(--ink-faint) 1px, transparent 1px),
+    radial-gradient(var(--coffee) 1.2px, transparent 1.2px);
+  background-size: 24px 24px, 12px 12px;
+  border-left: 4px solid var(--ink);
+  box-shadow: -15px 0 40px rgba(0,0,0,0.35);
+  display: flex;
+  flex-direction: column;
+  transform: translateX(105%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.offscreen-board-drawer.active {
+  transform: translateX(0);
+}
+.board-drawer-header {
+  padding: 18px 24px;
+  background: var(--paper);
+  border-bottom: 2.5px solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  z-index: 10;
+}
+.board-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.board-badge-tag {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 0.95rem;
+  background: var(--accent-yellow);
+  color: #111;
+  border: 2px solid var(--ink);
+  padding: 4px 10px;
+  border-radius: 6px;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.board-main-title {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 1.45rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1.1;
+  margin: 0;
+}
+.board-main-sub {
+  font-family: var(--hand);
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  margin: 2px 0 0;
+}
+.board-filter-group {
+  display: flex;
+  gap: 6px;
+  background: var(--paper-card);
+  border: 2px solid var(--ink);
+  padding: 3px;
+  border-radius: 30px;
+}
+.board-filter-btn {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 5px 14px;
+  border: none;
+  background: none;
+  border-radius: 20px;
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.board-filter-btn.active {
+  background: var(--ink);
+  color: var(--paper);
+}
+.board-actions-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.board-pin-btn {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 0.9rem;
+  background: var(--accent-yellow);
+  color: #111;
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 2.5px 2.5px 0 var(--ink);
+  transition: all 0.15s ease;
+}
+.board-pin-btn:hover {
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.board-close-btn {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 1rem;
+  background: #ffffff;
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+  box-shadow: 2.5px 2.5px 0 var(--ink);
+  transition: all 0.15s ease;
+}
+.board-close-btn:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+/* Pinboard Grid & Masonry Cards */
+.board-scroll-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px 24px 60px;
+}
+.pinboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 28px;
+  align-items: start;
+}
+
+/* 1. Polaroid Event Card */
+.pin-polaroid-card {
+  position: relative;
+  background: #ffffff;
+  border: 2.5px solid var(--ink);
+  border-radius: 3px;
+  padding: 14px 14px 18px 14px;
+  box-shadow: 5px 6px 0 var(--ink);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.pin-polaroid-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 8px 10px 0 var(--ink);
+  z-index: 5;
+}
+.pin-pushpin {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #111;
+  box-shadow: 2px 3px 6px rgba(0,0,0,0.3);
+  z-index: 8;
+}
+.pin-pushpin.red { background: #ef4444; }
+.pin-pushpin.blue { background: #3b82f6; }
+.pin-pushpin.brass { background: #eab308; }
+.pin-pushpin.green { background: #10b981; }
+
+.polaroid-img-frame {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #e2e8f0;
+  border: 2px solid var(--ink);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.polaroid-img-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pin-meta-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.pin-tag-pill {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: var(--paper-card);
+  border: 1.5px solid var(--ink);
+  padding: 1px 6px;
+  border-radius: 4px;
+  color: var(--ink);
+}
+.pin-date-tag {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+.pin-event-title {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 4px 0 8px;
+  line-height: 1.2;
+}
+.pin-user-words {
+  font-family: var(--hand);
+  font-size: 1.2rem;
+  line-height: 1.4;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+.pin-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1.5px dashed var(--ink-faint);
+  padding-top: 8px;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+}
+.pin-delete-btn {
+  background: none;
+  border: none;
+  color: var(--ink-soft);
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 2px 4px;
+}
+.pin-delete-btn:hover {
+  color: #dc2626;
+}
+
+/* 2. Personal Insight Sticky Card */
+.pin-insight-card {
+  position: relative;
+  padding: 24px 18px 18px;
+  border: 2.5px solid var(--ink);
+  border-radius: 2px;
+  box-shadow: 5px 6px 0 var(--ink);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.pin-insight-card:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 8px 10px 0 var(--ink);
+  z-index: 5;
+}
+.pin-insight-card.bg-yellow { background: #fef08a; }
+.pin-insight-card.bg-blue { background: #bae6fd; }
+.pin-insight-card.bg-pink { background: #fbcfe8; }
+.pin-insight-card.bg-green { background: #bbf7d0; }
+.pin-insight-card.bg-purple { background: #e9d5ff; }
+
+.insight-washi-tape {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 70px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px dashed rgba(0,0,0,0.25);
+}
+.insight-category {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+  margin-bottom: 8px;
+}
+.insight-quote-text {
+  font-family: var(--hand);
+  font-size: 1.45rem;
+  line-height: 1.4;
+  color: var(--ink);
+  font-weight: 600;
+  margin: 0 0 14px;
+}
+.insight-footer-stamp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--badge);
+  font-size: 1.25rem;
+  color: var(--ink-soft);
+}
+
+/* 3. Ticket Pass Card */
+.pin-ticket-card {
+  position: relative;
+  background: #fdf8e2;
+  border: 2.5px solid var(--ink);
+  border-radius: 6px;
+  padding: 16px;
+  box-shadow: 5px 6px 0 var(--ink);
+  border-left: 6px solid var(--accent);
+}
+
+/* MODAL: ADD PIN / INSIGHT */
+.pin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1005;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.pin-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.pin-modal-card {
+  width: 100%;
+  max-width: 520px;
+  background: var(--paper);
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 8px 8px 0 var(--ink);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.pin-modal-title {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: 1.5rem;
+  margin: 0 0 16px;
+  color: var(--ink);
+}
+.pin-type-switch {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.pin-type-btn {
+  flex: 1;
+  padding: 8px;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: 2px solid var(--ink);
+  background: #ffffff;
+  color: var(--ink);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.pin-type-btn.active {
+  background: var(--accent-yellow);
+  color: #111;
+  box-shadow: 2px 2px 0 var(--ink);
+}
+
+/* TERMINAL MODAL */
+.terminal-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: 1010;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.terminal-modal-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.terminal-box {
+  width: 100%;
+  max-width: 600px;
+  background: #0f172a;
+  border: 2.5px solid var(--ink);
+  border-radius: 8px;
+  box-shadow: 8px 8px 0 var(--ink);
+  overflow: hidden;
+  font-family: var(--mono);
+}
+.terminal-topbar {
+  background: #1e293b;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1.5px solid #334155;
+  color: #94a3b8;
+  font-size: 0.8rem;
+}
+.terminal-output-area {
+  padding: 16px;
+  color: #4ade80;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  max-height: 320px;
+  overflow-y: auto;
+}
+.terminal-input-row {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-top: 1.5px solid #334155;
+  background: #090d16;
+}
+.terminal-prompt-char {
+  color: #4ade80;
+  margin-right: 8px;
+  font-weight: 700;
+}
+.terminal-cli-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #f8fafc;
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  outline: none;
+}
+.floating-term-launcher {
+  position: fixed;
+  bottom: 24px;
+  right: 80px;
+  z-index: 60;
+  background: #0f172a;
+  color: #4ade80;
+  border: 2.5px solid var(--ink);
+  border-radius: 8px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 1.15rem;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: all 0.15s ease;
+}
+.floating-term-launcher:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+@media print {
+  .site-header, .controls-bar, .sketchbook-ribbon-btn, .edge-irl-tab, .back-to-top, .terminal-toggle-btn, .floating-term-launcher, .theme-picker-menu, #coffeeStain, .doodle.draw.side, .contact-stickies-row, .transmission-card, .offscreen-board-drawer, .board-backdrop, #terminalModal {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+}
+
+@media (max-width: 840px) {
+  .contact-section-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1626,18 +2882,38 @@ footer {
   <!-- NAVIGATION -->
   <header class="site-header">
     <nav>
-      <a class="brand" href="#top">
-        <span class="logo" id="siteLogoName">Your Name</span>
-        <span class="logo-stamp">portfolio</span>
+      <a class="brand brand-badge" href="#top">
+        <div class="brand-avatar" id="headerAvatar">
+          <img id="navAvatarImg" src="" alt="Avatar" style="display:none;" />
+          <span id="navAvatarPlaceholder">YN</span>
+        </div>
+        <div class="brand-title-wrap">
+          <span class="brand-name" id="siteLogoName">YOURNAME.DEV</span>
+          <span class="brand-tag">portfolio</span>
+        </div>
       </a>
       <ul>
-        <li><a class="nav-link" href="#about">about</a></li>
         <li><a class="nav-link" href="#work">work</a></li>
-        <li><a class="nav-link" href="#journey">journey</a></li>
-        <li><a class="nav-link" href="#skills">skills</a></li>
+        <li><a class="nav-link" href="#journey">experience</a></li>
+        <li><a class="nav-link" href="#about">about</a></li>
+        <li>
+          <button class="irl-nav-btn" id="navIrlBtn" type="button" title="Open IRL & Insights Board">
+            <span>irl</span>
+            <span class="nav-irl-badge">board</span>
+          </button>
+        </li>
         <li><a class="nav-link" href="#contact">contact</a></li>
       </ul>
       <div class="controls-bar" style="position:relative">
+        <!-- Terminal launcher button -->
+        <button class="terminal-toggle-btn" id="headerTermBtn" type="button" title="Open Developer Terminal">&gt;_</button>
+
+        <!-- Resume Download button -->
+        <a class="header-resume-btn" id="headerResumeBtn" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <span>RESUME</span>
+        </a>
+
         <!-- Sound FX toggle button -->
         <button class="control-btn" id="soundToggle" type="button" title="Toggle pen scratch sound effects">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1674,85 +2950,136 @@ footer {
   <!-- HERO SECTION -->
   <header class="hero" id="top">
     <div>
-      <h1 class="write" data-t="2.2s" id="heroName">Your Name</h1>
-      <svg class="doodle draw" style="width:min(420px,85%);height:16px;display:block;margin:0 0 16px" viewBox="0 0 380 16" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M4 10C80 2 160 16 240 8S340 4 376 9"/>
-      </svg>
-      <p class="hero-tagline ink" id="heroTagline">Full-stack software developer and creative designer. I craft robust web apps, responsive systems, and sketch ideas on paper first.</p>
+      <div class="hero-role-badge" id="heroRoleBadge">AI &amp; FULL-STACK ENGINEER &middot; IST (INDIA)</div>
+      <h1 class="hero-brutalist-title"><span id="heroFirstName">Your</span> <span class="accent-text" id="heroLastName">Name.</span></h1>
       
-      <div class="hero-actions ink">
-        <a class="hero-btn primary" href="#work">
-          <span>Explore Works</span>
-          <svg class="doodle" viewBox="0 0 24 24" width="20" height="20"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <div class="hero-typewriter-box">
+        <span class="typewriter-text" id="heroTypewriterText">Turning complex workflows into playful software.</span>
+        <span class="typewriter-cursor">|</span>
+      </div>
+      
+      <div class="hero-actions">
+        <a class="brutalist-btn btn-yellow" href="#work">
+          <span>SEE THE WORK</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" fill="none" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
         </a>
-        <a class="hero-btn" href="#contact">
-          <span>Say Hello</span>
-          <svg class="doodle" viewBox="0 0 24 24" width="20" height="20"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a class="brutalist-btn btn-white" href="#contact">
+          <span>GET IN TOUCH</span>
         </a>
       </div>
 
-      <div class="status-pill ink">
-        <span class="status-dot"></span>
-        <span id="availabilityText">AVAILABLE FOR NEW PROJECTS &middot; 2026</span>
+      <div class="hero-social-strip">
+        <a class="social-sq-btn" id="heroGhBtn" href="https://github.com" target="_blank" rel="noopener" title="GitHub">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+        <a class="social-sq-btn" id="heroLiBtn" href="https://linkedin.com" target="_blank" rel="noopener" title="LinkedIn">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+        <a class="social-sq-btn" id="heroMailBtn" href="mailto:you@example.com" title="Email me">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        </a>
+        <button class="social-sq-btn" id="heroIrlTriggerBtn" type="button" title="Open IRL Events &amp; Insights Board">
+          <span style="font-size:1.2rem">📌</span>
+        </button>
+      </div>
+
+      <div class="telemetry-bar">
+        <div class="telemetry-item">
+          <span class="pulsing-led green"></span>
+          <span>OPERATIONAL</span>
+        </div>
+        <div class="telemetry-divider"></div>
+        <div class="telemetry-item">
+          <span class="pulsing-led pink"></span>
+          <span>1 PERSON ONLINE</span>
+        </div>
+        <div class="telemetry-divider"></div>
+        <div class="telemetry-item">
+          <span style="font-size:0.75rem;opacity:0.7">VISITS</span>
+          <span class="visits-counter" id="liveVisitCounter">00188</span>
+        </div>
       </div>
     </div>
 
-    <!-- One Piece Wanted Bounty Poster Frame -->
-    <div class="wanted-poster-frame ink" id="wantedPoster" role="region" aria-label="One Piece Wanted Bounty Poster Frame">
-      <div class="poster-pin" aria-hidden="true"></div>
-      <div class="wanted-inner">
-        <div class="wanted-header">WANTED</div>
-        
-        <div class="wanted-photo-container" id="wantedPhotoContainer" title="Click or drag & drop your photo here!" tabindex="0" role="button" aria-label="Upload photo to Wanted Poster">
-          <!-- User photo img -->
-          <img id="wantedPhotoImg" src="" alt="Portrait" class="wanted-img" style="display:none;" />
+    <!-- DUAL PHOTO FRAME AREA -->
+    <div class="hero-frame-area">
+      <!-- Frame Switcher Pills -->
+      <div class="frame-mode-toggle">
+        <button class="frame-toggle-btn active" id="btnModePolaroid" type="button">📸 Polaroid Snap</button>
+        <button class="frame-toggle-btn" id="btnModeWanted" type="button">🏴‍☠️ Bounty Poster</button>
+      </div>
+
+      <!-- 1. POLAROID SNAP FRAME (Kurian style) -->
+      <div class="polaroid-frame-card" id="polaroidFrameCard">
+        <div class="polaroid-backer-cyan"></div>
+        <div class="polaroid-front">
+          <div class="polaroid-masking-tape"></div>
+          <div class="polaroid-photo-box" id="polaroidPhotoBox" title="Click or drag & drop photo here!">
+            <img id="polaroidPhotoImg" src="" alt="Portrait" style="display:none;" />
+            <div id="polaroidPlaceholder" class="wanted-placeholder">
+              <svg viewBox="0 0 100 100" width="80" height="80" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="50" cy="38" r="22"/>
+                <path d="M15 92C15 68 32 62 50 62s35 6 35 30"/>
+              </svg>
+              <span class="upload-hint">📷 Click to add photo</span>
+            </div>
+            <input type="file" id="sharedPhotoInput" accept="image/*" style="display:none;" />
+          </div>
+          <div class="polaroid-caption" id="polaroidCaptionWrap" title="Click to edit caption">
+            <span id="polaroidCaptionText">Me at work!</span>
+            <span class="polaroid-edit-hint">✎</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. ONE PIECE WANTED BOUNTY POSTER FRAME -->
+      <div class="wanted-poster-frame ink" id="wantedPoster" style="display:none;" role="region" aria-label="One Piece Wanted Bounty Poster Frame">
+        <div class="poster-pin" aria-hidden="true"></div>
+        <div class="wanted-inner">
+          <div class="wanted-header">WANTED</div>
           
-          <!-- Default Hand-Drawn One Piece Pirate Silhouette Placeholder -->
-          <div id="wantedPlaceholder" class="wanted-placeholder">
-            <svg class="doodle" viewBox="0 0 160 140" width="105" height="92" aria-hidden="true">
-              <!-- Straw Hat on top of head -->
-              <path d="M20 54C20 40 55 34 80 34S140 40 140 54 110 70 80 70 20 64 20 54Z" fill="var(--paper)"/>
-              <path d="M48 42C46 10 114 10 112 42"/>
-              <path d="M50 34C75 42 85 42 110 34" stroke="var(--stamp)"/>
-              <!-- Head silhouette & smile -->
-              <path d="M55 58C55 86 65 106 80 106S105 86 105 58"/>
-              <!-- Big D-Smile -->
-              <path d="M68 84Q80 96 92 84Z"/>
-              <!-- Collar / shoulders -->
-              <path d="M30 134Q50 110 70 116M130 134Q110 110 90 116"/>
-              <!-- Jolly Roger crossbones in background faint -->
-              <path d="M24 18L38 32M136 18L122 32M24 32L38 18M136 32L122 18" stroke-width="1.8" opacity="0.6"/>
-            </svg>
-            <span class="upload-hint">📷 Click to add photo</span>
+          <div class="wanted-photo-container" id="wantedPhotoContainer" title="Click or drag & drop your photo here!" tabindex="0" role="button" aria-label="Upload photo to Wanted Poster">
+            <img id="wantedPhotoImg" src="" alt="Portrait" class="wanted-img" style="display:none;" />
+            
+            <div id="wantedPlaceholder" class="wanted-placeholder">
+              <svg class="doodle" viewBox="0 0 160 140" width="105" height="92" aria-hidden="true">
+                <path d="M20 54C20 40 55 34 80 34S140 40 140 54 110 70 80 70 20 64 20 54Z" fill="var(--paper)"/>
+                <path d="M48 42C46 10 114 10 112 42"/>
+                <path d="M50 34C75 42 85 42 110 34" stroke="var(--stamp)"/>
+                <path d="M55 58C55 86 65 106 80 106S105 86 105 58"/>
+                <path d="M68 84Q80 96 92 84Z"/>
+                <path d="M30 134Q50 110 70 116M130 134Q110 110 90 116"/>
+                <path d="M24 18L38 32M136 18L122 32M24 32L38 18M136 32L122 18" stroke-width="1.8" opacity="0.6"/>
+              </svg>
+              <span class="upload-hint">📷 Click to add photo</span>
+            </div>
+
+            <span class="photo-change-badge" id="photoChangeBadge">change photo ↺</span>
           </div>
 
-          <span class="photo-change-badge" id="photoChangeBadge">change photo ↺</span>
-          <input type="file" id="wantedPhotoInput" accept="image/*" style="display:none;" />
-        </div>
+          <div class="wanted-dead-or-alive">DEAD OR ALIVE</div>
+          <div class="wanted-name" id="wantedPosterName">YOUR NAME</div>
+          
+          <div class="wanted-bounty-row" id="wantedBountyRow" title="Click to raise bounty!">
+            <span class="berry-symbol">฿</span>
+            <span class="bounty-amount" id="wantedPosterBounty">3,000,000,000</span>
+            <span class="bounty-dash">-</span>
+          </div>
 
-        <div class="wanted-dead-or-alive">DEAD OR ALIVE</div>
-        <div class="wanted-name" id="wantedPosterName">YOUR NAME</div>
-        
-        <div class="wanted-bounty-row">
-          <span class="berry-symbol">฿</span>
-          <span class="bounty-amount" id="wantedPosterBounty">3,000,000,000</span>
-          <span class="bounty-dash">-</span>
-        </div>
-
-        <div class="wanted-footer">
-          <span class="marine-text">MARINE</span>
-          <span class="marine-stamp" title="World Government Marine Seal">
-            <svg viewBox="0 0 44 26" width="30" height="18" class="doodle" aria-hidden="true">
-              <!-- Marine Seagull emblem -->
-              <path d="M3 14 Q12 4 22 14 Q32 4 41 14" stroke-width="2"/>
-              <path d="M22 14 L22 23 M17 21 L27 21" stroke-width="1.8"/>
-            </svg>
-          </span>
+          <div class="wanted-footer">
+            <span class="marine-text">MARINE</span>
+            <span class="marine-stamp" title="World Government Marine Seal">
+              <svg viewBox="0 0 44 26" width="30" height="18" class="doodle" aria-hidden="true">
+                <path d="M3 14 Q12 4 22 14 Q32 4 41 14" stroke-width="2"/>
+                <path d="M22 14 L22 23 M17 21 L27 21" stroke-width="1.8"/>
+              </svg>
+            </span>
+          </div>
         </div>
       </div>
     </div>
   </header>
-
+  
   <!-- DIVIDER -->
   <svg class="doodle draw" style="width:100%;height:14px;display:block;margin:28px 0" viewBox="0 0 600 14" preserveAspectRatio="none" aria-hidden="true">
     <path d="M2 8C50 0 100 14 150 7S250 1 300 8 400 14 450 7 550 1 598 8"/>
@@ -1980,66 +3307,91 @@ footer {
     <path d="M2 8C50 0 100 14 150 7S250 1 300 8 400 14 450 7 550 1 598 8"/>
   </svg>
 
-  <!-- CONTACT / POSTCARD SECTION -->
+  <!-- CONTACT / TRANSMISSION SECTION (KURIAN STYLE) -->
   <section class="contact-container" id="contact">
-    <h2 class="section-title write" style="text-align:center">send a postcard</h2>
-    <p class="section-subtitle ink" style="text-align:center">Have a project in mind, an opportunity, or just want to chat about code and tea? Drop a note below.</p>
-    
-    <div class="postcard ink">
-      <div class="postcard-airmail"></div>
+    <div class="contact-section-grid">
+      <!-- Left Column: Speech Bubble, Email Box & Stickies -->
+      <div>
+        <div class="contact-meta-header">05 / CONTACT</div>
+        <h2 class="contact-main-title">LET'S BUILD</h2>
+        <div class="contact-sub-motto">INTERNSHIPS, COLLABORATIONS, AND MESSY WORKFLOWS WELCOME</div>
 
-      <!-- Left: Handwritten Message -->
-      <div class="postcard-left">
-        <label for="postMsg" style="font-size:1.35rem;margin-bottom:6px">Dear <span id="postcardRecipientName">Your Name</span>,</label>
-        <textarea id="postMsg" class="postcard-message-area" placeholder="Write your thoughts or message here in ink... We could build something great together!"></textarea>
-        <div class="mail-feedback" id="mailFeedback"></div>
-      </div>
-
-      <!-- Right: Address & Stamp -->
-      <div class="postcard-right">
-        <div class="postcard-stamp">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M4 8l8-5 8 5v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/>
-          </svg>
-          <div>AIR MAIL<br>2026</div>
+        <!-- Comic Speech Bubble with Avatar -->
+        <div class="speech-bubble-row">
+          <div class="speech-avatar" id="contactSpeechAvatar">
+            <img id="contactAvatarImg" src="" alt="Avatar" style="display:none;" />
+            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:800;font-size:1.2rem">YN</div>
+          </div>
+          <div class="speech-bubble" id="contactSpeechBubbleText">
+            "If professionals hate doing it by hand, I want to hear about it."
+          </div>
         </div>
 
-        <div>
-          <div class="postcard-field">
-            <label for="postSenderName">From (Your Name):</label>
-            <input type="text" id="postSenderName" placeholder="e.g. Robin or Zoro" autocomplete="name">
+        <!-- Email copy box -->
+        <div class="contact-email-card">
+          <div class="contact-email-label">EMAIL</div>
+          <div class="contact-email-box">
+            <span id="contactDisplayEmail">you@example.com</span>
+            <button class="email-copy-icon-btn" id="btnCopyEmail" type="button" title="Copy email address">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              <span id="copyEmailLabel">Copy</span>
+            </button>
           </div>
-          <div class="postcard-field">
-            <label for="postSenderEmail">Your Email:</label>
-            <input type="email" id="postSenderEmail" placeholder="your.email@domain.com" autocomplete="email">
-          </div>
+        </div>
 
-          <button class="send-plane-btn" id="sendLetterBtn" type="button">
-            <span>Send Letter</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="22" y1="2" x2="11" y2="13"></line>
-              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-            </svg>
+        <!-- Sticky Notes Links (LinkedIn, GitHub, IRL Board) -->
+        <div class="contact-stickies-row">
+          <a class="contact-sticky-note sticky-blue" id="contactLinkedInLink" href="https://linkedin.com" target="_blank" rel="noopener">
+            <div class="sticky-tape-strip"></div>
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            <span>LinkedIn</span>
+          </a>
+
+          <a class="contact-sticky-note sticky-yellow" id="contactGitHubLink" href="https://github.com" target="_blank" rel="noopener">
+            <div class="sticky-tape-strip"></div>
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <span>GitHub</span>
+          </a>
+
+          <button class="contact-sticky-note sticky-pink" id="contactIrlBoardTrigger" type="button" title="View IRL Events &amp; Insights Board">
+            <div class="sticky-tape-strip"></div>
+            <span style="font-size:1.6rem">📌</span>
+            <span>IRL Board</span>
           </button>
         </div>
       </div>
-    </div>
 
-    <!-- Direct Email & Social Links -->
-    <div style="text-align:center;margin-top:20px">
-      <div class="ink" style="font-size:1.25rem;color:var(--ink-soft);margin-bottom:8px">Or write directly via your mail client:</div>
-      <a class="hero-btn ink" id="directEmailLink" href="mailto:you@example.com" style="display:inline-flex">
-        <span>you@example.com</span>
-      </a>
+      <!-- Right Column: SEND A TRANSMISSION Card -->
+      <div class="transmission-card">
+        <h3 class="transmission-title">SEND A TRANSMISSION</h3>
+        
+        <form id="transmissionForm" onsubmit="return false;">
+          <div class="transmission-field">
+            <label class="transmission-label" for="transName">NAME</label>
+            <input class="transmission-input" type="text" id="transName" placeholder="Who are you?" required autocomplete="name">
+          </div>
 
-      <div class="social-links ink">
-        <a class="social-item" id="githubLink" href="https://github.com" target="_blank" rel="noopener">GitHub ↗</a>
-        <a class="social-item" id="linkedinLink" href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn ↗</a>
-        <a class="social-item" id="resumeLink" href="#" target="_blank" rel="noopener">Resume PDF ↗</a>
+          <div class="transmission-field">
+            <label class="transmission-label" for="transEmail">EMAIL</label>
+            <input class="transmission-input" type="email" id="transEmail" placeholder="you@company.com" required autocomplete="email">
+          </div>
+
+          <div class="transmission-field">
+            <label class="transmission-label" for="transProblem">THE PROBLEM / MESSAGE</label>
+            <textarea class="transmission-textarea" id="transProblem" placeholder="Describe the workflow, idea, or challenge..." required></textarea>
+          </div>
+
+          <button class="transmission-submit-btn" id="btnTransmit" type="submit">
+            <span>TRANSMIT</span>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+          </button>
+          
+          <div id="transmitFeedback" style="font-family:var(--mono);font-size:0.85rem;margin-top:10px;text-align:center;color:var(--accent);min-height:1.2em"></div>
+        </form>
       </div>
     </div>
   </section>
-
+  
   <!-- FOOTER -->
   <footer class="ink">
     <p>Written by hand, sketched in ink, powered by pure web standards &middot; 2026</p>
@@ -2057,22 +3409,33 @@ footer {
 <script>
 /**
  * =========================================================================
- * PORTFOLIO CONFIGURATION
+ * PORTFOLIO CONFIGURATION & STATE
  * =========================================================================
- * Easily customize your details below! All changes will reflect across the site.
  */
 const PORTFOLIO_CONFIG = {
   name: "Your Name",
+  firstName: "Your",
+  lastName: "Name.",
+  brandName: "YOURNAME.DEV",
+  role: "AI & FULL-STACK ENGINEER · IST (INDIA)",
   bounty: "3,000,000,000",
-  photoUrl: "", // Path to your photo e.g. "photo.jpg" (or click the Wanted Poster to upload directly!)
+  photoUrl: "", // Path or Data URL to photo
+  polaroidCaption: "Me at work!",
+  speechBubble: "If professionals hate doing it by hand, I want to hear about it.",
   tagline: "Full-stack software developer and creative designer. I craft robust web apps, responsive systems, and sketch ideas on paper first.",
   email: "you@example.com",
-  status: "AVAILABLE FOR NEW PROJECTS · 2026",
+  status: "OPERATIONAL",
   socials: {
     github: "https://github.com",
     linkedin: "https://linkedin.com",
     resume: "#"
   },
+  typewriterPhrases: [
+    "Turning complex workflows into playful software.",
+    "Crafting responsive web apps & sketching ideas first.",
+    "If professionals hate doing it by hand, I build it.",
+    "Shipping clean code, crisp systems & tactile interfaces."
+  ],
   quotes: [
     { quote: "“As long as I live, there are infinite chances.”", by: "— Monkey D. Luffy" },
     { quote: "“When do you think people die? When they are forgotten!”", by: "— Dr. Hiluluk" },
@@ -2080,194 +3443,78 @@ const PORTFOLIO_CONFIG = {
     { quote: "“Scars on the back are a swordsman’s shame.”", by: "— Roronoa Zoro" },
     { quote: "“Simplicity is prerequisite for reliability.”", by: "— Edsger W. Dijkstra" }
   ],
-  projects: {
-    inkflow: {
-      title: "InkFlow Journal",
-      category: "Full Stack App",
-      badge: "Featured ★",
-      tags: ["React", "TypeScript", "Node.js", "SQLite", "Canvas API", "PWA"],
-      description: "A distraction-free markdown sketchbook with live vector ink sketching, offline-first sync, and custom hand-drawn calligraphy typography.",
-      highlights: [
-        "Vector ink smoothing engine using quadratic Bézier curves with dynamic pen pressure response.",
-        "Local-first architecture using IndexedDB with background optimistic synchronization to a SQLite backend.",
-        "Export notes to clean PDF with vector sketches and Markdown formatting intact.",
-        "Zero tracking, completely private, installable as an offline Progressive Web App."
-      ],
-      liveUrl: "#",
-      githubUrl: "https://github.com"
+  defaultPins: [
+    {
+      id: "pin-1",
+      type: "event",
+      tag: "1ST PLACE · HACKATHON",
+      date: "OCT 2025 · BANGALORE",
+      title: "⚡ Autonomous Agent for Healthcare",
+      story: "36 straight hours of coding without sleep. Built an autonomous voice-first agent for field doctors. When our demo ran live in front of the jury, the room went dead silent, then erupted. Pure adrenaline.",
+      pushpin: "red",
+      photoUrl: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300' fill='%231e293b'><rect width='400' height='300' fill='%230f172a'/><circle cx='200' cy='120' r='60' fill='%2338bdf8' opacity='0.2'/><path d='M100 240 L160 170 L220 220 L300 130' stroke='%23facc15' stroke-width='6' fill='none'/><circle cx='300' cy='130' r='10' fill='%23f43f5e'/><text x='200' y='275' fill='%2394a3b8' font-family='monospace' font-size='18' text-anchor='middle'>🏆 CHAMPION TROPHY MOMENT</text></svg>"
     },
-    voyagemap: {
-      title: "VoyageMap Explorer",
-      category: "Creative Canvas",
-      badge: "Interactive UI",
-      tags: ["TypeScript", "SVG Animations", "Canvas API", "CSS Grid", "GeoJSON"],
-      description: "An interactive cartography and voyage explorer tool that visualizes story journeys and nautical coordinates with hand-drawn trails and waypoint logs.",
-      highlights: [
-        "Procedural island generator with hand-drawn SVG coastal topography.",
-        "Timeline scrubbing system that animates vessel progress across routes with custom audio waves.",
-        "High-performance HTML5 Canvas renderer capable of 60 FPS across thousands of animated nautical nodes."
-      ],
-      liveUrl: "#",
-      githubUrl: "https://github.com"
+    {
+      id: "pin-2",
+      type: "insight",
+      color: "yellow",
+      category: "💡 ON CRAFT & SOFTWARE",
+      words: "If software doesn't feel alive when you interact with it, you haven't finished polishing it. The best digital tools have warmth, personality, and physical weight.",
+      date: "PERSONAL PHILOSOPHY",
+      likes: 89
     },
-    paperpulse: {
-      title: "PaperPulse Sync",
-      category: "Distributed Systems",
-      badge: "Real-Time",
-      tags: ["WebSockets", "Go", "Redis", "Yjs / CRDT", "Canvas Physics"],
-      description: "Real-time collaborative whiteboard with peer-to-peer ink stroke synchronization, CRDT conflict resolution, and tactile drawing physics.",
-      highlights: [
-        "Built resilient WebSocket pub/sub engine in Go handling 10,000+ simultaneous connections with low latency.",
-        "CRDT conflict-free replicated data types ensuring zero stroke loss during network drops or concurrent edits.",
-        "Infinite canvas zoom & pan with virtualized viewport rendering for instant rendering speeds."
-      ],
-      liveUrl: "#",
-      githubUrl: "https://github.com"
+    {
+      id: "pin-3",
+      type: "event",
+      tag: "SPEAKER SESSION",
+      date: "DEC 2025 · FOSS COMMUNITY",
+      title: "Talk: Local-First Web & CRDT Sync",
+      story: "Gave my first conference talk on 'Building Offline-First Web Systems with CRDTs'. Was nervous before stepping on stage, but seeing 60+ engineers nodding and asking questions about conflict-free data types made it unforgettable.",
+      pushpin: "brass",
+      photoUrl: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300' fill='%231e293b'><rect width='400' height='300' fill='%23182234'/><circle cx='200' cy='110' r='45' fill='%23facc15'/><rect x='150' y='180' width='100' height='90' rx='10' fill='%2338bdf8'/><path d='M120 180 Q200 140 280 180' stroke='%23ffffff' stroke-width='4' fill='none'/><text x='200' y='275' fill='%23e2e8f0' font-family='monospace' font-size='16' text-anchor='middle'>KEYNOTE HALL · 200+ ATTENDEES</text></svg>"
     },
-    shikisynth: {
-      title: "ShikiSynth Audio",
-      category: "Audio Experiment",
-      badge: "Web Audio",
-      tags: ["Web Audio API", "Vanilla JavaScript", "Custom Oscillators", "Canvas"],
-      description: "A browser-based synthesizer that sonifies drawing gestures, translating pen pressure, speed, and strokes into ambient procedural harmonies.",
-      highlights: [
-        "Dual FM synthesis engine driven by real-time pointer coordinates and acceleration vectors.",
-        "Custom biquad resonant filter modulating harmonics based on stroke curvature.",
-        "Completely self-contained in zero external dependencies, weighing under 15KB compressed."
-      ],
-      liveUrl: "#",
-      githubUrl: "https://github.com"
+    {
+      id: "pin-4",
+      type: "insight",
+      color: "blue",
+      category: "📐 DESIGN CREED",
+      words: "Simplicity is not the lack of clutter; it's the presence of clarity. Always sketch the mental model on paper with a pen before you ever write a single line of React.",
+      date: "FIRST PRINCIPLES",
+      likes: 64
+    },
+    {
+      id: "pin-5",
+      type: "event",
+      tag: "THE MIDNIGHT SHIP",
+      date: "LATE NIGHT · STUDIO DESK",
+      title: "Shipping v1.0 to the World",
+      story: "4:15 AM. Cold mug of coffee, dark room, lo-fi beats in headphones, and the terminal output showing 0 errors on production deploy. That quiet feeling of shipping something you poured weeks into never gets old.",
+      pushpin: "blue",
+      photoUrl: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300' fill='%230f172a'><rect width='400' height='300' fill='%230b0f19'/><rect x='60' y='60' width='280' height='170' rx='6' fill='%231e293b' stroke='%23334155' stroke-width='3'/><text x='85' y='110' fill='%234ade80' font-family='monospace' font-size='18'>$ git push origin main</text><text x='85' y='145' fill='%2338bdf8' font-family='monospace' font-size='16'>✔ Build succeeded (0.42s)</text><text x='85' y='180' fill='%23facc15' font-family='monospace' font-size='16'>🚀 Deployed to Production!</text><circle cx='340' cy='240' r='25' fill='%2392400e'/><text x='200' y='275' fill='%2394a3b8' font-family='monospace' font-size='15' text-anchor='middle'>THE 4:15 AM DEPLOY</text></svg>"
+    },
+    {
+      id: "pin-6",
+      type: "insight",
+      color: "pink",
+      category: "⚡ WORK ETHIC",
+      words: "If professionals hate doing it by hand, that's where the magic is hiding. The highest-leverage software doesn't invent new needs; it eliminates mundane friction.",
+      date: "BUILDER NOTE",
+      likes: 112
     }
-  }
+  ]
 };
 
 (function() {
   "use strict";
 
-  // 1. Apply config to DOM elements
-  function applyConfig() {
-    document.title = PORTFOLIO_CONFIG.name + " – Portfolio & Digital Sketchbook";
-    const logoName = document.getElementById("siteLogoName");
-    const heroName = document.getElementById("heroName");
-    const heroTagline = document.getElementById("heroTagline");
-    const availText = document.getElementById("availabilityText");
-    const directEmail = document.getElementById("directEmailLink");
-    const postRecipient = document.getElementById("postcardRecipientName");
-    const ghLink = document.getElementById("githubLink");
-    const liLink = document.getElementById("linkedinLink");
-    const resLink = document.getElementById("resumeLink");
-    const wantedPosterName = document.getElementById("wantedPosterName");
-    const wantedPosterBounty = document.getElementById("wantedPosterBounty");
-
-    if (logoName) logoName.textContent = PORTFOLIO_CONFIG.name;
-    if (heroName) heroName.textContent = PORTFOLIO_CONFIG.name;
-    if (heroTagline) heroTagline.textContent = PORTFOLIO_CONFIG.tagline;
-    if (availText) availText.textContent = PORTFOLIO_CONFIG.status;
-    if (wantedPosterName) wantedPosterName.textContent = PORTFOLIO_CONFIG.name;
-    if (wantedPosterBounty) wantedPosterBounty.textContent = PORTFOLIO_CONFIG.bounty;
-    if (directEmail) {
-      directEmail.href = "mailto:" + PORTFOLIO_CONFIG.email;
-      directEmail.querySelector("span").textContent = PORTFOLIO_CONFIG.email;
-    }
-    if (postRecipient) postRecipient.textContent = PORTFOLIO_CONFIG.name;
-    if (ghLink) ghLink.href = PORTFOLIO_CONFIG.socials.github;
-    if (liLink) liLink.href = PORTFOLIO_CONFIG.socials.linkedin;
-    if (resLink) resLink.href = PORTFOLIO_CONFIG.socials.resume;
-  }
-  applyConfig();
-
-  // One Piece Wanted Poster Photo Loader
-  const wantedPhotoContainer = document.getElementById("wantedPhotoContainer");
-  const wantedPhotoInput = document.getElementById("wantedPhotoInput");
-  const wantedPhotoImg = document.getElementById("wantedPhotoImg");
-  const wantedPlaceholder = document.getElementById("wantedPlaceholder");
-  const photoChangeBadge = document.getElementById("photoChangeBadge");
-
-  function setWantedPhoto(src) {
-    if (!wantedPhotoImg || !wantedPlaceholder) return;
-    if (src) {
-      wantedPhotoImg.src = src;
-      wantedPhotoImg.style.display = "block";
-      wantedPlaceholder.style.display = "none";
-      if (photoChangeBadge) photoChangeBadge.style.display = "block";
-    } else {
-      wantedPhotoImg.src = "";
-      wantedPhotoImg.style.display = "none";
-      wantedPlaceholder.style.display = "flex";
-      if (photoChangeBadge) photoChangeBadge.style.display = "none";
-    }
-  }
-
-  // Load saved photo or config photo
-  const savedPhoto = localStorage.getItem("portfolio_wanted_photo");
-  if (savedPhoto) {
-    setWantedPhoto(savedPhoto);
-  } else if (PORTFOLIO_CONFIG.photoUrl) {
-    setWantedPhoto(PORTFOLIO_CONFIG.photoUrl);
-  }
-
-  if (wantedPhotoContainer && wantedPhotoInput) {
-    wantedPhotoContainer.addEventListener("click", function() {
-      wantedPhotoInput.click();
-    });
-    wantedPhotoContainer.addEventListener("keydown", function(e) {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        wantedPhotoInput.click();
-      }
-    });
-
-    wantedPhotoInput.addEventListener("change", function(e) {
-      const file = e.target.files && e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-          const dataUrl = evt.target.result;
-          setWantedPhoto(dataUrl);
-          try {
-            localStorage.setItem("portfolio_wanted_photo", dataUrl);
-          } catch(err) {}
-          playPaperRustle();
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    // Drag and drop photo onto Wanted Poster
-    wantedPhotoContainer.addEventListener("dragover", function(e) {
-      e.preventDefault();
-      wantedPhotoContainer.classList.add("dragover");
-    });
-    wantedPhotoContainer.addEventListener("dragleave", function() {
-      wantedPhotoContainer.classList.remove("dragover");
-    });
-    wantedPhotoContainer.addEventListener("drop", function(e) {
-      e.preventDefault();
-      wantedPhotoContainer.classList.remove("dragover");
-      const file = e.dataTransfer.files && e.dataTransfer.files[0];
-      if (file && file.type.startsWith("image/")) {
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-          const dataUrl = evt.target.result;
-          setWantedPhoto(dataUrl);
-          try {
-            localStorage.setItem("portfolio_wanted_photo", dataUrl);
-          } catch(err) {}
-          playPaperRustle();
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  }
-
-  // 2. Synthesized Web Audio Sound Effects (Zero External Files)
+  // Audio Context (Synthesized Web Audio API)
   let audioCtx = null;
   let soundEnabled = localStorage.getItem("portfolio_sound") === "true";
 
   function getAudioContext() {
     if (!audioCtx) {
-      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-      if (AudioContextClass) audioCtx = new AudioContextClass();
+      const AudioClass = window.AudioContext || window.webkitAudioContext;
+      if (AudioClass) audioCtx = new AudioClass();
     }
     if (audioCtx && audioCtx.state === "suspended") {
       audioCtx.resume();
@@ -2326,25 +3573,695 @@ const PORTFOLIO_CONFIG = {
     } catch(e) {}
   }
 
+  function playPinSound() {
+    if (!soundEnabled) return;
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    try {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(600, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(180, ctx.currentTime + 0.08);
+      gain.gain.setValueAtTime(0.2, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.08);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.08);
+    } catch(e) {}
+  }
+
+  function playCoinSound() {
+    if (!soundEnabled) return;
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    try {
+      const osc1 = ctx.createOscillator();
+      const osc2 = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc1.type = "sine";
+      osc2.type = "triangle";
+      osc1.frequency.setValueAtTime(987.77, ctx.currentTime); // B5
+      osc1.frequency.setValueAtTime(1318.51, ctx.currentTime + 0.08); // E6
+      osc2.frequency.setValueAtTime(1318.51, ctx.currentTime);
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
+      osc1.connect(gain);
+      osc2.connect(gain);
+      gain.connect(ctx.destination);
+      osc1.start();
+      osc2.start();
+      osc1.stop(ctx.currentTime + 0.35);
+      osc2.stop(ctx.currentTime + 0.35);
+    } catch(e) {}
+  }
+
+  // 1. Apply Config
+  function applyPortfolioConfig() {
+    document.title = PORTFOLIO_CONFIG.name + " – Portfolio & Digital Sketchbook";
+    
+    // Header
+    const siteLogo = document.getElementById("siteLogoName");
+    if (siteLogo) siteLogo.textContent = PORTFOLIO_CONFIG.brandName || (PORTFOLIO_CONFIG.name.toUpperCase() + ".DEV");
+    
+    // Hero
+    const heroFirst = document.getElementById("heroFirstName");
+    const heroLast = document.getElementById("heroLastName");
+    const heroRole = document.getElementById("heroRoleBadge");
+    if (heroFirst) heroFirst.textContent = PORTFOLIO_CONFIG.firstName || PORTFOLIO_CONFIG.name.split(" ")[0];
+    if (heroLast) heroLast.textContent = PORTFOLIO_CONFIG.lastName || (PORTFOLIO_CONFIG.name.split(" ").slice(1).join(" ") + ".");
+    if (heroRole) heroRole.textContent = PORTFOLIO_CONFIG.role;
+
+    // Contact
+    const speechText = document.getElementById("contactSpeechBubbleText");
+    const dispEmail = document.getElementById("contactDisplayEmail");
+    const heroMailBtn = document.getElementById("heroMailBtn");
+    const heroGhBtn = document.getElementById("heroGhBtn");
+    const heroLiBtn = document.getElementById("heroLiBtn");
+    const headerResumeBtn = document.getElementById("headerResumeBtn");
+    const contactGh = document.getElementById("contactGitHubLink");
+    const contactLi = document.getElementById("contactLinkedInLink");
+
+    if (speechText) speechText.textContent = '"' + PORTFOLIO_CONFIG.speechBubble + '"';
+    if (dispEmail) dispEmail.textContent = PORTFOLIO_CONFIG.email;
+    if (heroMailBtn) heroMailBtn.href = "mailto:" + PORTFOLIO_CONFIG.email;
+    if (heroGhBtn) heroGhBtn.href = PORTFOLIO_CONFIG.socials.github;
+    if (heroLiBtn) heroLiBtn.href = PORTFOLIO_CONFIG.socials.linkedin;
+    if (headerResumeBtn) headerResumeBtn.href = PORTFOLIO_CONFIG.socials.resume;
+    if (contactGh) contactGh.href = PORTFOLIO_CONFIG.socials.github;
+    if (contactLi) contactLi.href = PORTFOLIO_CONFIG.socials.linkedin;
+
+    // Wanted Poster Name & Bounty
+    const wantedName = document.getElementById("wantedPosterName");
+    const wantedBounty = document.getElementById("wantedPosterBounty");
+    if (wantedName) wantedName.textContent = PORTFOLIO_CONFIG.name.toUpperCase();
+    if (wantedBounty) wantedBounty.textContent = PORTFOLIO_CONFIG.bounty;
+
+    // Polaroid Caption
+    const savedCaption = localStorage.getItem("portfolio_polaroid_caption") || PORTFOLIO_CONFIG.polaroidCaption;
+    const captionEl = document.getElementById("polaroidCaptionText");
+    if (captionEl) captionEl.textContent = savedCaption;
+  }
+  applyPortfolioConfig();
+
+  // 2. Typewriter Effect in Hero
+  const typewriterEl = document.getElementById("heroTypewriterText");
+  const phrases = PORTFOLIO_CONFIG.typewriterPhrases;
+  let phraseIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typingSpeed = 70;
+
+  function typeTick() {
+    if (!typewriterEl) return;
+    const currentPhrase = phrases[phraseIndex];
+
+    if (isDeleting) {
+      typewriterEl.textContent = currentPhrase.substring(0, charIndex - 1);
+      charIndex--;
+      typingSpeed = 35;
+    } else {
+      typewriterEl.textContent = currentPhrase.substring(0, charIndex + 1);
+      charIndex++;
+      typingSpeed = 75;
+    }
+
+    if (!isDeleting && charIndex === currentPhrase.length) {
+      typingSpeed = 2200; // Pause at end of phrase
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      isDeleting = false;
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      typingSpeed = 400; // Pause before new phrase
+    }
+
+    setTimeout(typeTick, typingSpeed);
+  }
+  setTimeout(typeTick, 600);
+
+  // 3. Live Visit Counter
+  let visits = parseInt(localStorage.getItem("portfolio_visits") || "188", 10);
+  visits += 1;
+  try { localStorage.setItem("portfolio_visits", visits.toString()); } catch(e) {}
+  const visitCounterEl = document.getElementById("liveVisitCounter");
+  if (visitCounterEl) {
+    visitCounterEl.textContent = String(visits).padStart(5, '0');
+  }
+
+  // 4. Dual Frame Switcher (Polaroid vs Wanted Bounty Poster)
+  const btnModePolaroid = document.getElementById("btnModePolaroid");
+  const btnModeWanted = document.getElementById("btnModeWanted");
+  const polaroidCard = document.getElementById("polaroidFrameCard");
+  const wantedPoster = document.getElementById("wantedPoster");
+
+  function setFrameMode(mode) {
+    if (mode === "wanted") {
+      if (btnModeWanted) btnModeWanted.classList.add("active");
+      if (btnModePolaroid) btnModePolaroid.classList.remove("active");
+      if (wantedPoster) wantedPoster.style.display = "block";
+      if (polaroidCard) polaroidCard.style.display = "none";
+    } else {
+      if (btnModePolaroid) btnModePolaroid.classList.add("active");
+      if (btnModeWanted) btnModeWanted.classList.remove("active");
+      if (polaroidCard) polaroidCard.style.display = "block";
+      if (wantedPoster) wantedPoster.style.display = "none";
+    }
+    localStorage.setItem("portfolio_frame_mode", mode);
+    playPaperRustle();
+  }
+
+  if (btnModePolaroid && btnModeWanted) {
+    btnModePolaroid.addEventListener("click", () => setFrameMode("polaroid"));
+    btnModeWanted.addEventListener("click", () => setFrameMode("wanted"));
+  }
+
+  const savedFrameMode = localStorage.getItem("portfolio_frame_mode") || "polaroid";
+  setFrameMode(savedFrameMode);
+
+  // 5. Shared Photo Upload (Syncs across Polaroid, Wanted Poster & Nav Avatar)
+  const sharedInput = document.getElementById("sharedPhotoInput");
+  const polaroidPhotoBox = document.getElementById("polaroidPhotoBox");
+  const polaroidImg = document.getElementById("polaroidPhotoImg");
+  const polaroidHolder = document.getElementById("polaroidPlaceholder");
+  
+  const wantedContainer = document.getElementById("wantedPhotoContainer");
+  const wantedImg = document.getElementById("wantedPhotoImg");
+  const wantedHolder = document.getElementById("wantedPlaceholder");
+  
+  const navAvatarImg = document.getElementById("navAvatarImg");
+  const navAvatarPlaceholder = document.getElementById("navAvatarPlaceholder");
+  const contactAvatarImg = document.getElementById("contactAvatarImg");
+
+  function updateGlobalPhoto(dataUrl) {
+    if (!dataUrl) return;
+    if (polaroidImg) {
+      polaroidImg.src = dataUrl;
+      polaroidImg.style.display = "block";
+      if (polaroidHolder) polaroidHolder.style.display = "none";
+    }
+    if (wantedImg) {
+      wantedImg.src = dataUrl;
+      wantedImg.style.display = "block";
+      if (wantedHolder) wantedHolder.style.display = "none";
+    }
+    if (navAvatarImg) {
+      navAvatarImg.src = dataUrl;
+      navAvatarImg.style.display = "block";
+      if (navAvatarPlaceholder) navAvatarPlaceholder.style.display = "none";
+    }
+    if (contactAvatarImg) {
+      contactAvatarImg.src = dataUrl;
+      contactAvatarImg.style.display = "block";
+      const p = contactAvatarImg.nextElementSibling;
+      if (p) p.style.display = "none";
+    }
+  }
+
+  const savedPhoto = localStorage.getItem("portfolio_wanted_photo");
+  if (savedPhoto) {
+    updateGlobalPhoto(savedPhoto);
+  } else if (PORTFOLIO_CONFIG.photoUrl) {
+    updateGlobalPhoto(PORTFOLIO_CONFIG.photoUrl);
+  }
+
+  function triggerPhotoPicker() {
+    if (sharedInput) sharedInput.click();
+  }
+
+  if (polaroidPhotoBox) polaroidPhotoBox.addEventListener("click", triggerPhotoPicker);
+  if (wantedContainer) wantedContainer.addEventListener("click", triggerPhotoPicker);
+
+  if (sharedInput) {
+    sharedInput.addEventListener("change", function(e) {
+      const file = e.target.files && e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          const dataUrl = evt.target.result;
+          updateGlobalPhoto(dataUrl);
+          try { localStorage.setItem("portfolio_wanted_photo", dataUrl); } catch(err) {}
+          playPaperRustle();
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  // Polaroid Caption Edit
+  const captionWrap = document.getElementById("polaroidCaptionWrap");
+  if (captionWrap) {
+    captionWrap.addEventListener("click", function() {
+      const current = document.getElementById("polaroidCaptionText").textContent;
+      const newText = prompt("Enter new polaroid caption:", current);
+      if (newText !== null && newText.trim() !== "") {
+        document.getElementById("polaroidCaptionText").textContent = newText.trim();
+        localStorage.setItem("portfolio_polaroid_caption", newText.trim());
+        playPenScratch();
+      }
+    });
+  }
+
+  // 6. Bounty Increment Easter Egg
+  const bountyRow = document.getElementById("wantedBountyRow");
+  if (bountyRow) {
+    bountyRow.addEventListener("click", function(e) {
+      const bountyEl = document.getElementById("wantedPosterBounty");
+      if (!bountyEl) return;
+      let rawBounty = parseInt(bountyEl.textContent.replace(/,/g, ""), 10) || 3000000000;
+      rawBounty += 100000000;
+      bountyEl.textContent = rawBounty.toLocaleString();
+      
+      // Spawn floating +100M badge
+      const floater = document.createElement("div");
+      floater.className = "bounty-click-floater";
+      floater.textContent = "+100,000,000 ฿";
+      floater.style.left = (e.clientX - 60) + "px";
+      floater.style.top = (e.clientY - 30) + "px";
+      document.body.appendChild(floater);
+      setTimeout(() => floater.remove(), 1200);
+
+      playCoinSound();
+    });
+  }
+
+  // 7. Copy Email with Toast Feedback
+  const btnCopyEmail = document.getElementById("btnCopyEmail");
+  if (btnCopyEmail) {
+    btnCopyEmail.addEventListener("click", function() {
+      const email = PORTFOLIO_CONFIG.email;
+      navigator.clipboard.writeText(email).then(() => {
+        const label = document.getElementById("copyEmailLabel");
+        if (label) label.textContent = "Copied! ✓";
+        playPenScratch();
+        setTimeout(() => {
+          if (label) label.textContent = "Copy";
+        }, 2000);
+      }).catch(() => {
+        prompt("Copy email address:", email);
+      });
+    });
+  }
+
+  // 8. Transmission Form Submit
+  const transForm = document.getElementById("transmissionForm");
+  const btnTransmit = document.getElementById("btnTransmit");
+  const transmitFeedback = document.getElementById("transmitFeedback");
+
+  if (transForm && btnTransmit) {
+    transForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("transName").value.trim();
+      const email = document.getElementById("transEmail").value.trim();
+      const problem = document.getElementById("transProblem").value.trim();
+
+      if (!name || !email || !problem) {
+        if (transmitFeedback) transmitFeedback.textContent = "Please fill in all fields.";
+        return;
+      }
+
+      playPaperRustle();
+      if (transmitFeedback) transmitFeedback.textContent = "✈ Formatting transmission...";
+      btnTransmit.disabled = true;
+
+      setTimeout(function() {
+        const subject = encodeURIComponent("Transmission from " + name + " (Portfolio)");
+        const body = encodeURIComponent(problem + "\n\n--\nFrom: " + name + " (" + email + ")");
+        window.location.href = "mailto:" + PORTFOLIO_CONFIG.email + "?subject=" + subject + "&body=" + body;
+        
+        setTimeout(function() {
+          btnTransmit.disabled = false;
+          if (transmitFeedback) transmitFeedback.textContent = "✔ Transmission dispatched to outbox! Looking forward to connecting.";
+          transForm.reset();
+        }, 1200);
+      }, 700);
+    });
+  }
+
+  // =========================================================================
+  // 9. OFF-SCREEN BOARD ENGINE (IRL EVENTS & PERSONAL INSIGHTS)
+  // =========================================================================
+  const offscreenBoard = document.getElementById("offscreenBoard");
+  const boardBackdrop = document.getElementById("boardBackdrop");
+  const btnCloseBoard = document.getElementById("btnCloseBoard");
+  const edgeIrlTab = document.getElementById("edgeIrlTab");
+  const navIrlBtn = document.getElementById("navIrlBtn");
+  const heroIrlTrigger = document.getElementById("heroIrlTriggerBtn");
+  const stickyIrlTrigger = document.getElementById("contactIrlBoardTrigger");
+  const pinboardGrid = document.getElementById("pinboardGrid");
+
+  let activeFilter = "all";
+
+  function openBoard() {
+    if (offscreenBoard) offscreenBoard.classList.add("active");
+    if (boardBackdrop) boardBackdrop.classList.add("active");
+    document.body.style.overflow = "hidden";
+    playPaperRustle();
+  }
+
+  function closeBoard() {
+    if (offscreenBoard) offscreenBoard.classList.remove("active");
+    if (boardBackdrop) boardBackdrop.classList.remove("active");
+    document.body.style.overflow = "";
+    playPaperRustle();
+  }
+
+  if (edgeIrlTab) edgeIrlTab.addEventListener("click", openBoard);
+  if (navIrlBtn) navIrlBtn.addEventListener("click", openBoard);
+  if (heroIrlTrigger) heroIrlTrigger.addEventListener("click", openBoard);
+  if (stickyIrlTrigger) stickyIrlTrigger.addEventListener("click", openBoard);
+  if (btnCloseBoard) btnCloseBoard.addEventListener("click", closeBoard);
+  if (boardBackdrop) boardBackdrop.addEventListener("click", closeBoard);
+
+  // Load Pins from LocalStorage or Defaults
+  function getPins() {
+    try {
+      const stored = localStorage.getItem("portfolio_board_pins");
+      if (stored) return JSON.parse(stored);
+    } catch(e) {}
+    return PORTFOLIO_CONFIG.defaultPins;
+  }
+
+  function savePins(pins) {
+    try {
+      localStorage.setItem("portfolio_board_pins", JSON.stringify(pins));
+    } catch(e) {}
+  }
+
+  function renderPins() {
+    if (!pinboardGrid) return;
+    const pins = getPins();
+    pinboardGrid.innerHTML = "";
+
+    const filtered = pins.filter(p => {
+      if (activeFilter === "all") return true;
+      return p.type === activeFilter;
+    });
+
+    if (filtered.length === 0) {
+      pinboardGrid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:40px;font-family:var(--hand);font-size:1.4rem;color:var(--ink-soft)">No pins found in this category. Click '＋ Pin New Item' above to create one!</div>`;
+      return;
+    }
+
+    filtered.forEach(pin => {
+      if (pin.type === "event") {
+        const card = document.createElement("div");
+        card.className = "pin-polaroid-card";
+        card.innerHTML = `
+          <div class="pin-pushpin ${pin.pushpin || 'red'}"></div>
+          <div class="polaroid-img-frame">
+            <img src="${pin.photoUrl || ''}" alt="${pin.title}">
+          </div>
+          <div class="pin-meta-strip">
+            <span class="pin-tag-pill">${pin.tag || 'EVENT'}</span>
+            <span class="pin-date-tag">${pin.date || ''}</span>
+          </div>
+          <h4 class="pin-event-title">${pin.title}</h4>
+          <p class="pin-user-words">"${pin.story}"</p>
+          <div class="pin-card-footer">
+            <span style="opacity:0.6">📌 Memory Pin</span>
+            <button class="pin-delete-btn" data-del-id="${pin.id}" title="Remove pin">✕ delete</button>
+          </div>
+        `;
+        pinboardGrid.appendChild(card);
+      } else {
+        const card = document.createElement("div");
+        card.className = "pin-insight-card bg-" + (pin.color || "yellow");
+        card.innerHTML = `
+          <div class="insight-washi-tape"></div>
+          <div class="insight-category">${pin.category || 'THOUGHT'}</div>
+          <div class="insight-quote-text">"${pin.words}"</div>
+          <div class="insight-footer-stamp">
+            <span>${pin.date || 'Personal Insight'}</span>
+            <button class="pin-delete-btn" data-del-id="${pin.id}" title="Remove pin">✕ delete</button>
+          </div>
+        `;
+        pinboardGrid.appendChild(card);
+      }
+    });
+
+    // Attach delete listeners
+    pinboardGrid.querySelectorAll(".pin-delete-btn").forEach(btn => {
+      btn.addEventListener("click", function() {
+        const id = this.getAttribute("data-del-id");
+        if (confirm("Remove this pin from the board?")) {
+          const current = getPins().filter(p => p.id !== id);
+          savePins(current);
+          renderPins();
+          playPaperRustle();
+        }
+      });
+    });
+  }
+
+  // Filter Buttons
+  document.querySelectorAll(".board-filter-btn").forEach(btn => {
+    btn.addEventListener("click", function() {
+      document.querySelectorAll(".board-filter-btn").forEach(b => b.classList.remove("active"));
+      this.classList.add("active");
+      activeFilter = this.getAttribute("data-filter");
+      renderPins();
+      playPaperRustle();
+    });
+  });
+
+  renderPins();
+
+  // Reset Default Pins
+  const btnResetDefaults = document.getElementById("btnResetDefaultPins");
+  if (btnResetDefaults) {
+    btnResetDefaults.addEventListener("click", function() {
+      if (confirm("Restore original sample event pins and insights?")) {
+        savePins(PORTFOLIO_CONFIG.defaultPins);
+        renderPins();
+        closeAddPinModal();
+        playPaperRustle();
+      }
+    });
+  }
+
+  // Modal: Add Pin
+  const addPinModal = document.getElementById("addPinModal");
+  const btnOpenAddPin = document.getElementById("btnOpenAddPinModal");
+  const btnCloseAddPin = document.getElementById("btnCloseAddPinModal");
+  const btnTypeEvent = document.getElementById("btnTypeEvent");
+  const btnTypeInsight = document.getElementById("btnTypeInsight");
+  const formEventSection = document.getElementById("formEventSection");
+  const formInsightSection = document.getElementById("formInsightSection");
+  const btnSaveNewPin = document.getElementById("btnSaveNewPin");
+  let currentPinType = "event";
+
+  function openAddPinModal() {
+    if (addPinModal) addPinModal.classList.add("active");
+    playPaperRustle();
+  }
+  function closeAddPinModal() {
+    if (addPinModal) addPinModal.classList.remove("active");
+  }
+
+  if (btnOpenAddPin) btnOpenAddPin.addEventListener("click", openAddPinModal);
+  if (btnCloseAddPin) btnCloseAddPin.addEventListener("click", closeAddPinModal);
+
+  if (btnTypeEvent && btnTypeInsight) {
+    btnTypeEvent.addEventListener("click", function() {
+      currentPinType = "event";
+      btnTypeEvent.classList.add("active");
+      btnTypeInsight.classList.remove("active");
+      formEventSection.style.display = "block";
+      formInsightSection.style.display = "none";
+    });
+    btnTypeInsight.addEventListener("click", function() {
+      currentPinType = "insight";
+      btnTypeInsight.classList.add("active");
+      btnTypeEvent.classList.remove("active");
+      formEventSection.style.display = "none";
+      formInsightSection.style.display = "block";
+    });
+  }
+
+  if (btnSaveNewPin) {
+    btnSaveNewPin.addEventListener("click", function() {
+      const pins = getPins();
+      if (currentPinType === "event") {
+        const title = document.getElementById("pinEventTitle").value.trim();
+        const date = document.getElementById("pinEventDate").value.trim();
+        const tag = document.getElementById("pinEventTag").value.trim();
+        const story = document.getElementById("pinEventStory").value.trim();
+        const photoFile = document.getElementById("pinPhotoInput").files[0];
+
+        if (!title || !story) {
+          alert("Please provide at least a title and your story!");
+          return;
+        }
+
+        const pushpinColors = ["red", "blue", "brass", "green"];
+        const chosenPin = pushpinColors[Math.floor(Math.random() * pushpinColors.length)];
+
+        function finishAddEvent(photoUrl) {
+          pins.unshift({
+            id: "pin-" + Date.now(),
+            type: "event",
+            title,
+            date: date || "RECENT",
+            tag: (tag || "EVENT").toUpperCase(),
+            story,
+            pushpin: chosenPin,
+            photoUrl: photoUrl || PORTFOLIO_CONFIG.defaultPins[0].photoUrl
+          });
+          savePins(pins);
+          renderPins();
+          closeAddPinModal();
+          playPinSound();
+          // Reset fields
+          document.getElementById("pinEventTitle").value = "";
+          document.getElementById("pinEventDate").value = "";
+          document.getElementById("pinEventTag").value = "";
+          document.getElementById("pinEventStory").value = "";
+          document.getElementById("pinPhotoInput").value = "";
+        }
+
+        if (photoFile) {
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            finishAddEvent(evt.target.result);
+          };
+          reader.readAsDataURL(photoFile);
+        } else {
+          finishAddEvent("");
+        }
+      } else {
+        // Insight
+        const category = document.getElementById("pinInsightCategory").value.trim() || "ON CRAFT & THOUGHTS";
+        const words = document.getElementById("pinInsightWords").value.trim();
+        const colorRadio = document.querySelector('input[name="stickyColor"]:checked');
+        const color = colorRadio ? colorRadio.value : "yellow";
+
+        if (!words) {
+          alert("Please write your words or insight!");
+          return;
+        }
+
+        pins.unshift({
+          id: "pin-" + Date.now(),
+          type: "insight",
+          category: category.toUpperCase(),
+          words,
+          color,
+          date: "PERSONAL INSIGHT"
+        });
+        savePins(pins);
+        renderPins();
+        closeAddPinModal();
+        playPinSound();
+        document.getElementById("pinInsightWords").value = "";
+        document.getElementById("pinInsightCategory").value = "";
+      }
+    });
+  }
+
+  // =========================================================================
+  // 10. INTERACTIVE DEVELOPER TERMINAL MODAL
+  // =========================================================================
+  const terminalModal = document.getElementById("terminalModal");
+  const headerTermBtn = document.getElementById("headerTermBtn");
+  const floatingTermLauncher = document.getElementById("floatingTermLauncher");
+  const btnCloseTerminal = document.getElementById("btnCloseTerminal");
+  const termCliInput = document.getElementById("termCliInput");
+  const termOutput = document.getElementById("termOutput");
+
+  function openTerminal() {
+    if (terminalModal) terminalModal.classList.add("active");
+    if (termCliInput) termCliInput.focus();
+    playPaperRustle();
+  }
+
+  function closeTerminal() {
+    if (terminalModal) terminalModal.classList.remove("active");
+  }
+
+  if (headerTermBtn) headerTermBtn.addEventListener("click", openTerminal);
+  if (floatingTermLauncher) floatingTermLauncher.addEventListener("click", openTerminal);
+  if (btnCloseTerminal) btnCloseTerminal.addEventListener("click", closeTerminal);
+
+  if (termCliInput) {
+    termCliInput.addEventListener("keydown", function(e) {
+      if (e.key === "Enter") {
+        const cmd = this.value.trim().toLowerCase();
+        this.value = "";
+        printTerm("&gt; " + cmd);
+
+        if (cmd === "help") {
+          printTerm("Available commands:\n - irl      : Slide open the IRL Events & Insights Board\n - studio   : Open the Digital Sketchbook\n - bounty   : Raise your One Piece bounty!\n - whoami   : Print bio & background\n - skills   : List technical stack\n - contact  : Jump to transmission form\n - clear    : Clear terminal screen");
+        } else if (cmd === "irl" || cmd === "board") {
+          closeTerminal();
+          openBoard();
+        } else if (cmd === "studio" || cmd === "doodle") {
+          const ribbon = document.getElementById("sketchbookRibbonBtn");
+          if (ribbon) ribbon.click();
+        } else if (cmd === "bounty") {
+          const bountyEl = document.getElementById("wantedPosterBounty");
+          if (bountyEl) {
+            let b = parseInt(bountyEl.textContent.replace(/,/g, ""), 10) || 3000000000;
+            b += 100000000;
+            bountyEl.textContent = b.toLocaleString();
+            printTerm("🏴‍☠️ Bounty raised to " + b.toLocaleString() + " ฿! Marine alerts activated.");
+            playCoinSound();
+          }
+        } else if (cmd === "whoami") {
+          printTerm(PORTFOLIO_CONFIG.name + " · " + PORTFOLIO_CONFIG.role + "\n" + PORTFOLIO_CONFIG.tagline);
+        } else if (cmd === "skills") {
+          printTerm("Stack: TypeScript, React, Go, Canvas API, WebSockets, Python, UI Design, SQLite.");
+        } else if (cmd === "contact") {
+          closeTerminal();
+          window.location.hash = "#contact";
+        } else if (cmd === "clear") {
+          if (termOutput) termOutput.innerHTML = "<div>Terminal buffer cleared.</div>";
+        } else if (cmd !== "") {
+          printTerm("Command not recognized: '" + cmd + "'. Type 'help' for available commands.");
+        }
+      }
+    });
+  }
+
+  function printTerm(text) {
+    if (!termOutput) return;
+    const div = document.createElement("div");
+    div.style.whiteSpace = "pre-wrap";
+    div.style.margin = "4px 0";
+    div.textContent = text;
+    termOutput.appendChild(div);
+    termOutput.scrollTop = termOutput.scrollHeight;
+  }
+
+  // Keyboard Shortcuts: Esc closes modals
+  window.addEventListener("keydown", function(e) {
+    if (e.key === "Escape") {
+      closeBoard();
+      closeAddPinModal();
+      closeTerminal();
+    }
+  });
+
+  // Sound FX Toggle Button
+  const soundBtn = document.getElementById("soundToggle");
+  const soundLabel = document.getElementById("soundLabel");
+  const w1 = document.getElementById("soundWave1");
+  const w2 = document.getElementById("soundWave2");
+
   function updateSoundUI() {
-    const soundToggle = document.getElementById("soundToggle");
-    const soundLabel = document.getElementById("soundLabel");
-    const w1 = document.getElementById("soundWave1");
-    const w2 = document.getElementById("soundWave2");
-    if (!soundToggle) return;
+    if (!soundLabel) return;
     if (soundEnabled) {
-      soundLabel.textContent = "sound on";
+      soundLabel.textContent = "sound";
       if (w1) w1.style.display = "block";
       if (w2) w2.style.display = "block";
     } else {
-      soundLabel.textContent = "sound off";
+      soundLabel.textContent = "mute";
       if (w1) w1.style.display = "none";
       if (w2) w2.style.display = "none";
     }
   }
   updateSoundUI();
 
-  const soundBtn = document.getElementById("soundToggle");
   if (soundBtn) {
     soundBtn.addEventListener("click", function() {
       soundEnabled = !soundEnabled;
@@ -2357,337 +4274,61 @@ const PORTFOLIO_CONFIG = {
     });
   }
 
-  // 3. Theme Engine
+  // Ink Themes
   const themeBtn = document.getElementById("themeBtn");
   const themeMenu = document.getElementById("themeMenu");
-  const savedTheme = localStorage.getItem("portfolio_theme") || "parchment";
-  document.documentElement.setAttribute("data-theme", savedTheme);
-
   if (themeBtn && themeMenu) {
     themeBtn.addEventListener("click", function(e) {
       e.stopPropagation();
       themeMenu.classList.toggle("open");
       playPaperRustle();
     });
-    document.addEventListener("click", function() {
-      themeMenu.classList.remove("open");
-    });
-    themeMenu.querySelectorAll(".theme-opt").forEach(function(opt) {
-      opt.addEventListener("click", function() {
-        const themeVal = opt.dataset.themeVal;
-        document.documentElement.setAttribute("data-theme", themeVal);
-        localStorage.setItem("portfolio_theme", themeVal);
+
+    document.querySelectorAll(".theme-opt").forEach(btn => {
+      btn.addEventListener("click", function() {
+        const val = this.getAttribute("data-theme-val");
+        document.documentElement.setAttribute("data-theme", val);
+        localStorage.setItem("portfolio_ink_theme", val);
         themeMenu.classList.remove("open");
         playPenScratch();
       });
     });
+
+    document.addEventListener("click", () => themeMenu.classList.remove("open"));
   }
 
-  // 4. Loader with quote cycling & skip
-  document.querySelectorAll(".draw path, .draw ellipse, .draw line, .draw polygon, .draw rect").forEach(function(p) {
-    p.setAttribute("pathLength", 1);
-  });
+  const savedTheme = localStorage.getItem("portfolio_ink_theme");
+  if (savedTheme) document.documentElement.setAttribute("data-theme", savedTheme);
 
-  const loader = document.getElementById("loader");
-  const bar = document.getElementById("bar");
-  const pct = document.getElementById("pct");
-  const qEl = document.getElementById("q");
-  const byEl = document.getElementById("by");
-  const skipBtn = document.getElementById("skipLoaderBtn");
-  const hatClicker = document.getElementById("hatClicker");
-
-  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const isRevisit = sessionStorage.getItem("portfolio_visited") === "true";
-  const total = reduceMotion ? 200 : (isRevisit ? 1200 : 3800);
-  let start = null;
-  let loaderDone = false;
-
-  // Pick initial random quote
-  let quoteIndex = Math.floor(Math.random() * PORTFOLIO_CONFIG.quotes.length);
-  function renderQuote(idx) {
-    const qObj = PORTFOLIO_CONFIG.quotes[idx];
-    if (qEl && byEl) {
-      qEl.textContent = qObj.quote;
-      byEl.textContent = qObj.by;
-    }
-  }
-  renderQuote(quoteIndex);
-
-  if (hatClicker) {
-    hatClicker.addEventListener("click", function() {
-      quoteIndex = (quoteIndex + 1) % PORTFOLIO_CONFIG.quotes.length;
-      renderQuote(quoteIndex);
-      playPenScratch();
-    });
-  }
-
-  requestAnimationFrame(function() {
-    if (qEl) qEl.classList.add("on");
-    if (byEl) byEl.classList.add("on");
-  });
-
-  function tick(ts) {
-    if (loaderDone) return;
-    if (!start) start = ts;
-    const t = Math.min((ts - start) / total, 1);
-    const ease = 1 - Math.pow(1 - t, 2);
-    if (bar) {
-      bar.style.setProperty("--p", ease);
-      const barPath = bar.querySelector("path");
-      if (barPath) barPath.style.strokeDashoffset = 1 - ease;
-    }
-    if (pct) pct.textContent = Math.round(ease * 100) + "%";
-    if (t < 1) {
-      requestAnimationFrame(tick);
-    } else {
-      setTimeout(enterSite, 250);
-    }
-  }
-  requestAnimationFrame(tick);
-
-  function enterSite() {
-    if (loaderDone) return;
-    loaderDone = true;
-    sessionStorage.setItem("portfolio_visited", "true");
-    if (loader) {
-      loader.classList.add("done");
-      setTimeout(function() {
-        loader.remove();
-        observeElements();
-      }, reduceMotion ? 10 : 600);
-    } else {
-      observeElements();
-    }
-  }
-
-  if (skipBtn) {
-    skipBtn.addEventListener("click", function(e) {
-      e.stopPropagation();
-      enterSite();
-    });
-  }
-  window.addEventListener("keydown", function(e) {
-    if (e.code === "Space" && !loaderDone) {
-      e.preventDefault();
-      enterSite();
-    }
-  });
-
-  // 5. Scroll Intersection Observer for Hand-Drawn Elements
-  function observeElements() {
-    const io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          const el = entry.target;
-          if (el.dataset.t) el.style.setProperty("--t", el.dataset.t);
-          el.classList.add("on");
-          io.unobserve(el);
-        }
-      });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll(".write:not(#q), .ink:not(#by), .draw").forEach(function(el) {
-      io.observe(el);
-    });
-  }
-
-  // 6. Project Filters
-  const filterPills = document.querySelectorAll(".filter-pill");
-  const projectCards = document.querySelectorAll(".card[data-category]");
-
-  filterPills.forEach(function(pill) {
-    pill.addEventListener("click", function() {
-      filterPills.forEach(function(p) { p.classList.remove("active"); });
-      pill.classList.add("active");
-      const target = pill.dataset.filter;
-      playPenScratch();
-
-      projectCards.forEach(function(card) {
-        if (target === "all" || card.dataset.category === target) {
-          card.style.display = "flex";
-          setTimeout(function() { card.style.opacity = "1"; card.style.transform = "none"; }, 20);
-        } else {
-          card.style.opacity = "0";
-          card.style.transform = "scale(0.95)";
-          setTimeout(function() { card.style.display = "none"; }, 200);
-        }
-      });
-    });
-  });
-
-  // 7. Sketchbook Case Study Modal
-  const modal = document.getElementById("sketchModal");
-  const modalClose = document.getElementById("modalCloseBtn");
-  const modalBadge = document.getElementById("modalBadge");
-  const modalHeading = document.getElementById("modalHeading");
-  const modalTags = document.getElementById("modalTags");
-  const modalDesc = document.getElementById("modalDescription");
-  const modalHighlights = document.getElementById("modalHighlights");
-  const modalLive = document.getElementById("modalLiveLink");
-  const modalGithub = document.getElementById("modalGithubLink");
-
-  function openProjectModal(projectId) {
-    const proj = PORTFOLIO_CONFIG.projects[projectId];
-    if (!proj) return;
-
-    if (modalBadge) modalBadge.textContent = proj.badge;
-    if (modalHeading) modalHeading.textContent = proj.title;
-    if (modalDesc) modalDesc.textContent = proj.description;
-
-    if (modalTags) {
-      modalTags.innerHTML = "";
-      proj.tags.forEach(function(t) {
-        const span = document.createElement("span");
-        span.className = "modal-tag";
-        span.textContent = t;
-        modalTags.appendChild(span);
-      });
-    }
-
-    if (modalHighlights) {
-      modalHighlights.innerHTML = "";
-      proj.highlights.forEach(function(hl) {
-        const li = document.createElement("li");
-        li.textContent = hl;
-        modalHighlights.appendChild(li);
-      });
-    }
-
-    if (modalLive) modalLive.href = proj.liveUrl;
-    if (modalGithub) modalGithub.href = proj.githubUrl;
-
-    if (modal) {
-      modal.classList.add("open");
-      document.body.style.overflow = "hidden";
-      playPaperRustle();
-    }
-  }
-
-  function closeProjectModal() {
-    if (modal) {
-      modal.classList.remove("open");
-      document.body.style.overflow = "";
-      playPaperRustle();
-    }
-  }
-
-  projectCards.forEach(function(card) {
-    card.addEventListener("click", function() {
-      const pid = card.dataset.projectId;
-      openProjectModal(pid);
-    });
-    card.addEventListener("keydown", function(e) {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        const pid = card.dataset.projectId;
-        openProjectModal(pid);
-      }
-    });
-  });
-
-  if (modalClose) modalClose.addEventListener("click", closeProjectModal);
-  if (modal) {
-    modal.addEventListener("click", function(e) {
-      if (e.target === modal) closeProjectModal();
-    });
-  }
-  window.addEventListener("keydown", function(e) {
-    if (e.key === "Escape" && modal && modal.classList.contains("open")) {
-      closeProjectModal();
-    }
-  });
-
-  // 8. Left Ribbon Sketchbook Button & 3D Paper Page Fold Transition
+  // Digital Sketchbook Studio Page-Turn Link
   const ribbonBtn = document.getElementById("sketchbookRibbonBtn");
-  const pageFlipper = document.getElementById("paperPageFlipper");
-
+  const flipper = document.getElementById("paperPageFlipper");
   if (ribbonBtn) {
-    ribbonBtn.addEventListener("click", function() {
-      ribbonBtn.disabled = true;
+    ribbonBtn.addEventListener("click", function(e) {
+      e.preventDefault();
       playPaperRustle();
-
-      if (pageFlipper) {
-        pageFlipper.classList.add("active");
-      }
-
-      const mainEl = document.querySelector("main");
-      if (mainEl) {
-        mainEl.style.transition = "transform 0.65s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.65s ease";
-        mainEl.style.transformOrigin = "left center";
-        mainEl.style.transform = "rotateY(-85deg) scale(0.92)";
-        mainEl.style.opacity = "0.1";
-      }
-
-      setTimeout(function() {
-        window.location.href = "doodle.html?from=fold";
-      }, 550);
-    });
-  }
-
-  // 9. Interactive Coffee Drops
-  const coffeeStain = document.getElementById("coffeeStain");
-  if (coffeeStain) {
-    coffeeStain.addEventListener("click", function(e) {
-      playPenScratch();
-      const drop = document.createElement("div");
-      drop.className = "coffee-drop";
-      const size = 30 + Math.random() * 40;
-      drop.style.width = size + "px";
-      drop.style.height = size + "px";
-      drop.style.left = (e.clientX - size / 2 + (Math.random() * 30 - 15)) + "px";
-      drop.style.top = (e.clientY - size / 2 + (Math.random() * 30 - 15)) + "px";
-      document.body.appendChild(drop);
-      setTimeout(function() {
-        drop.style.transition = "opacity 2s ease";
-        drop.style.opacity = "0.2";
-      }, 1000);
-    });
-  }
-
-  // 10. Interactive Postcard / Letter Sender
-  const sendLetterBtn = document.getElementById("sendLetterBtn");
-  const postMsg = document.getElementById("postMsg");
-  const postSenderName = document.getElementById("postSenderName");
-  const postSenderEmail = document.getElementById("postSenderEmail");
-  const mailFeedback = document.getElementById("mailFeedback");
-
-  if (sendLetterBtn) {
-    sendLetterBtn.addEventListener("click", function() {
-      const msg = postMsg.value.trim();
-      const name = postSenderName.value.trim();
-      const email = postSenderEmail.value.trim();
-
-      if (!msg) {
-        mailFeedback.textContent = "✏ Please write a short note before sending!";
-        postMsg.focus();
-        playPenScratch();
-        return;
-      }
-      if (!name) {
-        mailFeedback.textContent = "✍ Please let me know who this letter is from!";
-        postSenderName.focus();
-        playPenScratch();
-        return;
-      }
-
-      playPaperRustle();
-      mailFeedback.textContent = "✈ Folding airplane and delivering letter...";
-      sendLetterBtn.disabled = true;
-
-      setTimeout(function() {
-        mailFeedback.textContent = "✦ Postcard ready! Opening your email client to send...";
-        const subject = encodeURIComponent("Postcard from " + name + " (via Portfolio)");
-        const body = encodeURIComponent(msg + "\n\n--\nSender: " + name + (email ? " (" + email + ")" : ""));
-        window.location.href = "mailto:" + PORTFOLIO_CONFIG.email + "?subject=" + subject + "&body=" + body;
+      if (flipper) {
+        flipper.classList.add("active");
         setTimeout(function() {
-          sendLetterBtn.disabled = false;
-          mailFeedback.textContent = "✔ Delivered to the outbox! Looking forward to replying ☕";
-        }, 1500);
-      }, 800);
+          window.location.href = "doodle.html";
+        }, 550);
+      } else {
+        window.location.href = "doodle.html";
+      }
     });
   }
 
-  // 11. Back to Top Button
+  // Interactive Coffee Stain Clicker
+  const coffee = document.getElementById("coffeeStain");
+  if (coffee) {
+    coffee.addEventListener("click", function() {
+      playPaperRustle();
+      coffee.style.transform = "scale(1.15) rotate(15deg)";
+      setTimeout(() => coffee.style.transform = "", 300);
+    });
+  }
+
+  // Back to Top Button
   const backToTop = document.getElementById("backToTop");
   window.addEventListener("scroll", function() {
     if (window.scrollY > 400) {
@@ -2704,15 +4345,158 @@ const PORTFOLIO_CONFIG = {
     });
   }
 
-  // 12. Audio cue on link hovers
-  document.querySelectorAll("a, button, .card").forEach(function(interactiveEl) {
-    interactiveEl.addEventListener("mouseenter", function() {
+  // Interactive link hover audio
+  document.querySelectorAll("a, button, .card").forEach(function(el) {
+    el.addEventListener("mouseenter", function() {
       if (soundEnabled && Math.random() > 0.4) playPenScratch();
     });
   });
 
 })();
-</script>
+</script></script>
+
+<!-- FLOATING LEFT EDGE TABS (Arcade & Studio style) -->
+<button class="edge-irl-tab" id="edgeIrlTab" type="button" title="Open IRL Events &amp; Personal Insights Board">
+  <span class="tab-icon">📌</span>
+  <span class="tab-label">IRL BOARD</span>
+  <span class="tab-pulse-badge">NEW</span>
+</button>
+
+<!-- FLOATING DEVELOPER TERMINAL LAUNCHER (Bottom Right) -->
+<button class="floating-term-launcher" id="floatingTermLauncher" type="button" title="Open Interactive Terminal">&gt;_</button>
+
+<!-- ==========================================================================
+     OFF-SCREEN BOARD (IRL EVENTS & PERSONAL INSIGHTS)
+     ========================================================================== -->
+<div class="board-backdrop" id="boardBackdrop"></div>
+
+<aside class="offscreen-board-drawer" id="offscreenBoard" role="dialog" aria-modal="true" aria-label="IRL Events and Personal Insights Board">
+  <!-- Header -->
+  <div class="board-drawer-header">
+    <div class="board-header-left">
+      <div class="board-badge-tag">📌 IRL &amp; WORDS</div>
+      <div>
+        <h2 class="board-main-title">Life, Events &amp; Insights Board</h2>
+        <p class="board-main-sub">Real-world snapshots, hackathons, and personal insights in my own words.</p>
+      </div>
+    </div>
+
+    <!-- Filter Pills -->
+    <div class="board-filter-group">
+      <button class="board-filter-btn active" data-filter="all" type="button">All Pins</button>
+      <button class="board-filter-btn" data-filter="event" type="button">📸 Events</button>
+      <button class="board-filter-btn" data-filter="insight" type="button">💭 Insights</button>
+    </div>
+
+    <!-- Header Actions -->
+    <div class="board-actions-right">
+      <button class="board-pin-btn" id="btnOpenAddPinModal" type="button">
+        <span>＋ Pin New Item</span>
+      </button>
+      <button class="board-close-btn" id="btnCloseBoard" type="button" title="Close Board (Esc)">✕</button>
+    </div>
+  </div>
+
+  <!-- Board Pin Surface (Scrollable Corkboard Masonry) -->
+  <div class="board-scroll-body">
+    <div class="pinboard-grid" id="pinboardGrid">
+      <!-- Dynamically rendered pins from localStorage -->
+    </div>
+  </div>
+</aside>
+
+<!-- MODAL: ADD PIN / INSIGHT -->
+<div class="pin-modal-overlay" id="addPinModal">
+  <div class="pin-modal-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <h3 class="pin-modal-title" style="margin:0">Pin to Off-Screen Board</h3>
+      <button class="board-close-btn" id="btnCloseAddPinModal" type="button" style="padding:4px 8px">✕</button>
+    </div>
+
+    <!-- Type Switch -->
+    <div class="pin-type-switch">
+      <button class="pin-type-btn active" id="btnTypeEvent" type="button">📸 Event Photo</button>
+      <button class="pin-type-btn" id="btnTypeInsight" type="button">💭 Personal Insight</button>
+    </div>
+
+    <!-- Event Form -->
+    <div id="formEventSection">
+      <div class="transmission-field">
+        <label class="transmission-label">PHOTO</label>
+        <input type="file" id="pinPhotoInput" accept="image/*" class="transmission-input" style="padding:6px">
+      </div>
+      <div class="transmission-field">
+        <label class="transmission-label">EVENT TITLE</label>
+        <input type="text" id="pinEventTitle" class="transmission-input" placeholder="e.g. 1st Place at National AI Hackathon">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div class="transmission-field">
+          <label class="transmission-label">DATE &amp; LOCATION</label>
+          <input type="text" id="pinEventDate" class="transmission-input" placeholder="e.g. Oct 2025 · Bangalore">
+        </div>
+        <div class="transmission-field">
+          <label class="transmission-label">TAG / CATEGORY</label>
+          <input type="text" id="pinEventTag" class="transmission-input" placeholder="e.g. Hackathon, Speaker, Jam">
+        </div>
+      </div>
+      <div class="transmission-field">
+        <label class="transmission-label">THE STORY (IN YOUR OWN WORDS)</label>
+        <textarea id="pinEventStory" class="transmission-textarea" placeholder="What happened, what was the feeling, what did you learn? Write it in your own words..."></textarea>
+      </div>
+    </div>
+
+    <!-- Insight Form -->
+    <div id="formInsightSection" style="display:none;">
+      <div class="transmission-field">
+        <label class="transmission-label">STICKY NOTE COLOR</label>
+        <div style="display:flex;gap:10px;margin-top:6px">
+          <label style="display:flex;align-items:center;gap:4px;cursor:pointer"><input type="radio" name="stickyColor" value="yellow" checked> <span style="display:inline-block;width:20px;height:20px;background:#fef08a;border:1.5px solid #111;border-radius:3px"></span></label>
+          <label style="display:flex;align-items:center;gap:4px;cursor:pointer"><input type="radio" name="stickyColor" value="blue"> <span style="display:inline-block;width:20px;height:20px;background:#bae6fd;border:1.5px solid #111;border-radius:3px"></span></label>
+          <label style="display:flex;align-items:center;gap:4px;cursor:pointer"><input type="radio" name="stickyColor" value="pink"> <span style="display:inline-block;width:20px;height:20px;background:#fbcfe8;border:1.5px solid #111;border-radius:3px"></span></label>
+          <label style="display:flex;align-items:center;gap:4px;cursor:pointer"><input type="radio" name="stickyColor" value="green"> <span style="display:inline-block;width:20px;height:20px;background:#bbf7d0;border:1.5px solid #111;border-radius:3px"></span></label>
+          <label style="display:flex;align-items:center;gap:4px;cursor:pointer"><input type="radio" name="stickyColor" value="purple"> <span style="display:inline-block;width:20px;height:20px;background:#e9d5ff;border:1.5px solid #111;border-radius:3px"></span></label>
+        </div>
+      </div>
+      <div class="transmission-field">
+        <label class="transmission-label">TOPIC / CATEGORY</label>
+        <input type="text" id="pinInsightCategory" class="transmission-input" placeholder="e.g. On Engineering, Design Creed, Life Rule">
+      </div>
+      <div class="transmission-field">
+        <label class="transmission-label">YOUR WORDS &amp; INSIGHT</label>
+        <textarea id="pinInsightWords" class="transmission-textarea" placeholder="Type your personal insights, philosophy, or rules of craft here in your own words..."></textarea>
+      </div>
+    </div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px">
+      <button type="button" id="btnResetDefaultPins" style="background:none;border:none;color:var(--ink-soft);font-family:var(--mono);font-size:0.75rem;cursor:pointer;text-decoration:underline">Restore Default Pins</button>
+      <button type="button" class="board-pin-btn" id="btnSaveNewPin">
+        <span>📌 Pin It to Board</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ==========================================================================
+     INTERACTIVE DEVELOPER TERMINAL MODAL
+     ========================================================================== -->
+<div class="terminal-modal-overlay" id="terminalModal">
+  <div class="terminal-box">
+    <div class="terminal-topbar">
+      <span>● ● ● terminal: yourname.dev</span>
+      <button id="btnCloseTerminal" type="button" style="background:none;border:none;color:#94a3b8;cursor:pointer;font-family:var(--mono)">[esc ✕]</button>
+    </div>
+    <div class="terminal-output-area" id="termOutput">
+      <div>YOURNAME.DEV Interactive Shell [Version 2.4.0]</div>
+      <div>Type <span style="color:#facc15">'help'</span> for list of commands or <span style="color:#facc15">'irl'</span> to view the board.</div>
+      <div style="margin-bottom:8px">--------------------------------------------------</div>
+    </div>
+    <div class="terminal-input-row">
+      <span class="terminal-prompt-char">&gt;</span>
+      <input type="text" class="terminal-cli-input" id="termCliInput" placeholder="type a command..." autocomplete="off" spellcheck="false">
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
 
