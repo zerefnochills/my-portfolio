@@ -3419,12 +3419,12 @@ const PORTFOLIO_CONFIG = {
   brandName: "YOURNAME.DEV",
   role: "AI & FULL-STACK ENGINEER · IST (INDIA)",
   bounty: "3,000,000,000",
-  photoUrl: "", // Path or Data URL to photo
+  photoUrl: "",
   polaroidCaption: "Me at work!",
   speechBubble: "If professionals hate doing it by hand, I want to hear about it.",
   tagline: "Full-stack software developer and creative designer. I craft robust web apps, responsive systems, and sketch ideas on paper first.",
   email: "you@example.com",
-  status: "OPERATIONAL",
+  status: "AVAILABLE FOR NEW PROJECTS · 2026",
   socials: {
     github: "https://github.com",
     linkedin: "https://linkedin.com",
@@ -3443,6 +3443,65 @@ const PORTFOLIO_CONFIG = {
     { quote: "“Scars on the back are a swordsman’s shame.”", by: "— Roronoa Zoro" },
     { quote: "“Simplicity is prerequisite for reliability.”", by: "— Edsger W. Dijkstra" }
   ],
+  projects: {
+    inkflow: {
+      title: "InkFlow Journal",
+      category: "Full Stack App",
+      badge: "Featured ★",
+      tags: ["React", "TypeScript", "Node.js", "SQLite", "Canvas API", "PWA"],
+      description: "A distraction-free markdown sketchbook with live vector ink sketching, offline-first sync, and custom hand-drawn calligraphy typography.",
+      highlights: [
+        "Vector ink smoothing engine using quadratic Bézier curves with dynamic pen pressure response.",
+        "Local-first architecture using IndexedDB with background optimistic synchronization to a SQLite backend.",
+        "Export notes to clean PDF with vector sketches and Markdown formatting intact.",
+        "Zero tracking, completely private, installable as an offline Progressive Web App."
+      ],
+      liveUrl: "#",
+      githubUrl: "https://github.com"
+    },
+    voyagemap: {
+      title: "VoyageMap Explorer",
+      category: "Creative Canvas",
+      badge: "Interactive UI",
+      tags: ["TypeScript", "SVG Animations", "Canvas API", "CSS Grid", "GeoJSON"],
+      description: "An interactive cartography and voyage explorer tool that visualizes story journeys and nautical coordinates with hand-drawn trails and waypoint logs.",
+      highlights: [
+        "Procedural island generator with hand-drawn SVG coastal topography.",
+        "Timeline scrubbing system that animates vessel progress across routes with custom audio waves.",
+        "High-performance HTML5 Canvas renderer capable of 60 FPS across thousands of animated nautical nodes."
+      ],
+      liveUrl: "#",
+      githubUrl: "https://github.com"
+    },
+    paperpulse: {
+      title: "PaperPulse Sync",
+      category: "Distributed Systems",
+      badge: "Real-Time",
+      tags: ["WebSockets", "Go", "Redis", "Yjs / CRDT", "Canvas Physics"],
+      description: "Real-time collaborative whiteboard with peer-to-peer ink stroke synchronization, CRDT conflict resolution, and tactile drawing physics.",
+      highlights: [
+        "Built resilient WebSocket pub/sub engine in Go handling 10,000+ simultaneous connections with low latency.",
+        "CRDT conflict-free replicated data types ensuring zero stroke loss during network drops or concurrent edits.",
+        "Infinite canvas zoom & pan with virtualized viewport rendering for instant rendering speeds."
+      ],
+      liveUrl: "#",
+      githubUrl: "https://github.com"
+    },
+    shikisynth: {
+      title: "ShikiSynth Audio",
+      category: "Audio Experiment",
+      badge: "Web Audio",
+      tags: ["Web Audio API", "Vanilla JavaScript", "Custom Oscillators", "Canvas"],
+      description: "A browser-based synthesizer that sonifies drawing gestures, translating pen pressure, speed, and strokes into ambient procedural harmonies.",
+      highlights: [
+        "Dual FM synthesis engine driven by real-time pointer coordinates and acceleration vectors.",
+        "Custom biquad resonant filter modulating harmonics based on stroke curvature.",
+        "Completely self-contained in zero external dependencies, weighing under 15KB compressed."
+      ],
+      liveUrl: "#",
+      githubUrl: "https://github.com"
+    }
+  },
   defaultPins: [
     {
       id: "pin-1",
@@ -3460,8 +3519,7 @@ const PORTFOLIO_CONFIG = {
       color: "yellow",
       category: "💡 ON CRAFT & SOFTWARE",
       words: "If software doesn't feel alive when you interact with it, you haven't finished polishing it. The best digital tools have warmth, personality, and physical weight.",
-      date: "PERSONAL PHILOSOPHY",
-      likes: 89
+      date: "PERSONAL PHILOSOPHY"
     },
     {
       id: "pin-3",
@@ -3479,8 +3537,7 @@ const PORTFOLIO_CONFIG = {
       color: "blue",
       category: "📐 DESIGN CREED",
       words: "Simplicity is not the lack of clutter; it's the presence of clarity. Always sketch the mental model on paper with a pen before you ever write a single line of React.",
-      date: "FIRST PRINCIPLES",
-      likes: 64
+      date: "FIRST PRINCIPLES"
     },
     {
       id: "pin-5",
@@ -3498,8 +3555,7 @@ const PORTFOLIO_CONFIG = {
       color: "pink",
       category: "⚡ WORK ETHIC",
       words: "If professionals hate doing it by hand, that's where the magic is hiding. The highest-leverage software doesn't invent new needs; it eliminates mundane friction.",
-      date: "BUILDER NOTE",
-      likes: 112
+      date: "BUILDER NOTE"
     }
   ]
 };
@@ -3602,8 +3658,8 @@ const PORTFOLIO_CONFIG = {
       const gain = ctx.createGain();
       osc1.type = "sine";
       osc2.type = "triangle";
-      osc1.frequency.setValueAtTime(987.77, ctx.currentTime); // B5
-      osc1.frequency.setValueAtTime(1318.51, ctx.currentTime + 0.08); // E6
+      osc1.frequency.setValueAtTime(987.77, ctx.currentTime);
+      osc1.frequency.setValueAtTime(1318.51, ctx.currentTime + 0.08);
       osc2.frequency.setValueAtTime(1318.51, ctx.currentTime);
       gain.gain.setValueAtTime(0.15, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
@@ -3621,11 +3677,9 @@ const PORTFOLIO_CONFIG = {
   function applyPortfolioConfig() {
     document.title = PORTFOLIO_CONFIG.name + " – Portfolio & Digital Sketchbook";
     
-    // Header
     const siteLogo = document.getElementById("siteLogoName");
     if (siteLogo) siteLogo.textContent = PORTFOLIO_CONFIG.brandName || (PORTFOLIO_CONFIG.name.toUpperCase() + ".DEV");
     
-    // Hero
     const heroFirst = document.getElementById("heroFirstName");
     const heroLast = document.getElementById("heroLastName");
     const heroRole = document.getElementById("heroRoleBadge");
@@ -3633,7 +3687,6 @@ const PORTFOLIO_CONFIG = {
     if (heroLast) heroLast.textContent = PORTFOLIO_CONFIG.lastName || (PORTFOLIO_CONFIG.name.split(" ").slice(1).join(" ") + ".");
     if (heroRole) heroRole.textContent = PORTFOLIO_CONFIG.role;
 
-    // Contact
     const speechText = document.getElementById("contactSpeechBubbleText");
     const dispEmail = document.getElementById("contactDisplayEmail");
     const heroMailBtn = document.getElementById("heroMailBtn");
@@ -3652,20 +3705,125 @@ const PORTFOLIO_CONFIG = {
     if (contactGh) contactGh.href = PORTFOLIO_CONFIG.socials.github;
     if (contactLi) contactLi.href = PORTFOLIO_CONFIG.socials.linkedin;
 
-    // Wanted Poster Name & Bounty
     const wantedName = document.getElementById("wantedPosterName");
     const wantedBounty = document.getElementById("wantedPosterBounty");
     if (wantedName) wantedName.textContent = PORTFOLIO_CONFIG.name.toUpperCase();
     if (wantedBounty) wantedBounty.textContent = PORTFOLIO_CONFIG.bounty;
 
-    // Polaroid Caption
     const savedCaption = localStorage.getItem("portfolio_polaroid_caption") || PORTFOLIO_CONFIG.polaroidCaption;
     const captionEl = document.getElementById("polaroidCaptionText");
     if (captionEl) captionEl.textContent = savedCaption;
   }
   applyPortfolioConfig();
 
-  // 2. Typewriter Effect in Hero
+  // 2. LOADER ANIMATION LOOP WITH LUFFY'S HAT & QUOTE CYCLING
+  document.querySelectorAll(".draw path, .draw ellipse, .draw line, .draw polygon, .draw rect").forEach(function(p) {
+    p.setAttribute("pathLength", 1);
+  });
+
+  const loader = document.getElementById("loader");
+  const bar = document.getElementById("bar");
+  const pct = document.getElementById("pct");
+  const qEl = document.getElementById("q");
+  const byEl = document.getElementById("by");
+  const skipBtn = document.getElementById("skipLoaderBtn");
+  const hatClicker = document.getElementById("hatClicker");
+
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isRevisit = sessionStorage.getItem("portfolio_visited") === "true";
+  const total = reduceMotion ? 200 : (isRevisit ? 1000 : 2800);
+  let start = null;
+  let loaderDone = false;
+
+  let quoteIndex = Math.floor(Math.random() * PORTFOLIO_CONFIG.quotes.length);
+  function renderQuote(idx) {
+    const qObj = PORTFOLIO_CONFIG.quotes[idx];
+    if (qEl && byEl && qObj) {
+      qEl.textContent = qObj.quote;
+      byEl.textContent = qObj.by;
+    }
+  }
+  renderQuote(quoteIndex);
+
+  if (hatClicker) {
+    hatClicker.addEventListener("click", function() {
+      quoteIndex = (quoteIndex + 1) % PORTFOLIO_CONFIG.quotes.length;
+      renderQuote(quoteIndex);
+      playPenScratch();
+    });
+  }
+
+  requestAnimationFrame(function() {
+    if (qEl) qEl.classList.add("on");
+    if (byEl) byEl.classList.add("on");
+  });
+
+  function tick(ts) {
+    if (loaderDone) return;
+    if (!start) start = ts;
+    const t = Math.min((ts - start) / total, 1);
+    const ease = 1 - Math.pow(1 - t, 2);
+    if (bar) {
+      bar.style.setProperty("--p", ease);
+      const barPath = bar.querySelector("path");
+      if (barPath) barPath.style.strokeDashoffset = 1 - ease;
+    }
+    if (pct) pct.textContent = Math.round(ease * 100) + "%";
+    if (t < 1) {
+      requestAnimationFrame(tick);
+    } else {
+      setTimeout(enterSite, 200);
+    }
+  }
+  requestAnimationFrame(tick);
+
+  function enterSite() {
+    if (loaderDone) return;
+    loaderDone = true;
+    sessionStorage.setItem("portfolio_visited", "true");
+    if (loader) {
+      loader.classList.add("done");
+      setTimeout(function() {
+        loader.remove();
+        observeElements();
+      }, reduceMotion ? 10 : 500);
+    } else {
+      observeElements();
+    }
+  }
+
+  if (skipBtn) {
+    skipBtn.addEventListener("click", function(e) {
+      e.stopPropagation();
+      enterSite();
+    });
+  }
+  window.addEventListener("keydown", function(e) {
+    if (e.code === "Space" && !loaderDone) {
+      e.preventDefault();
+      enterSite();
+    }
+  });
+
+  // 3. Scroll Intersection Observer for Hand-Drawn Elements
+  function observeElements() {
+    const io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          if (el.dataset.t) el.style.setProperty("--t", el.dataset.t);
+          el.classList.add("on");
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll(".write:not(#q), .ink:not(#by), .draw").forEach(function(el) {
+      io.observe(el);
+    });
+  }
+
+  // 4. Typewriter Effect in Hero
   const typewriterEl = document.getElementById("heroTypewriterText");
   const phrases = PORTFOLIO_CONFIG.typewriterPhrases;
   let phraseIndex = 0;
@@ -3688,19 +3846,19 @@ const PORTFOLIO_CONFIG = {
     }
 
     if (!isDeleting && charIndex === currentPhrase.length) {
-      typingSpeed = 2200; // Pause at end of phrase
+      typingSpeed = 2200;
       isDeleting = true;
     } else if (isDeleting && charIndex === 0) {
       isDeleting = false;
       phraseIndex = (phraseIndex + 1) % phrases.length;
-      typingSpeed = 400; // Pause before new phrase
+      typingSpeed = 400;
     }
 
     setTimeout(typeTick, typingSpeed);
   }
   setTimeout(typeTick, 600);
 
-  // 3. Live Visit Counter
+  // 5. Live Visit Counter
   let visits = parseInt(localStorage.getItem("portfolio_visits") || "188", 10);
   visits += 1;
   try { localStorage.setItem("portfolio_visits", visits.toString()); } catch(e) {}
@@ -3709,7 +3867,7 @@ const PORTFOLIO_CONFIG = {
     visitCounterEl.textContent = String(visits).padStart(5, '0');
   }
 
-  // 4. Dual Frame Switcher (Polaroid vs Wanted Bounty Poster)
+  // 6. Dual Frame Switcher (Polaroid vs Wanted Bounty Poster)
   const btnModePolaroid = document.getElementById("btnModePolaroid");
   const btnModeWanted = document.getElementById("btnModeWanted");
   const polaroidCard = document.getElementById("polaroidFrameCard");
@@ -3739,7 +3897,7 @@ const PORTFOLIO_CONFIG = {
   const savedFrameMode = localStorage.getItem("portfolio_frame_mode") || "polaroid";
   setFrameMode(savedFrameMode);
 
-  // 5. Shared Photo Upload (Syncs across Polaroid, Wanted Poster & Nav Avatar)
+  // 7. Shared Photo Upload (Syncs across Polaroid, Wanted Poster & Nav Avatar)
   const sharedInput = document.getElementById("sharedPhotoInput");
   const polaroidPhotoBox = document.getElementById("polaroidPhotoBox");
   const polaroidImg = document.getElementById("polaroidPhotoImg");
@@ -3822,7 +3980,7 @@ const PORTFOLIO_CONFIG = {
     });
   }
 
-  // 6. Bounty Increment Easter Egg
+  // 8. Bounty Increment Easter Egg
   const bountyRow = document.getElementById("wantedBountyRow");
   if (bountyRow) {
     bountyRow.addEventListener("click", function(e) {
@@ -3832,7 +3990,6 @@ const PORTFOLIO_CONFIG = {
       rawBounty += 100000000;
       bountyEl.textContent = rawBounty.toLocaleString();
       
-      // Spawn floating +100M badge
       const floater = document.createElement("div");
       floater.className = "bounty-click-floater";
       floater.textContent = "+100,000,000 ฿";
@@ -3845,7 +4002,7 @@ const PORTFOLIO_CONFIG = {
     });
   }
 
-  // 7. Copy Email with Toast Feedback
+  // 9. Copy Email with Toast Feedback
   const btnCopyEmail = document.getElementById("btnCopyEmail");
   if (btnCopyEmail) {
     btnCopyEmail.addEventListener("click", function() {
@@ -3863,7 +4020,7 @@ const PORTFOLIO_CONFIG = {
     });
   }
 
-  // 8. Transmission Form Submit
+  // 10. Transmission Form Submit
   const transForm = document.getElementById("transmissionForm");
   const btnTransmit = document.getElementById("btnTransmit");
   const transmitFeedback = document.getElementById("transmitFeedback");
@@ -3898,9 +4055,108 @@ const PORTFOLIO_CONFIG = {
     });
   }
 
-  // =========================================================================
-  // 9. OFF-SCREEN BOARD ENGINE (IRL EVENTS & PERSONAL INSIGHTS)
-  // =========================================================================
+  // 11. Project Filters
+  const filterPills = document.querySelectorAll(".filter-pill");
+  const projectCards = document.querySelectorAll(".card[data-category]");
+
+  filterPills.forEach(function(pill) {
+    pill.addEventListener("click", function() {
+      filterPills.forEach(function(p) { p.classList.remove("active"); });
+      pill.classList.add("active");
+      const target = pill.dataset.filter;
+      playPenScratch();
+
+      projectCards.forEach(function(card) {
+        if (target === "all" || card.dataset.category === target) {
+          card.style.display = "flex";
+          setTimeout(function() { card.style.opacity = "1"; card.style.transform = "none"; }, 20);
+        } else {
+          card.style.opacity = "0";
+          card.style.transform = "scale(0.95)";
+          setTimeout(function() { card.style.display = "none"; }, 200);
+        }
+      });
+    });
+  });
+
+  // 12. Sketchbook Case Study Modal
+  const modal = document.getElementById("sketchModal");
+  const modalClose = document.getElementById("modalCloseBtn");
+  const modalBadge = document.getElementById("modalBadge");
+  const modalHeading = document.getElementById("modalHeading");
+  const modalTags = document.getElementById("modalTags");
+  const modalDesc = document.getElementById("modalDescription");
+  const modalHighlights = document.getElementById("modalHighlights");
+  const modalLive = document.getElementById("modalLiveLink");
+  const modalGithub = document.getElementById("modalGithubLink");
+
+  function openProjectModal(projectId) {
+    const proj = PORTFOLIO_CONFIG.projects[projectId];
+    if (!proj) return;
+
+    if (modalBadge) modalBadge.textContent = proj.badge;
+    if (modalHeading) modalHeading.textContent = proj.title;
+    if (modalDesc) modalDesc.textContent = proj.description;
+
+    if (modalTags) {
+      modalTags.innerHTML = "";
+      proj.tags.forEach(function(t) {
+        const span = document.createElement("span");
+        span.className = "modal-tag";
+        span.textContent = t;
+        modalTags.appendChild(span);
+      });
+    }
+
+    if (modalHighlights) {
+      modalHighlights.innerHTML = "";
+      proj.highlights.forEach(function(hl) {
+        const li = document.createElement("li");
+        li.textContent = hl;
+        modalHighlights.appendChild(li);
+      });
+    }
+
+    if (modalLive) modalLive.href = proj.liveUrl;
+    if (modalGithub) modalGithub.href = proj.githubUrl;
+
+    if (modal) {
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+      playPaperRustle();
+    }
+  }
+
+  function closeProjectModal() {
+    if (modal) {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+      playPaperRustle();
+    }
+  }
+
+  projectCards.forEach(function(card) {
+    card.addEventListener("click", function() {
+      const pid = card.dataset.projectId;
+      openProjectModal(pid);
+    });
+    card.addEventListener("keydown", function(e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        const pid = card.dataset.projectId;
+        openProjectModal(pid);
+      }
+    });
+  });
+
+  if (modalClose) modalClose.addEventListener("click", closeProjectModal);
+  if (modal) {
+    modal.addEventListener("click", function(e) {
+      if (e.target === modal) closeProjectModal();
+    });
+  }
+
+  // 13. OFF-SCREEN BOARD ENGINE (IRL EVENTS & PERSONAL INSIGHTS)
   const offscreenBoard = document.getElementById("offscreenBoard");
   const boardBackdrop = document.getElementById("boardBackdrop");
   const btnCloseBoard = document.getElementById("btnCloseBoard");
@@ -3933,7 +4189,6 @@ const PORTFOLIO_CONFIG = {
   if (btnCloseBoard) btnCloseBoard.addEventListener("click", closeBoard);
   if (boardBackdrop) boardBackdrop.addEventListener("click", closeBoard);
 
-  // Load Pins from LocalStorage or Defaults
   function getPins() {
     try {
       const stored = localStorage.getItem("portfolio_board_pins");
@@ -4000,7 +4255,6 @@ const PORTFOLIO_CONFIG = {
       }
     });
 
-    // Attach delete listeners
     pinboardGrid.querySelectorAll(".pin-delete-btn").forEach(btn => {
       btn.addEventListener("click", function() {
         const id = this.getAttribute("data-del-id");
@@ -4014,7 +4268,6 @@ const PORTFOLIO_CONFIG = {
     });
   }
 
-  // Filter Buttons
   document.querySelectorAll(".board-filter-btn").forEach(btn => {
     btn.addEventListener("click", function() {
       document.querySelectorAll(".board-filter-btn").forEach(b => b.classList.remove("active"));
@@ -4027,7 +4280,6 @@ const PORTFOLIO_CONFIG = {
 
   renderPins();
 
-  // Reset Default Pins
   const btnResetDefaults = document.getElementById("btnResetDefaultPins");
   if (btnResetDefaults) {
     btnResetDefaults.addEventListener("click", function() {
@@ -4112,7 +4364,6 @@ const PORTFOLIO_CONFIG = {
           renderPins();
           closeAddPinModal();
           playPinSound();
-          // Reset fields
           document.getElementById("pinEventTitle").value = "";
           document.getElementById("pinEventDate").value = "";
           document.getElementById("pinEventTag").value = "";
@@ -4130,7 +4381,6 @@ const PORTFOLIO_CONFIG = {
           finishAddEvent("");
         }
       } else {
-        // Insight
         const category = document.getElementById("pinInsightCategory").value.trim() || "ON CRAFT & THOUGHTS";
         const words = document.getElementById("pinInsightWords").value.trim();
         const colorRadio = document.querySelector('input[name="stickyColor"]:checked');
@@ -4159,9 +4409,7 @@ const PORTFOLIO_CONFIG = {
     });
   }
 
-  // =========================================================================
-  // 10. INTERACTIVE DEVELOPER TERMINAL MODAL
-  // =========================================================================
+  // 14. INTERACTIVE DEVELOPER TERMINAL MODAL
   const terminalModal = document.getElementById("terminalModal");
   const headerTermBtn = document.getElementById("headerTermBtn");
   const floatingTermLauncher = document.getElementById("floatingTermLauncher");
@@ -4188,7 +4436,7 @@ const PORTFOLIO_CONFIG = {
       if (e.key === "Enter") {
         const cmd = this.value.trim().toLowerCase();
         this.value = "";
-        printTerm("&gt; " + cmd);
+        printTerm("> " + cmd);
 
         if (cmd === "help") {
           printTerm("Available commands:\n - irl      : Slide open the IRL Events & Insights Board\n - studio   : Open the Digital Sketchbook\n - bounty   : Raise your One Piece bounty!\n - whoami   : Print bio & background\n - skills   : List technical stack\n - contact  : Jump to transmission form\n - clear    : Clear terminal screen");
@@ -4239,6 +4487,7 @@ const PORTFOLIO_CONFIG = {
       closeBoard();
       closeAddPinModal();
       closeTerminal();
+      closeProjectModal();
     }
   });
 
@@ -4302,29 +4551,45 @@ const PORTFOLIO_CONFIG = {
 
   // Digital Sketchbook Studio Page-Turn Link
   const ribbonBtn = document.getElementById("sketchbookRibbonBtn");
-  const flipper = document.getElementById("paperPageFlipper");
+  const pageFlipper = document.getElementById("paperPageFlipper");
   if (ribbonBtn) {
     ribbonBtn.addEventListener("click", function(e) {
       e.preventDefault();
+      ribbonBtn.disabled = true;
       playPaperRustle();
-      if (flipper) {
-        flipper.classList.add("active");
-        setTimeout(function() {
-          window.location.href = "doodle.html";
-        }, 550);
-      } else {
-        window.location.href = "doodle.html";
+      if (pageFlipper) {
+        pageFlipper.classList.add("active");
       }
+      const mainEl = document.querySelector("main");
+      if (mainEl) {
+        mainEl.style.transition = "transform 0.65s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.65s ease";
+        mainEl.style.transformOrigin = "left center";
+        mainEl.style.transform = "rotateY(-85deg) scale(0.92)";
+        mainEl.style.opacity = "0.1";
+      }
+      setTimeout(function() {
+        window.location.href = "doodle.html?from=fold";
+      }, 550);
     });
   }
 
   // Interactive Coffee Stain Clicker
   const coffee = document.getElementById("coffeeStain");
   if (coffee) {
-    coffee.addEventListener("click", function() {
-      playPaperRustle();
-      coffee.style.transform = "scale(1.15) rotate(15deg)";
-      setTimeout(() => coffee.style.transform = "", 300);
+    coffee.addEventListener("click", function(e) {
+      playPenScratch();
+      const drop = document.createElement("div");
+      drop.className = "coffee-drop";
+      const size = 30 + Math.random() * 40;
+      drop.style.width = size + "px";
+      drop.style.height = size + "px";
+      drop.style.left = (e.clientX - size / 2 + (Math.random() * 30 - 15)) + "px";
+      drop.style.top = (e.clientY - size / 2 + (Math.random() * 30 - 15)) + "px";
+      document.body.appendChild(drop);
+      setTimeout(function() {
+        drop.style.transition = "opacity 2s ease";
+        drop.style.opacity = "0.2";
+      }, 1000);
     });
   }
 
@@ -4371,7 +4636,6 @@ const PORTFOLIO_CONFIG = {
 <div class="board-backdrop" id="boardBackdrop"></div>
 
 <aside class="offscreen-board-drawer" id="offscreenBoard" role="dialog" aria-modal="true" aria-label="IRL Events and Personal Insights Board">
-  <!-- Header -->
   <div class="board-drawer-header">
     <div class="board-header-left">
       <div class="board-badge-tag">📌 IRL &amp; WORDS</div>
@@ -4397,11 +4661,8 @@ const PORTFOLIO_CONFIG = {
     </div>
   </div>
 
-  <!-- Board Pin Surface (Scrollable Corkboard Masonry) -->
   <div class="board-scroll-body">
-    <div class="pinboard-grid" id="pinboardGrid">
-      <!-- Dynamically rendered pins from localStorage -->
-    </div>
+    <div class="pinboard-grid" id="pinboardGrid"></div>
   </div>
 </aside>
 
@@ -4413,13 +4674,11 @@ const PORTFOLIO_CONFIG = {
       <button class="board-close-btn" id="btnCloseAddPinModal" type="button" style="padding:4px 8px">✕</button>
     </div>
 
-    <!-- Type Switch -->
     <div class="pin-type-switch">
       <button class="pin-type-btn active" id="btnTypeEvent" type="button">📸 Event Photo</button>
       <button class="pin-type-btn" id="btnTypeInsight" type="button">💭 Personal Insight</button>
     </div>
 
-    <!-- Event Form -->
     <div id="formEventSection">
       <div class="transmission-field">
         <label class="transmission-label">PHOTO</label>
@@ -4445,7 +4704,6 @@ const PORTFOLIO_CONFIG = {
       </div>
     </div>
 
-    <!-- Insight Form -->
     <div id="formInsightSection" style="display:none;">
       <div class="transmission-field">
         <label class="transmission-label">STICKY NOTE COLOR</label>
