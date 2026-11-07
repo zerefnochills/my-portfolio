@@ -1,0 +1,2728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A hand-crafted developer and designer portfolio sketched in ink and paper with interactive doodles, live projects, and playful animations.">
+<title>Your Name – Portfolio &amp; Digital Sketchbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Patrick+Hand&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root, [data-theme="parchment"] {
+  --paper: #fcf3c6;
+  --paper-card: rgba(255, 255, 255, 0.55);
+  --paper-card-hover: rgba(255, 255, 255, 0.85);
+  --paper-sticky: rgba(255, 250, 220, 0.92);
+  --paper-modal: #fbf5cf;
+  --ink: #2d2a9c;
+  --ink-soft: #5b58b8;
+  --ink-faint: rgba(45, 42, 156, 0.12);
+  --accent: #d97706;
+  --accent-soft: rgba(217, 119, 6, 0.15);
+  --tape: rgba(255, 255, 255, 0.7);
+  --stamp: #b91c1c;
+  --shadow: rgba(45, 42, 156, 0.15);
+  --coffee: rgba(160, 100, 30, 0.14);
+  --grid-line: rgba(45, 42, 156, 0.05);
+}
+
+[data-theme="sepia"] {
+  --paper: #f4ece1;
+  --paper-card: rgba(255, 255, 255, 0.6);
+  --paper-card-hover: rgba(255, 255, 255, 0.9);
+  --paper-sticky: rgba(250, 243, 233, 0.94);
+  --paper-modal: #f4ede2;
+  --ink: #442817;
+  --ink-soft: #7f5539;
+  --ink-faint: rgba(68, 40, 23, 0.12);
+  --accent: #a0633b;
+  --accent-soft: rgba(160, 99, 59, 0.15);
+  --tape: rgba(255, 255, 255, 0.7);
+  --stamp: #9a031e;
+  --shadow: rgba(68, 40, 23, 0.15);
+  --coffee: rgba(140, 75, 25, 0.16);
+  --grid-line: rgba(68, 40, 23, 0.05);
+}
+
+[data-theme="botanical"] {
+  --paper: #eef4ed;
+  --paper-card: rgba(255, 255, 255, 0.65);
+  --paper-card-hover: rgba(255, 255, 255, 0.92);
+  --paper-sticky: rgba(242, 248, 240, 0.94);
+  --paper-modal: #edf4ec;
+  --ink: #1a3c2f;
+  --ink-soft: #3b6b55;
+  --ink-faint: rgba(26, 60, 47, 0.12);
+  --accent: #4f8059;
+  --accent-soft: rgba(79, 128, 89, 0.15);
+  --tape: rgba(255, 255, 255, 0.7);
+  --stamp: #b83a4b;
+  --shadow: rgba(26, 60, 47, 0.15);
+  --coffee: rgba(100, 80, 40, 0.12);
+  --grid-line: rgba(26, 60, 47, 0.05);
+}
+
+[data-theme="blueprint"] {
+  --paper: #132035;
+  --paper-card: rgba(24, 39, 64, 0.85);
+  --paper-card-hover: rgba(32, 52, 85, 0.95);
+  --paper-sticky: rgba(28, 46, 75, 0.95);
+  --paper-modal: #16253e;
+  --ink: #e2eeff;
+  --ink-soft: #93c5fd;
+  --ink-faint: rgba(226, 238, 255, 0.14);
+  --accent: #38bdf8;
+  --accent-soft: rgba(56, 189, 248, 0.2);
+  --tape: rgba(147, 197, 253, 0.25);
+  --stamp: #f43f5e;
+  --shadow: rgba(0, 0, 0, 0.4);
+  --coffee: rgba(56, 189, 248, 0.15);
+  --grid-line: rgba(147, 197, 253, 0.06);
+}
+
+:root {
+  --script: "Mrs Saint Delafield", "Brush Script MT", cursive;
+  --hand: "Patrick Hand", "Comic Sans MS", cursive;
+  --badge: "Caveat", cursive;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html {
+  scroll-padding-top: 80px;
+  scroll-behavior: smooth;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--paper);
+  background-image: 
+    radial-gradient(ellipse at 50% 0, rgba(255, 255, 255, 0.5) 0, transparent 65%),
+    radial-gradient(ellipse at 50% 100%, rgba(0, 0, 0, 0.06) 0, transparent 60%),
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 28px 28px, 28px 28px;
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--hand);
+  font-size: 1.3rem;
+  line-height: 1.5;
+  overflow-x: hidden;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Subtle paper texture overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 .5 0 0 0 0 .4 0 0 0 0 .1 0 0 0 .5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Interactive Coffee Cup Stain */
+.coffee-stain {
+  position: fixed;
+  top: 90px;
+  right: 7%;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 8px solid var(--coffee);
+  box-shadow: inset 0 0 0 2px var(--coffee), 0 0 0 2px var(--coffee);
+  transform: rotate(20deg) scaleY(0.94);
+  pointer-events: auto;
+  cursor: pointer;
+  z-index: 1;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.coffee-stain:hover {
+  transform: rotate(25deg) scaleY(0.96) scale(1.06);
+}
+.coffee-stain::after {
+  content: "☕ tea mark";
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.coffee-stain:hover::after {
+  opacity: 0.85;
+}
+
+/* Click ripples for tea/coffee marks */
+.coffee-drop {
+  position: absolute;
+  border-radius: 50%;
+  border: 4px solid var(--coffee);
+  box-shadow: inset 0 0 0 1px var(--coffee);
+  pointer-events: none;
+  z-index: 0;
+  transform: scale(0.6);
+  opacity: 0.8;
+  animation: dropRipple 0.6s ease-out forwards;
+}
+@keyframes dropRipple {
+  to {
+    transform: scale(1.2) rotate(15deg);
+    opacity: 0.55;
+  }
+}
+
+a {
+  color: inherit;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+:focus-visible {
+  outline: 2.5px dashed var(--ink);
+  outline-offset: 4px;
+}
+
+svg.doodle {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.draw path, .draw ellipse, .draw line, .draw polygon, .draw rect {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 1.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.on .draw path, .on .draw ellipse, .on.draw path, .on .draw line, .on.draw polygon, .on .draw rect {
+  stroke-dashoffset: 0;
+}
+
+/* writing effects */
+.write {
+  clip-path: inset(-15% 100% -15% 0);
+  transition: clip-path var(--t, 1.6s) steps(28, end);
+}
+.write.on {
+  clip-path: inset(-15% -3% -15% 0);
+}
+.ink {
+  opacity: 0;
+  filter: blur(3px);
+  transition: opacity 1.2s ease 0.2s, filter 1.2s ease 0.2s, transform 0.4s ease;
+}
+.ink.on {
+  opacity: 1;
+  filter: none;
+}
+
+/* LOADER */
+#loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--paper);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  text-align: center;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  filter: url(#wobble);
+}
+#loader.done {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
+}
+.hat-wrapper {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+}
+.hat {
+  width: min(240px, 58vw);
+  animation: bob 2.6s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+.hat-wrapper:hover .hat {
+  transform: scale(1.08) rotate(4deg);
+}
+@keyframes bob {
+  50% { transform: translateY(-8px) rotate(-2deg); }
+}
+.hat path {
+  animation: dr 1.8s ease forwards;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+.hat path:nth-child(2) { animation-delay: 0.4s; }
+.hat path:nth-child(3) { animation-delay: 0.7s; }
+.hat path:nth-child(4) { animation-delay: 1.0s; }
+.hat path:nth-child(n+5) { animation-delay: 1.3s; }
+@keyframes dr { to { stroke-dashoffset: 0; } }
+
+.quote {
+  font-family: var(--script);
+  font-size: clamp(2.2rem, 7vw, 4rem);
+  line-height: 1.1;
+  margin: 14px auto 4px;
+  max-width: 14em;
+  min-height: 2.2em;
+}
+.by {
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+.bar {
+  width: min(320px, 70vw);
+  height: 24px;
+  margin: 20px auto 4px;
+  display: block;
+}
+.bar path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--p, 0));
+}
+.pct {
+  font-size: 1rem;
+  color: var(--ink-soft);
+  font-family: var(--badge);
+  font-size: 1.3rem;
+}
+.skip-btn {
+  margin-top: 14px;
+  background: transparent;
+  border: 1.5px dashed var(--ink-soft);
+  color: var(--ink-soft);
+  font-family: var(--hand);
+  font-size: 1.05rem;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.skip-btn:hover {
+  background: var(--ink-faint);
+  color: var(--ink);
+  border-style: solid;
+  transform: translateY(-2px);
+}
+
+/* LAYOUT */
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+  z-index: 1;
+  filter: url(#wobble);
+}
+
+/* NAVBAR */
+header.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--paper);
+  background: linear-gradient(to bottom, var(--paper) 80%, transparent 100%);
+  padding-bottom: 8px;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+nav .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+nav .logo {
+  font-family: var(--script);
+  font-size: 2.6rem;
+  text-decoration: none;
+  line-height: 1;
+  color: var(--ink);
+}
+nav .logo-stamp {
+  font-family: var(--badge);
+  font-size: 1.1rem;
+  padding: 2px 8px;
+  border: 1.5px solid var(--ink);
+  border-radius: 12px 4px 14px 3px;
+  transform: rotate(-3deg);
+  color: var(--ink);
+}
+nav ul {
+  display: flex;
+  gap: 22px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+nav a.nav-link {
+  text-decoration: none;
+  font-size: 1.35rem;
+  position: relative;
+  padding-bottom: 2px;
+}
+nav a.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+nav a.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* TOOLBAR CONTROLS */
+.controls-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.control-btn {
+  background: transparent;
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  padding: 5px 12px;
+  font-family: var(--hand);
+  font-size: 1.15rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.control-btn:hover {
+  transform: rotate(-1.5deg) scale(1.05);
+  background: var(--ink-faint);
+}
+.control-btn svg {
+  width: 18px;
+  height: 18px;
+}
+.theme-picker-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: var(--paper-sticky);
+  border: 2px solid var(--ink);
+  border-radius: 12px 18px 14px 20px;
+  box-shadow: 4px 6px 0 var(--shadow);
+  padding: 8px;
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 60;
+  min-width: 140px;
+}
+.theme-picker-menu.open {
+  display: flex;
+}
+.theme-opt {
+  background: transparent;
+  border: none;
+  color: var(--ink);
+  font-family: var(--hand);
+  font-size: 1.15rem;
+  text-align: left;
+  padding: 4px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.theme-opt:hover {
+  background: var(--ink-faint);
+}
+.color-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink);
+  display: inline-block;
+}
+
+/* HERO */
+.hero {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 28px;
+  align-items: center;
+  min-height: 75vh;
+  padding: 30px 0 20px;
+}
+.hero h1 {
+  font-family: var(--script);
+  font-weight: 400;
+  font-size: clamp(4.4rem, 12vw, 8.8rem);
+  line-height: 0.9;
+  margin: 0 0 10px;
+  transform: rotate(-2.5deg);
+  transform-origin: left;
+}
+.hero-tagline {
+  font-size: 1.55rem;
+  line-height: 1.4;
+  max-width: 25em;
+  margin: 0 0 16px;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 22px 0 18px;
+}
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--hand);
+  font-size: 1.35rem;
+  padding: 8px 22px;
+  border: 2.5px solid var(--ink);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  text-decoration: none;
+  background: var(--paper-card);
+  box-shadow: 3px 4px 0 var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.hero-btn:hover {
+  transform: translateY(-3px) rotate(-1deg);
+  box-shadow: 4px 6px 0 var(--shadow);
+  background: var(--paper-card-hover);
+}
+.hero-btn.primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+.hero-btn.primary svg {
+  stroke: var(--paper);
+}
+.hero-btn.primary:hover {
+  background: var(--ink-soft);
+}
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.05em;
+  font-family: var(--badge);
+  font-size: 1.3rem;
+  margin-top: 10px;
+}
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+  animation: pulseDot 2s infinite;
+}
+@keyframes pulseDot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.7; }
+}
+
+/* ONE PIECE WANTED POSTER FRAME */
+.wanted-poster-frame {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  justify-self: center;
+  background: var(--paper-sticky);
+  border: 3.5px solid var(--ink);
+  border-radius: 12px 18px 14px 16px/16px 14px 18px 12px;
+  padding: 22px 18px 14px;
+  box-shadow: 6px 10px 0 var(--shadow);
+  transform: rotate(2deg);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+  user-select: none;
+}
+.wanted-poster-frame:hover {
+  transform: rotate(0deg) scale(1.02) translateY(-4px);
+  box-shadow: 8px 14px 0 var(--shadow);
+}
+.poster-pin {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 26px;
+  background: #dc2626;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  box-shadow: 0 3px 0 var(--shadow);
+  z-index: 10;
+}
+.poster-pin::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  width: 7px;
+  height: 7px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+}
+.wanted-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1.5px dashed var(--ink-faint);
+  padding: 10px 10px 8px;
+  border-radius: 8px;
+  position: relative;
+}
+.wanted-header {
+  font-family: var(--badge), "Impact", "Arial Black", sans-serif;
+  font-weight: 700;
+  font-size: 2.8rem;
+  letter-spacing: 0.22em;
+  line-height: 1;
+  color: var(--ink);
+  margin-bottom: 8px;
+  text-shadow: 1px 1px 0 var(--paper);
+}
+.wanted-photo-container {
+  width: 100%;
+  aspect-ratio: 4 / 3.7;
+  border: 2.5px solid var(--ink);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.03);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.wanted-photo-container:hover, .wanted-photo-container.dragover {
+  border-color: var(--accent);
+  background: var(--ink-faint);
+  transform: scale(1.01);
+}
+.wanted-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.wanted-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  gap: 8px;
+  text-align: center;
+}
+.wanted-placeholder svg {
+  stroke: var(--ink);
+  opacity: 0.85;
+  transition: transform 0.3s ease;
+}
+.wanted-photo-container:hover .wanted-placeholder svg {
+  transform: scale(1.08) rotate(-3deg);
+}
+.upload-hint {
+  font-family: var(--badge);
+  font-size: 1.2rem;
+  color: var(--ink);
+  background: var(--tape);
+  padding: 3px 12px;
+  border-radius: 14px;
+  border: 1.5px dashed var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.photo-change-badge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: var(--paper-sticky);
+  border: 1.5px solid var(--ink);
+  border-radius: 12px;
+  padding: 2px 8px;
+  font-family: var(--badge);
+  font-size: 1.05rem;
+  color: var(--ink);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+.wanted-photo-container:hover .photo-change-badge {
+  opacity: 0.95;
+}
+.wanted-dead-or-alive {
+  font-family: var(--hand), sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.18em;
+  font-weight: bold;
+  color: var(--ink-soft);
+  margin-top: 8px;
+  line-height: 1.1;
+}
+.wanted-name {
+  font-family: var(--badge), "Impact", sans-serif;
+  font-size: 2.1rem;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.1;
+  margin: 3px 0 2px;
+  text-transform: uppercase;
+}
+.wanted-bounty-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+  font-family: var(--hand), "Courier New", monospace;
+  font-weight: bold;
+  color: var(--ink);
+  font-size: 1.6rem;
+  line-height: 1.1;
+  margin-top: 2px;
+}
+.berry-symbol {
+  font-size: 1.65rem;
+  font-family: serif;
+  transform: translateY(-1px);
+}
+.wanted-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: 6px;
+  padding-top: 4px;
+  border-top: 1px dashed var(--ink-faint);
+  font-family: var(--badge);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.15em;
+}
+.marine-stamp {
+  display: flex;
+  align-items: center;
+}
+
+/* SECTION HEADINGS */
+section {
+  padding: 60px 0 20px;
+  position: relative;
+}
+h2.section-title {
+  font-family: var(--script);
+  font-weight: 400;
+  font-size: clamp(3.2rem, 8vw, 5.2rem);
+  margin: 0 0 10px;
+  line-height: 1;
+}
+.section-subtitle {
+  margin: 0 0 30px;
+  color: var(--ink-soft);
+  font-size: 1.35rem;
+}
+
+/* ABOUT SECTION */
+.about-wrap {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 36px;
+  align-items: start;
+}
+.about-text p {
+  margin: 0 0 16px;
+  font-size: 1.35rem;
+}
+.sticky-board {
+  position: relative;
+  background: var(--paper-sticky);
+  border: 2px solid var(--ink);
+  border-radius: 12px 255px 16px 225px/225px 14px 255px 16px;
+  padding: 24px;
+  transform: rotate(1.5deg);
+  box-shadow: 5px 6px 0 var(--shadow);
+  transition: transform 0.25s ease;
+}
+.sticky-board:hover {
+  transform: rotate(0deg) translateY(-4px);
+}
+.sticky-board::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 80px;
+  height: 24px;
+  background: var(--tape);
+  border: 1px dashed var(--ink-soft);
+  transform: translateX(-50%) rotate(-3deg);
+}
+.sticky-board h3 {
+  font-family: var(--script);
+  font-weight: 400;
+  font-size: 2.8rem;
+  margin: 0 0 6px;
+  line-height: 1;
+}
+.sticky-board ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sticky-board li {
+  margin-bottom: 8px;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.sticky-board li span.label {
+  color: var(--ink-soft);
+  font-family: var(--badge);
+  font-size: 1.35rem;
+}
+
+/* PROJECT FILTERS & CARDS */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.filter-pill {
+  background: transparent;
+  border: 2px dashed var(--ink);
+  color: var(--ink);
+  border-radius: 20px;
+  padding: 4px 16px;
+  font-family: var(--hand);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.filter-pill:hover, .filter-pill.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-style: solid;
+  transform: translateY(-2px);
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 32px;
+}
+.card {
+  border: 2.5px solid var(--ink);
+  border-radius: 255px 18px 225px 18px/18px 225px 18px 255px;
+  background: var(--paper-card);
+  padding: 24px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 4px 6px 0 var(--shadow);
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease, background-color 0.25s ease;
+  cursor: pointer;
+}
+.card:nth-child(even) {
+  border-radius: 18px 255px 18px 225px/225px 18px 255px 18px;
+}
+.card::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 74px;
+  height: 22px;
+  background: var(--tape);
+  border: 1px dashed var(--ink-soft);
+  transform: translateX(-50%) rotate(-3deg);
+  transition: transform 0.25s ease;
+}
+.card:hover {
+  transform: rotate(-1.5deg) translateY(-6px);
+  box-shadow: 6px 10px 0 var(--shadow);
+  background: var(--paper-card-hover);
+}
+.card:hover::before {
+  transform: translateX(-50%) rotate(2deg);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.card-badge {
+  font-family: var(--badge);
+  font-size: 1.15rem;
+  border: 1.5px solid var(--ink);
+  padding: 1px 8px;
+  border-radius: 10px;
+  color: var(--ink);
+}
+.card-badge.featured {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.card h3 {
+  font-family: var(--script);
+  font-weight: 400;
+  font-size: 2.6rem;
+  margin: 4px 0 8px;
+  line-height: 1;
+}
+.card p {
+  margin: 0 0 16px;
+  flex-grow: 1;
+  font-size: 1.25rem;
+  color: var(--ink);
+}
+.card-footer {
+  margin-top: auto;
+  border-top: 1.5px dashed var(--ink-faint);
+  padding-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tags {
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  font-family: var(--hand);
+}
+.card-inspect-hint {
+  font-size: 1.05rem;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--badge);
+  font-size: 1.25rem;
+}
+
+/* SKETCHBOOK MODAL */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 15, 25, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 120;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.modal-sketchbook {
+  background: var(--paper-modal);
+  border: 3px solid var(--ink);
+  border-radius: 20px 255px 22px 240px/240px 24px 255px 20px;
+  max-width: 680px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 34px 30px;
+  position: relative;
+  box-shadow: 10px 14px 0 var(--shadow);
+  transform: translateY(20px) scale(0.96);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  filter: url(#wobble);
+}
+.modal-overlay.open .modal-sketchbook {
+  transform: translateY(0) scale(1);
+}
+.modal-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  background: transparent;
+  border: 2px dashed var(--ink);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  font-family: var(--hand);
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: var(--ink);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.modal-close-btn:hover {
+  transform: rotate(90deg) scale(1.1);
+  background: var(--ink);
+  color: var(--paper);
+}
+.modal-title {
+  font-family: var(--script);
+  font-size: 3.4rem;
+  line-height: 1;
+  margin: 0 0 6px;
+}
+.modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 8px 0 16px;
+}
+.modal-tag {
+  border: 1.5px solid var(--ink);
+  padding: 2px 10px;
+  border-radius: 14px;
+  font-size: 1.05rem;
+}
+.modal-desc {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.modal-highlight-box {
+  background: var(--paper-sticky);
+  border: 2px dashed var(--ink);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 22px;
+}
+.modal-highlight-box h4 {
+  font-family: var(--script);
+  font-size: 2.2rem;
+  margin: 0 0 6px;
+}
+.modal-highlight-box ul {
+  margin: 0;
+  padding-left: 20px;
+}
+.modal-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 2px dashed var(--ink-faint);
+}
+
+/* JOURNEY / TIMELINE */
+.trail {
+  position: relative;
+  margin-left: 22px;
+  border-left: 3px dashed var(--ink);
+  padding-left: 32px;
+  margin-top: 20px;
+}
+.step {
+  position: relative;
+  margin-bottom: 34px;
+  padding-bottom: 4px;
+}
+.step::before {
+  content: "";
+  position: absolute;
+  left: -44px;
+  top: 10px;
+  width: 20px;
+  height: 20px;
+  border: 3px solid var(--ink);
+  border-radius: 50% 46% 54% 48%;
+  background: var(--paper);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.step:hover::before {
+  transform: scale(1.3);
+  background: var(--ink);
+}
+.step-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.step-year {
+  font-family: var(--script);
+  font-weight: 400;
+  font-size: 2.8rem;
+  line-height: 1;
+  color: var(--ink);
+}
+.step-role {
+  font-family: var(--badge);
+  font-size: 1.5rem;
+  color: var(--ink-soft);
+}
+.step-desc {
+  margin: 6px 0 10px;
+  font-size: 1.3rem;
+  max-width: 44em;
+}
+.step-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.step-chip {
+  font-size: 1.05rem;
+  border: 1px dashed var(--ink-soft);
+  border-radius: 12px;
+  padding: 1px 10px;
+}
+
+/* SKILLS SECTION */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 26px;
+  margin-top: 10px;
+}
+.skill-category {
+  border: 2px solid var(--ink);
+  border-radius: 20px 255px 18px 240px/240px 18px 255px 20px;
+  background: var(--paper-card);
+  padding: 22px 24px;
+  box-shadow: 4px 5px 0 var(--shadow);
+}
+.skill-category h3 {
+  font-family: var(--script);
+  font-size: 2.6rem;
+  margin: 0 0 12px;
+  line-height: 1;
+}
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+}
+.skill-item {
+  position: relative;
+  padding: 4px 8px;
+  font-size: 1.35rem;
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.skill-item:hover {
+  transform: translateY(-2px) scale(1.04);
+}
+.skill-item svg {
+  position: absolute;
+  left: -4px;
+  bottom: -4px;
+  width: calc(100% + 8px);
+  height: 10px;
+}
+
+/* DOODLE PAD / GUESTBOOK */
+.doodle-section {
+  border: 3px dashed var(--ink);
+  border-radius: 24px;
+  background: var(--paper-card);
+  padding: 28px;
+  margin: 40px 0 20px;
+  position: relative;
+}
+.doodle-canvas-wrap {
+  position: relative;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.06);
+}
+[data-theme="blueprint"] .doodle-canvas-wrap {
+  background: #0f172a;
+}
+#doodleCanvas {
+  display: block;
+  width: 100%;
+  height: 260px;
+  touch-action: none;
+  cursor: crosshair;
+}
+.doodle-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+}
+.doodle-colors {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.doodle-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.doodle-swatch.active {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--ink);
+}
+.doodle-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* POSTCARD CONTACT SECTION */
+.contact-container {
+  padding-bottom: 40px;
+}
+.postcard {
+  max-width: 840px;
+  margin: 30px auto;
+  border: 3px solid var(--ink);
+  border-radius: 20px;
+  background: var(--paper-card);
+  box-shadow: 6px 10px 0 var(--shadow);
+  padding: 34px 30px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 34px;
+}
+.postcard-airmail {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: repeating-linear-gradient(45deg, #b91c1c 0, #b91c1c 16px, #ffffff 16px, #ffffff 32px, #2d2a9c 32px, #2d2a9c 48px, #ffffff 48px, #ffffff 64px);
+  border-radius: 17px 17px 0 0;
+}
+.postcard-left {
+  display: flex;
+  flex-direction: column;
+}
+.postcard-message-area {
+  width: 100%;
+  height: 180px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px dashed var(--ink-faint);
+  color: var(--ink);
+  font-family: var(--hand);
+  font-size: 1.35rem;
+  line-height: 1.8;
+  resize: vertical;
+  padding: 8px 4px;
+}
+.postcard-message-area:focus {
+  outline: none;
+  border-bottom: 2px solid var(--ink);
+}
+.postcard-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 2px dashed var(--ink-faint);
+  padding-left: 30px;
+}
+.postcard-stamp {
+  align-self: flex-end;
+  border: 2px dashed var(--stamp);
+  border-radius: 8px;
+  padding: 8px 12px;
+  text-align: center;
+  color: var(--stamp);
+  font-family: var(--badge);
+  font-size: 1.2rem;
+  transform: rotate(3deg);
+  width: 100px;
+  background: rgba(185, 28, 28, 0.05);
+}
+.postcard-stamp svg {
+  stroke: var(--stamp);
+  width: 38px;
+  height: 28px;
+  margin: 0 auto;
+  display: block;
+}
+.postcard-field {
+  margin-bottom: 12px;
+}
+.postcard-field label {
+  display: block;
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+  margin-bottom: 2px;
+}
+.postcard-field input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px dashed var(--ink);
+  color: var(--ink);
+  font-family: var(--hand);
+  font-size: 1.25rem;
+  padding: 4px 2px;
+}
+.postcard-field input:focus {
+  outline: none;
+  border-bottom-style: solid;
+}
+.send-plane-btn {
+  margin-top: 16px;
+  background: var(--ink);
+  color: var(--paper);
+  border: 2.5px solid var(--ink);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  padding: 10px 22px;
+  font-family: var(--hand);
+  font-size: 1.35rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 3px 5px 0 var(--shadow);
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.send-plane-btn:hover {
+  transform: translateY(-3px) rotate(-1deg);
+  box-shadow: 5px 8px 0 var(--shadow);
+  background: var(--ink-soft);
+}
+.send-plane-btn svg {
+  stroke: var(--paper);
+  width: 22px;
+  height: 22px;
+  transition: transform 0.3s ease;
+}
+.send-plane-btn:hover svg {
+  transform: translate(4px, -4px);
+}
+
+.mail-feedback {
+  margin-top: 14px;
+  font-family: var(--badge);
+  font-size: 1.35rem;
+  color: var(--accent);
+  min-height: 1.6em;
+}
+
+/* SOCIAL & FOOTER */
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin: 30px 0 10px;
+  flex-wrap: wrap;
+}
+.social-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 1.35rem;
+  text-decoration: none;
+  border-bottom: 2px dashed var(--ink);
+  padding-bottom: 2px;
+}
+.social-item:hover {
+  border-bottom-style: solid;
+  transform: translateY(-2px);
+}
+footer {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 1.15rem;
+  padding: 40px 0 50px;
+}
+.back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 50;
+  background: var(--paper-sticky);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 3px 4px 0 var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.back-to-top:hover {
+  transform: translateY(-4px) rotate(-6deg);
+}
+
+/* MARGIN DOODLES */
+.side {
+  display: none;
+  position: absolute;
+  pointer-events: none;
+}
+@media (min-width: 1240px) {
+  .side { display: block; }
+}
+
+/* RESPONSIVE */
+@media (max-width: 860px) {
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-bottom: 30px;
+  }
+  .about-wrap {
+    grid-template-columns: 1fr;
+  }
+  .postcard {
+    grid-template-columns: 1fr;
+  }
+  .postcard-right {
+    border-left: none;
+    border-top: 2px dashed var(--ink-faint);
+    padding-left: 0;
+    padding-top: 24px;
+  }
+  nav ul {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 580px) {
+  main {
+    padding: 0 16px;
+  }
+  nav .logo {
+    font-size: 2.1rem;
+  }
+  .controls-bar {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01s !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01s !important;
+  }
+  .write { clip-path: none; }
+  .ink { opacity: 1; filter: none; }
+  .draw path, .draw ellipse, .draw line, .draw polygon, .draw rect { stroke-dashoffset: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- SVG Turbulence Filter for Hand-Drawn Wobble -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="wobble">
+    <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="2" seed="4"/>
+    <feDisplacementMap in="SourceGraphic" scale="2.5"/>
+  </filter>
+</svg>
+
+<!-- Interactive Coffee Cup Stain -->
+<div class="coffee-stain" id="coffeeStain" title="Click for fresh tea drops!" aria-label="Interactive coffee cup stain"></div>
+
+<!-- LOADER -->
+<div id="loader" role="status" aria-label="Loading sketchpad portfolio">
+  <div>
+    <div class="hat-wrapper" id="hatClicker" title="Click Luffy's straw hat!">
+      <svg class="doodle hat" viewBox="0 0 200 120" aria-hidden="true">
+        <path pathLength="1" d="M10 80C10 60 60 52 100 52S190 60 190 80 140 108 100 108 10 100 10 80Z"/>
+        <path pathLength="1" d="M55 62C52 14 148 14 145 62"/>
+        <path pathLength="1" d="M57 50C90 60 110 60 143 50"/>
+        <path pathLength="1" d="M56 58C90 68 110 68 144 58"/>
+        <path pathLength="1" d="M20 66L6 50M180 66L194 50M100 14L100 2M70 20L62 8M130 20L138 8"/>
+      </svg>
+    </div>
+    <div class="quote write" id="q" style="--t:1.8s">“As long as I live, there are infinite chances.”</div>
+    <div class="by ink" id="by">— Monkey D. Luffy</div>
+    <svg class="doodle bar" id="bar" viewBox="0 0 320 24" preserveAspectRatio="none" aria-hidden="true">
+      <path pathLength="1" d="M4 12C30 2 50 22 80 12S130 2 160 12 210 22 240 12 290 4 316 12"/>
+    </svg>
+    <div class="pct" id="pct">0%</div>
+    <button class="skip-btn" id="skipLoaderBtn" type="button">skip intro [space] ↵</button>
+  </div>
+</div>
+
+<main>
+  <!-- NAVIGATION -->
+  <header class="site-header">
+    <nav>
+      <a class="brand" href="#top">
+        <span class="logo" id="siteLogoName">Your Name</span>
+        <span class="logo-stamp">portfolio</span>
+      </a>
+      <ul>
+        <li><a class="nav-link" href="#about">about</a></li>
+        <li><a class="nav-link" href="#work">work</a></li>
+        <li><a class="nav-link" href="#journey">journey</a></li>
+        <li><a class="nav-link" href="#skills">skills</a></li>
+        <li><a class="nav-link" href="#doodle">doodle</a></li>
+        <li><a class="nav-link" href="#contact">contact</a></li>
+      </ul>
+      <div class="controls-bar" style="position:relative">
+        <!-- Sound FX toggle button -->
+        <button class="control-btn" id="soundToggle" type="button" title="Toggle pen scratch sound effects">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path id="soundWave1" d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path id="soundWave2" d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
+          <span id="soundLabel">sound</span>
+        </button>
+
+        <!-- Ink Theme Picker button -->
+        <button class="control-btn" id="themeBtn" type="button" title="Choose ink theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+          </svg>
+          <span>ink</span>
+        </button>
+        <div class="theme-picker-menu" id="themeMenu">
+          <button class="theme-opt" data-theme-val="parchment" type="button"><span class="color-dot" style="background:#2d2a9c"></span> Indigo Paper</button>
+          <button class="theme-opt" data-theme-val="sepia" type="button"><span class="color-dot" style="background:#442817"></span> Walnut Sepia</button>
+          <button class="theme-opt" data-theme-val="botanical" type="button"><span class="color-dot" style="background:#1a3c2f"></span> Forest Green</button>
+          <button class="theme-opt" data-theme-val="blueprint" type="button"><span class="color-dot" style="background:#38bdf8"></span> Blueprint Dark</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MARGIN DOODLES (Visible on wide screens) -->
+  <svg class="doodle draw side" style="top:26%;left:-110px;width:70px" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3L24 15L37 15L27 23L31 36L20 28L9 36L13 23L3 15L16 15Z"/></svg>
+  <svg class="doodle draw side" style="top:44%;right:-115px;width:75px" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 20C20 14 28 14 28 20S16 30 14 20 22 6 32 14 36 34 18 36 2 22 8 10"/></svg>
+  <svg class="doodle draw side" style="top:62%;left:-120px;width:75px" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 38L20 20M20 28Q10 26 9 20Q16 20 20 28M20 14a6 6 0 1 0 .1 0M14 12Q8 6 14 4M26 12Q32 6 26 4"/></svg>
+  <svg class="doodle draw side" style="top:80%;right:-110px;width:75px" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 30C14 4 30 4 36 24M28 22L36 25L38 15"/></svg>
+
+  <!-- HERO SECTION -->
+  <header class="hero" id="top">
+    <div>
+      <h1 class="write" data-t="2.2s" id="heroName">Your Name</h1>
+      <svg class="doodle draw" style="width:min(420px,85%);height:16px;display:block;margin:0 0 16px" viewBox="0 0 380 16" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M4 10C80 2 160 16 240 8S340 4 376 9"/>
+      </svg>
+      <p class="hero-tagline ink" id="heroTagline">Full-stack software developer and creative designer. I craft robust web apps, responsive systems, and sketch ideas on paper first.</p>
+      
+      <div class="hero-actions ink">
+        <a class="hero-btn primary" href="#work">
+          <span>Explore Works</span>
+          <svg class="doodle" viewBox="0 0 24 24" width="20" height="20"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a class="hero-btn" href="#contact">
+          <span>Say Hello</span>
+          <svg class="doodle" viewBox="0 0 24 24" width="20" height="20"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+      </div>
+
+      <div class="status-pill ink">
+        <span class="status-dot"></span>
+        <span id="availabilityText">AVAILABLE FOR NEW PROJECTS &middot; 2026</span>
+      </div>
+    </div>
+
+    <!-- One Piece Wanted Bounty Poster Frame -->
+    <div class="wanted-poster-frame ink" id="wantedPoster" role="region" aria-label="One Piece Wanted Bounty Poster Frame">
+      <div class="poster-pin" aria-hidden="true"></div>
+      <div class="wanted-inner">
+        <div class="wanted-header">WANTED</div>
+        
+        <div class="wanted-photo-container" id="wantedPhotoContainer" title="Click or drag & drop your photo here!" tabindex="0" role="button" aria-label="Upload photo to Wanted Poster">
+          <!-- User photo img -->
+          <img id="wantedPhotoImg" src="" alt="Portrait" class="wanted-img" style="display:none;" />
+          
+          <!-- Default Hand-Drawn One Piece Pirate Silhouette Placeholder -->
+          <div id="wantedPlaceholder" class="wanted-placeholder">
+            <svg class="doodle" viewBox="0 0 160 140" width="105" height="92" aria-hidden="true">
+              <!-- Straw Hat on top of head -->
+              <path d="M20 54C20 40 55 34 80 34S140 40 140 54 110 70 80 70 20 64 20 54Z" fill="var(--paper)"/>
+              <path d="M48 42C46 10 114 10 112 42"/>
+              <path d="M50 34C75 42 85 42 110 34" stroke="var(--stamp)"/>
+              <!-- Head silhouette & smile -->
+              <path d="M55 58C55 86 65 106 80 106S105 86 105 58"/>
+              <!-- Big D-Smile -->
+              <path d="M68 84Q80 96 92 84Z"/>
+              <!-- Collar / shoulders -->
+              <path d="M30 134Q50 110 70 116M130 134Q110 110 90 116"/>
+              <!-- Jolly Roger crossbones in background faint -->
+              <path d="M24 18L38 32M136 18L122 32M24 32L38 18M136 32L122 18" stroke-width="1.8" opacity="0.6"/>
+            </svg>
+            <span class="upload-hint">📷 Click to add photo</span>
+          </div>
+
+          <span class="photo-change-badge" id="photoChangeBadge">change photo ↺</span>
+          <input type="file" id="wantedPhotoInput" accept="image/*" style="display:none;" />
+        </div>
+
+        <div class="wanted-dead-or-alive">DEAD OR ALIVE</div>
+        <div class="wanted-name" id="wantedPosterName">YOUR NAME</div>
+        
+        <div class="wanted-bounty-row">
+          <span class="berry-symbol">฿</span>
+          <span class="bounty-amount" id="wantedPosterBounty">3,000,000,000</span>
+          <span class="bounty-dash">-</span>
+        </div>
+
+        <div class="wanted-footer">
+          <span class="marine-text">MARINE</span>
+          <span class="marine-stamp" title="World Government Marine Seal">
+            <svg viewBox="0 0 44 26" width="30" height="18" class="doodle" aria-hidden="true">
+              <!-- Marine Seagull emblem -->
+              <path d="M3 14 Q12 4 22 14 Q32 4 41 14" stroke-width="2"/>
+              <path d="M22 14 L22 23 M17 21 L27 21" stroke-width="1.8"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- DIVIDER -->
+  <svg class="doodle draw" style="width:100%;height:14px;display:block;margin:28px 0" viewBox="0 0 600 14" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M2 8C50 0 100 14 150 7S250 1 300 8 400 14 450 7 550 1 598 8"/>
+  </svg>
+
+  <!-- ABOUT SECTION -->
+  <section id="about">
+    <h2 class="section-title write">about me</h2>
+    <div class="about-wrap">
+      <div class="about-text">
+        <p class="ink">Hi! I’m a passionate developer who bridges the gap between clean code architecture and delightful visual design. I believe software should not only be reliable and fast, but feel humane and enjoyable to use.</p>
+        <p class="ink">When solving problems, I always draft ideas on a notebook first—mapping state flows, database relations, and user journeys with ink before opening an editor. This tactile approach keeps my code intentional and well-structured.</p>
+        <p class="ink">Currently building modern full-stack web applications, exploring reactive interfaces, and collaborating with forward-thinking teams.</p>
+      </div>
+      <aside class="sticky-board ink">
+        <h3>currently</h3>
+        <ul>
+          <li><span class="label">reading:</span> One Piece &amp; System Design</li>
+          <li><span class="label">building:</span> interactive web experiments</li>
+          <li><span class="label">learning:</span> WebGL shaders &amp; audio synths</li>
+          <li><span class="label">brewing:</span> fresh oolong &amp; dark roast</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- WORK SECTION -->
+  <section id="work">
+    <h2 class="section-title write">things I’ve made</h2>
+    <p class="section-subtitle ink">A selection of projects crafted with precision, care, and attention to detail. Click any card to inspect the sketchbook case study.</p>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar ink" id="projectFilterBar">
+      <button class="filter-pill active" data-filter="all" type="button">All Sketches</button>
+      <button class="filter-pill" data-filter="fullstack" type="button">Full Stack</button>
+      <button class="filter-pill" data-filter="frontend" type="button">Creative UI</button>
+      <button class="filter-pill" data-filter="tools" type="button">Tools &amp; Experiments</button>
+    </div>
+
+    <!-- Project Cards Grid -->
+    <div class="project-grid" id="projectGrid">
+      <!-- Card 1 -->
+      <article class="card ink" data-category="fullstack" data-project-id="inkflow" tabindex="0" role="button" aria-haspopup="dialog">
+        <div class="card-top">
+          <span class="card-badge featured">Featured ★</span>
+          <span class="tags">React · Node · SQLite</span>
+        </div>
+        <h3>InkFlow Journal</h3>
+        <p>A distraction-free markdown sketchbook with real-time vector ink sketching, offline-first sync, and custom hand-drawn calligraphy typography.</p>
+        <div class="card-footer">
+          <span class="tags">Full Stack App</span>
+          <span class="card-inspect-hint">inspect sketch →</span>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="card ink" data-category="frontend" data-project-id="voyagemap" tabindex="0" role="button" aria-haspopup="dialog">
+        <div class="card-top">
+          <span class="card-badge">Interactive UI</span>
+          <span class="tags">TypeScript · SVG · Canvas</span>
+        </div>
+        <h3>VoyageMap Explorer</h3>
+        <p>An interactive dynamic cartography tool for tracking story arcs, nautical voyages, and anime journey trails with animated ink coordinates.</p>
+        <div class="card-footer">
+          <span class="tags">Creative Canvas</span>
+          <span class="card-inspect-hint">inspect sketch →</span>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="card ink" data-category="fullstack" data-project-id="paperpulse" tabindex="0" role="button" aria-haspopup="dialog">
+        <div class="card-top">
+          <span class="card-badge">Real-Time</span>
+          <span class="tags">WebSockets · Go · Redis</span>
+        </div>
+        <h3>PaperPulse Sync</h3>
+        <p>Real-time collaborative whiteboard with peer-to-peer ink stroke synchronization, CRDT conflict resolution, and tactile drawing physics.</p>
+        <div class="card-footer">
+          <span class="tags">Distributed Systems</span>
+          <span class="card-inspect-hint">inspect sketch →</span>
+        </div>
+      </article>
+
+      <!-- Card 4 -->
+      <article class="card ink" data-category="tools" data-project-id="shikisynth" tabindex="0" role="button" aria-haspopup="dialog">
+        <div class="card-top">
+          <span class="card-badge">Web Audio</span>
+          <span class="tags">Web Audio API · Vanilla JS</span>
+        </div>
+        <h3>ShikiSynth Audio</h3>
+        <p>A browser-based synthesizer that sonifies drawing gestures, translating pen pressure, speed, and strokes into ambient procedural harmonies.</p>
+        <div class="card-footer">
+          <span class="tags">Audio Experiment</span>
+          <span class="card-inspect-hint">inspect sketch →</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SKETCHBOOK MODAL (Case Study Viewer) -->
+  <div class="modal-overlay" id="sketchModal" role="dialog" aria-modal="true" aria-labelledby="modalHeading">
+    <div class="modal-sketchbook">
+      <button class="modal-close-btn" id="modalCloseBtn" type="button" aria-label="Close case study dialog">&times;</button>
+      <div class="card-badge" id="modalBadge" style="display:inline-block;margin-bottom:8px">Case Study</div>
+      <h3 class="modal-title" id="modalHeading">Project Title</h3>
+      <div class="modal-tags" id="modalTags"></div>
+      <p class="modal-desc" id="modalDescription">Detailed description...</p>
+      
+      <div class="modal-highlight-box">
+        <h4>Key Craftsmanship Highlights</h4>
+        <ul id="modalHighlights"></ul>
+      </div>
+
+      <div class="modal-actions">
+        <a class="hero-btn primary" id="modalLiveLink" href="#" target="_blank" rel="noopener">
+          <span>Live Demo</span>
+          <svg class="doodle" viewBox="0 0 24 24" width="18" height="18"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg>
+        </a>
+        <a class="hero-btn" id="modalGithubLink" href="#" target="_blank" rel="noopener">
+          <span>Source Code</span>
+          <svg class="doodle" viewBox="0 0 24 24" width="18" height="18"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIVIDER -->
+  <svg class="doodle draw" style="width:100%;height:14px;display:block;margin:36px 0" viewBox="0 0 600 14" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M2 7C60 14 110 0 170 7S260 13 320 6 420 0 480 8 560 12 598 6"/>
+  </svg>
+
+  <!-- JOURNEY SECTION -->
+  <section id="journey">
+    <h2 class="section-title write">my journey</h2>
+    <p class="section-subtitle ink">Milestones along the voyage so far—from the first line of code to production software.</p>
+    
+    <div class="trail">
+      <div class="step ink">
+        <div class="step-header">
+          <span class="step-year">2026</span>
+          <span class="step-role">Senior Full-Stack &amp; Creative Craft</span>
+        </div>
+        <p class="step-desc">Leading feature architecture, optimizing performance, and designing intuitive web experiences with modern TypeScript, React, and server-side runtimes.</p>
+        <div class="step-stack">
+          <span class="step-chip">Full-Stack Architecture</span>
+          <span class="step-chip">Performance Optimization</span>
+          <span class="step-chip">Design Systems</span>
+        </div>
+      </div>
+
+      <div class="step ink">
+        <div class="step-header">
+          <span class="step-year">2024</span>
+          <span class="step-role">Full-Stack Engineer &amp; Open Source</span>
+        </div>
+        <p class="step-desc">Built scalable APIs, engineered responsive web client architectures, and contributed to open-source developer tooling and interactive canvas components.</p>
+        <div class="step-stack">
+          <span class="step-chip">REST &amp; GraphQL</span>
+          <span class="step-chip">PostgreSQL &amp; Redis</span>
+          <span class="step-chip">Testing &amp; CI/CD</span>
+        </div>
+      </div>
+
+      <div class="step ink">
+        <div class="step-header">
+          <span class="step-year">2022</span>
+          <span class="step-role">The First Ink Stroke &amp; Midnight Code</span>
+        </div>
+        <p class="step-desc">Wrote my first lines of JavaScript, fallen in love with UI design and state machines, and spent nights turning notebook scribbles into living browser applications.</p>
+        <div class="step-stack">
+          <span class="step-chip">HTML5 / Modern CSS</span>
+          <span class="step-chip">Core JavaScript</span>
+          <span class="step-chip">Algorithms &amp; UX</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS SECTION -->
+  <section id="skills">
+    <h2 class="section-title write">what I use</h2>
+    <p class="section-subtitle ink">Tools, languages, and frameworks I reach for when building products.</p>
+    
+    <div class="skills-grid">
+      <div class="skill-category ink">
+        <h3>frontend craft</h3>
+        <div class="skills-list">
+          <span class="skill-item">TypeScript<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 6C25 1 60 9 98 3"/></svg></span>
+          <span class="skill-item">React / Next.js<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 4C30 9 65 1 98 6"/></svg></span>
+          <span class="skill-item">JavaScript (ESNext)<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 6C25 1 60 9 98 3"/></svg></span>
+          <span class="skill-item">HTML5 &amp; CSS3<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 4C30 9 65 1 98 6"/></svg></span>
+          <span class="skill-item">Canvas API &amp; SVG<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 6C25 1 60 9 98 3"/></svg></span>
+          <span class="skill-item">Tailwind / PostCSS<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 4C30 9 65 1 98 6"/></svg></span>
+        </div>
+      </div>
+
+      <div class="skill-category ink">
+        <h3>backend &amp; data</h3>
+        <div class="skills-list">
+          <span class="skill-item">Node.js<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 6C25 1 60 9 98 3"/></svg></span>
+          <span class="skill-item">Python<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 4C30 9 65 1 98 6"/></svg></span>
+          <span class="skill-item">PostgreSQL<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 6C25 1 60 9 98 3"/></svg></span>
+          <span class="skill-item">REST &amp; GraphQL<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 4C30 9 65 1 98 6"/></svg></span>
+          <span class="skill-item">Redis<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 6C25 1 60 9 98 3"/></svg></span>
+          <span class="skill-item">SQLite &amp; Prisma<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 4C30 9 65 1 98 6"/></svg></span>
+        </div>
+      </div>
+
+      <div class="skill-category ink">
+        <h3>workflow &amp; design</h3>
+        <div class="skills-list">
+          <span class="skill-item">Git &amp; GitHub<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 6C25 1 60 9 98 3"/></svg></span>
+          <span class="skill-item">Figma UI/UX<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 4C30 9 65 1 98 6"/></svg></span>
+          <span class="skill-item">Vite &amp; Webpack<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 6C25 1 60 9 98 3"/></svg></span>
+          <span class="skill-item">Jest &amp; Vitest<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 4C30 9 65 1 98 6"/></svg></span>
+          <span class="skill-item">Docker basics<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 6C25 1 60 9 98 3"/></svg></span>
+          <span class="skill-item">Ink &amp; Paper Sketching<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 4C30 9 65 1 98 6"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE DOODLE CANVAS / GUESTBOOK -->
+  <section id="doodle">
+    <h2 class="section-title write">guest doodle pad</h2>
+    <p class="section-subtitle ink">Leave an ink scribble, sign your initials, or sketch something fun right on this parchment!</p>
+    
+    <div class="doodle-section ink">
+      <div class="doodle-canvas-wrap">
+        <canvas id="doodleCanvas" width="900" height="260"></canvas>
+      </div>
+
+      <div class="doodle-toolbar">
+        <div class="doodle-colors">
+          <span style="font-size:1.15rem;margin-right:4px">Ink:</span>
+          <button class="doodle-swatch active" data-color="#2d2a9c" style="background:#2d2a9c" title="Royal Blue Ink" type="button"></button>
+          <button class="doodle-swatch" data-color="#b91c1c" style="background:#b91c1c" title="Crimson Stamp Ink" type="button"></button>
+          <button class="doodle-swatch" data-color="#1b4d3e" style="background:#1b4d3e" title="Forest Green Ink" type="button"></button>
+          <button class="doodle-swatch" data-color="#4a2e18" style="background:#4a2e18" title="Sepia Walnut Ink" type="button"></button>
+        </div>
+
+        <div class="doodle-actions">
+          <button class="control-btn" id="doodleStampHat" type="button" title="Stamp a straw hat on canvas">
+            <span>👒 Stamp Hat</span>
+          </button>
+          <button class="control-btn" id="doodleSaveBtn" type="button" title="Download your drawing">
+            <span>💾 Save Doodle</span>
+          </button>
+          <button class="control-btn" id="doodleClearBtn" type="button" title="Wipe canvas clear">
+            <span>🧹 Clear Pad</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIVIDER -->
+  <svg class="doodle draw" style="width:100%;height:14px;display:block;margin:32px 0" viewBox="0 0 600 14" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M2 8C50 0 100 14 150 7S250 1 300 8 400 14 450 7 550 1 598 8"/>
+  </svg>
+
+  <!-- CONTACT / POSTCARD SECTION -->
+  <section class="contact-container" id="contact">
+    <h2 class="section-title write" style="text-align:center">send a postcard</h2>
+    <p class="section-subtitle ink" style="text-align:center">Have a project in mind, an opportunity, or just want to chat about code and tea? Drop a note below.</p>
+    
+    <div class="postcard ink">
+      <div class="postcard-airmail"></div>
+
+      <!-- Left: Handwritten Message -->
+      <div class="postcard-left">
+        <label for="postMsg" style="font-size:1.35rem;margin-bottom:6px">Dear <span id="postcardRecipientName">Your Name</span>,</label>
+        <textarea id="postMsg" class="postcard-message-area" placeholder="Write your thoughts or message here in ink... We could build something great together!"></textarea>
+        <div class="mail-feedback" id="mailFeedback"></div>
+      </div>
+
+      <!-- Right: Address & Stamp -->
+      <div class="postcard-right">
+        <div class="postcard-stamp">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 8l8-5 8 5v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/>
+          </svg>
+          <div>AIR MAIL<br>2026</div>
+        </div>
+
+        <div>
+          <div class="postcard-field">
+            <label for="postSenderName">From (Your Name):</label>
+            <input type="text" id="postSenderName" placeholder="e.g. Robin or Zoro" autocomplete="name">
+          </div>
+          <div class="postcard-field">
+            <label for="postSenderEmail">Your Email:</label>
+            <input type="email" id="postSenderEmail" placeholder="your.email@domain.com" autocomplete="email">
+          </div>
+
+          <button class="send-plane-btn" id="sendLetterBtn" type="button">
+            <span>Send Letter</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Direct Email & Social Links -->
+    <div style="text-align:center;margin-top:20px">
+      <div class="ink" style="font-size:1.25rem;color:var(--ink-soft);margin-bottom:8px">Or write directly via your mail client:</div>
+      <a class="hero-btn ink" id="directEmailLink" href="mailto:you@example.com" style="display:inline-flex">
+        <span>you@example.com</span>
+      </a>
+
+      <div class="social-links ink">
+        <a class="social-item" id="githubLink" href="https://github.com" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="social-item" id="linkedinLink" href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="social-item" id="resumeLink" href="#" target="_blank" rel="noopener">Resume PDF ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="ink">
+    <p>Written by hand, sketched in ink, powered by pure web standards &middot; 2026</p>
+    <p style="font-size:0.95rem;opacity:0.8">“Inherited Will, the Swell of the Age, and the Dreams of its People.” ✦</p>
+  </footer>
+</main>
+
+<!-- FLOATING BACK TO TOP BUTTON -->
+<button class="back-to-top" id="backToTop" type="button" aria-label="Back to top of page" title="Back to top">
+  <svg class="doodle" viewBox="0 0 24 24" width="22" height="22">
+    <path d="M12 19V5M5 12l7-7 7 7"/>
+  </svg>
+</button>
+
+<script>
+/**
+ * =========================================================================
+ * PORTFOLIO CONFIGURATION
+ * =========================================================================
+ * Easily customize your details below! All changes will reflect across the site.
+ */
+const PORTFOLIO_CONFIG = {
+  name: "Your Name",
+  bounty: "3,000,000,000",
+  photoUrl: "", // Path to your photo e.g. "photo.jpg" (or click the Wanted Poster to upload directly!)
+  tagline: "Full-stack software developer and creative designer. I craft robust web apps, responsive systems, and sketch ideas on paper first.",
+  email: "you@example.com",
+  status: "AVAILABLE FOR NEW PROJECTS · 2026",
+  socials: {
+    github: "https://github.com",
+    linkedin: "https://linkedin.com",
+    resume: "#"
+  },
+  quotes: [
+    { quote: "“As long as I live, there are infinite chances.”", by: "— Monkey D. Luffy" },
+    { quote: "“When do you think people die? When they are forgotten!”", by: "— Dr. Hiluluk" },
+    { quote: "“If you don’t take risks, you can’t create a future.”", by: "— Monkey D. Luffy" },
+    { quote: "“Scars on the back are a swordsman’s shame.”", by: "— Roronoa Zoro" },
+    { quote: "“Simplicity is prerequisite for reliability.”", by: "— Edsger W. Dijkstra" }
+  ],
+  projects: {
+    inkflow: {
+      title: "InkFlow Journal",
+      category: "Full Stack App",
+      badge: "Featured ★",
+      tags: ["React", "TypeScript", "Node.js", "SQLite", "Canvas API", "PWA"],
+      description: "A distraction-free markdown sketchbook with live vector ink sketching, offline-first sync, and custom hand-drawn calligraphy typography.",
+      highlights: [
+        "Vector ink smoothing engine using quadratic Bézier curves with dynamic pen pressure response.",
+        "Local-first architecture using IndexedDB with background optimistic synchronization to a SQLite backend.",
+        "Export notes to clean PDF with vector sketches and Markdown formatting intact.",
+        "Zero tracking, completely private, installable as an offline Progressive Web App."
+      ],
+      liveUrl: "#",
+      githubUrl: "https://github.com"
+    },
+    voyagemap: {
+      title: "VoyageMap Explorer",
+      category: "Creative Canvas",
+      badge: "Interactive UI",
+      tags: ["TypeScript", "SVG Animations", "Canvas API", "CSS Grid", "GeoJSON"],
+      description: "An interactive cartography and voyage explorer tool that visualizes story journeys and nautical coordinates with hand-drawn trails and waypoint logs.",
+      highlights: [
+        "Procedural island generator with hand-drawn SVG coastal topography.",
+        "Timeline scrubbing system that animates vessel progress across routes with custom audio waves.",
+        "High-performance HTML5 Canvas renderer capable of 60 FPS across thousands of animated nautical nodes."
+      ],
+      liveUrl: "#",
+      githubUrl: "https://github.com"
+    },
+    paperpulse: {
+      title: "PaperPulse Sync",
+      category: "Distributed Systems",
+      badge: "Real-Time",
+      tags: ["WebSockets", "Go", "Redis", "Yjs / CRDT", "Canvas Physics"],
+      description: "Real-time collaborative whiteboard with peer-to-peer ink stroke synchronization, CRDT conflict resolution, and tactile drawing physics.",
+      highlights: [
+        "Built resilient WebSocket pub/sub engine in Go handling 10,000+ simultaneous connections with low latency.",
+        "CRDT conflict-free replicated data types ensuring zero stroke loss during network drops or concurrent edits.",
+        "Infinite canvas zoom & pan with virtualized viewport rendering for instant rendering speeds."
+      ],
+      liveUrl: "#",
+      githubUrl: "https://github.com"
+    },
+    shikisynth: {
+      title: "ShikiSynth Audio",
+      category: "Audio Experiment",
+      badge: "Web Audio",
+      tags: ["Web Audio API", "Vanilla JavaScript", "Custom Oscillators", "Canvas"],
+      description: "A browser-based synthesizer that sonifies drawing gestures, translating pen pressure, speed, and strokes into ambient procedural harmonies.",
+      highlights: [
+        "Dual FM synthesis engine driven by real-time pointer coordinates and acceleration vectors.",
+        "Custom biquad resonant filter modulating harmonics based on stroke curvature.",
+        "Completely self-contained in zero external dependencies, weighing under 15KB compressed."
+      ],
+      liveUrl: "#",
+      githubUrl: "https://github.com"
+    }
+  }
+};
+
+(function() {
+  "use strict";
+
+  // 1. Apply config to DOM elements
+  function applyConfig() {
+    document.title = PORTFOLIO_CONFIG.name + " – Portfolio & Digital Sketchbook";
+    const logoName = document.getElementById("siteLogoName");
+    const heroName = document.getElementById("heroName");
+    const heroTagline = document.getElementById("heroTagline");
+    const availText = document.getElementById("availabilityText");
+    const directEmail = document.getElementById("directEmailLink");
+    const postRecipient = document.getElementById("postcardRecipientName");
+    const ghLink = document.getElementById("githubLink");
+    const liLink = document.getElementById("linkedinLink");
+    const resLink = document.getElementById("resumeLink");
+    const wantedPosterName = document.getElementById("wantedPosterName");
+    const wantedPosterBounty = document.getElementById("wantedPosterBounty");
+
+    if (logoName) logoName.textContent = PORTFOLIO_CONFIG.name;
+    if (heroName) heroName.textContent = PORTFOLIO_CONFIG.name;
+    if (heroTagline) heroTagline.textContent = PORTFOLIO_CONFIG.tagline;
+    if (availText) availText.textContent = PORTFOLIO_CONFIG.status;
+    if (wantedPosterName) wantedPosterName.textContent = PORTFOLIO_CONFIG.name;
+    if (wantedPosterBounty) wantedPosterBounty.textContent = PORTFOLIO_CONFIG.bounty;
+    if (directEmail) {
+      directEmail.href = "mailto:" + PORTFOLIO_CONFIG.email;
+      directEmail.querySelector("span").textContent = PORTFOLIO_CONFIG.email;
+    }
+    if (postRecipient) postRecipient.textContent = PORTFOLIO_CONFIG.name;
+    if (ghLink) ghLink.href = PORTFOLIO_CONFIG.socials.github;
+    if (liLink) liLink.href = PORTFOLIO_CONFIG.socials.linkedin;
+    if (resLink) resLink.href = PORTFOLIO_CONFIG.socials.resume;
+  }
+  applyConfig();
+
+  // One Piece Wanted Poster Photo Loader
+  const wantedPhotoContainer = document.getElementById("wantedPhotoContainer");
+  const wantedPhotoInput = document.getElementById("wantedPhotoInput");
+  const wantedPhotoImg = document.getElementById("wantedPhotoImg");
+  const wantedPlaceholder = document.getElementById("wantedPlaceholder");
+  const photoChangeBadge = document.getElementById("photoChangeBadge");
+
+  function setWantedPhoto(src) {
+    if (!wantedPhotoImg || !wantedPlaceholder) return;
+    if (src) {
+      wantedPhotoImg.src = src;
+      wantedPhotoImg.style.display = "block";
+      wantedPlaceholder.style.display = "none";
+      if (photoChangeBadge) photoChangeBadge.style.display = "block";
+    } else {
+      wantedPhotoImg.src = "";
+      wantedPhotoImg.style.display = "none";
+      wantedPlaceholder.style.display = "flex";
+      if (photoChangeBadge) photoChangeBadge.style.display = "none";
+    }
+  }
+
+  // Load saved photo or config photo
+  const savedPhoto = localStorage.getItem("portfolio_wanted_photo");
+  if (savedPhoto) {
+    setWantedPhoto(savedPhoto);
+  } else if (PORTFOLIO_CONFIG.photoUrl) {
+    setWantedPhoto(PORTFOLIO_CONFIG.photoUrl);
+  }
+
+  if (wantedPhotoContainer && wantedPhotoInput) {
+    wantedPhotoContainer.addEventListener("click", function() {
+      wantedPhotoInput.click();
+    });
+    wantedPhotoContainer.addEventListener("keydown", function(e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        wantedPhotoInput.click();
+      }
+    });
+
+    wantedPhotoInput.addEventListener("change", function(e) {
+      const file = e.target.files && e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          const dataUrl = evt.target.result;
+          setWantedPhoto(dataUrl);
+          try {
+            localStorage.setItem("portfolio_wanted_photo", dataUrl);
+          } catch(err) {}
+          playPaperRustle();
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Drag and drop photo onto Wanted Poster
+    wantedPhotoContainer.addEventListener("dragover", function(e) {
+      e.preventDefault();
+      wantedPhotoContainer.classList.add("dragover");
+    });
+    wantedPhotoContainer.addEventListener("dragleave", function() {
+      wantedPhotoContainer.classList.remove("dragover");
+    });
+    wantedPhotoContainer.addEventListener("drop", function(e) {
+      e.preventDefault();
+      wantedPhotoContainer.classList.remove("dragover");
+      const file = e.dataTransfer.files && e.dataTransfer.files[0];
+      if (file && file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          const dataUrl = evt.target.result;
+          setWantedPhoto(dataUrl);
+          try {
+            localStorage.setItem("portfolio_wanted_photo", dataUrl);
+          } catch(err) {}
+          playPaperRustle();
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+
+  // 2. Synthesized Web Audio Sound Effects (Zero External Files)
+  let audioCtx = null;
+  let soundEnabled = localStorage.getItem("portfolio_sound") === "true";
+
+  function getAudioContext() {
+    if (!audioCtx) {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (AudioContextClass) audioCtx = new AudioContextClass();
+    }
+    if (audioCtx && audioCtx.state === "suspended") {
+      audioCtx.resume();
+    }
+    return audioCtx;
+  }
+
+  function playPenScratch() {
+    if (!soundEnabled) return;
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    try {
+      const bufferSize = ctx.sampleRate * 0.05;
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.3));
+      }
+      const noise = ctx.createBufferSource();
+      noise.buffer = buffer;
+      const filter = ctx.createBiquadFilter();
+      filter.type = "bandpass";
+      filter.frequency.value = 1600 + Math.random() * 400;
+      filter.Q.value = 3.0;
+      const gain = ctx.createGain();
+      gain.gain.value = 0.08;
+      noise.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+      noise.start();
+    } catch(e) {}
+  }
+
+  function playPaperRustle() {
+    if (!soundEnabled) return;
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    try {
+      const bufferSize = ctx.sampleRate * 0.12;
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.5));
+      }
+      const noise = ctx.createBufferSource();
+      noise.buffer = buffer;
+      const filter = ctx.createBiquadFilter();
+      filter.type = "lowpass";
+      filter.frequency.value = 850;
+      const gain = ctx.createGain();
+      gain.gain.value = 0.12;
+      noise.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+      noise.start();
+    } catch(e) {}
+  }
+
+  function updateSoundUI() {
+    const soundToggle = document.getElementById("soundToggle");
+    const soundLabel = document.getElementById("soundLabel");
+    const w1 = document.getElementById("soundWave1");
+    const w2 = document.getElementById("soundWave2");
+    if (!soundToggle) return;
+    if (soundEnabled) {
+      soundLabel.textContent = "sound on";
+      if (w1) w1.style.display = "block";
+      if (w2) w2.style.display = "block";
+    } else {
+      soundLabel.textContent = "sound off";
+      if (w1) w1.style.display = "none";
+      if (w2) w2.style.display = "none";
+    }
+  }
+  updateSoundUI();
+
+  const soundBtn = document.getElementById("soundToggle");
+  if (soundBtn) {
+    soundBtn.addEventListener("click", function() {
+      soundEnabled = !soundEnabled;
+      localStorage.setItem("portfolio_sound", soundEnabled ? "true" : "false");
+      updateSoundUI();
+      if (soundEnabled) {
+        getAudioContext();
+        playPenScratch();
+      }
+    });
+  }
+
+  // 3. Theme Engine
+  const themeBtn = document.getElementById("themeBtn");
+  const themeMenu = document.getElementById("themeMenu");
+  const savedTheme = localStorage.getItem("portfolio_theme") || "parchment";
+  document.documentElement.setAttribute("data-theme", savedTheme);
+
+  if (themeBtn && themeMenu) {
+    themeBtn.addEventListener("click", function(e) {
+      e.stopPropagation();
+      themeMenu.classList.toggle("open");
+      playPaperRustle();
+    });
+    document.addEventListener("click", function() {
+      themeMenu.classList.remove("open");
+    });
+    themeMenu.querySelectorAll(".theme-opt").forEach(function(opt) {
+      opt.addEventListener("click", function() {
+        const themeVal = opt.dataset.themeVal;
+        document.documentElement.setAttribute("data-theme", themeVal);
+        localStorage.setItem("portfolio_theme", themeVal);
+        themeMenu.classList.remove("open");
+        playPenScratch();
+      });
+    });
+  }
+
+  // 4. Loader with quote cycling & skip
+  document.querySelectorAll(".draw path, .draw ellipse, .draw line, .draw polygon, .draw rect").forEach(function(p) {
+    p.setAttribute("pathLength", 1);
+  });
+
+  const loader = document.getElementById("loader");
+  const bar = document.getElementById("bar");
+  const pct = document.getElementById("pct");
+  const qEl = document.getElementById("q");
+  const byEl = document.getElementById("by");
+  const skipBtn = document.getElementById("skipLoaderBtn");
+  const hatClicker = document.getElementById("hatClicker");
+
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isRevisit = sessionStorage.getItem("portfolio_visited") === "true";
+  const total = reduceMotion ? 200 : (isRevisit ? 1200 : 3800);
+  let start = null;
+  let loaderDone = false;
+
+  // Pick initial random quote
+  let quoteIndex = Math.floor(Math.random() * PORTFOLIO_CONFIG.quotes.length);
+  function renderQuote(idx) {
+    const qObj = PORTFOLIO_CONFIG.quotes[idx];
+    if (qEl && byEl) {
+      qEl.textContent = qObj.quote;
+      byEl.textContent = qObj.by;
+    }
+  }
+  renderQuote(quoteIndex);
+
+  if (hatClicker) {
+    hatClicker.addEventListener("click", function() {
+      quoteIndex = (quoteIndex + 1) % PORTFOLIO_CONFIG.quotes.length;
+      renderQuote(quoteIndex);
+      playPenScratch();
+    });
+  }
+
+  requestAnimationFrame(function() {
+    if (qEl) qEl.classList.add("on");
+    if (byEl) byEl.classList.add("on");
+  });
+
+  function tick(ts) {
+    if (loaderDone) return;
+    if (!start) start = ts;
+    const t = Math.min((ts - start) / total, 1);
+    const ease = 1 - Math.pow(1 - t, 2);
+    if (bar) {
+      bar.style.setProperty("--p", ease);
+      const barPath = bar.querySelector("path");
+      if (barPath) barPath.style.strokeDashoffset = 1 - ease;
+    }
+    if (pct) pct.textContent = Math.round(ease * 100) + "%";
+    if (t < 1) {
+      requestAnimationFrame(tick);
+    } else {
+      setTimeout(enterSite, 250);
+    }
+  }
+  requestAnimationFrame(tick);
+
+  function enterSite() {
+    if (loaderDone) return;
+    loaderDone = true;
+    sessionStorage.setItem("portfolio_visited", "true");
+    if (loader) {
+      loader.classList.add("done");
+      setTimeout(function() {
+        loader.remove();
+        observeElements();
+      }, reduceMotion ? 10 : 600);
+    } else {
+      observeElements();
+    }
+  }
+
+  if (skipBtn) {
+    skipBtn.addEventListener("click", function(e) {
+      e.stopPropagation();
+      enterSite();
+    });
+  }
+  window.addEventListener("keydown", function(e) {
+    if (e.code === "Space" && !loaderDone) {
+      e.preventDefault();
+      enterSite();
+    }
+  });
+
+  // 5. Scroll Intersection Observer for Hand-Drawn Elements
+  function observeElements() {
+    const io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          if (el.dataset.t) el.style.setProperty("--t", el.dataset.t);
+          el.classList.add("on");
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll(".write:not(#q), .ink:not(#by), .draw").forEach(function(el) {
+      io.observe(el);
+    });
+  }
+
+  // 6. Project Filters
+  const filterPills = document.querySelectorAll(".filter-pill");
+  const projectCards = document.querySelectorAll(".card[data-category]");
+
+  filterPills.forEach(function(pill) {
+    pill.addEventListener("click", function() {
+      filterPills.forEach(function(p) { p.classList.remove("active"); });
+      pill.classList.add("active");
+      const target = pill.dataset.filter;
+      playPenScratch();
+
+      projectCards.forEach(function(card) {
+        if (target === "all" || card.dataset.category === target) {
+          card.style.display = "flex";
+          setTimeout(function() { card.style.opacity = "1"; card.style.transform = "none"; }, 20);
+        } else {
+          card.style.opacity = "0";
+          card.style.transform = "scale(0.95)";
+          setTimeout(function() { card.style.display = "none"; }, 200);
+        }
+      });
+    });
+  });
+
+  // 7. Sketchbook Case Study Modal
+  const modal = document.getElementById("sketchModal");
+  const modalClose = document.getElementById("modalCloseBtn");
+  const modalBadge = document.getElementById("modalBadge");
+  const modalHeading = document.getElementById("modalHeading");
+  const modalTags = document.getElementById("modalTags");
+  const modalDesc = document.getElementById("modalDescription");
+  const modalHighlights = document.getElementById("modalHighlights");
+  const modalLive = document.getElementById("modalLiveLink");
+  const modalGithub = document.getElementById("modalGithubLink");
+
+  function openProjectModal(projectId) {
+    const proj = PORTFOLIO_CONFIG.projects[projectId];
+    if (!proj) return;
+
+    if (modalBadge) modalBadge.textContent = proj.badge;
+    if (modalHeading) modalHeading.textContent = proj.title;
+    if (modalDesc) modalDesc.textContent = proj.description;
+
+    if (modalTags) {
+      modalTags.innerHTML = "";
+      proj.tags.forEach(function(t) {
+        const span = document.createElement("span");
+        span.className = "modal-tag";
+        span.textContent = t;
+        modalTags.appendChild(span);
+      });
+    }
+
+    if (modalHighlights) {
+      modalHighlights.innerHTML = "";
+      proj.highlights.forEach(function(hl) {
+        const li = document.createElement("li");
+        li.textContent = hl;
+        modalHighlights.appendChild(li);
+      });
+    }
+
+    if (modalLive) modalLive.href = proj.liveUrl;
+    if (modalGithub) modalGithub.href = proj.githubUrl;
+
+    if (modal) {
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+      playPaperRustle();
+    }
+  }
+
+  function closeProjectModal() {
+    if (modal) {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+      playPaperRustle();
+    }
+  }
+
+  projectCards.forEach(function(card) {
+    card.addEventListener("click", function() {
+      const pid = card.dataset.projectId;
+      openProjectModal(pid);
+    });
+    card.addEventListener("keydown", function(e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        const pid = card.dataset.projectId;
+        openProjectModal(pid);
+      }
+    });
+  });
+
+  if (modalClose) modalClose.addEventListener("click", closeProjectModal);
+  if (modal) {
+    modal.addEventListener("click", function(e) {
+      if (e.target === modal) closeProjectModal();
+    });
+  }
+  window.addEventListener("keydown", function(e) {
+    if (e.key === "Escape" && modal && modal.classList.contains("open")) {
+      closeProjectModal();
+    }
+  });
+
+  // 8. Interactive Guest Doodle Canvas
+  const canvas = document.getElementById("doodleCanvas");
+  if (canvas) {
+    const ctx = canvas.getContext("2d");
+    let isDrawing = false;
+    let currentColor = "#2d2a9c";
+    let lastX = 0, lastY = 0;
+
+    function resizeCanvas() {
+      const rect = canvas.getBoundingClientRect();
+      if (canvas.width !== rect.width) {
+        const temp = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        canvas.width = rect.width;
+        canvas.height = 260;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.lineWidth = 2.8;
+      }
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    function getCoords(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: (clientX - rect.left) * (canvas.width / rect.width),
+        y: (clientY - rect.top) * (canvas.height / rect.height)
+      };
+    }
+
+    function startDraw(e) {
+      isDrawing = true;
+      const coords = getCoords(e);
+      lastX = coords.x;
+      lastY = coords.y;
+      playPenScratch();
+    }
+
+    function moveDraw(e) {
+      if (!isDrawing) return;
+      e.preventDefault();
+      const coords = getCoords(e);
+      ctx.strokeStyle = currentColor;
+      ctx.lineWidth = 2.8;
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(coords.x, coords.y);
+      ctx.stroke();
+      lastX = coords.x;
+      lastY = coords.y;
+    }
+
+    function stopDraw() {
+      isDrawing = false;
+    }
+
+    canvas.addEventListener("mousedown", startDraw);
+    canvas.addEventListener("mousemove", moveDraw);
+    window.addEventListener("mouseup", stopDraw);
+
+    canvas.addEventListener("touchstart", startDraw, { passive: false });
+    canvas.addEventListener("touchmove", moveDraw, { passive: false });
+    window.addEventListener("touchend", stopDraw);
+
+    // Color Swatches
+    document.querySelectorAll(".doodle-swatch").forEach(function(swatch) {
+      swatch.addEventListener("click", function() {
+        document.querySelectorAll(".doodle-swatch").forEach(function(s) { s.classList.remove("active"); });
+        swatch.classList.add("active");
+        currentColor = swatch.dataset.color;
+        playPenScratch();
+      });
+    });
+
+    // Clear Canvas
+    const clearBtn = document.getElementById("doodleClearBtn");
+    if (clearBtn) {
+      clearBtn.addEventListener("click", function() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        playPaperRustle();
+      });
+    }
+
+    // Save Canvas
+    const saveBtn = document.getElementById("doodleSaveBtn");
+    if (saveBtn) {
+      saveBtn.addEventListener("click", function() {
+        const link = document.createElement("a");
+        link.download = "portfolio-doodle.png";
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+        playPaperRustle();
+      });
+    }
+
+    // Stamp Hat on Canvas
+    const stampHatBtn = document.getElementById("doodleStampHat");
+    if (stampHatBtn) {
+      stampHatBtn.addEventListener("click", function() {
+        const cx = canvas.width / 2 + (Math.random() * 100 - 50);
+        const cy = canvas.height / 2 + (Math.random() * 60 - 30);
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.strokeStyle = currentColor;
+        ctx.lineWidth = 2.5;
+        // Straw hat path
+        ctx.beginPath();
+        ctx.ellipse(0, 10, 45, 14, 0, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(0, 6, 22, Math.PI, 0, false);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(0, 8, 22, Math.PI * 0.95, Math.PI * 0.05, true);
+        ctx.stroke();
+        ctx.restore();
+        playPenScratch();
+      });
+    }
+  }
+
+  // 9. Interactive Coffee Drops
+  const coffeeStain = document.getElementById("coffeeStain");
+  if (coffeeStain) {
+    coffeeStain.addEventListener("click", function(e) {
+      playPenScratch();
+      const drop = document.createElement("div");
+      drop.className = "coffee-drop";
+      const size = 30 + Math.random() * 40;
+      drop.style.width = size + "px";
+      drop.style.height = size + "px";
+      drop.style.left = (e.clientX - size / 2 + (Math.random() * 30 - 15)) + "px";
+      drop.style.top = (e.clientY - size / 2 + (Math.random() * 30 - 15)) + "px";
+      document.body.appendChild(drop);
+      setTimeout(function() {
+        drop.style.transition = "opacity 2s ease";
+        drop.style.opacity = "0.2";
+      }, 1000);
+    });
+  }
+
+  // 10. Interactive Postcard / Letter Sender
+  const sendLetterBtn = document.getElementById("sendLetterBtn");
+  const postMsg = document.getElementById("postMsg");
+  const postSenderName = document.getElementById("postSenderName");
+  const postSenderEmail = document.getElementById("postSenderEmail");
+  const mailFeedback = document.getElementById("mailFeedback");
+
+  if (sendLetterBtn) {
+    sendLetterBtn.addEventListener("click", function() {
+      const msg = postMsg.value.trim();
+      const name = postSenderName.value.trim();
+      const email = postSenderEmail.value.trim();
+
+      if (!msg) {
+        mailFeedback.textContent = "✏ Please write a short note before sending!";
+        postMsg.focus();
+        playPenScratch();
+        return;
+      }
+      if (!name) {
+        mailFeedback.textContent = "✍ Please let me know who this letter is from!";
+        postSenderName.focus();
+        playPenScratch();
+        return;
+      }
+
+      playPaperRustle();
+      mailFeedback.textContent = "✈ Folding airplane and delivering letter...";
+      sendLetterBtn.disabled = true;
+
+      setTimeout(function() {
+        mailFeedback.textContent = "✦ Postcard ready! Opening your email client to send...";
+        const subject = encodeURIComponent("Postcard from " + name + " (via Portfolio)");
+        const body = encodeURIComponent(msg + "\n\n--\nSender: " + name + (email ? " (" + email + ")" : ""));
+        window.location.href = "mailto:" + PORTFOLIO_CONFIG.email + "?subject=" + subject + "&body=" + body;
+        setTimeout(function() {
+          sendLetterBtn.disabled = false;
+          mailFeedback.textContent = "✔ Delivered to the outbox! Looking forward to replying ☕";
+        }, 1500);
+      }, 800);
+    });
+  }
+
+  // 11. Back to Top Button
+  const backToTop = document.getElementById("backToTop");
+  window.addEventListener("scroll", function() {
+    if (window.scrollY > 400) {
+      if (backToTop) backToTop.classList.add("visible");
+    } else {
+      if (backToTop) backToTop.classList.remove("visible");
+    }
+  }, { passive: true });
+
+  if (backToTop) {
+    backToTop.addEventListener("click", function() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      playPaperRustle();
+    });
+  }
+
+  // 12. Audio cue on link hovers
+  document.querySelectorAll("a, button, .card").forEach(function(interactiveEl) {
+    interactiveEl.addEventListener("mouseenter", function() {
+      if (soundEnabled && Math.random() > 0.4) playPenScratch();
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
+
