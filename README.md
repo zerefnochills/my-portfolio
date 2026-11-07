@@ -37,7 +37,24 @@ A distinctive, hand-crafted developer & designer portfolio built with tactile in
    - Stamp button to stamp Luffy's straw hat onto the page.
    - Save button (`.png` download) and wipe clear button.
 
-5. **Handwritten Postcard & Airmail Contact Form**:
+5. **Dedicated Digital Sketchbook Studio (`doodle.html`)**:
+   - A full-screen dedicated drawing app linked via the **"sketchbook ↗"** navbar link and home page button.
+   - **Multiple Custom Brushes**:
+     - ✒️ **Fountain Pen** (smooth quadratic Bézier curves)
+     - 🖌️ **Calligraphy Nib** (45° slanted chisel ribbons)
+     - ✏️ **Pencil Sketch** (graphite texture with stochastic jitter)
+     - 🖍️ **Marker Pen** (wide, semi-transparent highlighter)
+     - 🎨 **Ink Splatter** (manga-style spray droplets)
+     - 🧽 **Rubber Eraser**
+   - **Custom Color Combinations & Palettes**:
+     - Curated themes: *Straw Hat*, *Classic Ink*, *Marine*, and *Wano Forest*.
+     - Interactive **Custom Color Picker** with live hex display.
+     - Sliders for Nib Thickness (1px - 50px) & Opacity with dynamic preview.
+   - **One Piece Stamps & Seals**:
+     - Stamp Straw Hat 👒, Jolly Roger ☠️, Marine Anchor ⚓, Coffee Cup ☕, Stars ✨, Hearts 💛, Flames 🔥, or Meat 🍖 anywhere on the sheet.
+   - **Studio Utilities**: Full Undo/Redo history (`Ctrl+Z`, `Ctrl+Y`), 4 paper patterns (Grid, Lined, Dots, Plain), and 1-click PNG image download.
+
+6. **Handwritten Postcard & Airmail Contact Form**:
    - Vintage postcard layout with airmail border and postal stamp.
    - Enter your name, email, and message.
    - "Send Letter" action with paper airplane delivery animation, instant feedback, and pre-formatted mail client integration.

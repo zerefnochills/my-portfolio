@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Interactive hand-drawn digital sketchbook with custom brushes, color combinations, manga ink stamps, and tactile sound effects.">
+<title>The Digital Sketchbook Studio – Draw &amp; Doodle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Patrick+Hand&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+:root, [data-theme="parchment"] {
+  --paper: #fcf3c6;
+  --paper-card: rgba(255, 255, 255, 0.65);
+  --paper-sticky: rgba(255, 250, 220, 0.94);
+  --paper-canvas: #ffffff;
+  --ink: #2d2a9c;
+  --ink-soft: #5b58b8;
+  --ink-faint: rgba(45, 42, 156, 0.12);
+  --accent: #d97706;
+  --accent-soft: rgba(217, 119, 6, 0.15);
+  --tape: rgba(255, 255, 255, 0.7);
+  --stamp: #b91c1c;
+  --shadow: rgba(45, 42, 156, 0.15);
+  --coffee: rgba(160, 100, 30, 0.14);
+  --grid-line: rgba(45, 42, 156, 0.06);
+}
+
+[data-theme="sepia"] {
+  --paper: #f4ece1;
+  --paper-card: rgba(255, 255, 255, 0.7);
+  --paper-sticky: rgba(250, 243, 233, 0.95);
+  --paper-canvas: #faf6f0;
+  --ink: #442817;
+  --ink-soft: #7f5539;
+  --ink-faint: rgba(68, 40, 23, 0.12);
+  --accent: #a0633b;
+  --accent-soft: rgba(160, 99, 59, 0.15);
+  --tape: rgba(255, 255, 255, 0.7);
+  --stamp: #9a031e;
+  --shadow: rgba(68, 40, 23, 0.15);
+  --coffee: rgba(140, 75, 25, 0.16);
+  --grid-line: rgba(68, 40, 23, 0.06);
+}
+
+[data-theme="blueprint"] {
+  --paper: #132035;
+  --paper-card: rgba(24, 39, 64, 0.88);
+  --paper-sticky: rgba(28, 46, 75, 0.96);
+  --paper-canvas: #0c1524;
+  --ink: #e2eeff;
+  --ink-soft: #93c5fd;
+  --ink-faint: rgba(226, 238, 255, 0.14);
+  --accent: #38bdf8;
+  --accent-soft: rgba(56, 189, 248, 0.2);
+  --tape: rgba(147, 197, 253, 0.25);
+  --stamp: #f43f5e;
+  --shadow: rgba(0, 0, 0, 0.4);
+  --coffee: rgba(56, 189, 248, 0.15);
+  --grid-line: rgba(147, 197, 253, 0.08);
+}
+
+:root {
+  --script: "Mrs Saint Delafield", cursive;
+  --hand: "Patrick Hand", cursive;
+  --badge: "Caveat", cursive;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--paper);
+  background-image: 
+    radial-gradient(ellipse at 50% 0, rgba(255, 255, 255, 0.45) 0, transparent 65%),
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px, 28px 28px;
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--hand);
+  font-size: 1.25rem;
+  line-height: 1.4;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Subtle paper texture overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 .5 0 0 0 0 .4 0 0 0 0 .1 0 0 0 .5 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* Wobble SVG filter */
+.wobble-wrap {
+  filter: url(#wobble);
+  position: relative;
+  z-index: 1;
+}
+
+svg.doodle {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* TOP APP BAR */
+header.studio-header {
+  padding: 12px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-bottom: 2px dashed var(--ink-faint);
+  background: var(--paper-card);
+  backdrop-filter: blur(6px);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.back-btn {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 2px solid var(--ink);
+  padding: 4px 14px;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  font-family: var(--hand);
+  font-size: 1.25rem;
+  color: var(--ink);
+  background: var(--paper-sticky);
+  box-shadow: 2px 3px 0 var(--shadow);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.back-btn:hover {
+  transform: translateY(-2px) rotate(-1deg);
+  background: var(--paper);
+}
+.studio-title {
+  font-family: var(--script);
+  font-size: 2.8rem;
+  line-height: 1;
+  color: var(--ink);
+  margin: 0;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tool-btn {
+  background: var(--paper-sticky);
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  padding: 5px 14px;
+  font-family: var(--hand);
+  font-size: 1.15rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 2px 3px 0 var(--shadow);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.tool-btn:hover {
+  transform: translateY(-2px) rotate(-1deg);
+  background: var(--paper);
+}
+.tool-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none !important;
+}
+.tool-btn.primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+.tool-btn.primary svg {
+  stroke: var(--paper);
+}
+
+/* STUDIO WORKSPACE LAYOUT */
+.studio-container {
+  display: grid;
+  grid-template-columns: 310px 1fr;
+  flex-grow: 1;
+  max-width: 1440px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 18px 24px 24px;
+  gap: 24px;
+}
+
+/* SIDEBAR TOOLBOX */
+.toolbox {
+  background: var(--paper-card);
+  border: 3px solid var(--ink);
+  border-radius: 20px 255px 18px 240px/240px 18px 255px 20px;
+  padding: 20px;
+  box-shadow: 5px 8px 0 var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: fit-content;
+}
+.tool-section-title {
+  font-family: var(--badge);
+  font-size: 1.55rem;
+  color: var(--ink);
+  margin: 0 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1.5px dashed var(--ink-faint);
+  padding-bottom: 4px;
+}
+
+/* BRUSHES GRID */
+.brush-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.brush-card {
+  background: var(--paper-sticky);
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  padding: 8px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.15rem;
+  transition: all 0.2s ease;
+}
+.brush-card:hover {
+  transform: translateY(-2px);
+  background: var(--paper);
+}
+.brush-card.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+  transform: scale(1.02);
+  box-shadow: 2px 3px 0 var(--shadow);
+}
+.brush-card.active svg {
+  stroke: var(--paper);
+}
+
+/* BRUSH SIZE & OPACITY SLIDERS */
+.slider-group {
+  margin-bottom: 8px;
+}
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+.custom-range {
+  width: 100%;
+  accent-color: var(--ink);
+  cursor: pointer;
+}
+.nib-preview-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  background: var(--paper-sticky);
+  border: 1.5px dashed var(--ink-faint);
+  border-radius: 8px;
+  margin-top: 6px;
+}
+.nib-circle {
+  border-radius: 50%;
+  background: var(--ink);
+  transition: width 0.1s ease, height 0.1s ease;
+}
+
+/* COLOR COMBINATIONS & PALETTES */
+.palette-preset-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+.palette-pill {
+  font-family: var(--badge);
+  font-size: 1.1rem;
+  background: transparent;
+  border: 1.5px dashed var(--ink);
+  padding: 2px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  color: var(--ink);
+}
+.palette-pill.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-style: solid;
+}
+.swatches-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.swatch-btn {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.swatch-btn:hover {
+  transform: scale(1.2);
+}
+.swatch-btn.active {
+  transform: scale(1.25);
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--ink);
+}
+
+.custom-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--paper-sticky);
+  border: 1.5px solid var(--ink);
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+.color-picker-input {
+  width: 36px;
+  height: 36px;
+  border: none;
+  padding: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background: transparent;
+}
+.color-picker-input::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+.color-picker-input::-webkit-color-swatch {
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+}
+.hex-display {
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  font-size: 1.15rem;
+}
+
+/* STICKERS & STAMPS */
+.stamps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.stamp-btn {
+  background: var(--paper-sticky);
+  border: 2px dashed var(--ink);
+  border-radius: 10px;
+  font-size: 1.5rem;
+  padding: 8px 4px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: all 0.2s ease;
+}
+.stamp-btn:hover {
+  transform: scale(1.15) rotate(4deg);
+  background: var(--paper);
+  border-style: solid;
+}
+.stamp-btn.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  border-style: solid;
+  transform: scale(1.15);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+/* PAPER STYLE TOGGLES */
+.paper-pattern-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.pattern-btn {
+  background: var(--paper-sticky);
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 1.05rem;
+  font-family: var(--hand);
+  cursor: pointer;
+  color: var(--ink);
+  text-align: center;
+}
+.pattern-btn.active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* MAIN CANVAS WORKSPACE */
+.canvas-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.canvas-card {
+  background: var(--paper-canvas);
+  border: 3.5px solid var(--ink);
+  border-radius: 22px;
+  box-shadow: 8px 12px 0 var(--shadow);
+  overflow: hidden;
+  position: relative;
+  flex-grow: 1;
+  min-height: 580px;
+  display: flex;
+  flex-direction: column;
+}
+.canvas-card::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-2deg);
+  width: 90px;
+  height: 24px;
+  background: var(--tape);
+  border: 1px dashed var(--ink-soft);
+  z-index: 10;
+}
+#mainCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  flex-grow: 1;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+/* Paper pattern textures on canvas */
+.canvas-card.pattern-grid {
+  background-image: 
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.canvas-card.pattern-lined {
+  background-image: linear-gradient(to bottom, transparent 95%, var(--grid-line) 95%);
+  background-size: 100% 28px;
+}
+.canvas-card.pattern-dots {
+  background-image: radial-gradient(var(--ink-faint) 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+}
+
+/* STATUS FOOTER BAR */
+.canvas-status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  border-top: 2px dashed var(--ink-faint);
+  background: var(--paper-sticky);
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+  font-family: var(--badge);
+}
+
+/* TOAST MESSAGE */
+.studio-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--ink);
+  color: var(--paper);
+  border: 2px solid var(--paper);
+  padding: 8px 22px;
+  border-radius: 20px;
+  font-family: var(--badge);
+  font-size: 1.4rem;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.studio-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* RESPONSIVE */
+@media (max-width: 980px) {
+  .studio-container {
+    grid-template-columns: 1fr;
+  }
+  .toolbox {
+    order: 2;
+  }
+  .canvas-wrapper {
+    order: 1;
+  }
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <filter id="wobble">
+    <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="2" seed="4"/>
+    <feDisplacementMap in="SourceGraphic" scale="2.2"/>
+  </filter>
+</svg>
+
+<div class="wobble-wrap">
+  <!-- HEADER -->
+  <header class="studio-header">
+    <div class="brand-group">
+      <a class="back-btn" href="index.html" title="Return to Main Portfolio">
+        <span>← Portfolio</span>
+      </a>
+      <h1 class="studio-title">Digital Sketchbook Studio</h1>
+    </div>
+
+    <div class="header-actions">
+      <!-- Undo / Redo -->
+      <button class="tool-btn" id="undoBtn" type="button" title="Undo stroke (Ctrl+Z)" disabled>
+        <span>↺ Undo</span>
+      </button>
+      <button class="tool-btn" id="redoBtn" type="button" title="Redo stroke (Ctrl+Y)" disabled>
+        <span>↻ Redo</span>
+      </button>
+
+      <!-- Clear Pad -->
+      <button class="tool-btn" id="clearBtn" type="button" title="Wipe canvas clear">
+        <span>🧹 Clear</span>
+      </button>
+
+      <!-- Sound toggle -->
+      <button class="tool-btn" id="soundToggle" type="button" title="Toggle tactile pen scratch sound">
+        <span>🔊 Sound</span>
+      </button>
+
+      <!-- Export / Download -->
+      <button class="tool-btn primary" id="downloadBtn" type="button" title="Save your drawing as a PNG image">
+        <span>💾 Download Artwork</span>
+      </button>
+    </div>
+  </header>
+</div>
+
+<!-- STUDIO WORKSPACE -->
+<main class="studio-container">
+  
+  <!-- LEFT TOOLBOX -->
+  <aside class="toolbox wobble-wrap">
+    
+    <!-- 1. BRUSH SELECTION -->
+    <div>
+      <div class="tool-section-title">
+        <span>Brush Types</span>
+        <span style="font-size:1.15rem;color:var(--ink-soft)" id="activeBrushLabel">Fountain Pen</span>
+      </div>
+      <div class="brush-grid">
+        <button class="brush-card active" data-brush="fountain" type="button">
+          <span>✒️</span>
+          <span>Fountain Pen</span>
+        </button>
+        <button class="brush-card" data-brush="calligraphy" type="button">
+          <span>🖌️</span>
+          <span>Calligraphy</span>
+        </button>
+        <button class="brush-card" data-brush="pencil" type="button">
+          <span>✏️</span>
+          <span>Pencil Sketch</span>
+        </button>
+        <button class="brush-card" data-brush="marker" type="button">
+          <span>🖍️</span>
+          <span>Marker Pen</span>
+        </button>
+        <button class="brush-card" data-brush="splatter" type="button">
+          <span>🎨</span>
+          <span>Ink Splatter</span>
+        </button>
+        <button class="brush-card" data-brush="eraser" type="button">
+          <span>🧽</span>
+          <span>Eraser</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 2. NIB SIZE & OPACITY -->
+    <div>
+      <div class="tool-section-title">
+        <span>Nib Size &amp; Opacity</span>
+      </div>
+      <div class="slider-group">
+        <div class="slider-header">
+          <span>Thickness</span>
+          <span id="brushSizeDisplay">4 px</span>
+        </div>
+        <input type="range" class="custom-range" id="brushSizeSlider" min="1" max="50" value="4">
+      </div>
+      <div class="slider-group">
+        <div class="slider-header">
+          <span>Opacity</span>
+          <span id="brushOpacityDisplay">100%</span>
+        </div>
+        <input type="range" class="custom-range" id="brushOpacitySlider" min="10" max="100" value="100">
+      </div>
+      <div class="nib-preview-wrap">
+        <div class="nib-circle" id="nibPreviewCircle" style="width:4px;height:4px"></div>
+      </div>
+    </div>
+
+    <!-- 3. COLOR PALETTE COMBINATIONS & CUSTOM PICKER -->
+    <div>
+      <div class="tool-section-title">
+        <span>Ink Combinations</span>
+      </div>
+
+      <!-- Quick Palette Themes -->
+      <div class="palette-preset-row">
+        <button class="palette-pill active" data-palette="strawhat" type="button">Straw Hat</button>
+        <button class="palette-pill" data-palette="classic" type="button">Classic Ink</button>
+        <button class="palette-pill" data-palette="marine" type="button">Marine</button>
+        <button class="palette-pill" data-palette="botanical" type="button">Wano Forest</button>
+      </div>
+
+      <!-- Swatches -->
+      <div class="swatches-grid" id="swatchesContainer">
+        <!-- populated dynamically -->
+      </div>
+
+      <!-- Custom Color Picker -->
+      <div class="custom-picker-row">
+        <input type="color" class="color-picker-input" id="customColorInput" value="#2d2a9c" title="Choose custom color">
+        <div>
+          <div style="font-size:0.95rem;color:var(--ink-soft)">Custom Ink Color:</div>
+          <span class="hex-display" id="customHexDisplay">#2D2A9C</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. STAMPS & STICKERS -->
+    <div>
+      <div class="tool-section-title">
+        <span>Stamps &amp; Seals</span>
+        <span style="font-size:1rem;color:var(--ink-soft)">Click to place</span>
+      </div>
+      <div class="stamps-grid">
+        <button class="stamp-btn" data-stamp="hat" title="Straw Hat stamp" type="button">👒</button>
+        <button class="stamp-btn" data-stamp="skull" title="Jolly Roger skull stamp" type="button">☠️</button>
+        <button class="stamp-btn" data-stamp="anchor" title="Marine Anchor stamp" type="button">⚓</button>
+        <button class="stamp-btn" data-stamp="tea" title="Tea Cup stamp" type="button">☕</button>
+        <button class="stamp-btn" data-stamp="star" title="Sparkle Star stamp" type="button">✨</button>
+        <button class="stamp-btn" data-stamp="heart" title="Ink Heart stamp" type="button">💛</button>
+        <button class="stamp-btn" data-stamp="flame" title="Flame stamp" type="button">🔥</button>
+        <button class="stamp-btn" data-stamp="meat" title="Luffy Meat stamp" type="button">🍖</button>
+      </div>
+    </div>
+
+    <!-- 5. PAPER STYLE -->
+    <div>
+      <div class="tool-section-title">
+        <span>Paper Texture</span>
+      </div>
+      <div class="paper-pattern-row">
+        <button class="pattern-btn active" data-pattern="grid" type="button">Grid Notebook</button>
+        <button class="pattern-btn" data-pattern="lined" type="button">Lined Paper</button>
+        <button class="pattern-btn" data-pattern="dots" type="button">Dot Grid</button>
+        <button class="pattern-btn" data-pattern="plain" type="button">Plain Sheet</button>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- RIGHT CANVAS AREA -->
+  <div class="canvas-wrapper wobble-wrap">
+    <div class="canvas-card pattern-grid" id="canvasCard">
+      <canvas id="mainCanvas"></canvas>
+      <div class="canvas-status-bar">
+        <span id="canvasStats">Ready to sketch · Click or drag to draw</span>
+        <span>Shortcuts: [Ctrl+Z] Undo &middot; [Ctrl+Y] Redo</span>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<div class="studio-toast" id="studioToast">Artwork saved to your device! 💾</div>
+
+<script>
+(function() {
+  "use strict";
+
+  // --- AUDIO SYNTHESIS ENGINE (Web Audio API) ---
+  let audioCtx = null;
+  let soundEnabled = true;
+
+  function getAudioContext() {
+    if (!audioCtx) {
+      const AudioClass = window.AudioContext || window.webkitAudioContext;
+      if (AudioClass) audioCtx = new AudioClass();
+    }
+    if (audioCtx && audioCtx.state === "suspended") {
+      audioCtx.resume();
+    }
+    return audioCtx;
+  }
+
+  function playScratchSound(duration, freq) {
+    if (!soundEnabled) return;
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    try {
+      const dur = duration || 0.04;
+      const bufferSize = ctx.sampleRate * dur;
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.4));
+      }
+      const noise = ctx.createBufferSource();
+      noise.buffer = buffer;
+      const filter = ctx.createBiquadFilter();
+      filter.type = "bandpass";
+      filter.frequency.value = freq || (1400 + Math.random() * 600);
+      filter.Q.value = 3.5;
+      const gain = ctx.createGain();
+      gain.gain.value = 0.07;
+      noise.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+      noise.start();
+    } catch(e) {}
+  }
+
+  function playPaperRustle() {
+    if (!soundEnabled) return;
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    try {
+      const bufferSize = ctx.sampleRate * 0.12;
+      const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < bufferSize; i++) {
+        data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.5));
+      }
+      const noise = ctx.createBufferSource();
+      noise.buffer = buffer;
+      const filter = ctx.createBiquadFilter();
+      filter.type = "lowpass";
+      filter.frequency.value = 850;
+      const gain = ctx.createGain();
+      gain.gain.value = 0.1;
+      noise.connect(filter);
+      filter.connect(gain);
+      gain.connect(ctx.destination);
+      noise.start();
+    } catch(e) {}
+  }
+
+  // --- STATE ---
+  const state = {
+    brush: "fountain",      // 'fountain', 'calligraphy', 'pencil', 'marker', 'splatter', 'eraser'
+    color: "#2d2a9c",
+    size: 4,
+    opacity: 1,
+    activeStamp: null,
+    isDrawing: false,
+    undoStack: [],
+    redoStack: [],
+    maxHistory: 25
+  };
+
+  // --- COLOR PALETTE COMBINATIONS ---
+  const PALETTES = {
+    strawhat: ["#2d2a9c", "#dc2626", "#eab308", "#d97706", "#18181b", "#ffffff"],
+    classic: ["#2d2a9c", "#442817", "#166534", "#991b1b", "#334155", "#000000"],
+    marine: ["#0284c7", "#0f172a", "#38bdf8", "#475569", "#dc2626", "#f8fafc"],
+    botanical: ["#166534", "#4ade80", "#65a30d", "#78350f", "#b45309", "#fef08a"]
+  };
+
+  // --- DOM REFS ---
+  const canvas = document.getElementById("mainCanvas");
+  const canvasCard = document.getElementById("canvasCard");
+  const ctx = canvas.getContext("2d", { willReadFrequently: true });
+  const brushCards = document.querySelectorAll(".brush-card");
+  const brushSizeSlider = document.getElementById("brushSizeSlider");
+  const brushSizeDisplay = document.getElementById("brushSizeDisplay");
+  const brushOpacitySlider = document.getElementById("brushOpacitySlider");
+  const brushOpacityDisplay = document.getElementById("brushOpacityDisplay");
+  const nibPreviewCircle = document.getElementById("nibPreviewCircle");
+  const swatchesContainer = document.getElementById("swatchesContainer");
+  const customColorInput = document.getElementById("customColorInput");
+  const customHexDisplay = document.getElementById("customHexDisplay");
+  const stampBtns = document.querySelectorAll(".stamp-btn");
+  const patternBtns = document.querySelectorAll(".pattern-btn");
+  const undoBtn = document.getElementById("undoBtn");
+  const redoBtn = document.getElementById("redoBtn");
+  const clearBtn = document.getElementById("clearBtn");
+  const downloadBtn = document.getElementById("downloadBtn");
+  const soundToggle = document.getElementById("soundToggle");
+  const toast = document.getElementById("studioToast");
+  const canvasStats = document.getElementById("canvasStats");
+  const activeBrushLabel = document.getElementById("activeBrushLabel");
+
+  // --- CANVAS RESIZING & HIGH DPI HANDLING ---
+  function resizeCanvas() {
+    const rect = canvasCard.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    
+    // Save image before resize
+    let savedData = null;
+    if (canvas.width > 0 && canvas.height > 0) {
+      savedData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    }
+
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.scale(dpr, dpr);
+    
+    if (savedData) {
+      ctx.putImageData(savedData, 0, 0);
+    } else {
+      saveState();
+    }
+  }
+
+  window.addEventListener("resize", resizeCanvas);
+
+  // --- HISTORY (UNDO / REDO) ---
+  function saveState() {
+    state.undoStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
+    if (state.undoStack.length > state.maxHistory) {
+      state.undoStack.shift();
+    }
+    state.redoStack = [];
+    updateUndoRedoUI();
+  }
+
+  function undo() {
+    if (state.undoStack.length > 1) {
+      state.redoStack.push(state.undoStack.pop());
+      const previous = state.undoStack[state.undoStack.length - 1];
+      ctx.putImageData(previous, 0, 0);
+      updateUndoRedoUI();
+      playPaperRustle();
+    }
+  }
+
+  function redo() {
+    if (state.redoStack.length > 0) {
+      const next = state.redoStack.pop();
+      state.undoStack.push(next);
+      ctx.putImageData(next, 0, 0);
+      updateUndoRedoUI();
+      playPaperRustle();
+    }
+  }
+
+  function updateUndoRedoUI() {
+    undoBtn.disabled = state.undoStack.length <= 1;
+    redoBtn.disabled = state.redoStack.length === 0;
+  }
+
+  undoBtn.addEventListener("click", undo);
+  redoBtn.addEventListener("click", redo);
+
+  // --- COLOR SWATCHES POPULATION ---
+  function renderSwatches(paletteKey) {
+    swatchesContainer.innerHTML = "";
+    const colors = PALETTES[paletteKey] || PALETTES.strawhat;
+    colors.forEach(function(col) {
+      const btn = document.createElement("button");
+      btn.className = "swatch-btn" + (col.toLowerCase() === state.color.toLowerCase() ? " active" : "");
+      btn.style.backgroundColor = col;
+      btn.type = "button";
+      btn.addEventListener("click", function() {
+        setColor(col);
+        playScratchSound(0.03, 1800);
+      });
+      swatchesContainer.appendChild(btn);
+    });
+  }
+
+  function setColor(col) {
+    state.color = col;
+    customColorInput.value = col;
+    customHexDisplay.textContent = col.toUpperCase();
+    nibPreviewCircle.style.backgroundColor = col;
+    // update swatches active states
+    document.querySelectorAll(".swatch-btn").forEach(function(s) {
+      s.classList.toggle("active", s.style.backgroundColor === col || rgbToHex(s.style.backgroundColor) === col.toLowerCase());
+    });
+    // if eraser was active, switch back to fountain
+    if (state.brush === "eraser") {
+      setBrush("fountain");
+    }
+  }
+
+  function rgbToHex(rgb) {
+    if (!rgb || rgb.startsWith("#")) return rgb;
+    const m = rgb.match(/\d+/g);
+    if (!m) return rgb;
+    return "#" + ((1 << 24) + (+m[0] << 16) + (+m[1] << 8) + +m[2]).toString(16).slice(1);
+  }
+
+  customColorInput.addEventListener("input", function(e) {
+    setColor(e.target.value);
+  });
+
+  document.querySelectorAll(".palette-pill").forEach(function(pill) {
+    pill.addEventListener("click", function() {
+      document.querySelectorAll(".palette-pill").forEach(function(p) { p.classList.remove("active"); });
+      pill.classList.add("active");
+      renderSwatches(pill.dataset.palette);
+      playPaperRustle();
+    });
+  });
+
+  // --- BRUSH SELECTION ---
+  function setBrush(bName) {
+    state.brush = bName;
+    state.activeStamp = null;
+    stampBtns.forEach(function(s) { s.classList.remove("active"); });
+    brushCards.forEach(function(b) {
+      b.classList.toggle("active", b.dataset.brush === bName);
+    });
+    const labels = {
+      fountain: "Fountain Pen",
+      calligraphy: "Calligraphy Nib",
+      pencil: "Pencil Sketch",
+      marker: "Marker Pen",
+      splatter: "Ink Splatter",
+      eraser: "Rubber Eraser"
+    };
+    activeBrushLabel.textContent = labels[bName] || bName;
+    playScratchSound(0.04, 1600);
+  }
+
+  brushCards.forEach(function(card) {
+    card.addEventListener("click", function() {
+      setBrush(card.dataset.brush);
+    });
+  });
+
+  // --- NIB SIZE & OPACITY CONTROLS ---
+  function updateNibPreview() {
+    brushSizeDisplay.textContent = state.size + " px";
+    brushOpacityDisplay.textContent = Math.round(state.opacity * 100) + "%";
+    nibPreviewCircle.style.width = Math.max(state.size, 3) + "px";
+    nibPreviewCircle.style.height = Math.max(state.size, 3) + "px";
+    nibPreviewCircle.style.opacity = state.opacity;
+  }
+
+  brushSizeSlider.addEventListener("input", function(e) {
+    state.size = parseInt(e.target.value, 10);
+    updateNibPreview();
+  });
+
+  brushOpacitySlider.addEventListener("input", function(e) {
+    state.opacity = parseInt(e.target.value, 10) / 100;
+    updateNibPreview();
+  });
+
+  // --- STAMP SELECTION ---
+  stampBtns.forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      if (state.activeStamp === btn.dataset.stamp) {
+        state.activeStamp = null;
+        btn.classList.remove("active");
+      } else {
+        stampBtns.forEach(function(b) { b.classList.remove("active"); });
+        btn.classList.add("active");
+        state.activeStamp = btn.dataset.stamp;
+        canvasStats.textContent = "Stamp mode active · Click canvas to stamp " + btn.dataset.stamp + "!";
+      }
+      playScratchSound(0.04, 2000);
+    });
+  });
+
+  // --- PAPER PATTERNS ---
+  patternBtns.forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      patternBtns.forEach(function(b) { b.classList.remove("active"); });
+      btn.classList.add("active");
+      const pattern = btn.dataset.pattern;
+      canvasCard.className = "canvas-card pattern-" + pattern;
+      playPaperRustle();
+    });
+  });
+
+  // --- DRAWING ENGINE WITH MULTIPLE BRUSHES ---
+  let lastX = 0, lastY = 0;
+  let points = [];
+
+  function getCanvasCoords(e) {
+    const rect = canvas.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return {
+      x: clientX - rect.left,
+      y: clientY - rect.top
+    };
+  }
+
+  function startDrawing(e) {
+    const coords = getCanvasCoords(e);
+
+    // If stamp is active, place stamp and stop
+    if (state.activeStamp) {
+      drawStamp(state.activeStamp, coords.x, coords.y);
+      saveState();
+      playScratchSound(0.08, 1200);
+      return;
+    }
+
+    state.isDrawing = true;
+    lastX = coords.x;
+    lastY = coords.y;
+    points = [coords];
+
+    drawDot(coords.x, coords.y);
+    playScratchSound(0.04, 1500);
+  }
+
+  function drawDot(x, y) {
+    ctx.save();
+    ctx.globalAlpha = state.opacity;
+    if (state.brush === "eraser") {
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.beginPath();
+      ctx.arc(x, y, state.size * 2, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      ctx.fillStyle = state.color;
+      ctx.beginPath();
+      ctx.arc(x, y, state.size / 2, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.restore();
+  }
+
+  function continueDrawing(e) {
+    if (!state.isDrawing) return;
+    e.preventDefault();
+    const coords = getCanvasCoords(e);
+    points.push(coords);
+
+    ctx.save();
+    ctx.globalAlpha = state.opacity;
+
+    if (state.brush === "eraser") {
+      ctx.globalCompositeOperation = "destination-out";
+      ctx.lineWidth = state.size * 3;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(coords.x, coords.y);
+      ctx.stroke();
+    } 
+    else if (state.brush === "fountain") {
+      // Fountain Pen: Quadratic smooth curve with organic line width
+      ctx.strokeStyle = state.color;
+      ctx.lineWidth = state.size;
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      if (points.length >= 3) {
+        const xc = (points[points.length - 2].x + points[points.length - 1].x) / 2;
+        const yc = (points[points.length - 2].y + points[points.length - 1].y) / 2;
+        ctx.beginPath();
+        ctx.moveTo(points[points.length - 3].x, points[points.length - 3].y);
+        ctx.quadraticCurveTo(points[points.length - 2].x, points[points.length - 2].y, xc, yc);
+        ctx.stroke();
+      } else {
+        ctx.beginPath();
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(coords.x, coords.y);
+        ctx.stroke();
+      }
+    } 
+    else if (state.brush === "calligraphy") {
+      // Calligraphy: Angled chisel ribbon stroke
+      ctx.fillStyle = state.color;
+      const angle = Math.PI / 4; // 45 degree slant
+      const len = state.size * 2.5;
+      const dx = Math.cos(angle) * len;
+      const dy = Math.sin(angle) * len;
+      ctx.beginPath();
+      ctx.moveTo(lastX - dx, lastY - dy);
+      ctx.lineTo(lastX + dx, lastY + dy);
+      ctx.lineTo(coords.x + dx, coords.y + dy);
+      ctx.lineTo(coords.x - dx, coords.y - dy);
+      ctx.closePath();
+      ctx.fill();
+    } 
+    else if (state.brush === "pencil") {
+      // Pencil: Stochastic graphite texture
+      ctx.strokeStyle = state.color;
+      ctx.lineWidth = state.size;
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(coords.x, coords.y);
+      ctx.stroke();
+
+      // Sprinkle light jitter dots
+      ctx.fillStyle = state.color;
+      for (let i = 0; i < 4; i++) {
+        const jx = coords.x + (Math.random() * state.size * 1.5 - state.size * 0.75);
+        const jy = coords.y + (Math.random() * state.size * 1.5 - state.size * 0.75);
+        ctx.fillRect(jx, jy, 1.2, 1.2);
+      }
+    } 
+    else if (state.brush === "marker") {
+      // Marker: Translucent wide stroke
+      ctx.strokeStyle = state.color;
+      ctx.globalAlpha = Math.min(state.opacity * 0.45, 0.6);
+      ctx.lineWidth = state.size * 3;
+      ctx.lineCap = "square";
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(coords.x, coords.y);
+      ctx.stroke();
+    } 
+    else if (state.brush === "splatter") {
+      // Splatter: Ink droplets sprayed across stroke path
+      ctx.fillStyle = state.color;
+      const droplets = 3 + Math.floor(state.size / 2);
+      for (let i = 0; i < droplets; i++) {
+        const radius = Math.random() * (state.size * 4);
+        const ang = Math.random() * Math.PI * 2;
+        const dropX = coords.x + Math.cos(ang) * radius;
+        const dropY = coords.y + Math.sin(ang) * radius;
+        const dropSize = 1 + Math.random() * (state.size * 0.6);
+        ctx.beginPath();
+        ctx.arc(dropX, dropY, dropSize, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    ctx.restore();
+
+    lastX = coords.x;
+    lastY = coords.y;
+
+    if (Math.random() > 0.75) {
+      playScratchSound(0.02, 1600 + Math.random() * 400);
+    }
+  }
+
+  function stopDrawing() {
+    if (state.isDrawing) {
+      state.isDrawing = false;
+      points = [];
+      saveState();
+    }
+  }
+
+  canvas.addEventListener("mousedown", startDrawing);
+  canvas.addEventListener("mousemove", continueDrawing);
+  window.addEventListener("mouseup", stopDrawing);
+
+  canvas.addEventListener("touchstart", startDrawing, { passive: false });
+  canvas.addEventListener("touchmove", continueDrawing, { passive: false });
+  window.addEventListener("touchend", stopDrawing);
+
+  // --- STAMP RENDERER ---
+  function drawStamp(type, x, y) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.strokeStyle = state.color;
+    ctx.fillStyle = state.color;
+    ctx.lineWidth = 2.4;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+
+    if (type === "hat") {
+      // Straw hat stamp
+      ctx.beginPath();
+      ctx.ellipse(0, 10, 42, 14, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(0, 7, 22, Math.PI, 0, false);
+      ctx.stroke();
+      ctx.strokeStyle = "#dc2626"; // red band
+      ctx.beginPath();
+      ctx.arc(0, 9, 22, Math.PI * 0.95, Math.PI * 0.05, true);
+      ctx.stroke();
+    } 
+    else if (type === "skull") {
+      // Jolly Roger skull stamp
+      ctx.beginPath();
+      ctx.arc(0, -6, 18, 0, Math.PI * 2);
+      ctx.stroke();
+      // Eyes
+      ctx.beginPath();
+      ctx.arc(-7, -8, 4, 0, Math.PI * 2);
+      ctx.arc(7, -8, 4, 0, Math.PI * 2);
+      ctx.fill();
+      // Teeth
+      ctx.strokeRect(-8, 6, 16, 8);
+      ctx.beginPath();
+      ctx.moveTo(-3, 6); ctx.lineTo(-3, 14);
+      ctx.moveTo(3, 6); ctx.lineTo(3, 14);
+      ctx.stroke();
+    } 
+    else if (type === "anchor") {
+      // Marine anchor
+      ctx.beginPath();
+      ctx.arc(0, -16, 6, 0, Math.PI * 2);
+      ctx.moveTo(0, -10); ctx.lineTo(0, 20);
+      ctx.moveTo(-14, -4); ctx.lineTo(14, -4);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(0, 6, 18, 0.2 * Math.PI, 0.8 * Math.PI, false);
+      ctx.stroke();
+    } 
+    else if (type === "tea") {
+      // Coffee/tea mug
+      ctx.beginPath();
+      ctx.roundRect(-14, -10, 28, 26, [2, 2, 10, 10]);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(14, 2, 7, -Math.PI / 2, Math.PI / 2, false);
+      ctx.stroke();
+      // Steam
+      ctx.beginPath();
+      ctx.moveTo(-6, -16); ctx.quadraticCurveTo(-10, -22, -6, -26);
+      ctx.moveTo(6, -16); ctx.quadraticCurveTo(2, -22, 6, -26);
+      ctx.stroke();
+    } 
+    else if (type === "star") {
+      // Sparkle star
+      ctx.beginPath();
+      for (let i = 0; i < 5; i++) {
+        ctx.lineTo(Math.cos((18 + i * 72) * Math.PI / 180) * 20, -Math.sin((18 + i * 72) * Math.PI / 180) * 20);
+        ctx.lineTo(Math.cos((54 + i * 72) * Math.PI / 180) * 8, -Math.sin((54 + i * 72) * Math.PI / 180) * 8);
+      }
+      ctx.closePath();
+      ctx.stroke();
+    } 
+    else if (type === "heart") {
+      // Heart
+      ctx.beginPath();
+      ctx.moveTo(0, 16);
+      ctx.bezierCurveTo(-22, -2, -18, -18, 0, -8);
+      ctx.bezierCurveTo(18, -18, 22, -2, 0, 16);
+      ctx.fill();
+    }
+    else {
+      // Default emoji stamp fallback
+      ctx.font = "32px serif";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      const emojis = { flame: "🔥", meat: "🍖" };
+      ctx.fillText(emojis[type] || "★", 0, 0);
+    }
+
+    ctx.restore();
+  }
+
+  // --- CLEAR CANVAS ---
+  clearBtn.addEventListener("click", function() {
+    if (confirm("Wipe the sketchbook page clean?")) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      saveState();
+      playPaperRustle();
+      showToast("Canvas wiped clean 🧹");
+    }
+  });
+
+  // --- DOWNLOAD ARTWORK ---
+  downloadBtn.addEventListener("click", function() {
+    // Render on background parchment color
+    const exportCanvas = document.createElement("canvas");
+    exportCanvas.width = canvas.width;
+    exportCanvas.height = canvas.height;
+    const expCtx = exportCanvas.getContext("2d");
+    
+    // Fill paper background
+    expCtx.fillStyle = "#ffffff";
+    expCtx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
+    
+    // Draw sketch layer
+    expCtx.drawImage(canvas, 0, 0);
+
+    const link = document.createElement("a");
+    link.download = "sketchbook-" + Date.now() + ".png";
+    link.href = exportCanvas.toDataURL("image/png");
+    link.click();
+
+    playPaperRustle();
+    showToast("Artwork downloaded successfully! 💾");
+  });
+
+  // --- SOUND TOGGLE ---
+  soundToggle.addEventListener("click", function() {
+    soundEnabled = !soundEnabled;
+    soundToggle.querySelector("span").textContent = soundEnabled ? "🔊 Sound" : "🔇 Muted";
+    if (soundEnabled) {
+      getAudioContext();
+      playScratchSound(0.04, 1800);
+      showToast("Sound effects enabled 🔊");
+    } else {
+      showToast("Sound muted 🔇");
+    }
+  });
+
+  // --- KEYBOARD SHORTCUTS ---
+  window.addEventListener("keydown", function(e) {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z") {
+      e.preventDefault();
+      if (e.shiftKey) redo(); else undo();
+    } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "y") {
+      e.preventDefault();
+      redo();
+    } else if (e.key.toLowerCase() === "e" && !e.ctrlKey) {
+      setBrush("eraser");
+    } else if (e.key.toLowerCase() === "b" && !e.ctrlKey) {
+      setBrush("fountain");
+    }
+  });
+
+  // --- TOAST NOTIFICATIONS ---
+  let toastTimer = null;
+  function showToast(msg) {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() {
+      toast.classList.remove("show");
+    }, 2400);
+  }
+
+  // --- INITIALIZATION ---
+  renderSwatches("strawhat");
+  updateNibPreview();
+  setTimeout(resizeCanvas, 50);
+
+})();
+</script>
+</body>
+</html>
