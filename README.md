@@ -37,22 +37,12 @@ A distinctive, hand-crafted developer & designer portfolio built with tactile in
    - Stamp button to stamp Luffy's straw hat onto the page.
    - Save button (`.png` download) and wipe clear button.
 
-5. **Dedicated Digital Sketchbook Studio (`doodle.html`)**:
-   - A full-screen dedicated drawing app linked via the **"sketchbook ↗"** navbar link and home page button.
-   - **Multiple Custom Brushes**:
-     - ✒️ **Fountain Pen** (smooth quadratic Bézier curves)
-     - 🖌️ **Calligraphy Nib** (45° slanted chisel ribbons)
-     - ✏️ **Pencil Sketch** (graphite texture with stochastic jitter)
-     - 🖍️ **Marker Pen** (wide, semi-transparent highlighter)
-     - 🎨 **Ink Splatter** (manga-style spray droplets)
-     - 🧽 **Rubber Eraser**
-   - **Custom Color Combinations & Palettes**:
-     - Curated themes: *Straw Hat*, *Classic Ink*, *Marine*, and *Wano Forest*.
-     - Interactive **Custom Color Picker** with live hex display.
-     - Sliders for Nib Thickness (1px - 50px) & Opacity with dynamic preview.
-   - **One Piece Stamps & Seals**:
-     - Stamp Straw Hat 👒, Jolly Roger ☠️, Marine Anchor ⚓, Coffee Cup ☕, Stars ✨, Hearts 💛, Flames 🔥, or Meat 🍖 anywhere on the sheet.
-   - **Studio Utilities**: Full Undo/Redo history (`Ctrl+Z`, `Ctrl+Y`), 4 paper patterns (Grid, Lined, Dots, Plain), and 1-click PNG image download.
+5. **Dedicated Digital Sketchbook Studio & 3D Paper Page Fold**:
+   - The main home page is streamlined without the embedded canvas or navbar clutter.
+   - **Floating Left Bookmark Ribbon**: A hand-drawn paper bookmark tab pinned to the left edge with continuous paper flutter and a scribbling feather quill doodle animation (`ribbonFloat` & `quillScribble`).
+   - **3D Paper Turn Page Transition**: Clicking the left ribbon physically folds the current page in 3D perspective along its spine with real-time paper rustle audio, turning over into `doodle.html`!
+   - Returning from `doodle.html` via **`← Portfolio`** smoothly flips the page back.
+   - **Studio Capabilities**: 6 brush types (Fountain, Calligraphy, Pencil, Marker, Splatter, Eraser), custom color wheel & palettes, One Piece stamps (Straw Hat 👒, Skull ☠️, Anchor ⚓, etc.), Undo/Redo (`Ctrl+Z`, `Ctrl+Y`), 4 paper textures, and high-res image download.
 
 6. **Handwritten Postcard & Airmail Contact Form**:
    - Vintage postcard layout with airmail border and postal stamp.

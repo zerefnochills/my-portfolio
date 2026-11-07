@@ -1159,62 +1159,161 @@ h2.section-title {
   height: 10px;
 }
 
-/* DOODLE PAD / GUESTBOOK */
-.doodle-section {
-  border: 3px dashed var(--ink);
-  border-radius: 24px;
-  background: var(--paper-card);
-  padding: 28px;
-  margin: 40px 0 20px;
-  position: relative;
-}
-.doodle-canvas-wrap {
-  position: relative;
-  border: 2px solid var(--ink);
-  border-radius: 16px;
-  background: #ffffff;
-  overflow: hidden;
-  box-shadow: inset 0 2px 6px rgba(0,0,0,0.06);
-}
-[data-theme="blueprint"] .doodle-canvas-wrap {
-  background: #0f172a;
-}
-#doodleCanvas {
-  display: block;
-  width: 100%;
-  height: 260px;
-  touch-action: none;
-  cursor: crosshair;
-}
-.doodle-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 14px;
-}
-.doodle-colors {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-.doodle-swatch {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 2px solid var(--ink);
+/* FLOATING LEFT SKETCHBOOK RIBBON BUTTON */
+.sketchbook-ribbon-btn {
+  position: fixed;
+  left: 0;
+  top: 48%;
+  transform: translateY(-50%);
+  z-index: 85;
+  background: var(--paper-sticky);
+  border: 2.5px solid var(--ink);
+  border-left: none;
+  border-radius: 0 16px 16px 0/0 18px 18px 0;
+  padding: 10px 14px 10px 10px;
   cursor: pointer;
-  transition: transform 0.2s ease;
-}
-.doodle-swatch.active {
-  transform: scale(1.25);
-  box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--ink);
-}
-.doodle-actions {
+  box-shadow: 4px 6px 0 var(--shadow);
   display: flex;
+  align-items: center;
   gap: 8px;
-  flex-wrap: wrap;
+  user-select: none;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease, background-color 0.25s ease;
+  animation: ribbonFloat 3.2s ease-in-out infinite;
+}
+
+@keyframes ribbonFloat {
+  0%, 100% {
+    transform: translateY(-50%) translateX(0) rotate(0deg);
+  }
+  35% {
+    transform: translateY(-53%) translateX(4px) rotate(1.5deg);
+  }
+  70% {
+    transform: translateY(-47%) translateX(2px) rotate(-1.5deg);
+  }
+}
+
+.sketchbook-ribbon-btn:hover {
+  transform: translateY(-50%) translateX(8px) rotate(1deg) scale(1.05);
+  box-shadow: 6px 10px 0 var(--shadow);
+  background: var(--paper);
+}
+
+.ribbon-crease {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 80%;
+  border-right: 2px dashed var(--ink-soft);
+  opacity: 0.7;
+}
+
+.ribbon-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.ribbon-icon-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ribbon-quill {
+  animation: quillScribble 2.4s ease-in-out infinite;
+  transform-origin: bottom left;
+}
+
+@keyframes quillScribble {
+  0%, 100% {
+    transform: rotate(0deg) translate(0, 0);
+  }
+  25% {
+    transform: rotate(-10deg) translate(1px, -2px);
+  }
+  50% {
+    transform: rotate(5deg) translate(-1px, 1px);
+  }
+  75% {
+    transform: rotate(-6deg) translate(2px, -1px);
+  }
+}
+
+.ribbon-text {
+  font-family: var(--badge);
+  font-size: 1.35rem;
+  font-weight: bold;
+  color: var(--ink);
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.ribbon-fold-hint {
+  font-family: var(--hand);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  letter-spacing: 0.05em;
+  opacity: 0.85;
+}
+
+/* 3D Paper Page Fold Transition Overlay */
+.paper-page-flipper {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  perspective: 2000px;
+  display: none;
+}
+.paper-page-flipper.active {
+  display: block;
+}
+.paper-page-leaf {
+  width: 100%;
+  height: 100%;
+  background: var(--paper);
+  background-image: 
+    radial-gradient(ellipse at 50% 0, rgba(255, 255, 255, 0.5) 0, transparent 65%),
+    linear-gradient(to right, rgba(0, 0, 0, 0.25) 0%, transparent 15%, transparent 85%, rgba(0, 0, 0, 0.35) 100%);
+  transform-origin: left center;
+  box-shadow: -25px 0 60px rgba(0, 0, 0, 0.4);
+  animation: leafTurnPage 0.65s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards;
+}
+@keyframes leafTurnPage {
+  0% {
+    transform: rotateY(0deg) skewY(0deg);
+    opacity: 1;
+  }
+  40% {
+    transform: rotateY(-40deg) skewY(-2deg) scaleY(0.98);
+    opacity: 0.95;
+  }
+  100% {
+    transform: rotateY(-90deg) skewY(-6deg) scaleY(0.92);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .sketchbook-ribbon-btn {
+    top: auto;
+    bottom: 80px;
+    padding: 8px 10px 8px 8px;
+  }
+  .ribbon-text {
+    font-size: 1.15rem;
+  }
+  .ribbon-fold-hint {
+    display: none;
+  }
 }
 
 /* POSTCARD CONTACT SECTION */
@@ -1479,6 +1578,28 @@ footer {
 <!-- Interactive Coffee Cup Stain -->
 <div class="coffee-stain" id="coffeeStain" title="Click for fresh tea drops!" aria-label="Interactive coffee cup stain"></div>
 
+<!-- FLOATING LEFT SKETCHBOOK RIBBON BUTTON -->
+<button class="sketchbook-ribbon-btn" id="sketchbookRibbonBtn" type="button" aria-label="Open Digital Sketchbook Studio" title="Open Digital Sketchbook (Turn Page)">
+  <div class="ribbon-crease" aria-hidden="true"></div>
+  <div class="ribbon-content">
+    <div class="ribbon-icon-wrap">
+      <svg class="doodle ribbon-quill" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
+        <path d="M26 4 C24 10 16 16 6 26" stroke-width="2.4"/>
+        <path d="M26 4 C18 4 12 12 10 20" stroke-width="2"/>
+        <path d="M6 26 L10 27 L11 23 Z" fill="var(--ink)"/>
+        <circle cx="25" cy="5" r="1.5" fill="var(--accent)"/>
+      </svg>
+    </div>
+    <span class="ribbon-text">Doodle Studio</span>
+    <span class="ribbon-fold-hint">turn page ⮞</span>
+  </div>
+</button>
+
+<!-- 3D PAPER PAGE FLIPPER OVERLAY -->
+<div class="paper-page-flipper" id="paperPageFlipper" aria-hidden="true">
+  <div class="paper-page-leaf"></div>
+</div>
+
 <!-- LOADER -->
 <div id="loader" role="status" aria-label="Loading sketchpad portfolio">
   <div>
@@ -1514,7 +1635,6 @@ footer {
         <li><a class="nav-link" href="#work">work</a></li>
         <li><a class="nav-link" href="#journey">journey</a></li>
         <li><a class="nav-link" href="#skills">skills</a></li>
-        <li><a class="nav-link" href="doodle.html" title="Open Full Screen Sketchbook Studio">sketchbook ↗</a></li>
         <li><a class="nav-link" href="#contact">contact</a></li>
       </ul>
       <div class="controls-bar" style="position:relative">
@@ -1850,47 +1970,6 @@ footer {
           <span class="skill-item">Jest &amp; Vitest<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 4C30 9 65 1 98 6"/></svg></span>
           <span class="skill-item">Docker basics<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 6C25 1 60 9 98 3"/></svg></span>
           <span class="skill-item">Ink &amp; Paper Sketching<svg class="doodle draw" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M2 4C30 9 65 1 98 6"/></svg></span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- INTERACTIVE DOODLE CANVAS / GUESTBOOK -->
-  <section id="doodle">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:8px">
-      <div>
-        <h2 class="section-title write">guest doodle pad</h2>
-        <p class="section-subtitle ink" style="margin-bottom:0">Leave an ink scribble, sign your initials, or launch the studio for full drawing tools.</p>
-      </div>
-      <a class="hero-btn primary ink" href="doodle.html" style="margin-bottom:12px">
-        <span>🎨 Open Full Sketchbook Studio ↗</span>
-      </a>
-    </div>
-    
-    <div class="doodle-section ink">
-      <div class="doodle-canvas-wrap">
-        <canvas id="doodleCanvas" width="900" height="260"></canvas>
-      </div>
-
-      <div class="doodle-toolbar">
-        <div class="doodle-colors">
-          <span style="font-size:1.15rem;margin-right:4px">Ink:</span>
-          <button class="doodle-swatch active" data-color="#2d2a9c" style="background:#2d2a9c" title="Royal Blue Ink" type="button"></button>
-          <button class="doodle-swatch" data-color="#b91c1c" style="background:#b91c1c" title="Crimson Stamp Ink" type="button"></button>
-          <button class="doodle-swatch" data-color="#1b4d3e" style="background:#1b4d3e" title="Forest Green Ink" type="button"></button>
-          <button class="doodle-swatch" data-color="#4a2e18" style="background:#4a2e18" title="Sepia Walnut Ink" type="button"></button>
-        </div>
-
-        <div class="doodle-actions">
-          <button class="control-btn" id="doodleStampHat" type="button" title="Stamp a straw hat on canvas">
-            <span>👒 Stamp Hat</span>
-          </button>
-          <button class="control-btn" id="doodleSaveBtn" type="button" title="Download your drawing">
-            <span>💾 Save Doodle</span>
-          </button>
-          <button class="control-btn" id="doodleClearBtn" type="button" title="Wipe canvas clear">
-            <span>🧹 Clear Pad</span>
-          </button>
         </div>
       </div>
     </div>
@@ -2518,127 +2597,31 @@ const PORTFOLIO_CONFIG = {
     }
   });
 
-  // 8. Interactive Guest Doodle Canvas
-  const canvas = document.getElementById("doodleCanvas");
-  if (canvas) {
-    const ctx = canvas.getContext("2d");
-    let isDrawing = false;
-    let currentColor = "#2d2a9c";
-    let lastX = 0, lastY = 0;
+  // 8. Left Ribbon Sketchbook Button & 3D Paper Page Fold Transition
+  const ribbonBtn = document.getElementById("sketchbookRibbonBtn");
+  const pageFlipper = document.getElementById("paperPageFlipper");
 
-    function resizeCanvas() {
-      const rect = canvas.getBoundingClientRect();
-      if (canvas.width !== rect.width) {
-        const temp = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        canvas.width = rect.width;
-        canvas.height = 260;
-        ctx.lineCap = "round";
-        ctx.lineJoin = "round";
-        ctx.lineWidth = 2.8;
+  if (ribbonBtn) {
+    ribbonBtn.addEventListener("click", function() {
+      ribbonBtn.disabled = true;
+      playPaperRustle();
+
+      if (pageFlipper) {
+        pageFlipper.classList.add("active");
       }
-    }
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
 
-    function getCoords(e) {
-      const rect = canvas.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-      return {
-        x: (clientX - rect.left) * (canvas.width / rect.width),
-        y: (clientY - rect.top) * (canvas.height / rect.height)
-      };
-    }
+      const mainEl = document.querySelector("main");
+      if (mainEl) {
+        mainEl.style.transition = "transform 0.65s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.65s ease";
+        mainEl.style.transformOrigin = "left center";
+        mainEl.style.transform = "rotateY(-85deg) scale(0.92)";
+        mainEl.style.opacity = "0.1";
+      }
 
-    function startDraw(e) {
-      isDrawing = true;
-      const coords = getCoords(e);
-      lastX = coords.x;
-      lastY = coords.y;
-      playPenScratch();
-    }
-
-    function moveDraw(e) {
-      if (!isDrawing) return;
-      e.preventDefault();
-      const coords = getCoords(e);
-      ctx.strokeStyle = currentColor;
-      ctx.lineWidth = 2.8;
-      ctx.beginPath();
-      ctx.moveTo(lastX, lastY);
-      ctx.lineTo(coords.x, coords.y);
-      ctx.stroke();
-      lastX = coords.x;
-      lastY = coords.y;
-    }
-
-    function stopDraw() {
-      isDrawing = false;
-    }
-
-    canvas.addEventListener("mousedown", startDraw);
-    canvas.addEventListener("mousemove", moveDraw);
-    window.addEventListener("mouseup", stopDraw);
-
-    canvas.addEventListener("touchstart", startDraw, { passive: false });
-    canvas.addEventListener("touchmove", moveDraw, { passive: false });
-    window.addEventListener("touchend", stopDraw);
-
-    // Color Swatches
-    document.querySelectorAll(".doodle-swatch").forEach(function(swatch) {
-      swatch.addEventListener("click", function() {
-        document.querySelectorAll(".doodle-swatch").forEach(function(s) { s.classList.remove("active"); });
-        swatch.classList.add("active");
-        currentColor = swatch.dataset.color;
-        playPenScratch();
-      });
+      setTimeout(function() {
+        window.location.href = "doodle.html?from=fold";
+      }, 550);
     });
-
-    // Clear Canvas
-    const clearBtn = document.getElementById("doodleClearBtn");
-    if (clearBtn) {
-      clearBtn.addEventListener("click", function() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        playPaperRustle();
-      });
-    }
-
-    // Save Canvas
-    const saveBtn = document.getElementById("doodleSaveBtn");
-    if (saveBtn) {
-      saveBtn.addEventListener("click", function() {
-        const link = document.createElement("a");
-        link.download = "portfolio-doodle.png";
-        link.href = canvas.toDataURL("image/png");
-        link.click();
-        playPaperRustle();
-      });
-    }
-
-    // Stamp Hat on Canvas
-    const stampHatBtn = document.getElementById("doodleStampHat");
-    if (stampHatBtn) {
-      stampHatBtn.addEventListener("click", function() {
-        const cx = canvas.width / 2 + (Math.random() * 100 - 50);
-        const cy = canvas.height / 2 + (Math.random() * 60 - 30);
-        ctx.save();
-        ctx.translate(cx, cy);
-        ctx.strokeStyle = currentColor;
-        ctx.lineWidth = 2.5;
-        // Straw hat path
-        ctx.beginPath();
-        ctx.ellipse(0, 10, 45, 14, 0, 0, Math.PI * 2);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(0, 6, 22, Math.PI, 0, false);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(0, 8, 22, Math.PI * 0.95, Math.PI * 0.05, true);
-        ctx.stroke();
-        ctx.restore();
-        playPenScratch();
-      });
-    }
   }
 
   // 9. Interactive Coffee Drops
