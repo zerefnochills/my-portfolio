@@ -2464,6 +2464,472 @@ footer {
   100% { transform: translateY(-40px) scale(1.15); opacity: 0; }
 }
 
+
+/* =========================================================================
+   LEFT EDGE IRL RIBBON BUTTON & HOVER PREVIEW
+   ========================================================================= */
+.irl-ribbon-btn {
+  position: fixed;
+  left: 0;
+  top: calc(48% - 70px);
+  transform: translateY(-50%);
+  z-index: 86;
+  background: #facc15;
+  color: #1c1917;
+  border: 2.5px solid var(--ink);
+  border-left: none;
+  border-radius: 0 16px 16px 0/0 18px 18px 0;
+  padding: 8px 12px 8px 10px;
+  cursor: pointer;
+  box-shadow: 4px 6px 0 var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  user-select: none;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease, background-color 0.25s ease;
+  animation: irlRibbonFloat 3.4s ease-in-out infinite;
+}
+
+@keyframes irlRibbonFloat {
+  0%, 100% {
+    transform: translateY(-50%) translateX(0) rotate(0deg);
+  }
+  40% {
+    transform: translateY(-53%) translateX(3px) rotate(-1deg);
+  }
+  80% {
+    transform: translateY(-47%) translateX(2px) rotate(1deg);
+  }
+}
+
+.irl-ribbon-btn:hover {
+  transform: translateY(-50%) translateX(8px) rotate(-1deg) scale(1.05);
+  box-shadow: 6px 10px 0 var(--shadow);
+  background: #fde047;
+}
+
+/* Hover Preview Card attached to IRL Ribbon */
+.irl-hover-preview {
+  position: absolute;
+  left: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%) translateX(-8px) scale(0.95);
+  opacity: 0;
+  pointer-events: none;
+  background: var(--paper-card, #fffdf7);
+  border: 2.5px solid var(--ink);
+  border-radius: 10px;
+  padding: 12px 14px;
+  box-shadow: 4px 6px 0 var(--ink);
+  width: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 100;
+  text-align: left;
+}
+.irl-hover-preview::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 8px solid var(--ink);
+}
+.irl-ribbon-btn:hover .irl-hover-preview,
+.irl-ribbon-btn:focus-visible .irl-hover-preview {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%) translateX(0) scale(1);
+}
+.preview-badge {
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+}
+.preview-title {
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.2;
+}
+.preview-thumb-row {
+  display: flex;
+  gap: 6px;
+  margin: 4px 0 2px;
+}
+.preview-mini-thumb {
+  width: 38px;
+  height: 28px;
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  object-fit: cover;
+  background: var(--paper);
+}
+.preview-cta {
+  font-family: var(--font-hand, 'Patrick Hand', cursive);
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .irl-ribbon-btn {
+    padding: 7px 10px 7px 6px;
+    top: calc(48% - 58px);
+  }
+  .irl-hover-preview {
+    display: none;
+  }
+}
+
+/* =========================================================================
+   CENTERED IRL & INSIGHTS POPUP MODAL
+   ========================================================================= */
+.board-popup-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.board-popup-modal.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.board-popup-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+}
+.board-popup-card {
+  position: relative;
+  width: min(840px, 95vw);
+  max-height: 88vh;
+  background: var(--paper);
+  background-image: 
+    radial-gradient(var(--ink-soft) 0.6px, transparent 0.6px),
+    linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px);
+  background-size: 16px 16px;
+  border: 3.5px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 8px 12px 0 var(--ink);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.92) translateY(12px);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+}
+.board-popup-modal.open .board-popup-card {
+  transform: scale(1) translateY(0);
+}
+.board-popup-header {
+  padding: 18px 24px 14px;
+  border-bottom: 2.5px solid var(--ink);
+  background: var(--paper-card, #fffdf7);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  flex-shrink: 0;
+}
+.board-popup-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 22px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+/* =========================================================================
+   HALL OF FAME / ACHIEVEMENTS SECTION
+   ========================================================================= */
+.hall-of-fame-container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+.hof-header-wrap {
+  text-align: center;
+  margin-bottom: 28px;
+  position: relative;
+}
+.hof-meta-tag {
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.hof-title-row {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.hof-trophy-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #facc15;
+  border: 2.5px solid var(--ink);
+  box-shadow: 2.5px 2.5px 0 var(--ink);
+  font-size: 1.4rem;
+}
+.hof-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 20px 0 28px;
+}
+.hof-filter-btn {
+  background: var(--paper-card, #fff);
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: all 0.15s ease;
+}
+.hof-filter-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.hof-filter-btn.active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.hof-add-btn {
+  background: #facc15;
+  color: #1c1917;
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.hof-add-btn:hover {
+  background: #fde047;
+  transform: translate(-1px, -1px);
+}
+
+/* Achievement Grid & Cards */
+.hof-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+@media (max-width: 700px) {
+  .hof-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.hof-card {
+  position: relative;
+  background: var(--paper-card, #fffdf7);
+  border: 2.5px solid var(--ink);
+  border-radius: 8px;
+  padding: 22px 20px 18px;
+  box-shadow: 4px 5px 0 var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hof-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 6px 8px 0 var(--ink);
+}
+.hof-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.hof-icon-seal {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  background: #fef08a;
+  box-shadow: 2px 2px 0 var(--ink);
+  flex-shrink: 0;
+}
+.hof-card-badges {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.hof-badge {
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+.hof-badge.gold {
+  background: #fef08a;
+  color: #713f12;
+}
+.hof-badge.blue {
+  background: #bae6fd;
+  color: #0369a1;
+}
+.hof-badge.purple {
+  background: #f3e8ff;
+  color: #6b21a8;
+}
+.hof-badge.silver {
+  background: #e2e8f0;
+  color: #334155;
+}
+.hof-badge.red {
+  background: #fecdd3;
+  color: #9f1239;
+}
+.hof-card-title {
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.25;
+  margin: 0;
+}
+.hof-issuer-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+}
+.hof-card-desc {
+  font-family: var(--font-hand, 'Patrick Hand', cursive);
+  font-size: 1.15rem;
+  line-height: 1.35;
+  color: var(--ink);
+  margin: 0;
+  flex: 1;
+}
+.hof-tags-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.hof-tag {
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 0.72rem;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+  padding: 2px 6px;
+  color: var(--ink);
+}
+.hof-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px dashed rgba(0, 0, 0, 0.18);
+  padding-top: 10px;
+  margin-top: 4px;
+}
+.hof-link-btn {
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-bottom: 1.5px solid var(--ink);
+  transition: transform 0.15s ease;
+}
+.hof-link-btn:hover {
+  transform: translateX(3px);
+}
+.hof-delete-btn {
+  background: transparent;
+  border: none;
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+.hof-delete-btn:hover {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* Add Achievement Modal */
+.hof-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(3px);
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.hof-modal-card {
+  width: min(520px, 95vw);
+  background: var(--paper-modal, #fbf5cf);
+  border: 3px solid var(--ink);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 6px 6px 0 var(--ink);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
 </style>
 </head>
 <body>
@@ -2478,6 +2944,27 @@ footer {
 
 <!-- Interactive Coffee Cup Stain -->
 <div class="coffee-stain" id="coffeeStain" title="Click for fresh tea drops!" aria-label="Interactive coffee cup stain"></div>
+
+<!-- FLOATING LEFT IRL & INSIGHTS RIBBON BUTTON (ABOVE SKETCHBOOK) -->
+<button class="irl-ribbon-btn" id="irlRibbonBtn" type="button" aria-label="Open IRL & Personal Insights Board" title="Open IRL & Personal Insights Board">
+  <div class="ribbon-crease" aria-hidden="true"></div>
+  <div class="ribbon-content">
+    <div class="ribbon-icon-wrap">
+      <span style="font-size:1.15rem;line-height:1;">📌</span>
+      <span class="ribbon-text" style="font-family:var(--sans);font-weight:800;letter-spacing:0.02em;">IRL &bull; Insights</span>
+    </div>
+    <span class="ribbon-fold-hint" style="color:var(--ink-soft)">field notes &bull; pics ↗</span>
+  </div>
+  <!-- Hover popup preview teaser -->
+  <div class="irl-hover-preview" id="irlHoverPreview" aria-hidden="true">
+    <span class="preview-badge">FIELD ARCHIVE &bull; 2026</span>
+    <span class="preview-title">📸 Event Photos &amp; 💡 Insights</span>
+    <div class="preview-thumb-row" id="previewThumbRow">
+      <!-- Mini thumbs generated by JS -->
+    </div>
+    <span class="preview-cta">Press button to view &bull; Add posts ✦</span>
+  </div>
+</button>
 
 <!-- FLOATING LEFT SKETCHBOOK RIBBON BUTTON -->
 <button class="sketchbook-ribbon-btn" id="sketchbookRibbonBtn" type="button" aria-label="Open Digital Sketchbook Studio" title="Open Digital Sketchbook (Turn Page)">
@@ -2536,7 +3023,7 @@ footer {
         <li><a class="nav-link" href="#work">work</a></li>
         <li><a class="nav-link" href="#journey">journey</a></li>
         <li><a class="nav-link" href="#skills">skills</a></li>
-        <li><a class="nav-link" href="#irl" id="openIrlNavBtn">irl</a></li>
+        <li><a class="nav-link" href="#hall-of-fame">fame</a></li>
         <li><a class="nav-link" href="#contact">contact</a></li>
       </ul>
       <div class="controls-bar" style="position:relative">
@@ -2882,11 +3369,102 @@ footer {
     <path d="M2 8C50 0 100 14 150 7S250 1 300 8 400 14 450 7 550 1 598 8"/>
   </svg>
 
+  <!-- HALL OF FAME / ACHIEVEMENTS SECTION -->
+  <section class="hall-of-fame-container" id="hall-of-fame">
+    <div class="hof-header-wrap">
+      <div class="hof-meta-tag">05 / HALL OF FAME</div>
+      <div class="hof-title-row">
+        <div class="hof-trophy-badge" aria-hidden="true">🏆</div>
+        <h2 class="section-title write" style="margin:0;font-size:clamp(2.2rem,5vw,3.2rem);">hall of fame</h2>
+      </div>
+      <svg class="doodle draw" style="width:min(360px,80%);height:14px;display:block;margin:10px auto" viewBox="0 0 360 14" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M4 10C70 2 150 14 220 8S310 4 356 9"/>
+      </svg>
+      <p class="section-subtitle ink" style="text-align:center;max-width:680px;margin:0 auto">Trophies, hackathons won, milestones unlocked, and honors earned along the voyage.</p>
+      
+      <!-- Filter Bar & Add Button -->
+      <div class="hof-filter-bar">
+        <button class="hof-filter-btn active" data-hof-filter="all" type="button">All (<span id="hofCountAll">0</span>)</button>
+        <button class="hof-filter-btn" data-hof-filter="hackathon" type="button">🏆 Hackathons (<span id="hofCountHackathon">0</span>)</button>
+        <button class="hof-filter-btn" data-hof-filter="opensource" type="button">🎖 Open Source (<span id="hofCountOpenSource">0</span>)</button>
+        <button class="hof-filter-btn" data-hof-filter="award" type="button">📜 Awards &amp; UX (<span id="hofCountAward">0</span>)</button>
+        <button class="hof-filter-btn" data-hof-filter="milestone" type="button">⚡ Milestones (<span id="hofCountMilestone">0</span>)</button>
+        <button class="hof-add-btn" id="openAddHofBtn" type="button">+ Add Achievement</button>
+      </div>
+    </div>
+
+    <!-- Achievement Grid -->
+    <div class="hof-grid" id="hofGrid">
+      <!-- Populated dynamically from PORTFOLIO_CONFIG.achievements and user localStorage -->
+    </div>
+  </section>
+
+  <!-- ADD ACHIEVEMENT MODAL -->
+  <div class="hof-modal-overlay" id="hofModalOverlay" style="display:none;">
+    <div class="hof-modal-card">
+      <div class="pin-modal-header">
+        <h3>🏆 Add Achievement to Hall of Fame</h3>
+        <button type="button" class="pin-modal-close" id="closeHofModalBtn">✕</button>
+      </div>
+      <form id="hofForm" class="pin-form">
+        <div>
+          <label for="hofTitle">Achievement / Prize Title</label>
+          <input type="text" id="hofTitle" placeholder="e.g. 1st Place — National Innovation Hackathon" required>
+        </div>
+        <div class="form-row">
+          <div>
+            <label for="hofCategory">Category</label>
+            <select id="hofCategory" style="width:100%;padding:8px 12px;background:var(--paper);border:2px solid var(--ink);border-radius:4px;font-family:var(--sans);font-size:0.95rem;color:var(--ink);">
+              <option value="hackathon">🏆 Hackathon</option>
+              <option value="opensource">🎖 Open Source</option>
+              <option value="award">📜 Award &amp; Honors</option>
+              <option value="milestone">⚡ Milestone</option>
+            </select>
+          </div>
+          <div>
+            <label for="hofBadge">Badge Tag</label>
+            <input type="text" id="hofBadge" placeholder="e.g. 1ST PLACE / GOLD" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label for="hofIssuer">Issuer / Organization</label>
+            <input type="text" id="hofIssuer" placeholder="e.g. Global Tech Forum">
+          </div>
+          <div>
+            <label for="hofDate">Date / Year</label>
+            <input type="text" id="hofDate" placeholder="e.g. Feb 2026" required>
+          </div>
+        </div>
+        <div>
+          <label for="hofDesc">Description &amp; Highlights</label>
+          <textarea id="hofDesc" placeholder="Describe the achievement, what you built or solved, and the impact..." rows="3" required></textarea>
+        </div>
+        <div class="form-row">
+          <div>
+            <label for="hofTags">Tags (comma separated)</label>
+            <input type="text" id="hofTags" placeholder="e.g. React, Systems, CRDT">
+          </div>
+          <div>
+            <label for="hofLink">Link / Certificate URL (optional)</label>
+            <input type="url" id="hofLink" placeholder="https://...">
+          </div>
+        </div>
+        <button type="submit" class="pin-submit-btn">🏆 Induct into Hall of Fame</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- DIVIDER -->
+  <svg class="doodle draw" style="width:100%;height:14px;display:block;margin:32px 0" viewBox="0 0 600 14" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M2 8C50 0 100 14 150 7S250 1 300 8 400 14 450 7 550 1 598 8"/>
+  </svg>
+
   <!-- CONTACT / LET'S BUILD SECTION -->
   <section class="contact-container" id="contact">
     <div class="contact-kurian-wrap">
       <div class="contact-meta-header">
-        <div class="contact-meta-num">05 / CONTACT</div>
+        <div class="contact-meta-num">06 / CONTACT</div>
         <h2 class="contact-headline write">LET'S BUILD</h2>
         <p class="contact-sub-motto ink">INTERNSHIPS, COLLABORATIONS, AND MESSY WORKFLOWS WELCOME</p>
       </div>
@@ -2988,46 +3566,41 @@ footer {
     <p style="font-size:0.95rem;opacity:0.8">“Inherited Will, the Swell of the Age, and the Dreams of its People.” ✦</p>
   </footer>
 
-<!-- FLOATING EDGE TAB FOR IRL BOARD -->
-<button class="edge-irl-tab" id="edgeIrlTab" type="button" title="Open IRL & Personal Insights Board">
-  <span class="tab-pin">📌</span>
-  <span class="tab-label">IRL &bull; INSIGHTS</span>
-</button>
-
-<!-- IRL BOARD BACKDROP -->
-<div class="board-backdrop" id="boardBackdrop"></div>
-
-<!-- OFF-SCREEN IRL & INSIGHTS DRAWER -->
-<aside class="offscreen-board-drawer" id="boardDrawer" role="dialog" aria-modal="true" aria-label="IRL & Personal Insights Board">
-  <!-- Header -->
-  <div class="board-drawer-header">
-    <div>
-      <div class="board-meta-tag">FIELD ARCHIVE &middot; 2026</div>
-      <h2 class="board-title">📌 IRL &amp; Insights</h2>
-      <p class="board-subtitle">Events, real-life moments, and unfiltered thoughts in my own words.</p>
+<!-- CENTERED IRL & INSIGHTS POPUP MODAL -->
+<div class="board-popup-modal" id="boardPopupModal" role="dialog" aria-modal="true" aria-label="IRL & Personal Insights Board">
+  <div class="board-popup-backdrop" id="boardPopupBackdrop"></div>
+  
+  <div class="board-popup-card">
+    <!-- Header -->
+    <div class="board-popup-header">
+      <div>
+        <div class="board-meta-tag">FIELD ARCHIVE &middot; 2026</div>
+        <h2 class="board-title">📌 IRL &amp; Insights</h2>
+        <p class="board-subtitle">Events, real-life moments, and unfiltered thoughts in my own words.</p>
+      </div>
+      <div class="board-header-actions">
+        <button class="board-action-btn primary" id="openNewPinBtn" type="button" title="Add a new memory or insight">
+          <span>+ Add Post</span>
+        </button>
+        <button class="board-action-btn close" id="closeBoardPopupBtn" type="button" aria-label="Close board" title="Close (Esc)">
+          <span>✕</span>
+        </button>
+      </div>
     </div>
-    <div class="board-header-actions">
-      <button class="board-action-btn primary" id="openNewPinBtn" type="button" title="Add a new memory or insight">
-        <span>+ Add Post</span>
-      </button>
-      <button class="board-action-btn close" id="closeBoardBtn" type="button" aria-label="Close board" title="Close (Esc)">
-        <span>✕</span>
-      </button>
+
+    <!-- Filter Bar -->
+    <div class="board-filter-bar">
+      <button class="board-filter-btn active" data-filter="all" type="button">All (<span id="countAll">0</span>)</button>
+      <button class="board-filter-btn" data-filter="event" type="button">📸 Events (<span id="countEvents">0</span>)</button>
+      <button class="board-filter-btn" data-filter="insight" type="button">💡 Insights (<span id="countInsights">0</span>)</button>
+    </div>
+
+    <!-- Popup Pinboard Grid -->
+    <div class="board-popup-body" id="pinboardGrid">
+      <!-- Populated by JavaScript -->
     </div>
   </div>
-
-  <!-- Filter Bar -->
-  <div class="board-filter-bar">
-    <button class="board-filter-btn active" data-filter="all" type="button">All (<span id="countAll">0</span>)</button>
-    <button class="board-filter-btn" data-filter="event" type="button">📸 Events (<span id="countEvents">0</span>)</button>
-    <button class="board-filter-btn" data-filter="insight" type="button">💡 Insights (<span id="countInsights">0</span>)</button>
-  </div>
-
-  <!-- Pinboard Grid -->
-  <div class="pinboard-grid" id="pinboardGrid">
-    <!-- Populated by JavaScript -->
-  </div>
-</aside>
+</div>
 
 <!-- ADD PIN MODAL -->
 <div class="pin-modal-overlay" id="pinModalOverlay" style="display:none;">
@@ -3137,6 +3710,78 @@ const PORTFOLIO_CONFIG = {
     linkedin: "https://linkedin.com",
     resume: "#"
   },
+  achievements: [
+    {
+      id: "ach-default-1",
+      category: "hackathon",
+      icon: "🏆",
+      badge: "1ST PLACE",
+      badgeColor: "gold",
+      title: "Grand Champion — National Innovation Hackathon 2026",
+      issuer: "Ministry of Tech & Global Developer Forum",
+      date: "Feb 2026",
+      description: "Built an offline-first collaborative canvas with CRDT synchronization and real-time audio synthesis across 48 intense hours, competing against 150+ teams.",
+      tags: ["CRDT", "WebSockets", "First Prize"],
+      link: "#",
+      linkLabel: "View Project ↗"
+    },
+    {
+      id: "ach-default-2",
+      category: "opensource",
+      icon: "🎖",
+      badge: "TOP CONTRIBUTOR",
+      badgeColor: "blue",
+      title: "Core Contributor — Ink Engine & Vector Canvas",
+      issuer: "GitHub Open Source Collective",
+      date: "2025 – 2026",
+      description: "Engineered ultra-low-latency Bézier stroke smoothing algorithms and dynamic pressure curves adopted by 12,000+ developer sketch tools worldwide.",
+      tags: ["TypeScript", "Canvas API", "Algorithms"],
+      link: "https://github.com",
+      linkLabel: "GitHub Repo ↗"
+    },
+    {
+      id: "ach-default-3",
+      category: "award",
+      icon: "📜",
+      badge: "EXCELLENCE AWARD",
+      badgeColor: "purple",
+      title: "Best System Architecture & UI Craft Award",
+      issuer: "DevExpo & Design Guild 2025",
+      date: "Nov 2025",
+      description: "Recognized for exceptional tactile web craftsmanship, zero-dependency procedural sound engine, and hand-drawn responsive design aesthetic.",
+      tags: ["UI/UX", "Architecture", "Best in Class"],
+      link: "#",
+      linkLabel: "Read Case Study ↗"
+    },
+    {
+      id: "ach-default-4",
+      category: "hackathon",
+      icon: "⚡",
+      badge: "RUNNER UP",
+      badgeColor: "silver",
+      title: "2nd Prize — Global AI & Agentic Systems Sprint",
+      issuer: "Anthropic & DeepTech Accelerator",
+      date: "Aug 2025",
+      description: "Designed a multi-agent orchestration terminal that visualized automated reasoning graphs and codebase transformations on an interactive paper parchment.",
+      tags: ["Agents", "Automation", "2nd Place"],
+      link: "#",
+      linkLabel: "Demo Video ↗"
+    },
+    {
+      id: "ach-default-5",
+      category: "milestone",
+      icon: "🌟",
+      badge: "BOUNTY RECORD",
+      badgeColor: "red",
+      title: "3,000,000,000฿ Bounty Club Unlocked",
+      issuer: "Grand Line Engineering Fleet",
+      date: "2026",
+      description: "Achieved legendary status across 20+ shipped production apps, 99.99% uptime systems, and an unwavering commitment to craft and inherited will.",
+      tags: ["One Piece", "Full Stack", "Legendary"],
+      link: "#wantedPoster",
+      linkLabel: "Inspect Bounty ↗"
+    }
+  ],
   quotes: [
     { quote: "“As long as I live, there are infinite chances.”", by: "— Monkey D. Luffy" },
     { quote: "“When do you think people die? When they are forgotten!”", by: "— Dr. Hiluluk" },
@@ -3807,14 +4452,14 @@ const PORTFOLIO_CONFIG = {
     } catch(e) {}
   }
 
-  // 10c. Off-Screen IRL & Personal Insights Board Engine
-  const boardDrawer = document.getElementById("boardDrawer");
-  const boardBackdrop = document.getElementById("boardBackdrop");
-  const edgeIrlTab = document.getElementById("edgeIrlTab");
-  const openIrlNavBtn = document.getElementById("openIrlNavBtn");
+  // 10c. IRL & Personal Insights Popup Engine
+  const boardPopupModal = document.getElementById("boardPopupModal");
+  const boardPopupBackdrop = document.getElementById("boardPopupBackdrop");
+  const irlRibbonBtn = document.getElementById("irlRibbonBtn");
   const contactIrlNoteBtn = document.getElementById("contactIrlNoteBtn");
-  const closeBoardBtn = document.getElementById("closeBoardBtn");
+  const closeBoardPopupBtn = document.getElementById("closeBoardPopupBtn");
   const pinboardGrid = document.getElementById("pinboardGrid");
+  const previewThumbRow = document.getElementById("previewThumbRow");
 
   const openNewPinBtn = document.getElementById("openNewPinBtn");
   const pinModalOverlay = document.getElementById("pinModalOverlay");
@@ -3893,9 +4538,8 @@ const PORTFOLIO_CONFIG = {
   }
 
   function openBoard() {
-    if (boardDrawer && boardBackdrop) {
-      boardDrawer.classList.add("open");
-      boardBackdrop.classList.add("open");
+    if (boardPopupModal) {
+      boardPopupModal.classList.add("open");
       document.body.style.overflow = "hidden";
       renderBoardPins(currentBoardFilter);
       playPaperRustle();
@@ -3903,30 +4547,25 @@ const PORTFOLIO_CONFIG = {
   }
 
   function closeBoard() {
-    if (boardDrawer && boardBackdrop) {
-      boardDrawer.classList.remove("open");
-      boardBackdrop.classList.remove("open");
+    if (boardPopupModal) {
+      boardPopupModal.classList.remove("open");
       document.body.style.overflow = "";
       playPaperRustle();
     }
   }
 
-  if (edgeIrlTab) edgeIrlTab.addEventListener("click", openBoard);
-  if (openIrlNavBtn) {
-    openIrlNavBtn.addEventListener("click", function(e) {
-      e.preventDefault();
-      openBoard();
-    });
-  }
+  if (irlRibbonBtn) irlRibbonBtn.addEventListener("click", openBoard);
   if (contactIrlNoteBtn) contactIrlNoteBtn.addEventListener("click", openBoard);
-  if (closeBoardBtn) closeBoardBtn.addEventListener("click", closeBoard);
-  if (boardBackdrop) boardBackdrop.addEventListener("click", closeBoard);
+  if (closeBoardPopupBtn) closeBoardPopupBtn.addEventListener("click", closeBoard);
+  if (boardPopupBackdrop) boardPopupBackdrop.addEventListener("click", closeBoard);
 
   window.addEventListener("keydown", function(e) {
     if (e.key === "Escape") {
       if (pinModalOverlay && pinModalOverlay.style.display !== "none") {
         closePinModal();
-      } else if (boardDrawer && boardDrawer.classList.contains("open")) {
+      } else if (hofModalOverlay && hofModalOverlay.style.display !== "none") {
+        closeHofModal();
+      } else if (boardPopupModal && boardPopupModal.classList.contains("open")) {
         closeBoard();
       }
     }
@@ -3954,6 +4593,7 @@ const PORTFOLIO_CONFIG = {
     if (countAll) countAll.textContent = totalCount;
     if (countEvents) countEvents.textContent = eventCount;
     if (countInsights) countInsights.textContent = insightCount;
+    updatePreviewThumbs(allPins);
 
     const filtered = filter === "all" ? allPins : allPins.filter(p => p.type === filter);
     pinboardGrid.innerHTML = "";
@@ -4179,6 +4819,210 @@ const PORTFOLIO_CONFIG = {
     });
   }
   
+  // 10d. Update Hover Preview Thumbnails for IRL Ribbon Button
+  function updatePreviewThumbs(pins) {
+    if (!previewThumbRow) return;
+    previewThumbRow.innerHTML = "";
+    const eventPins = pins.filter(p => p.type === "event" && p.imageUrl).slice(0, 3);
+    eventPins.forEach(function(ep) {
+      const img = document.createElement("img");
+      img.className = "preview-mini-thumb";
+      img.src = ep.imageUrl;
+      img.alt = ep.title || "Event";
+      previewThumbRow.appendChild(img);
+    });
+  }
+
+  // 10e. Hall of Fame / Achievements Engine
+  const hofGrid = document.getElementById("hofGrid");
+  const hofCountAll = document.getElementById("hofCountAll");
+  const hofCountHackathon = document.getElementById("hofCountHackathon");
+  const hofCountOpenSource = document.getElementById("hofCountOpenSource");
+  const hofCountAward = document.getElementById("hofCountAward");
+  const hofCountMilestone = document.getElementById("hofCountMilestone");
+
+  const openAddHofBtn = document.getElementById("openAddHofBtn");
+  const hofModalOverlay = document.getElementById("hofModalOverlay");
+  const closeHofModalBtn = document.getElementById("closeHofModalBtn");
+  const hofForm = document.getElementById("hofForm");
+
+  let currentHofFilter = "all";
+
+  function getStoredAchievements() {
+    try {
+      const raw = localStorage.getItem("portfolio_user_achievements");
+      const userAchs = raw ? JSON.parse(raw) : [];
+      return [...userAchs, ...(PORTFOLIO_CONFIG.achievements || [])];
+    } catch(e) {
+      return PORTFOLIO_CONFIG.achievements || [];
+    }
+  }
+
+  function saveUserAchievements(userOnlyAchs) {
+    try {
+      localStorage.setItem("portfolio_user_achievements", JSON.stringify(userOnlyAchs));
+    } catch(e) {}
+  }
+
+  function renderAchievements(filter) {
+    if (!hofGrid) return;
+    const all = getStoredAchievements();
+
+    // Counts
+    if (hofCountAll) hofCountAll.textContent = all.length;
+    if (hofCountHackathon) hofCountHackathon.textContent = all.filter(a => a.category === "hackathon").length;
+    if (hofCountOpenSource) hofCountOpenSource.textContent = all.filter(a => a.category === "opensource").length;
+    if (hofCountAward) hofCountAward.textContent = all.filter(a => a.category === "award").length;
+    if (hofCountMilestone) hofCountMilestone.textContent = all.filter(a => a.category === "milestone").length;
+
+    const filtered = filter === "all" ? all : all.filter(a => a.category === filter);
+    hofGrid.innerHTML = "";
+
+    filtered.forEach(function(item) {
+      const isCustom = !item.id.startsWith("ach-default-");
+      const card = document.createElement("article");
+      card.className = "hof-card";
+      
+      const tagsHtml = (item.tags || []).map(t => `<span class="hof-tag">${escapeHtml(t)}</span>`).join("");
+      const linkHtml = item.link && item.link !== "#" 
+        ? `<a class="hof-link-btn" href="${escapeHtml(item.link)}" target="_blank" rel="noopener">${escapeHtml(item.linkLabel || "Inspect ↗")}</a>`
+        : `<span style="font-family:var(--mono);font-size:0.75rem;color:var(--ink-soft);opacity:0.8;">✦ VERIFIED HONOR</span>`;
+
+      card.innerHTML = `
+        <div class="hof-card-top">
+          <div class="hof-icon-seal" aria-hidden="true">${item.icon || "🏆"}</div>
+          <div class="hof-card-badges">
+            <span class="hof-badge ${item.badgeColor || 'gold'}">${escapeHtml(item.badge || 'AWARD')}</span>
+            <span style="font-family:var(--mono);font-size:0.75rem;color:var(--ink-soft);font-weight:700;">${escapeHtml(item.date || '2026')}</span>
+          </div>
+        </div>
+        <h3 class="hof-card-title">${escapeHtml(item.title)}</h3>
+        ${item.issuer ? `
+          <div class="hof-issuer-row">
+            <span>🏛 ${escapeHtml(item.issuer)}</span>
+          </div>
+        ` : ""}
+        <p class="hof-card-desc">${escapeHtml(item.description)}</p>
+        ${tagsHtml ? `<div class="hof-tags-row">${tagsHtml}</div>` : ""}
+        <div class="hof-card-footer">
+          ${linkHtml}
+          ${isCustom ? `<button type="button" class="hof-delete-btn" data-hof-id="${item.id}">✕ delete</button>` : ""}
+        </div>
+      `;
+      hofGrid.appendChild(card);
+    });
+
+    // Delete handlers
+    hofGrid.querySelectorAll(".hof-delete-btn").forEach(function(btn) {
+      btn.addEventListener("click", function(e) {
+        e.stopPropagation();
+        const idToDelete = btn.dataset.hofId;
+        deleteUserAchievement(idToDelete);
+      });
+    });
+  }
+
+  function deleteUserAchievement(achId) {
+    try {
+      const raw = localStorage.getItem("portfolio_user_achievements");
+      if (!raw) return;
+      let userAchs = JSON.parse(raw);
+      userAchs = userAchs.filter(a => a.id !== achId);
+      saveUserAchievements(userAchs);
+      renderAchievements(currentHofFilter);
+      playPenScratch();
+    } catch(e) {}
+  }
+
+  // Hall of Fame Filters
+  document.querySelectorAll(".hof-filter-btn").forEach(function(btn) {
+    btn.addEventListener("click", function() {
+      document.querySelectorAll(".hof-filter-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentHofFilter = btn.dataset.hofFilter || "all";
+      renderAchievements(currentHofFilter);
+      playPenScratch();
+    });
+  });
+
+  // Modal: Add Achievement
+  function openHofModal() {
+    if (hofModalOverlay) {
+      hofModalOverlay.style.display = "flex";
+      playPaperRustle();
+    }
+  }
+
+  function closeHofModal() {
+    if (hofModalOverlay) {
+      hofModalOverlay.style.display = "none";
+      playPaperRustle();
+    }
+  }
+
+  if (openAddHofBtn) openAddHofBtn.addEventListener("click", openHofModal);
+  if (closeHofModalBtn) closeHofModalBtn.addEventListener("click", closeHofModal);
+
+  if (hofForm) {
+    hofForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const title = (document.getElementById("hofTitle")?.value || "").trim();
+      const category = document.getElementById("hofCategory")?.value || "hackathon";
+      const badge = (document.getElementById("hofBadge")?.value || "").trim();
+      const issuer = (document.getElementById("hofIssuer")?.value || "").trim();
+      const date = (document.getElementById("hofDate")?.value || "").trim();
+      const desc = (document.getElementById("hofDesc")?.value || "").trim();
+      const tagsRaw = (document.getElementById("hofTags")?.value || "").trim();
+      const link = (document.getElementById("hofLink")?.value || "").trim();
+
+      if (!title || !desc) return;
+
+      const badgeColorMap = {
+        hackathon: "gold",
+        opensource: "blue",
+        award: "purple",
+        milestone: "red"
+      };
+      const iconMap = {
+        hackathon: "🏆",
+        opensource: "🎖",
+        award: "📜",
+        milestone: "⚡"
+      };
+
+      const newAch = {
+        id: "user-ach-" + Date.now(),
+        category: category,
+        icon: iconMap[category] || "🏆",
+        badge: badge || "HONOR",
+        badgeColor: badgeColorMap[category] || "gold",
+        title: title,
+        issuer: issuer,
+        date: date || "2026",
+        description: desc,
+        tags: tagsRaw ? tagsRaw.split(",").map(t => t.trim()).filter(Boolean) : [],
+        link: link || "#",
+        linkLabel: link ? "Inspect Proof ↗" : ""
+      };
+
+      try {
+        const raw = localStorage.getItem("portfolio_user_achievements");
+        const userAchs = raw ? JSON.parse(raw) : [];
+        userAchs.unshift(newAch);
+        saveUserAchievements(userAchs);
+      } catch(err) {}
+
+      hofForm.reset();
+      closeHofModal();
+      renderAchievements(currentHofFilter);
+      playCoinAudio();
+    });
+  }
+
+  // Initial call to render Hall of Fame and update preview thumbs
+  renderAchievements("all");
+  updatePreviewThumbs(getStoredPins());
+
   // 11. Back to Top Button
   const backToTop = document.getElementById("backToTop");
   window.addEventListener("scroll", function() {
