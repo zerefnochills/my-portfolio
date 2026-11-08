@@ -547,147 +547,263 @@ header.site-header {
   padding-right: calc(12px + env(safe-area-inset-right, 0px));
 }
 
-/* Responsive Floating Nav Island */
-@media (max-width: 920px) {
+/* ==========================================================
+   TABLET & iPAD RESPONSIVE RATIOS (681px - 1024px)
+   ========================================================== */
+@media (min-width: 681px) and (max-width: 1024px) {
+  /* Tablet 2-column Hero Layout */
+  .hero {
+    display: grid !important;
+    grid-template-columns: 1.15fr minmax(280px, 340px) !important;
+    gap: 28px !important;
+    align-items: center !important;
+    min-height: 70vh !important;
+    padding-top: 24px !important;
+    padding-bottom: 48px !important;
+  }
+  .hero-left-col {
+    max-width: 100% !important;
+    align-items: flex-start !important;
+  }
+  .hero h1#heroName {
+    font-size: clamp(3.2rem, 6.5vw, 5.2rem) !important;
+    line-height: 0.95 !important;
+  }
+  .hero-tagline {
+    font-size: 1.3rem !important;
+    max-width: 26em !important;
+  }
+  .wanted-poster-frame {
+    width: 100% !important;
+    max-width: 330px !important;
+    margin: 0 0 0 auto !important;
+    justify-self: end !important;
+    transform: rotate(2deg) !important;
+  }
+
+  /* Single-row Navbar on iPad */
+  nav.nav-island {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+    padding: 8px 16px !important;
+    max-width: min(780px, 96vw) !important;
+  }
+  .nav-brand-row {
+    flex: 0 0 auto !important;
+  }
+  .nav-links-dock {
+    order: 2 !important;
+    width: auto !important;
+    display: flex !important;
+    gap: 6px !important;
+    padding: 0 !important;
+  }
+  .controls-bar {
+    order: 3 !important;
+    margin-left: 0 !important;
+    flex: 0 0 auto !important;
+  }
+
+  /* Tablet Content Grids */
+  .logbook-spread {
+    grid-template-columns: 1.1fr 0.9fr !important;
+    gap: 20px !important;
+  }
+  .skills-categories-deck {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 20px !important;
+  }
+}
+
+/* ==========================================================
+   PHONE RESPONSIVE RATIOS (iPhone, Android <= 680px)
+   ========================================================== */
+@media (max-width: 680px) {
+  header.site-header {
+    top: 4px;
+    padding: 0 8px;
+  }
   nav.nav-island {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 8px 12px;
-    padding: 8px 14px;
-    max-width: min(680px, 94vw);
+    justify-content: space-between;
+    padding: 7px 10px;
+    border-radius: 14px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12), 3px 3px 0 var(--shadow);
+    gap: 6px 8px;
+    max-width: 100%;
   }
   .nav-brand-row {
     flex: 1 1 auto;
     display: flex;
     align-items: center;
   }
-  .controls-bar {
-    margin-left: auto;
-    flex: 0 0 auto;
-    gap: 6px;
-  }
-  .nav-links-dock {
-    order: 3;
-    width: 100%;
-    justify-content: center;
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    padding: 4px 2px;
-    gap: 6px;
-  }
-  .nav-links-dock::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-@media (max-width: 600px) {
-  header.site-header {
-    top: 4px;
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-  nav.nav-island {
-    padding: 6px 10px;
-    border-radius: 14px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12), 3px 3px 0 var(--shadow);
-  }
   .brand .logo {
-    font-size: 1.55rem !important;
+    font-size: 1.45rem !important;
   }
   .brand-avatar-seal {
     width: 24px !important;
     height: 24px !important;
   }
+  .controls-bar {
+    flex: 0 0 auto;
+    margin-left: auto;
+    display: flex;
+    gap: 4px;
+  }
   .control-btn {
-    padding: 5px 8px;
-    font-size: 0.85rem;
-    min-height: 34px;
+    padding: 4px 7px;
+    font-size: 0.8rem;
+    min-height: 32px;
+  }
+
+  /* Mobile Links Dock - All 6 links fit across row 2 without cutoffs */
+  .nav-links-dock {
+    order: 3;
+    width: 100%;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    gap: 2px !important;
+    padding: 4px 0 2px !important;
+    margin: 0 !important;
+    overflow: visible !important;
+    flex-wrap: nowrap !important;
+  }
+  .nav-links-dock li {
+    flex: 1 1 auto;
+    text-align: center;
+    list-style: none;
   }
   .nav-link {
-    padding: 4px 10px;
-    font-size: 0.98rem;
-  }
-}
-
-/* Hero Section Mobile Ratios */
-@media (max-width: 960px) {
-  .hero {
-    grid-template-columns: 1fr !important;
-    gap: 32px !important;
-    min-height: auto !important;
-    padding-top: 24px !important;
-    padding-bottom: 64px !important;
-  }
-  .hero-left-col {
-    max-width: 100% !important;
-    align-items: flex-start !important;
-  }
-  .wanted-poster-frame {
-    margin: 20px auto 0 !important;
-    justify-self: center !important;
-    width: 100% !important;
-    max-width: min(340px, 92vw) !important;
-    transform: rotate(1deg) !important;
-  }
-}
-
-@media (max-width: 680px) {
-  /* Hero Name Typography - Prevents horizontal blowout on narrow mobile phones */
-  .hero h1#heroName {
-    font-size: clamp(2.35rem, 9.2vw, 4.2rem) !important;
-    line-height: 1 !important;
-    white-space: normal !important;
-    word-break: keep-all !important;
-    margin-bottom: 6px !important;
-  }
-  .hero-tagline {
-    font-size: clamp(1.1rem, 3.8vw, 1.35rem) !important;
-    line-height: 1.42 !important;
-    margin: 8px 0 20px !important;
-    max-width: 100% !important;
-  }
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
+    display: block;
     width: 100%;
-    margin-bottom: 18px;
-  }
-  .hero-btn {
-    padding: 10px 20px;
-    font-size: 1.15rem;
-    min-height: 44px; /* Apple & Android touch target standard */
-  }
-  .captain-stash-wrap {
-    width: 100%;
-    align-items: flex-start;
-  }
-  a.treasure-chest-widget {
-    font-size: 1rem !important;
-    padding: 9px 18px !important;
-    max-width: 100%;
+    padding: 4px 2px !important;
+    font-size: 0.82rem !important;
+    letter-spacing: 0.01em;
+    text-align: center;
   }
 
-  /* Wanted Annotation Note */
-  .wanted-annotation-note {
-    right: 0;
-    bottom: -64px;
-    max-width: 160px;
+  /* Edge Ribbon Bookmarks - Docked to bottom left so they NEVER block hero buttons or text */
+  .irl-ribbon-btn {
+    top: auto !important;
+    bottom: 68px !important;
+    left: 0 !important;
+    transform: none !important;
+    padding: 6px 12px 6px 8px !important;
+    border-radius: 0 8px 8px 0 !important;
+    z-index: 80 !important;
   }
-
-  /* Edge Ribbon Bookmarks - Responsive scaling so they never block reading flow */
-  .irl-ribbon-btn,
   .sketchbook-ribbon-btn {
-    transform: translateY(-50%) scale(0.85) !important;
-    transform-origin: left center;
+    top: auto !important;
+    bottom: 22px !important;
+    left: 0 !important;
+    transform: none !important;
+    padding: 6px 12px 6px 8px !important;
+    border-radius: 0 8px 8px 0 !important;
+    z-index: 80 !important;
   }
   .irl-ribbon-btn:hover,
   .sketchbook-ribbon-btn:hover {
-    transform: translateY(-50%) scale(0.9) translateX(4px) !important;
+    transform: translateX(6px) !important;
+  }
+
+  /* Hero Section Mobile Proportions - Centered & Symmetrical */
+  .hero {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 20px !important;
+    min-height: auto !important;
+    padding-top: 18px !important;
+    padding-bottom: 60px !important;
+  }
+  .hero-left-col {
+    max-width: 100% !important;
+    align-items: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 0 !important;
+  }
+  .hero h1#heroName {
+    font-size: clamp(2.8rem, 11vw, 4.2rem) !important;
+    line-height: 1 !important;
+    white-space: normal !important;
+    word-break: keep-all !important;
+    text-align: center !important;
+    margin-bottom: 4px !important;
+  }
+  .hero-left-col svg.doodle.draw {
+    margin: 0 auto 12px !important;
+  }
+  .hero-tagline {
+    font-size: clamp(1.08rem, 3.8vw, 1.28rem) !important;
+    line-height: 1.42 !important;
+    text-align: center !important;
+    margin: 4px auto 16px !important;
+    max-width: 24em !important;
+  }
+
+  /* Side-by-Side Compact Action Buttons */
+  .hero-actions {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important;
+    width: 100% !important;
+    max-width: 320px !important;
+    margin: 0 auto 14px !important;
+  }
+  .hero-btn {
+    flex: 1 1 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 9px 12px !important;
+    font-size: 1.05rem !important;
+    min-height: 44px !important;
+    white-space: nowrap !important;
+  }
+
+  /* Centered Captain's Secret Stash Pill with Straw Hat */
+  .captain-stash-wrap {
+    width: 100% !important;
+    max-width: 320px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    margin: 0 auto !important;
+  }
+  a.treasure-chest-widget {
+    width: 100% !important;
+    display: inline-flex !important;
+    justify-content: center !important;
+    font-size: 1.02rem !important;
+    padding: 9px 16px !important;
+  }
+  .stash-strawhat-decor {
+    left: 50% !important;
+    transform: translateX(-50%) rotate(-5deg) !important;
+  }
+
+  /* Centered Wanted Bounty Poster */
+  .wanted-poster-frame {
+    margin: 18px auto 0 !important;
+    justify-self: center !important;
+    width: 100% !important;
+    max-width: min(310px, 90vw) !important;
+    transform: rotate(1deg) !important;
+  }
+  .wanted-annotation-note {
+    right: 0;
+    bottom: -50px;
+    max-width: 160px;
   }
 
   /* Full-bleed Red Ticker Tape without scroll blowout */
@@ -816,11 +932,14 @@ header.site-header {
     padding: 0 10px !important;
   }
   .hero h1#heroName {
-    font-size: 2.15rem !important;
+    font-size: 2.35rem !important;
+  }
+  .hero-actions {
+    max-width: 290px !important;
   }
   .hero-btn {
-    width: 100%;
-    justify-content: center;
+    font-size: 0.95rem !important;
+    padding: 8px 10px !important;
   }
   .tech-icon-tile {
     width: 46px !important;
