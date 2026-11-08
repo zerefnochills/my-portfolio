@@ -122,25 +122,27 @@ section[id], header[id], div[id] {
   scroll-margin-top: 96px;
 }
 
-/* ---------- Edge Ribbon Bookmarks (Docked to lower-left corner) ---------- */
-/* Positioned in lower left so they never overlap hero text or headings */
+/* ---------- Edge Ribbon Bookmarks (Vertically centered on left edge) ---------- */
 .irl-ribbon-btn {
-  top: auto !important;
-  bottom: 84px !important;
+  top: calc(50% - 32px) !important;
+  bottom: auto !important;
   left: 0 !important;
-  transform: none !important;
+  transform: translateY(-50%) !important;
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
 }
 .sketchbook-ribbon-btn {
-  top: auto !important;
-  bottom: 26px !important;
+  top: calc(50% + 28px) !important;
+  bottom: auto !important;
   left: 0 !important;
-  transform: none !important;
+  transform: translateY(-50%) !important;
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
 }
-.irl-ribbon-btn:hover,
+.irl-ribbon-btn:hover {
+  transform: translateY(-50%) translateX(8px) !important;
+  box-shadow: 4px 6px 0 var(--shadow);
+}
 .sketchbook-ribbon-btn:hover {
-  transform: translateX(6px) !important;
+  transform: translateY(-50%) translateX(8px) !important;
   box-shadow: 4px 6px 0 var(--shadow);
 }
 .hero-left-col {
@@ -238,20 +240,24 @@ html.js-polish .wanted-poster-frame:not(.poster-in) { opacity: 0; }
 }
 
 /* ==========================================================
-   GRAND LINE STRIP — tilted black marquee (skills section top)
+   GRAND LINE STRIP — tilted red marquee (above manifesto headliner)
    ========================================================== */
-.skills-showcase-section { padding-top: 90px; }
+.skills-showcase-section { padding-top: 60px; }
 
 .skills-ticker-tape {
   position: relative;
   left: 50%;
   width: 112vw;
-  margin: 10px 0 70px -56vw;
-  background: #000;
+  margin: 10px 0 54px -56vw;
+  background: #dc2626 !important;
+  background: linear-gradient(90deg, #991b1b 0%, #dc2626 35%, #ef4444 65%, #991b1b 100%) !important;
   color: #fff;
-  transform: rotate(-1.8deg);
+  transform: rotate(-1.5deg);
   overflow: hidden;
-  box-shadow: 0 6px 0 var(--shadow, rgba(0, 0, 0, 0.18));
+  box-shadow: 0 8px 0 var(--shadow, rgba(0, 0, 0, 0.25));
+  border-top: 3.5px solid var(--ink, #111);
+  border-bottom: 3.5px solid var(--ink, #111);
+  z-index: 10;
 }
 .skills-ticker-track {
   display: flex;
@@ -263,34 +269,55 @@ html.js-polish .wanted-poster-frame:not(.poster-in) { opacity: 0; }
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  padding: 20px 0;
+  padding: 16px 0;
 }
 .ticker-pill {
   display: inline-flex;
   align-items: center;
   white-space: nowrap;
   font-family: 'Space Grotesk', system-ui, sans-serif;
-  font-weight: 800;
-  font-size: clamp(1.05rem, 2.1vw, 1.65rem);
+  font-weight: 900;
+  font-size: clamp(1.15rem, 2vw, 1.65rem);
   line-height: 1;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.05em;
+  color: #ffffff !important;
+  text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.55);
   text-transform: uppercase;
 }
 .ticker-pill i { display: none; }
-.ticker-dot {
+
+.ticker-runner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  margin: 0 clamp(20px, 3vw, 38px);
+  margin: 0 clamp(16px, 2.5vw, 32px);
+  animation: runnerSprint 0.38s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+  transform-origin: 50% 85%;
+  will-change: transform;
 }
-.skills-ticker-tape .ticker-dot {
-  background: var(--accent, #dc2626) !important;
-  box-shadow: 0 0 8px rgba(220, 38, 38, 0.4);
+.skills-ticker-tape:hover .ticker-runner {
+  animation-play-state: paused;
 }
-.skills-ticker-tape .ticker-dot:nth-child(even) {
-  background: #ffffff !important;
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+.runner-sprite {
+  width: clamp(38px, 3.8vw, 50px);
+  height: clamp(38px, 3.8vw, 50px);
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.55));
+  user-select: none;
+  pointer-events: none;
+}
+@keyframes runnerSprint {
+  0% {
+    transform: translateY(0px) rotate(-4deg) scale(1, 0.96);
+  }
+  50% {
+    transform: translateY(-6px) rotate(2deg) scale(0.97, 1.03);
+  }
+  100% {
+    transform: translateY(-9px) rotate(5deg) scale(0.95, 1.05);
+  }
 }
 @keyframes stripScroll {
   to { transform: translateX(-50%); }
@@ -395,6 +422,7 @@ html.js-polish .wanted-poster-frame:not(.poster-in) { opacity: 0; }
 /* ---------- Respect reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   .skills-ticker-track { animation: none; }
+  .ticker-runner { animation: none; }
   .wanted-poster-frame.poster-in { animation: none; }
   html.js-polish .wanted-poster-frame:not(.poster-in) { opacity: 1; }
   #scrollProgress { display: none; }
