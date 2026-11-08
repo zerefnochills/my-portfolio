@@ -3586,9 +3586,89 @@ nav.nav-island:hover {
   pointer-events: auto;
 }
 
+
+/* =========================================================================
+   ONE PIECE: RORONOA ZORO & GLOWING ENMA SWORD CUSTOM CURSORS
+   ========================================================================= */
+:root {
+  --cursor-enma: url('cursors/enma-sword.png') 3 0, url('data:image/png;base64,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') 3 0, auto;
+  --cursor-zoro: url('cursors/zoro-pointer.png') 4 0, url('data:image/png;base64,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') 4 0, pointer;
+}
+
+body.zoro-cursor-active,
+body.zoro-cursor-active * {
+  cursor: var(--cursor-enma);
+}
+
+body.zoro-cursor-active a,
+body.zoro-cursor-active button,
+body.zoro-cursor-active [role="button"],
+body.zoro-cursor-active input[type="submit"],
+body.zoro-cursor-active input[type="button"],
+body.zoro-cursor-active input[type="checkbox"],
+body.zoro-cursor-active select,
+body.zoro-cursor-active summary,
+body.zoro-cursor-active .hero-btn,
+body.zoro-cursor-active .clickable,
+body.zoro-cursor-active .nav-link,
+body.zoro-cursor-active .board-filter-btn,
+body.zoro-cursor-active .hof-filter-btn,
+body.zoro-cursor-active .hof-card,
+body.zoro-cursor-active .drawing-board-ribbon-btn,
+body.zoro-cursor-active .irl-ribbon-btn,
+body.zoro-cursor-active .wanted-poster-frame,
+body.zoro-cursor-active .wanted-photo-container,
+body.zoro-cursor-active .treasure-chest-widget,
+body.zoro-cursor-active .contact-sticky-note,
+body.zoro-cursor-active .control-btn,
+body.zoro-cursor-active .copy-email-btn,
+body.zoro-cursor-active .transmit-btn,
+body.zoro-cursor-active .marine-stamp,
+body.zoro-cursor-active .chopper-peeking-wrap,
+body.zoro-cursor-active .chopper-doctor-wrap {
+  cursor: var(--cursor-zoro) !important;
+}
+
+body.zoro-cursor-active input[type="text"],
+body.zoro-cursor-active input[type="email"],
+body.zoro-cursor-active textarea {
+  cursor: text !important;
+}
+
+/* Purple Haki Slash Click Effect */
+.enma-slash-fx {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  width: 56px;
+  height: 56px;
+  margin-left: -6px;
+  margin-top: -6px;
+  transform-origin: top left;
+  animation: enmaSlashAnim 0.38s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+}
+
+@keyframes enmaSlashAnim {
+  0% {
+    opacity: 1;
+    transform: scale(0.35) rotate(-30deg);
+    filter: drop-shadow(0 0 12px #c084fc) drop-shadow(0 0 4px #9333ea);
+  }
+  60% {
+    opacity: 0.9;
+    transform: scale(1.15) rotate(15deg);
+    filter: drop-shadow(0 0 18px #d8b4fe) drop-shadow(0 0 8px #a855f7);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.35) rotate(35deg) translate(8px, 8px);
+    filter: drop-shadow(0 0 4px transparent);
+  }
+}
+
 </style>
 </head>
-<body>
+<body class="zoro-cursor-active">
 
 <!-- SVG Turbulence Filter for Hand-Drawn Wobble -->
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -3704,6 +3784,15 @@ nav.nav-island:hover {
         </button>
 
         <!-- Ink Theme Picker button -->
+        <button class="control-btn active" id="cursorToggle" type="button" title="Toggle Zoro & Enma Custom Cursor">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="14.5" y1="17.5" x2="3" y2="6"></line>
+            <path d="M14 6l7 7"></path>
+            <path d="M19 1l4 4"></path>
+          </svg>
+          <span id="cursorLabel">zoro</span>
+        </button>
+
         <button class="control-btn" id="themeBtn" type="button" title="Choose ink theme">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
@@ -4728,6 +4817,65 @@ const PORTFOLIO_CONFIG = {
 
 (function() {
   "use strict";
+
+  
+  // =========================================================================
+  // ONE PIECE: RORONOA ZORO & GLOWING ENMA SWORD CURSOR ENGINE
+  // =========================================================================
+  const cursorToggleBtn = document.getElementById("cursorToggle");
+  const cursorLabel = document.getElementById("cursorLabel");
+  const savedCursorState = localStorage.getItem("portfolio_zoro_cursor");
+
+  if (document.body && document.body.classList) {
+    if (savedCursorState === "disabled") {
+      document.body.classList.remove("zoro-cursor-active");
+      if (cursorToggleBtn) cursorToggleBtn.classList.remove("active");
+      if (cursorLabel) cursorLabel.textContent = "default";
+    } else {
+      document.body.classList.add("zoro-cursor-active");
+      if (cursorToggleBtn) cursorToggleBtn.classList.add("active");
+      if (cursorLabel) cursorLabel.textContent = "zoro";
+    }
+  }
+
+  if (cursorToggleBtn) {
+    cursorToggleBtn.addEventListener("click", function() {
+      if (!document.body || !document.body.classList) return;
+      const isNowActive = document.body.classList.toggle("zoro-cursor-active");
+      cursorToggleBtn.classList.toggle("active", isNowActive);
+      if (cursorLabel) cursorLabel.textContent = isNowActive ? "zoro" : "default";
+      localStorage.setItem("portfolio_zoro_cursor", isNowActive ? "enabled" : "disabled");
+      playPaperRustle();
+    });
+  }
+
+  // Purple Ryuo Haki Slash effect on click
+  window.addEventListener("pointerdown", function(e) {
+    if (!document.body || !document.body.classList || !document.body.classList.contains("zoro-cursor-active")) return;
+    
+    // Spawn subtle purple Haki crescent slash
+    const slash = document.createElement("div");
+    slash.className = "enma-slash-fx";
+    slash.style.left = e.clientX + "px";
+    slash.style.top = e.clientY + "px";
+    slash.innerHTML = `<svg viewBox="0 0 60 60" width="56" height="56">
+      <defs>
+        <linearGradient id="hakiGrad_${Date.now()}" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#ffffff"/>
+          <stop offset="25%" stop-color="#f0abfc"/>
+          <stop offset="60%" stop-color="#c084fc"/>
+          <stop offset="100%" stop-color="#7e22ce"/>
+        </linearGradient>
+      </defs>
+      <path d="M6 6 Q 38 18 48 48 Q 28 32 6 6 Z" fill="url(#hakiGrad_${Date.now()})"/>
+      <path d="M10 10 Q 36 20 44 44" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+    </svg>`;
+    
+    document.body.appendChild(slash);
+    setTimeout(() => {
+      if (slash.parentNode) slash.parentNode.removeChild(slash);
+    }, 400);
+  });
 
   // 1. Apply config to DOM elements
   function applyConfig() {
