@@ -9,7 +9,9 @@
 <meta property="og:title" content="Portfolio &amp; Digital Sketchbook">
 <meta property="og:description" content="A hand-crafted developer and designer portfolio sketched in ink and paper with interactive One Piece wanted poster, sound effects, and digital sketchbook studio.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23fcf3c6' stroke='%232d2a9c' stroke-width='2'/><path d='M6 18c0-4 6-6 10-6s10 2 10 6-5 5-10 5-10-1-10-5z' fill='%23eab308' stroke='%232d2a9c' stroke-width='1.5'/><path d='M10 16c0-6 12-6 12 0' fill='%23eab308' stroke='%232d2a9c' stroke-width='1.5'/><path d='M10 15c4 2 8 2 12 0' stroke='%23dc2626' stroke-width='1.8'/></svg>">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="images/avatar-seal.png">
 <title>Deepak Pandey – Founder @ Synapse Calyx | Portfolio & Digital Sketchbook</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -131,11 +133,9 @@ body {
   margin: 0;
   background-color: var(--paper);
   background-image: 
-    radial-gradient(ellipse at 50% 0, rgba(255, 255, 255, 0.5) 0, transparent 65%),
-    radial-gradient(ellipse at 50% 100%, rgba(0, 0, 0, 0.06) 0, transparent 60%),
-    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 28px 28px, 28px 28px;
+    radial-gradient(ellipse at 50% 0, rgba(255, 255, 255, 0.45) 0, transparent 65%),
+    radial-gradient(ellipse at 50% 100%, rgba(0, 0, 0, 0.04) 0, transparent 60%);
+  background-size: 100% 100%, 100% 100%;
   background-attachment: fixed;
   color: var(--ink);
   font-family: var(--hand);
@@ -3830,16 +3830,8 @@ body.zoro-cursor-active textarea {
     <nav class="nav-island">
       <div class="nav-brand-row">
         <a class="brand" href="#top" title="Back to top &bull; Grand Line Voyage">
-          <div class="brand-avatar-seal" aria-hidden="true">
-            <!-- Mini Straw Hat Jolly Roger Emblem -->
-            <svg viewBox="0 0 40 40" width="28" height="28" class="doodle" aria-hidden="true">
-              <path d="M6 22C6 16 14 14 20 14S34 16 34 22 26 26 20 26 6 24 6 22Z" fill="#eab308"/>
-              <path d="M12 18C11 8 29 8 28 18" fill="#eab308"/>
-              <path d="M12 17C17 20 23 20 28 17" stroke="#dc2626" stroke-width="1.8"/>
-              <circle cx="16" cy="22" r="1.5" fill="#1c1917"/>
-              <circle cx="24" cy="22" r="1.5" fill="#1c1917"/>
-              <path d="M17 24Q20 27 23 24" stroke="#1c1917" stroke-width="1.5" fill="none"/>
-            </svg>
+          <div class="brand-avatar-seal" aria-hidden="true" title="Deepak Pandey Seal">
+            <img src="images/avatar-seal.png" alt="Deepak Pandey Avatar Seal" width="28" height="28" style="border-radius:50%;display:block;object-fit:cover;">
           </div>
           <div class="brand-text-col">
             <span class="logo" id="siteLogoName">Deepak Pandey</span>
@@ -4000,10 +3992,10 @@ body.zoro-cursor-active textarea {
         
         <div class="wanted-photo-container" id="wantedPhotoContainer" title="Click or drag & drop your photo here!" tabindex="0" role="button" aria-label="Upload photo to Wanted Poster">
           <!-- User photo img -->
-          <img id="wantedPhotoImg" src="" alt="Portrait" class="wanted-img" style="display:none;" />
+          <img id="wantedPhotoImg" src="images/deepak-wanted.jpg" alt="Portrait of Deepak Pandey" class="wanted-img" style="display:block;" />
           
           <!-- Default Hand-Drawn One Piece Pirate Silhouette Placeholder -->
-          <div id="wantedPlaceholder" class="wanted-placeholder">
+          <div id="wantedPlaceholder" class="wanted-placeholder" style="display:none;">
             <svg class="doodle" viewBox="0 0 160 140" width="105" height="92" aria-hidden="true">
               <!-- Straw Hat on top of head -->
               <path d="M20 54C20 40 55 34 80 34S140 40 140 54 110 70 80 70 20 64 20 54Z" fill="var(--paper)"/>
@@ -5327,7 +5319,7 @@ body.zoro-cursor-active textarea {
 const PORTFOLIO_CONFIG = {
   name: "Deepak Pandey",
   bounty: "3,000,000,000",
-  photoUrl: "", // Path to your photo e.g. "photo.jpg" (or click the Wanted Poster to upload directly!)
+  photoUrl: "images/deepak-wanted.jpg", // Official Wanted Poster Anime Portrait e.g. "photo.jpg" (or click the Wanted Poster to upload directly!)
   tagline: "Founder at Synapse Calyx (digital services company), Event Organiser at Cluster Community | GU, and former Tech Lead at Ralph Co. I craft robust web apps, scale digital platforms, and sketch systems on paper first.",
   email: "deepak@synapsecalyx.com",
   status: "FOUNDER @ SYNAPSE CALYX · OPEN FOR COLLABORATIONS · 2026",
@@ -5598,10 +5590,10 @@ const PORTFOLIO_CONFIG = {
 
   // Load saved photo or config photo
   const savedPhoto = localStorage.getItem("portfolio_wanted_photo");
-  if (savedPhoto) {
+  if (savedPhoto && savedPhoto.startsWith("data:image")) {
     setWantedPhoto(savedPhoto);
-  } else if (PORTFOLIO_CONFIG.photoUrl) {
-    setWantedPhoto(PORTFOLIO_CONFIG.photoUrl);
+  } else {
+    setWantedPhoto(PORTFOLIO_CONFIG.photoUrl || "images/deepak-wanted.jpg");
   }
 
   if (wantedPhotoContainer && wantedPhotoInput) {
