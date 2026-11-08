@@ -2565,9 +2565,9 @@ footer {
 .board-popup-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 .board-popup-card {
   position: fixed;
@@ -5404,7 +5404,6 @@ const PORTFOLIO_CONFIG = {
   function openBoard() {
     if (boardPopupModal) {
       boardPopupModal.classList.add("open");
-      document.body.style.overflow = "hidden";
       renderBoardPins(currentBoardFilter);
       playPaperRustle();
     }
@@ -5413,7 +5412,6 @@ const PORTFOLIO_CONFIG = {
   function closeBoard() {
     if (boardPopupModal) {
       boardPopupModal.classList.remove("open");
-      document.body.style.overflow = "";
       playPaperRustle();
     }
   }
