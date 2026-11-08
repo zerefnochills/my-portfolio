@@ -225,31 +225,72 @@ section[id], header[id], div[id] {
   gap: 16px;
   margin: 0 0 22px;
 }
+
+/* ---------- Captain's Secret Stash (Red Button with Perched Straw Hat) ---------- */
+.captain-stash-wrap {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.stash-strawhat-decor {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-5deg);
+  z-index: 2;
+  pointer-events: none;
+  filter: drop-shadow(0 3px 3px rgba(0, 0, 0, 0.28));
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.captain-stash-wrap:hover .stash-strawhat-decor {
+  transform: translateX(-50%) translateY(-5px) rotate(-9deg) scale(1.12);
+}
+
 a.treasure-chest-widget {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   width: auto;
   max-width: none;
-  background: var(--paper-card, #ffffff);
-  border: 2px solid var(--ink);
+  background: #dc2626 !important;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 55%, #b91c1c 100%) !important;
+  border: 2.5px solid var(--ink, #111) !important;
   border-radius: 999px;
-  padding: 8px 22px;
-  box-shadow: 3px 3px 0 var(--shadow);
-  margin-top: 4px;
+  padding: 10px 24px;
+  box-shadow: 3.5px 4px 0 var(--shadow, #111) !important;
+  margin-top: 0;
   text-decoration: none;
-  color: var(--ink);
+  color: #ffffff !important;
   font-family: var(--font-chewy, 'Chewy', cursive);
-  font-size: 1.05rem;
-  letter-spacing: 0.02em;
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.15s ease, border-color 0.15s ease, box-shadow 0.2s ease;
+  font-size: 1.1rem;
+  letter-spacing: 0.03em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45);
+  position: relative;
+  z-index: 1;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.15s ease, box-shadow 0.2s ease;
 }
+
 a.treasure-chest-widget:hover {
   transform: translateY(-2px) scale(1.03);
-  background: #fee2e2;
-  border-color: #dc2626;
-  color: #991b1b;
-  box-shadow: 4px 5px 0 var(--shadow);
+  background: linear-gradient(135deg, #f87171 0%, #ef4444 55%, #dc2626 100%) !important;
+  box-shadow: 4.5px 6px 0 var(--shadow, #111) !important;
+  color: #ffffff !important;
+}
+
+a.treasure-chest-widget:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 2px 2px 0 var(--shadow, #111) !important;
+}
+
+a.treasure-chest-widget .chest-icon {
+  font-size: 1.2rem;
+  color: #fef08a !important;
+  text-shadow: 0 0 6px rgba(254, 240, 138, 0.6);
+  animation: chestBounce 2.6s infinite ease-in-out;
 }
 
 /* ---------- Hero: wanted poster note no longer covers the bounty ---------- */
