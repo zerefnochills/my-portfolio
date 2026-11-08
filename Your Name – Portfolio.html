@@ -3023,6 +3023,231 @@ footer {
   font-family: var(--font-chewy);
 }
 
+
+/* =========================================================================
+   TACTILE FLOATING ISLAND NAVBAR
+   ========================================================================= */
+header.site-header {
+  position: sticky;
+  top: 14px;
+  z-index: 900;
+  padding: 0 12px;
+  margin-bottom: 24px;
+  pointer-events: none;
+}
+nav.nav-island {
+  pointer-events: auto;
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 8px 16px;
+  background: var(--paper-sticky, rgba(255, 250, 220, 0.94));
+  background-image: 
+    radial-gradient(var(--ink-soft) 0.5px, transparent 0.5px),
+    linear-gradient(to right, rgba(0,0,0,0.02) 1px, transparent 1px);
+  background-size: 14px 14px;
+  border: 2.5px solid var(--ink);
+  border-radius: 16px;
+  box-shadow: 0 4px 0 var(--ink), 0 8px 24px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+nav.nav-island:hover {
+  box-shadow: 0 6px 0 var(--ink), 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+/* Brand Area */
+.nav-brand-row {
+  display: flex;
+  align-items: center;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ink);
+}
+.brand-avatar-seal {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--paper-card, #fff);
+  border: 2px solid var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.brand:hover .brand-avatar-seal {
+  transform: rotate(-12deg) scale(1.12);
+}
+.brand-text-col {
+  display: flex;
+  flex-direction: column;
+}
+.brand .logo {
+  font-family: var(--font-spicy, 'Spicy Rice', cursive);
+  font-size: 1.45rem;
+  line-height: 1;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+.brand .logo-sub-tag {
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  letter-spacing: 0.14em;
+  margin-top: 2px;
+}
+.brand .logo-stamp {
+  font-family: var(--font-chewy, 'Chewy', cursive);
+  font-size: 0.82rem;
+  padding: 2px 7px;
+  background: #facc15;
+  color: #1c1917;
+  border: 1.5px solid var(--ink);
+  border-radius: 4px;
+  transform: rotate(-3deg);
+  box-shadow: 1.5px 1.5px 0 var(--ink);
+  letter-spacing: 0.04em;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Nav Links Dock */
+.nav-links-dock {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 4px 6px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 30px;
+  box-shadow: inset 1px 1px 0 rgba(0,0,0,0.06), 2px 2px 0 var(--ink);
+}
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  font-family: var(--font-chewy, 'Chewy', cursive);
+  font-size: 1.12rem;
+  color: var(--ink);
+  padding: 5px 11px;
+  border-radius: 20px;
+  border: 1.5px solid transparent;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+.nav-link .nav-icon {
+  font-size: 0.92rem;
+  opacity: 0.85;
+  transition: transform 0.18s ease;
+}
+.nav-link:hover {
+  background: var(--paper-card, #fff);
+  border-color: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 0 var(--ink);
+}
+.nav-link:hover .nav-icon {
+  transform: scale(1.2) rotate(4deg);
+}
+.nav-link.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+  box-shadow: 2px 2px 0 var(--shadow);
+}
+.nav-link.active .nav-icon {
+  opacity: 1;
+}
+
+/* Controls Bar */
+.controls-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.control-btn {
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  border-radius: 8px;
+  padding: 6px 11px;
+  font-family: var(--font-chewy, 'Chewy', cursive);
+  font-size: 1.05rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 2px 2px 0 var(--ink);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.control-btn:hover {
+  background: var(--paper-card, #fff);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.control-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+
+/* Responsive Navbar */
+@media (max-width: 900px) {
+  header.site-header {
+    top: 8px;
+    padding: 0 8px;
+  }
+  nav.nav-island {
+    padding: 8px 12px;
+  }
+  .brand-text-col .logo-sub-tag {
+    display: none;
+  }
+  .nav-links-dock {
+    overflow-x: auto;
+    max-width: 100%;
+    scrollbar-width: none;
+  }
+  .nav-links-dock::-webkit-scrollbar {
+    display: none;
+  }
+  .nav-link {
+    font-size: 1.02rem;
+    padding: 4px 8px;
+  }
+}
+@media (max-width: 680px) {
+  nav.nav-island {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .nav-brand-row {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .nav-links-dock {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+  .controls-bar {
+    margin-left: auto;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3106,22 +3331,42 @@ footer {
 <main>
   <!-- NAVIGATION -->
   <header class="site-header">
-    <nav>
-      <a class="brand" href="#top">
-        <span class="logo" id="siteLogoName">Your Name</span>
-        <span class="logo-stamp">portfolio</span>
-      </a>
-      <ul>
-        <li><a class="nav-link" href="#about">about</a></li>
-        <li><a class="nav-link" href="#work">work</a></li>
-        <li><a class="nav-link" href="#journey">journey</a></li>
-        <li><a class="nav-link" href="#skills">skills</a></li>
-        <li><a class="nav-link" href="#hall-of-fame">fame</a></li>
-        <li><a class="nav-link" href="#contact">contact</a></li>
+    <nav class="nav-island">
+      <div class="nav-brand-row">
+        <a class="brand" href="#top" title="Back to top &bull; Grand Line Voyage">
+          <div class="brand-avatar-seal" aria-hidden="true">
+            <!-- Mini Straw Hat Jolly Roger Emblem -->
+            <svg viewBox="0 0 40 40" width="28" height="28" class="doodle" aria-hidden="true">
+              <path d="M6 22C6 16 14 14 20 14S34 16 34 22 26 26 20 26 6 24 6 22Z" fill="#eab308"/>
+              <path d="M12 18C11 8 29 8 28 18" fill="#eab308"/>
+              <path d="M12 17C17 20 23 20 28 17" stroke="#dc2626" stroke-width="1.8"/>
+              <circle cx="16" cy="22" r="1.5" fill="#1c1917"/>
+              <circle cx="24" cy="22" r="1.5" fill="#1c1917"/>
+              <path d="M17 24Q20 27 23 24" stroke="#1c1917" stroke-width="1.5" fill="none"/>
+            </svg>
+          </div>
+          <div class="brand-text-col">
+            <span class="logo" id="siteLogoName">Your Name</span>
+            <span class="logo-sub-tag">LOGBOOK &bull; 2026</span>
+          </div>
+          <span class="logo-stamp">portfolio</span>
+        </a>
+      </div>
+
+      <!-- Tactile Dock Navigation Pills -->
+      <ul class="nav-links-dock" id="navLinksDock">
+        <li><a class="nav-link active" href="#top" data-section="top"><span class="nav-icon">⚓</span><span>about</span></a></li>
+        <li><a class="nav-link" href="#work" data-section="work"><span class="nav-icon">💼</span><span>work</span></a></li>
+        <li><a class="nav-link" href="#journey" data-section="journey"><span class="nav-icon">🗺</span><span>journey</span></a></li>
+        <li><a class="nav-link" href="#skills" data-section="skills"><span class="nav-icon">⚡</span><span>skills</span></a></li>
+        <li><a class="nav-link" href="#hall-of-fame" data-section="hall-of-fame"><span class="nav-icon">🏆</span><span>fame</span></a></li>
+        <li><a class="nav-link" href="#contact" data-section="contact"><span class="nav-icon">✉</span><span>contact</span></a></li>
       </ul>
+
+      <!-- Controls Bar -->
       <div class="controls-bar" style="position:relative">
         <!-- Sound FX toggle button -->
-        <button class="control-btn" id="soundToggle" type="button" title="Toggle pen scratch sound effects">
+        <button class="control-btn" id="soundToggle" type="button" title="Toggle sound effects">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
             <path id="soundWave1" d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
@@ -5133,7 +5378,42 @@ const PORTFOLIO_CONFIG = {
     });
   }
 
-  // 12. Audio cue on link hovers
+  
+  // 12. Active Nav Link Scroll Spy
+  const navSections = [
+    { id: "top", el: document.getElementById("top") },
+    { id: "work", el: document.getElementById("work") },
+    { id: "journey", el: document.getElementById("journey") },
+    { id: "skills", el: document.getElementById("skills") },
+    { id: "hall-of-fame", el: document.getElementById("hall-of-fame") },
+    { id: "contact", el: document.getElementById("contact") }
+  ];
+  const dockNavLinks = document.querySelectorAll(".nav-links-dock .nav-link");
+
+  function updateActiveNav() {
+    const scrollPos = window.scrollY + 180;
+    let currentId = "top";
+
+    for (let i = 0; i < navSections.length; i++) {
+      const item = navSections[i];
+      if (item.el && item.el.offsetTop <= scrollPos) {
+        currentId = item.id;
+      }
+    }
+
+    dockNavLinks.forEach(function(link) {
+      if (link.dataset.section === currentId) {
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", updateActiveNav, { passive: true });
+  updateActiveNav();
+
+  // 13. Audio cue on link hovers
   document.querySelectorAll("a, button, .card").forEach(function(interactiveEl) {
     interactiveEl.addEventListener("mouseenter", function() {
       if (soundEnabled && Math.random() > 0.4) playPenScratch();
