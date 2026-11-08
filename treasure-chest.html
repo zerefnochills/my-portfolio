@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Captain's Secret Treasure Vault &bull; Deepak Pandey</title>
   <meta name="description" content="The secret One Piece treasure chest of Captain Deepak Pandey. View exclusive blueprints, personal manifesto, and the legendary Golden Nakama Certificate.">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -507,6 +507,47 @@
       background: #dc2626;
       box-shadow: 0 7px 0 var(--ink), 0 14px 28px rgba(220, 38, 38, 0.3);
       color: #ffffff;
+    }
+
+    /* Mobile Responsiveness for Android & iOS */
+    * { -webkit-tap-highlight-color: transparent; }
+    button, a { touch-action: manipulation; }
+
+    @media (max-width: 680px) {
+      body {
+        padding: 12px 12px 40px;
+      }
+      .vault-nav {
+        padding: 8px 12px;
+        margin-bottom: 20px;
+      }
+      .chest-box-container {
+        width: min(300px, 86vw);
+        height: 200px;
+      }
+      .chest-glow-aura {
+        width: 280px;
+        height: 280px;
+      }
+      .vault-hero h1 {
+        font-size: 2.1rem;
+      }
+      .vault-subtitle {
+        font-size: 1.05rem;
+      }
+      .vault-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .vault-card {
+        padding: 20px 16px;
+      }
+      .manifesto-parchment {
+        padding: 20px 16px;
+      }
+      .secret-code-display {
+        font-size: 1.25rem;
+      }
     }
   </style>
 </head>

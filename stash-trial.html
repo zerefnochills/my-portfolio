@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Captain's Secret Trial &bull; Deepak Pandey</title>
   <meta name="description" content="Prove your wit on the Grand Line! Complete Captain Deepak Pandey's Secret Trial to unlock the legendary Golden Treasure Chest.">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -436,6 +436,55 @@
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Mobile Responsiveness for Android & iOS */
+    * { -webkit-tap-highlight-color: transparent; }
+    button, a { touch-action: manipulation; }
+
+    @media (max-width: 680px) {
+      body {
+        padding: 12px 12px 40px;
+      }
+      .trial-nav {
+        padding: 8px 12px;
+        margin-bottom: 20px;
+      }
+      .trial-nav a.back-link {
+        font-size: 1.1rem;
+      }
+      .bounty-tally {
+        padding: 4px 10px;
+        font-size: 0.95rem;
+      }
+      .trial-hero h1 {
+        font-size: 2.1rem;
+      }
+      .trial-subtitle {
+        font-size: 1.05rem;
+      }
+      .step-checkpoint {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+      }
+      .trial-box {
+        padding: 20px 16px;
+      }
+      .question-text {
+        font-size: 1.25rem;
+      }
+      .option-btn {
+        padding: 10px 14px;
+        font-size: 1.05rem;
+        min-height: 48px;
+      }
+      .victory-box {
+        padding: 24px 16px;
+      }
+      .victory-title {
+        font-size: 2.2rem;
+      }
     }
   </style>
 </head>
