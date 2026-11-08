@@ -510,12 +510,30 @@ nav a.nav-link:hover::after {
 /* HERO */
 .hero {
   display: grid;
-  grid-template-columns: 1.25fr 1fr;
-  gap: 28px;
+  grid-template-columns: 1.15fr 400px;
+  gap: 56px;
   align-items: center;
-  min-height: 75vh;
-  padding: 30px 0 20px;
+  justify-content: space-between;
+  min-height: 80vh;
+  padding: 36px 0 28px;
 }
+@media (max-width: 960px) {
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.hero-left-col {
+  max-width: 660px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.hero-left-col h1 {
+  margin-bottom: 8px;
+}
+
 .hero h1 {
   font-family: var(--script);
   font-weight: 400;
@@ -569,13 +587,18 @@ nav a.nav-link:hover::after {
 .status-pill {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 1.05rem;
-  color: var(--ink-soft);
-  letter-spacing: 0.05em;
-  font-family: var(--badge);
-  font-size: 1.3rem;
-  margin-top: 10px;
+  gap: 10px;
+  background: var(--paper-card, #fffdf7);
+  border: 1.8px solid var(--ink);
+  border-radius: 20px;
+  padding: 6px 16px;
+  box-shadow: 2px 2px 0 var(--ink);
+  font-family: var(--font-chewy, 'Chewy', cursive);
+  font-size: 1.08rem;
+  letter-spacing: 0.03em;
+  color: var(--ink);
+  margin-top: 12px;
+  margin-bottom: 4px;
 }
 .status-dot {
   width: 9px;
@@ -594,8 +617,9 @@ nav a.nav-link:hover::after {
 .wanted-poster-frame {
   position: relative;
   width: 100%;
-  max-width: 340px;
-  justify-self: center;
+  max-width: 380px;
+  justify-self: end;
+  margin-left: auto;
   background: var(--paper-sticky);
   border: 3.5px solid var(--ink);
   border-radius: 12px 18px 14px 16px/16px 14px 18px 12px;
@@ -883,8 +907,13 @@ h2.section-title {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 32px;
+}
+@media (max-width: 780px) {
+  .project-grid {
+    grid-template-columns: 1fr;
+  }
 }
 .card {
   border: 2.5px solid var(--ink);
@@ -927,15 +956,31 @@ h2.section-title {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: nowrap;
+}
+.card-top .tags {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: right;
 }
 .card-badge {
-  font-family: var(--badge);
-  font-size: 1.15rem;
+  font-family: var(--font-chewy, 'Chewy', cursive);
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
   border: 1.5px solid var(--ink);
-  padding: 1px 8px;
-  border-radius: 10px;
+  padding: 3px 10px;
+  border-radius: 6px;
   color: var(--ink);
+  background: #fef08a;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .card-badge.featured {
   background: var(--accent-soft);
@@ -943,11 +988,13 @@ h2.section-title {
   color: var(--accent);
 }
 .card h3 {
-  font-family: var(--script);
+  font-family: var(--font-spicy, 'Spicy Rice', cursive);
   font-weight: 400;
-  font-size: 2.6rem;
-  margin: 4px 0 8px;
-  line-height: 1;
+  font-size: 1.85rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  margin: 6px 0 10px;
+  line-height: 1.25;
 }
 .card p {
   margin: 0 0 16px;
@@ -1100,16 +1147,23 @@ h2.section-title {
   padding-bottom: 4px;
 }
 .step::before {
-  content: "";
+  content: "✦";
   position: absolute;
-  left: -44px;
-  top: 10px;
-  width: 20px;
-  height: 20px;
-  border: 3px solid var(--ink);
-  border-radius: 50% 46% 54% 48%;
-  background: var(--paper);
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  left: -48px;
+  top: 4px;
+  width: 24px;
+  height: 24px;
+  border: 2.5px solid var(--ink);
+  border-radius: 50%;
+  background: #fef08a;
+  color: var(--ink);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 4px var(--paper), 2px 2px 0 var(--ink);
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.2s ease;
+  z-index: 2;
 }
 .step:hover::before {
   transform: scale(1.3);
@@ -1122,10 +1176,23 @@ h2.section-title {
   flex-wrap: wrap;
 }
 .step-year {
-  font-family: var(--script);
-  font-weight: 400;
-  font-size: 2.8rem;
-  line-height: 1;
+  background: var(--paper-sticky, #fef9c3);
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-family: var(--font-spicy, 'Spicy Rice', cursive);
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.step-role {
+  font-family: var(--font-chewy, 'Chewy', cursive);
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
   color: var(--ink);
 }
 .step-role {
@@ -1144,10 +1211,15 @@ h2.section-title {
   gap: 8px;
 }
 .step-chip {
-  font-size: 1.05rem;
-  border: 1px dashed var(--ink-soft);
-  border-radius: 12px;
-  padding: 1px 10px;
+  background: var(--paper-card, #fffdf7);
+  border: 1.5px solid var(--ink);
+  border-radius: 6px;
+  padding: 3px 12px;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.85rem;
+  color: var(--ink);
+  box-shadow: 1.5px 1.5px 0 var(--ink);
+  transition: transform 0.15s ease;
 }
 
 /* SKILLS SECTION */
@@ -3200,26 +3272,37 @@ nav.nav-island:hover {
 
 /* Hero Stats Badges Row */
 .hero-stats-row {
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
-  margin-top: 18px;
-  flex-wrap: wrap;
+  width: 100%;
+  max-width: 580px;
+  margin-top: 16px;
+  margin-bottom: 14px;
+}
+@media (max-width: 540px) {
+  .hero-stats-row {
+    grid-template-columns: 1fr;
+  }
 }
 .hero-stat-badge {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 8px;
-  background: var(--paper-sticky, #fef9c3);
+  background: var(--paper-card, #fffdf7);
   border: 2px solid var(--ink);
   border-radius: 8px;
-  padding: 7px 12px;
+  padding: 8px 12px;
   box-shadow: 2.5px 2.5px 0 var(--ink);
   font-family: var(--font-chewy, 'Chewy', cursive);
-  font-size: 0.98rem;
+  font-size: 1.02rem;
   color: var(--ink);
-  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.15s ease;
   cursor: default;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .hero-stat-badge:hover {
   transform: translateY(-3px) rotate(-1deg);
@@ -3228,7 +3311,10 @@ nav.nav-island:hover {
 
 /* Secret Treasure Chest Widget */
 .treasure-chest-widget {
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 580px;
   align-items: center;
   gap: 8px;
   background: #fef3c7;
@@ -3817,9 +3903,7 @@ body.zoro-cursor-active textarea {
 
   <!-- HERO SECTION -->
   <header class="hero" id="top">
-    <div>
-
-
+    <div class="hero-left-col">
       <h1 class="write" data-t="2.2s" id="heroName">Deepak Pandey</h1>
       <svg class="doodle draw" style="width:min(420px,85%);height:16px;display:block;margin:0 0 16px" viewBox="0 0 380 16" preserveAspectRatio="none" aria-hidden="true">
         <path d="M4 10C80 2 160 16 240 8S340 4 376 9"/>
@@ -3961,7 +4045,7 @@ body.zoro-cursor-active textarea {
       </div>
       <!-- Taped Note Annotation -->
       <div class="wanted-annotation-note" aria-hidden="true">
-        <span>Deepak Pandey: Founder @ Synapse Calyx &bull; Relentless curiosity &amp; pure craft</span>
+        <span>Wanted: Relentless curiosity &amp; pure craft ✦</span>
       </div>
     </div>
   </header>
