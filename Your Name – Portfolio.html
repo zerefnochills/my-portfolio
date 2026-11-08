@@ -13,8 +13,24 @@
 <title>Your Name – Portfolio &amp; Digital Sketchbook</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Patrick+Hand&family=Caveat:wght@600&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Spicy+Rice&family=Mrs+Saint+Delafield&family=Patrick+Hand&family=Caveat:wght@600&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
+/* LOCAL FONT FACES: Chewy & Spicy Rice */
+@font-face {
+  font-family: 'Spicy Rice';
+  src: url('./fonts/SpicyRice-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Chewy';
+  src: url('./fonts/Chewy-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 :root, [data-theme="parchment"] {
   --sans: 'Space Grotesk', system-ui, -apple-system, sans-serif;
   --mono: 'JetBrains Mono', ui-monospace, monospace;
@@ -90,9 +106,13 @@
 }
 
 :root {
+  --font-spicy: 'Spicy Rice', 'Space Grotesk', cursive, sans-serif;
+  --font-chewy: 'Chewy', 'Patrick Hand', cursive, sans-serif;
   --script: "Mrs Saint Delafield", "Brush Script MT", cursive;
-  --hand: "Patrick Hand", "Comic Sans MS", cursive;
-  --badge: "Caveat", cursive;
+  --hand: 'Chewy', "Patrick Hand", cursive, sans-serif;
+  --badge: 'Chewy', "Caveat", cursive, sans-serif;
+  --display: 'Spicy Rice', cursive, sans-serif;
+  --structured: 'Chewy', cursive, sans-serif;
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -2928,6 +2948,79 @@ footer {
   box-shadow: 6px 6px 0 var(--ink);
   max-height: 90vh;
   overflow-y: auto;
+}
+
+
+/* =========================================================================
+   CLEAN & STRUCTURED TYPOGRAPHY (SPICY RICE & CHEWY)
+   ========================================================================= */
+/* Display Headlines in Spicy Rice */
+.section-title,
+.contact-headline,
+.board-title,
+.wanted-header,
+.wanted-dead-or-alive,
+.wanted-name,
+.marine-text,
+.transmission-card-title,
+.hof-card-title {
+  font-family: var(--font-spicy);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* Nav links in Chewy for clean structured legibility */
+.site-header nav ul li a,
+.nav-link {
+  font-family: var(--font-chewy);
+  font-size: 1.25rem;
+  letter-spacing: 0.03em;
+  font-weight: 400;
+}
+
+/* Hero tagline & Section subtitles in Chewy */
+.hero-tagline,
+.section-subtitle,
+.board-subtitle,
+.pin-caption,
+.hof-card-desc,
+.project-desc,
+.timeline-desc,
+.speech-bubble {
+  font-family: var(--font-chewy);
+  letter-spacing: 0.015em;
+  line-height: 1.35;
+}
+
+/* Interactive Buttons in Chewy */
+.hero-btn,
+.transmit-btn,
+.filter-btn,
+.hof-filter-btn,
+.board-filter-btn,
+.board-action-btn,
+.pin-submit-btn,
+.hof-add-btn,
+.control-btn,
+.theme-opt,
+.ribbon-text,
+.sticky-note-title {
+  font-family: var(--font-chewy);
+  letter-spacing: 0.03em;
+}
+
+/* Badges & Tags in Chewy */
+.status-pill,
+.logo-stamp,
+.project-badge,
+.tag,
+.skill-item,
+.pin-badge,
+.hof-badge,
+.photo-change-badge,
+.berry-symbol,
+.bounty-amount {
+  font-family: var(--font-chewy);
 }
 
 </style>

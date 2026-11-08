@@ -7,8 +7,23 @@
 <title>The Digital Sketchbook Studio – Draw &amp; Doodle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Patrick+Hand&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Spicy+Rice&family=Mrs+Saint+Delafield&family=Patrick+Hand&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <style>
+/* LOCAL FONT FACES: Chewy & Spicy Rice */
+@font-face {
+  font-family: 'Spicy Rice';
+  src: url('./fonts/SpicyRice-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Chewy';
+  src: url('./fonts/Chewy-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 :root, [data-theme="parchment"] {
   --paper: #fcf3c6;
   --paper-card: rgba(255, 255, 255, 0.7);
@@ -61,9 +76,11 @@
 }
 
 :root {
+  --font-spicy: 'Spicy Rice', cursive, sans-serif;
+  --font-chewy: 'Chewy', 'Patrick Hand', cursive, sans-serif;
   --script: "Mrs Saint Delafield", cursive;
-  --hand: "Patrick Hand", cursive;
-  --badge: "Caveat", cursive;
+  --hand: 'Chewy', "Patrick Hand", cursive;
+  --badge: 'Chewy', "Caveat", cursive;
 }
 
 *, *::before, *::after {
