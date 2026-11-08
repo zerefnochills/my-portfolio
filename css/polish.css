@@ -201,13 +201,58 @@ section[id], header[id], div[id] {
   stroke-dashoffset: 0 !important;
 }
 
+/* ---------- Minimal Hero Layout & Clean Spacing ---------- */
+.hero {
+  min-height: 80vh;
+  align-items: center;
+  padding: 30px 0 96px;
+}
+.hero-left-col {
+  padding-left: 0;
+  max-width: 620px;
+}
+.hero-tagline {
+  font-size: clamp(1.22rem, 1.9vw, 1.55rem);
+  line-height: 1.45;
+  color: var(--ink-soft);
+  max-width: 28em;
+  margin: 12px 0 24px;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 22px;
+}
 a.treasure-chest-widget {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: auto;
+  max-width: none;
+  background: var(--paper-card, #ffffff);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  padding: 8px 22px;
+  box-shadow: 3px 3px 0 var(--shadow);
+  margin-top: 4px;
   text-decoration: none;
   color: var(--ink);
+  font-family: var(--font-chewy, 'Chewy', cursive);
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.15s ease, border-color 0.15s ease, box-shadow 0.2s ease;
+}
+a.treasure-chest-widget:hover {
+  transform: translateY(-2px) scale(1.03);
+  background: #fee2e2;
+  border-color: #dc2626;
+  color: #991b1b;
+  box-shadow: 4px 5px 0 var(--shadow);
 }
 
 /* ---------- Hero: wanted poster note no longer covers the bounty ---------- */
-.hero { padding-bottom: 96px; }
 .wanted-annotation-note {
   bottom: -74px;
   right: 14px;
