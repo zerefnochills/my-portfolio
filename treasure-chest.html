@@ -15,15 +15,15 @@
 
   <style>
     :root {
-      --paper: #f6f1e3;
-      --paper-card: #fdfbf7;
-      --paper-sticky: #fffde0;
-      --ink: #0f172a;
-      --ink-soft: #334155;
-      --shadow: rgba(15, 23, 42, 0.14);
-      --gold: #facc15;
-      --gold-dark: #a16207;
-      --accent: #2563eb;
+      --paper: #f8f9fa;
+      --paper-card: #ffffff;
+      --paper-sticky: rgba(255, 255, 255, 0.98);
+      --ink: #09090b;
+      --ink-soft: #52525b;
+      --shadow: rgba(0, 0, 0, 0.12);
+      --gold: #dc2626;
+      --gold-dark: #991b1b;
+      --accent: #dc2626;
       --font-chewy: 'Chewy', cursive;
       --font-spicy: 'Spicy Rice', cursive;
       --font-hand: 'Patrick Hand', cursive;
@@ -39,8 +39,8 @@
     body {
       background-color: var(--paper);
       background-image: 
-        radial-gradient(rgba(234, 179, 8, 0.15) 1.5px, transparent 1.5px),
-        linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+        radial-gradient(rgba(220, 38, 38, 0.12) 1.5px, transparent 1.5px),
+        linear-gradient(to right, rgba(9, 9, 11, 0.03) 1px, transparent 1px);
       background-size: 24px 24px, 48px 48px;
       color: var(--ink);
       font-family: var(--font-hand);
@@ -93,8 +93,9 @@
       gap: 6px;
       font-family: var(--font-chewy);
       font-size: 1.15rem;
-      background: #facc15;
-      border: 1.5px solid var(--ink);
+      background: #fee2e2;
+      border: 1.5px solid #dc2626;
+      color: #991b1b;
       padding: 4px 14px;
       border-radius: 10px;
       box-shadow: 2px 2px 0 var(--ink);
@@ -121,8 +122,9 @@
       font-size: 1rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      background: #fde047;
-      border: 1.5px solid var(--ink);
+      background: #fee2e2;
+      border: 1.5px solid #dc2626;
+      color: #991b1b;
       padding: 3px 12px;
       border-radius: 6px;
       margin-bottom: 10px;
@@ -133,7 +135,7 @@
       font-size: clamp(2.4rem, 6vw, 3.8rem);
       line-height: 1.05;
       color: var(--ink);
-      text-shadow: 3px 3px 0 rgba(250, 204, 21, 0.45);
+      text-shadow: 3px 3px 0 rgba(220, 38, 38, 0.25);
       margin-bottom: 8px;
     }
     .vault-subtitle {
@@ -166,7 +168,7 @@
       user-select: none;
     }
 
-    /* Golden Glow Rays behind chest */
+    /* Crimson Glow Rays behind chest */
     .chest-glow-aura {
       position: absolute;
       top: 50%;
@@ -174,7 +176,7 @@
       transform: translate(-50%, -50%);
       width: 380px;
       height: 380px;
-      background: radial-gradient(circle, rgba(250, 204, 21, 0.6) 0%, rgba(234, 179, 8, 0.25) 45%, transparent 70%);
+      background: radial-gradient(circle, rgba(220, 38, 38, 0.4) 0%, rgba(239, 68, 68, 0.15) 45%, transparent 70%);
       border-radius: 50%;
       z-index: 1;
       pointer-events: none;
@@ -194,8 +196,8 @@
       left: 20px;
       right: 20px;
       height: 130px;
-      background: #78350f;
-      background: linear-gradient(to bottom, #92400e 0%, #78350f 100%);
+      background: #18181b;
+      background: linear-gradient(to bottom, #27272a 0%, #09090b 100%);
       border: 3.5px solid var(--ink);
       border-radius: 0 0 16px 16px;
       box-shadow: 0 10px 0 var(--ink), 0 18px 30px rgba(0,0,0,0.3);
@@ -207,15 +209,15 @@
       content: "";
       position: absolute;
       inset: 0;
-      background-image: repeating-linear-gradient(to right, transparent, transparent 40px, rgba(0,0,0,0.2) 41px, transparent 42px);
+      background-image: repeating-linear-gradient(to right, transparent, transparent 40px, rgba(255,255,255,0.06) 41px, transparent 42px);
     }
-    /* Gold straps */
+    /* Crimson straps */
     .chest-strap-left, .chest-strap-right {
       position: absolute;
       top: 0;
       bottom: 0;
       width: 28px;
-      background: #eab308;
+      background: #dc2626;
       border: 2px solid var(--ink);
       z-index: 3;
     }
@@ -230,8 +232,8 @@
       transform: translateX(-50%);
       width: 44px;
       height: 52px;
-      background: #facc15;
-      border: 2.5px solid var(--ink);
+      background: #fee2e2;
+      border: 2.5px solid #dc2626;
       border-radius: 8px 8px 14px 14px;
       z-index: 4;
       display: flex;
@@ -243,7 +245,7 @@
     .lock-keyhole {
       width: 10px;
       height: 10px;
-      background: var(--ink);
+      background: #dc2626;
       border-radius: 50%;
       position: relative;
     }
@@ -254,7 +256,7 @@
       left: 2px;
       width: 6px;
       height: 12px;
-      background: var(--ink);
+      background: #dc2626;
     }
 
     /* Chest Lid */
@@ -264,8 +266,8 @@
       left: 12px;
       right: 12px;
       height: 90px;
-      background: #a16207;
-      background: linear-gradient(to bottom, #ca8a04 0%, #a16207 40%, #78350f 100%);
+      background: #27272a;
+      background: linear-gradient(to bottom, #3f3f46 0%, #27272a 40%, #18181b 100%);
       border: 3.5px solid var(--ink);
       border-radius: 120px 120px 6px 6px / 80px 80px 6px 6px;
       z-index: 5;
@@ -285,15 +287,14 @@
       transform: translateY(0);
     }
 
-    /* Gold pile overflowing when open */
+    /* Ruby Pile overflowing when open */
     .chest-gold-pile {
       position: absolute;
       top: 25px;
       left: 30px;
       right: 30px;
       height: 60px;
-      background: #facc15;
-      background: radial-gradient(circle, #fef08a 0%, #eab308 60%, #ca8a04 100%);
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 50%, #991b1b 100%);
       border: 2px solid var(--ink);
       border-radius: 40px 40px 0 0;
       z-index: 3;
@@ -302,7 +303,8 @@
       justify-content: center;
       font-family: var(--font-spicy);
       font-size: 1.4rem;
-      color: #713f12;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.4);
       opacity: 0;
       transform: translateY(20px);
       transition: all 0.5s ease 0.2s;
@@ -312,13 +314,13 @@
     .chest-action-btn {
       font-family: var(--font-chewy);
       font-size: 1.45rem;
-      background: #facc15;
-      color: var(--ink);
+      background: #dc2626;
+      color: #ffffff;
       border: 2.5px solid var(--ink);
       padding: 10px 24px;
       border-radius: 14px;
       cursor: pointer;
-      box-shadow: 0 4px 0 var(--ink), 0 8px 18px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 0 var(--ink), 0 8px 18px rgba(220, 38, 38, 0.25);
       transition: all 0.15s ease;
       display: inline-flex;
       align-items: center;
@@ -327,8 +329,8 @@
     }
     .chest-action-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 0 var(--ink), 0 12px 24px rgba(0,0,0,0.2);
-      background: #fde047;
+      box-shadow: 0 6px 0 var(--ink), 0 12px 24px rgba(220, 38, 38, 0.35);
+      background: #ef4444;
     }
 
     /* =========================================================================
@@ -369,8 +371,9 @@
       font-family: var(--font-mono);
       font-size: 0.8rem;
       font-weight: bold;
-      background: #fef08a;
-      border: 1px solid var(--ink);
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #dc2626;
       padding: 2px 8px;
       border-radius: 6px;
     }
@@ -396,8 +399,8 @@
 
     /* Certificate Box */
     .certificate-preview-box {
-      background: #fffef2;
-      border: 2px dashed var(--ink);
+      background: #ffffff;
+      border: 2px dashed #dc2626;
       border-radius: 12px;
       padding: 16px;
       text-align: center;
@@ -496,13 +499,14 @@
       padding: 12px 28px;
       border: 2.5px solid var(--ink);
       border-radius: 16px;
-      box-shadow: 0 5px 0 var(--gold), 0 10px 24px rgba(0,0,0,0.2);
+      box-shadow: 0 5px 0 #dc2626, 0 10px 24px rgba(0,0,0,0.2);
       transition: all 0.2s ease;
     }
     .return-ship-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 7px 0 var(--gold), 0 14px 28px rgba(0,0,0,0.3);
-      color: #fde047;
+      background: #dc2626;
+      box-shadow: 0 7px 0 var(--ink), 0 14px 28px rgba(220, 38, 38, 0.3);
+      color: #ffffff;
     }
   </style>
 </head>

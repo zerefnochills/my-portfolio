@@ -284,6 +284,14 @@ html.js-polish .wanted-poster-frame:not(.poster-in) { opacity: 0; }
   border-radius: 50%;
   margin: 0 clamp(20px, 3vw, 38px);
 }
+.skills-ticker-tape .ticker-dot {
+  background: var(--accent, #dc2626) !important;
+  box-shadow: 0 0 8px rgba(220, 38, 38, 0.4);
+}
+.skills-ticker-tape .ticker-dot:nth-child(even) {
+  background: #ffffff !important;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+}
 @keyframes stripScroll {
   to { transform: translateX(-50%); }
 }
@@ -316,9 +324,10 @@ html.js-polish .wanted-poster-frame:not(.poster-in) { opacity: 0; }
   padding: 4px 16px;
   border: 2px solid var(--ink);
   border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
-  background: #fde047;
-  color: #1c1917;
+  background: var(--accent, #dc2626);
+  color: #ffffff;
   transform: rotate(-1deg);
+  box-shadow: 2px 2px 0 var(--ink);
 }
 .cat-emoji { display: none; }
 .cat-title {
@@ -346,9 +355,10 @@ html.js-polish .wanted-poster-frame:not(.poster-in) { opacity: 0; }
 .tech-icon-tile:focus-visible {
   transform: translateY(-4px) rotate(-3deg);
   box-shadow: 3px 5px 0 var(--shadow);
+  border-color: var(--accent, #dc2626);
   outline: none;
 }
-.tech-icon-tile:focus-visible { outline: 3px solid var(--accent, #2d2a9c); outline-offset: 3px; }
+.tech-icon-tile:focus-visible { outline: 3px solid var(--accent, #dc2626); outline-offset: 3px; }
 .tech-tooltip {
   position: absolute;
   bottom: calc(100% + 10px);
@@ -358,6 +368,7 @@ html.js-polish .wanted-poster-frame:not(.poster-in) { opacity: 0; }
   border-radius: 6px;
   background: var(--ink);
   color: var(--paper);
+  border: 1px solid var(--accent, #dc2626);
   font-family: var(--hand);
   font-size: 1rem;
   line-height: 1.2;
