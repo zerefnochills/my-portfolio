@@ -301,22 +301,26 @@ svg.doodle {
 @keyframes dr { to { stroke-dashoffset: 0; } }
 
 .quote {
-  font-family: var(--script);
-  font-size: clamp(2.2rem, 7vw, 4rem);
-  line-height: 1.1;
-  margin: 14px auto 4px;
-  max-width: 14em;
-  min-height: 2.2em;
+  font-family: var(--font-spicy, 'Spicy Rice', cursive);
+  font-size: clamp(1.85rem, 5vw, 2.9rem);
+  line-height: 1.28;
+  margin: 18px auto 8px;
+  max-width: 17em;
+  min-height: 2.5em;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.4);
 }
 .by {
-  font-size: 1.15rem;
-  color: var(--ink-soft);
-  font-style: italic;
+  font-family: var(--font-chewy, 'Chewy', cursive);
+  font-size: 1.45rem;
+  color: var(--accent, #d97706);
+  letter-spacing: 0.04em;
 }
 .bar {
-  width: min(320px, 70vw);
+  width: min(340px, 72vw);
   height: 24px;
-  margin: 20px auto 4px;
+  margin: 22px auto 6px;
   display: block;
 }
 .bar path {
@@ -324,28 +328,31 @@ svg.doodle {
   stroke-dashoffset: calc(1 - var(--p, 0));
 }
 .pct {
-  font-size: 1rem;
-  color: var(--ink-soft);
-  font-family: var(--badge);
-  font-size: 1.3rem;
+  color: var(--ink);
+  font-family: var(--font-chewy, 'Chewy', cursive);
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  font-weight: 700;
 }
 .skip-btn {
-  margin-top: 14px;
-  background: transparent;
-  border: 1.5px dashed var(--ink-soft);
-  color: var(--ink-soft);
-  font-family: var(--hand);
+  margin-top: 16px;
+  background: var(--paper-card, rgba(255, 255, 255, 0.6));
+  border: 2px dashed var(--ink-soft);
+  color: var(--ink);
+  font-family: var(--font-chewy, 'Chewy', cursive);
   font-size: 1.05rem;
-  padding: 6px 14px;
+  padding: 6px 16px;
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: 2px 2px 0 var(--shadow);
 }
 .skip-btn:hover {
-  background: var(--ink-faint);
+  background: #fff;
   color: var(--ink);
   border-style: solid;
   transform: translateY(-2px);
+  box-shadow: 3px 3px 0 var(--ink);
 }
 
 /* LAYOUT */
@@ -5055,7 +5062,7 @@ const PORTFOLIO_CONFIG = {
 
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isRevisit = sessionStorage.getItem("portfolio_visited") === "true";
-  const total = reduceMotion ? 150 : (isRevisit ? 600 : 1600);
+  const total = reduceMotion ? 200 : (isRevisit ? 3000 : 5000);
   let start = null;
   let loaderDone = false;
 
@@ -5083,7 +5090,7 @@ const PORTFOLIO_CONFIG = {
     if (byEl) byEl.classList.add("on");
   });
 
-  setTimeout(enterSite, 2400); // Safety timeout guarantee
+  setTimeout(enterSite, 6200); // Safety timeout guarantee
   function tick(ts) {
     if (loaderDone) return;
     if (!start) start = ts;
