@@ -3820,7 +3820,6 @@ body.zoro-cursor-active textarea {
       <path pathLength="1" d="M4 12C30 2 50 22 80 12S130 2 160 12 210 22 240 12 290 4 316 12"/>
     </svg>
     <div class="pct" id="pct">0%</div>
-    <button class="skip-btn" id="skipLoaderBtn" type="button">skip intro [space] ↵</button>
   </div>
 </div>
 
@@ -5849,6 +5848,12 @@ const PORTFOLIO_CONFIG = {
     }
   }
 
+  // Skipping feature: click anywhere on the loader screen or press Space / Enter / Escape
+  if (loader) {
+    loader.addEventListener("click", function() {
+      enterSite();
+    });
+  }
   if (skipBtn) {
     skipBtn.addEventListener("click", function(e) {
       e.stopPropagation();
@@ -5856,7 +5861,7 @@ const PORTFOLIO_CONFIG = {
     });
   }
   window.addEventListener("keydown", function(e) {
-    if (e.code === "Space" && !loaderDone) {
+    if ((e.code === "Space" || e.key === "Enter" || e.key === "Escape") && !loaderDone) {
       e.preventDefault();
       enterSite();
     }
