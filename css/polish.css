@@ -11,15 +11,197 @@ main {
   filter: none;
 }
 
-/* ---------- Navbar: one row instead of wrapping ---------- */
-@media (min-width: 681px) {
-  nav.nav-island { flex-wrap: nowrap; }
-  .nav-brand-row, .controls-bar { flex-shrink: 0; }
-  .nav-links-dock { flex-shrink: 1; min-width: 0; }
+/* ---------- Navbar: Responsive & Non-Overlapping Tactile Dock ---------- */
+header.site-header {
+  position: sticky;
+  top: 12px;
+  z-index: 900;
+  padding: 0 8px;
+  margin-bottom: 24px;
+  pointer-events: none;
 }
-@media (min-width: 681px) and (max-width: 1180px) {
-  .control-btn span, .brand .logo-stamp { display: none; }
-  .control-btn { padding: 6px 9px; }
+nav.nav-island {
+  pointer-events: auto;
+  max-width: 1160px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  box-sizing: border-box;
+}
+
+.nav-brand-row {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  min-width: 0;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  min-width: 0;
+}
+.brand .logo {
+  font-size: clamp(1.15rem, 1.5vw, 1.35rem);
+  white-space: nowrap;
+}
+
+/* Hide bulky sub-tags on standard laptops so nav links have plenty of room */
+.brand-text-col .logo-sub-tag {
+  display: none !important;
+}
+
+.nav-links-dock {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  list-style: none;
+  margin: 0;
+  padding: 3px 6px;
+  flex-shrink: 0;
+}
+.nav-link {
+  font-size: clamp(0.92rem, 1.05vw, 1.05rem);
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+
+.controls-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.control-btn {
+  padding: 5px 8px;
+  font-size: 0.92rem;
+  white-space: nowrap;
+}
+
+/* Medium screens & tablets (< 1100px) */
+@media (max-width: 1100px) {
+  .brand .logo-stamp {
+    display: none;
+  }
+  .control-btn span {
+    display: none;
+  }
+  .control-btn {
+    padding: 6px 8px;
+  }
+}
+
+/* 2-row layout below 920px so links never truncate or collide */
+@media (max-width: 920px) {
+  nav.nav-island {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 12px;
+  }
+  .nav-brand-row {
+    flex: 1 1 auto;
+  }
+  .controls-bar {
+    margin-left: auto;
+  }
+  .nav-links-dock {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    padding: 4px 2px;
+  }
+}
+
+/* Sticky anchor scroll-margin to prevent header from covering section titles */
+section[id], header[id], div[id] {
+  scroll-margin-top: 96px;
+}
+
+/* ---------- Edge Ribbon Bookmarks (Docked to lower-left corner) ---------- */
+/* Positioned in lower left so they never overlap hero text or headings */
+.irl-ribbon-btn {
+  top: auto !important;
+  bottom: 84px !important;
+  left: 0 !important;
+  transform: none !important;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+}
+.sketchbook-ribbon-btn {
+  top: auto !important;
+  bottom: 26px !important;
+  left: 0 !important;
+  transform: none !important;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
+}
+.irl-ribbon-btn:hover,
+.sketchbook-ribbon-btn:hover {
+  transform: translateX(6px) !important;
+  box-shadow: 4px 6px 0 var(--shadow);
+}
+.hero-left-col {
+  padding-left: 0;
+}
+
+/* ---------- Hero: Continuous Looping Animation for Deepak Pandey ---------- */
+.hero h1#heroName {
+  display: inline-block;
+  position: relative;
+  font-family: var(--script);
+  font-size: clamp(3.8rem, 10vw, 7.8rem);
+  line-height: 0.95;
+  color: var(--ink);
+  white-space: nowrap;
+  clip-path: inset(-15% 100% -15% 0);
+  animation: heroNameWriteLoop 7s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  transition: none !important;
+  transform-origin: left center;
+  filter: drop-shadow(2px 2px 0 var(--paper));
+}
+
+@keyframes heroNameWriteLoop {
+  0% {
+    clip-path: inset(-15% 100% -15% 0);
+    opacity: 0.2;
+    transform: translateY(0) scale(0.99);
+  }
+  4% {
+    opacity: 1;
+  }
+  32%, 74% {
+    clip-path: inset(-15% -8% -15% 0);
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  84% {
+    clip-path: inset(-15% -8% -15% 0);
+    opacity: 0.2;
+    transform: translateY(-2px) scale(0.99);
+  }
+  92%, 100% {
+    clip-path: inset(-15% 100% -15% 0);
+    opacity: 0;
+    transform: translateY(0) scale(0.99);
+  }
+}
+
+/* Ensure hero contents are immediately visible */
+.hero-left-col .ink,
+.hero .ink {
+  opacity: 1 !important;
+  filter: none !important;
+}
+.hero-left-col .doodle.draw path {
+  stroke-dashoffset: 0 !important;
+}
+
+a.treasure-chest-widget {
+  text-decoration: none;
+  color: var(--ink);
 }
 
 /* ---------- Hero: wanted poster note no longer covers the bounty ---------- */

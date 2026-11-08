@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Captain's Secret Treasure Vault &bull; Deepak Pandey</title>
+  <meta name="description" content="The secret One Piece treasure chest of Captain Deepak Pandey. View exclusive blueprints, personal manifesto, and the legendary Golden Nakama Certificate.">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Patrick+Hand&family=Spicy+Rice&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+  <style>
+    :root {
+      --paper: #f6f1e3;
+      --paper-card: #fdfbf7;
+      --paper-sticky: #fffde0;
+      --ink: #0f172a;
+      --ink-soft: #334155;
+      --shadow: rgba(15, 23, 42, 0.14);
+      --gold: #facc15;
+      --gold-dark: #a16207;
+      --accent: #2563eb;
+      --font-chewy: 'Chewy', cursive;
+      --font-spicy: 'Spicy Rice', cursive;
+      --font-hand: 'Patrick Hand', cursive;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--paper);
+      background-image: 
+        radial-gradient(rgba(234, 179, 8, 0.15) 1.5px, transparent 1.5px),
+        linear-gradient(to right, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
+      background-size: 24px 24px, 48px 48px;
+      color: var(--ink);
+      font-family: var(--font-hand);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow-x: hidden;
+      padding: 16px 16px 80px;
+    }
+
+    /* Tactile Top Navigation */
+    .vault-nav {
+      max-width: 1040px;
+      margin: 0 auto 28px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--paper-sticky);
+      border: 2px solid var(--ink);
+      border-radius: 16px;
+      padding: 10px 18px;
+      box-shadow: 0 4px 0 var(--ink), 0 8px 24px var(--shadow);
+    }
+    .vault-nav a.nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--ink);
+      font-family: var(--font-chewy);
+      font-size: 1.15rem;
+      background: var(--paper);
+      border: 1.5px solid var(--ink);
+      padding: 5px 14px;
+      border-radius: 20px;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: all 0.15s ease;
+    }
+    .vault-nav a.nav-btn:hover {
+      transform: translateY(-2px);
+      background: #fff;
+    }
+
+    .vault-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-chewy);
+      font-size: 1.15rem;
+      background: #facc15;
+      border: 1.5px solid var(--ink);
+      padding: 4px 14px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 0 var(--ink);
+      transform: rotate(-1deg);
+    }
+
+    /* Main Container */
+    .vault-main {
+      max-width: 980px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .vault-header-hero {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .vault-tag {
+      display: inline-block;
+      font-family: var(--font-chewy);
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: #fde047;
+      border: 1.5px solid var(--ink);
+      padding: 3px 12px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+    .vault-title {
+      font-family: var(--font-spicy);
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      line-height: 1.05;
+      color: var(--ink);
+      text-shadow: 3px 3px 0 rgba(250, 204, 21, 0.45);
+      margin-bottom: 8px;
+    }
+    .vault-subtitle {
+      font-size: 1.35rem;
+      color: var(--ink-soft);
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.35;
+    }
+
+    /* =========================================================================
+       THE INTERACTIVE TREASURE CHEST (Centerpiece)
+       ========================================================================= */
+    .chest-stage-wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 44px;
+      position: relative;
+    }
+
+    .chest-box-container {
+      perspective: 1000px;
+      width: 320px;
+      height: 220px;
+      position: relative;
+      cursor: pointer;
+      margin-bottom: 20px;
+      user-select: none;
+    }
+
+    /* Golden Glow Rays behind chest */
+    .chest-glow-aura {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 380px;
+      height: 380px;
+      background: radial-gradient(circle, rgba(250, 204, 21, 0.6) 0%, rgba(234, 179, 8, 0.25) 45%, transparent 70%);
+      border-radius: 50%;
+      z-index: 1;
+      pointer-events: none;
+      animation: chestAuraPulse 3s infinite ease-in-out;
+      opacity: 0.8;
+      transition: opacity 0.4s ease;
+    }
+    @keyframes chestAuraPulse {
+      0%, 100% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.7; }
+      50% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+    }
+
+    /* Chest Base */
+    .chest-base {
+      position: absolute;
+      bottom: 0;
+      left: 20px;
+      right: 20px;
+      height: 130px;
+      background: #78350f;
+      background: linear-gradient(to bottom, #92400e 0%, #78350f 100%);
+      border: 3.5px solid var(--ink);
+      border-radius: 0 0 16px 16px;
+      box-shadow: 0 10px 0 var(--ink), 0 18px 30px rgba(0,0,0,0.3);
+      z-index: 2;
+      overflow: hidden;
+    }
+    /* Wood Planks Lines */
+    .chest-base::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(to right, transparent, transparent 40px, rgba(0,0,0,0.2) 41px, transparent 42px);
+    }
+    /* Gold straps */
+    .chest-strap-left, .chest-strap-right {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 28px;
+      background: #eab308;
+      border: 2px solid var(--ink);
+      z-index: 3;
+    }
+    .chest-strap-left { left: 45px; }
+    .chest-strap-right { right: 45px; }
+
+    /* Keyhole Plate */
+    .chest-lock-plate {
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 44px;
+      height: 52px;
+      background: #facc15;
+      border: 2.5px solid var(--ink);
+      border-radius: 8px 8px 14px 14px;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 2px 2px 0 var(--ink);
+    }
+    .lock-keyhole {
+      width: 10px;
+      height: 10px;
+      background: var(--ink);
+      border-radius: 50%;
+      position: relative;
+    }
+    .lock-keyhole::after {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 2px;
+      width: 6px;
+      height: 12px;
+      background: var(--ink);
+    }
+
+    /* Chest Lid */
+    .chest-lid {
+      position: absolute;
+      top: 15px;
+      left: 12px;
+      right: 12px;
+      height: 90px;
+      background: #a16207;
+      background: linear-gradient(to bottom, #ca8a04 0%, #a16207 40%, #78350f 100%);
+      border: 3.5px solid var(--ink);
+      border-radius: 120px 120px 6px 6px / 80px 80px 6px 6px;
+      z-index: 5;
+      transform-origin: top center;
+      transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.3, 1.25);
+      box-shadow: 0 4px 0 var(--ink);
+    }
+    .chest-lid .chest-strap-left { left: 53px; border-radius: 60px 60px 0 0; }
+    .chest-lid .chest-strap-right { right: 53px; border-radius: 60px 60px 0 0; }
+
+    /* Open State */
+    .chest-box-container.opened .chest-lid {
+      transform: rotateX(-95deg) translateY(-25px);
+    }
+    .chest-box-container.opened .chest-gold-pile {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Gold pile overflowing when open */
+    .chest-gold-pile {
+      position: absolute;
+      top: 25px;
+      left: 30px;
+      right: 30px;
+      height: 60px;
+      background: #facc15;
+      background: radial-gradient(circle, #fef08a 0%, #eab308 60%, #ca8a04 100%);
+      border: 2px solid var(--ink);
+      border-radius: 40px 40px 0 0;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-spicy);
+      font-size: 1.4rem;
+      color: #713f12;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease 0.2s;
+    }
+
+    /* Trigger / Status Button */
+    .chest-action-btn {
+      font-family: var(--font-chewy);
+      font-size: 1.45rem;
+      background: #facc15;
+      color: var(--ink);
+      border: 2.5px solid var(--ink);
+      padding: 10px 24px;
+      border-radius: 14px;
+      cursor: pointer;
+      box-shadow: 0 4px 0 var(--ink), 0 8px 18px rgba(0,0,0,0.15);
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .chest-action-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 var(--ink), 0 12px 24px rgba(0,0,0,0.2);
+      background: #fde047;
+    }
+
+    /* =========================================================================
+       SECRET STASH REPOSITORY ITEMS GRID
+       ========================================================================= */
+    .stash-items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+      gap: 24px;
+      width: 100%;
+    }
+
+    .stash-card {
+      background: var(--paper-card);
+      border: 2.5px solid var(--ink);
+      border-radius: 18px 240px 18px 240px / 240px 18px 240px 18px;
+      padding: 24px 22px;
+      box-shadow: 5px 6px 0 var(--ink), 0 10px 24px var(--shadow);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .stash-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      border-bottom: 2px dashed var(--ink-soft);
+      padding-bottom: 8px;
+    }
+    .stash-item-num {
+      font-family: var(--font-chewy);
+      font-size: 1.15rem;
+      color: var(--gold-dark);
+    }
+    .stash-item-badge {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: bold;
+      background: #fef08a;
+      border: 1px solid var(--ink);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .stash-card-title {
+      font-family: var(--font-spicy);
+      font-size: 1.6rem;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stash-card-desc {
+      font-size: 1.2rem;
+      line-height: 1.45;
+      color: var(--ink-soft);
+      margin-bottom: 16px;
+      flex: 1;
+    }
+
+    /* Certificate Box */
+    .certificate-preview-box {
+      background: #fffef2;
+      border: 2px dashed var(--ink);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 14px;
+      box-shadow: inset 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .cert-seal {
+      font-family: var(--font-chewy);
+      font-size: 1.8rem;
+      color: #dc2626;
+      letter-spacing: 0.05em;
+    }
+    .cert-sub {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    /* Key Token Box */
+    .token-copy-box {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f1f5f9;
+      border: 1.5px solid var(--ink);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: bold;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+    .token-text {
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .copy-token-btn {
+      background: var(--paper-sticky);
+      border: 1.5px solid var(--ink);
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: var(--font-chewy);
+      font-size: 0.95rem;
+      box-shadow: 1.5px 1.5px 0 var(--ink);
+    }
+
+    /* Action links */
+    .stash-action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--paper-sticky);
+      border: 2px solid var(--ink);
+      color: var(--ink);
+      font-family: var(--font-chewy);
+      font-size: 1.15rem;
+      text-decoration: none;
+      padding: 7px 16px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 0 var(--ink);
+      transition: all 0.15s ease;
+      align-self: flex-start;
+      cursor: pointer;
+    }
+    .stash-action-link:hover {
+      background: #fff;
+      transform: translateY(-2px);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    /* Devil Fruit Card Accent */
+    .fruit-icon-tag {
+      font-size: 2.2rem;
+      line-height: 1;
+    }
+
+    /* Footer Voyage Return */
+    .vault-footer-strip {
+      margin-top: 50px;
+      text-align: center;
+    }
+    .return-ship-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--font-chewy);
+      font-size: 1.5rem;
+      text-decoration: none;
+      padding: 12px 28px;
+      border: 2.5px solid var(--ink);
+      border-radius: 16px;
+      box-shadow: 0 5px 0 var(--gold), 0 10px 24px rgba(0,0,0,0.2);
+      transition: all 0.2s ease;
+    }
+    .return-ship-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 7px 0 var(--gold), 0 14px 28px rgba(0,0,0,0.3);
+      color: #fde047;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="vault-nav">
+    <a href="index.html" class="nav-btn" title="Return to Captain Deepak's main portfolio">
+      <span>&larr; Ship Portfolio</span>
+    </a>
+
+    <div class="vault-status-badge">
+      <span>✦ VAULT UNLOCKED &bull; 5.0B ฿ ✦</span>
+    </div>
+
+    <a href="stash-trial.html" class="nav-btn" title="Replay the Captain's Trial Quiz">
+      <span>&#x21bb; Replay Trial</span>
+    </a>
+  </nav>
+
+  <!-- Main Vault Stage -->
+  <main class="vault-main">
+    <div class="vault-header-hero">
+      <span class="vault-tag">SECRET PIRATE STASH &bull; LEVEL 99 NAKAMA</span>
+      <h1 class="vault-title">Captain's Secret Stash</h1>
+      <p class="vault-subtitle">Welcome to the inner sanctum of the Grand Line! Here lie the blueprints, secret codes, and relics kept safe by Captain Deepak Pandey.</p>
+    </div>
+
+    <!-- Interactive Treasure Chest Stage -->
+    <div class="chest-stage-wrap">
+      <div class="chest-glow-aura"></div>
+      
+      <div class="chest-box-container opened" id="treasureChest" title="Click to open or close the Captain's Treasure Chest!">
+        <!-- Chest Lid -->
+        <div class="chest-lid">
+          <div class="chest-strap-left"></div>
+          <div class="chest-strap-right"></div>
+        </div>
+
+        <!-- Gold Pile Inside -->
+        <div class="chest-gold-pile">
+          <span>5,000,000,000 ฿</span>
+        </div>
+
+        <!-- Chest Base -->
+        <div class="chest-base">
+          <div class="chest-strap-left"></div>
+          <div class="chest-strap-right"></div>
+          
+          <div class="chest-lock-plate">
+            <div class="lock-keyhole"></div>
+          </div>
+        </div>
+      </div>
+
+      <button class="chest-action-btn" id="toggleChestBtn" type="button">
+        <span id="chestBtnIcon">✦</span>
+        <span id="chestBtnText">Chest Is Open &bull; Tap to Inspect</span>
+      </button>
+    </div>
+
+    <!-- Stash Repository Items Grid -->
+    <div class="stash-items-grid">
+
+      <!-- Item 1: The Handwritten Manifesto -->
+      <article class="stash-card">
+        <div class="stash-card-header">
+          <span class="stash-item-num">RELIC 01</span>
+          <span class="stash-item-badge">CAPTAIN'S LOG</span>
+        </div>
+        <h2 class="stash-card-title">
+          <span>📜</span>
+          <span>The Founder's Manifesto</span>
+        </h2>
+        <p class="stash-card-desc">
+          “We didn’t set sail across the digital ocean to be passengers or build forgettable things. Whether founding Synapse Calyx, leading software squads at Ralph Co, or organizing hacker communities at Cluster GU—our rule has always been simple: plan boldly on paper, build with fearless craft, and never compromise on beauty or speed.”
+        </p>
+        <button class="stash-action-link" id="readManifestoBtn" type="button">
+          <span>Read Full Dispatch</span>
+          <span>&rarr;</span>
+        </button>
+      </article>
+
+      <!-- Item 2: Mythical Devil Fruit -->
+      <article class="stash-card">
+        <div class="stash-card-header">
+          <span class="stash-item-num">RELIC 02</span>
+          <span class="stash-item-badge">SPECIAL ABILITY</span>
+        </div>
+        <h2 class="stash-card-title">
+          <span class="fruit-icon-tag">🍎</span>
+          <span>Code-Code no Mi (Devil Fruit)</span>
+        </h2>
+        <p class="stash-card-desc">
+          <strong>Type:</strong> Mythical Paramecia &bull; <strong>Awakening:</strong> Full-Stack Mastery.<br>
+          Grants the wielder instant bug diagnosis, immune to infinite loops, and the power to turn complex architecture into elegant, maintainable solutions. Side effect: insatiable craving for black coffee and late-night commits.
+        </p>
+        <div class="stash-action-link" style="cursor:default;background:#fde047;">
+          <span>✦ Devil Fruit Power Active</span>
+        </div>
+      </article>
+
+      <!-- Item 3: Senior Nakama Bounty Certificate -->
+      <article class="stash-card">
+        <div class="stash-card-header">
+          <span class="stash-item-num">RELIC 03</span>
+          <span class="stash-item-badge">OFFICIAL RECOGNITION</span>
+        </div>
+        <h2 class="stash-card-title">
+          <span>🏆</span>
+          <span>Senior Nakama Bounty Certificate</span>
+        </h2>
+        <div class="certificate-preview-box">
+          <div class="cert-seal">WANTED &bull; SENIOR NAKAMA</div>
+          <div style="font-family:var(--font-chewy);font-size:1.35rem;margin-top:4px;">5,000,000,000 ฿</div>
+          <div class="cert-sub">APPROVED BY CAPTAIN DEEPAK PANDEY &bull; SYNAPSE CALYX</div>
+        </div>
+        <p class="stash-card-desc">
+          Official Grand Line certification awarded for cracking all 4 Captain's Trials. Ready to download or print as a collector's keepsake!
+        </p>
+        <button class="stash-action-link" id="printCertBtn" type="button">
+          <span>🖨️ Print / Save Certificate</span>
+        </button>
+      </article>
+
+      <!-- Item 4: Secret Captain's Passcode -->
+      <article class="stash-card">
+        <div class="stash-card-header">
+          <span class="stash-item-num">RELIC 04</span>
+          <span class="stash-item-badge">VIP ACCESS KEY</span>
+        </div>
+        <h2 class="stash-card-title">
+          <span>🔑</span>
+          <span>Grand Line VIP Passcode</span>
+        </h2>
+        <p class="stash-card-desc">
+          Use this secret authentication passphrase when contacting Deepak directly for priority founder collaboration, freelance contracts, or technical consultations.
+        </p>
+        <div class="token-copy-box">
+          <span class="token-text" id="secretPasscode">SYNAPSE-CALYX-GRAND-LINE-2026</span>
+          <button class="copy-token-btn" id="copyTokenBtn" type="button">Copy</button>
+        </div>
+        <a href="index.html#contact" class="stash-action-link">
+          <span>Deploy Code in Contact &rarr;</span>
+        </a>
+      </article>
+
+    </div>
+
+    <!-- Return to Ship Strip -->
+    <div class="vault-footer-strip">
+      <a href="index.html" class="return-ship-btn">
+        <span>&larr; Set Sail Back to Portfolio</span>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    (function() {
+      "use strict";
+
+      // 1. Audio Engine
+      let soundEnabled = localStorage.getItem("portfolio_sound") !== "false";
+      let audioCtx = null;
+
+      function getAudioCtx() {
+        if (!audioCtx) {
+          const Cls = window.AudioContext || window.webkitAudioContext;
+          if (Cls) audioCtx = new Cls();
+        }
+        if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+        return audioCtx;
+      }
+
+      function playCoinChime() {
+        if (!soundEnabled) return;
+        try {
+          const ctx = getAudioCtx();
+          if (!ctx) return;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(1046.50, ctx.currentTime);
+          osc.frequency.setValueAtTime(1318.51, ctx.currentTime + 0.08);
+          osc.frequency.setValueAtTime(1567.98, ctx.currentTime + 0.16);
+          gain.gain.setValueAtTime(0.2, ctx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.45);
+        } catch(e) {}
+      }
+
+      // Initial fanfare on load
+      setTimeout(playCoinChime, 400);
+
+      // 2. Interactive Chest Opening / Closing
+      const chest = document.getElementById("treasureChest");
+      const toggleBtn = document.getElementById("toggleChestBtn");
+      const chestBtnText = document.getElementById("chestBtnText");
+
+      let isOpen = true;
+
+      function toggleChest() {
+        isOpen = !isOpen;
+        if (isOpen) {
+          chest.classList.add("opened");
+          chestBtnText.textContent = "Chest Is Open • Tap to Close";
+          playCoinChime();
+        } else {
+          chest.classList.remove("opened");
+          chestBtnText.textContent = "Chest Is Closed • Tap to Open";
+        }
+      }
+
+      if (chest) chest.addEventListener("click", toggleChest);
+      if (toggleBtn) toggleBtn.addEventListener("click", toggleChest);
+
+      // 3. Copy Secret Passcode
+      const copyBtn = document.getElementById("copyTokenBtn");
+      const tokenText = document.getElementById("secretPasscode");
+
+      if (copyBtn && tokenText) {
+        copyBtn.addEventListener("click", function() {
+          navigator.clipboard.writeText(tokenText.textContent.trim()).then(function() {
+            copyBtn.textContent = "Copied! ✓";
+            copyBtn.style.background = "#86efac";
+            playCoinChime();
+            setTimeout(function() {
+              copyBtn.textContent = "Copy";
+              copyBtn.style.background = "";
+            }, 2000);
+          });
+        });
+      }
+
+      // 4. Print Certificate
+      const printBtn = document.getElementById("printCertBtn");
+      if (printBtn) {
+        printBtn.addEventListener("click", function() {
+          window.print();
+        });
+      }
+
+      // 5. Read Full Dispatch Modal/Alert
+      const readBtn = document.getElementById("readManifestoBtn");
+      if (readBtn) {
+        readBtn.addEventListener("click", function() {
+          alert("📜 CAPTAIN'S LOG ENTRY:\n\n'Always build products you would be proud to show your idols. Keep your code clean, your architecture honest, and your curiosity boundless.' — Deepak Pandey (Founder @ Synapse Calyx)");
+        });
+      }
+
+    })();
+  </script>
+</body>
+</html>
+
