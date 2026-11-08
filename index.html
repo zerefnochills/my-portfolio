@@ -4730,11 +4730,7 @@ const PORTFOLIO_CONFIG = {
     }
   ],
   quotes: [
-    { quote: "“As long as I live, there are infinite chances.”", by: "— Monkey D. Luffy" },
-    { quote: "“When do you think people die? When they are forgotten!”", by: "— Dr. Hiluluk" },
-    { quote: "“If you don’t take risks, you can’t create a future.”", by: "— Monkey D. Luffy" },
-    { quote: "“Scars on the back are a swordsman’s shame.”", by: "— Roronoa Zoro" },
-    { quote: "“Simplicity is prerequisite for reliability.”", by: "— Edsger W. Dijkstra" }
+    { quote: "“As long as I live, there are infinite chances.”", by: "— Monkey D. Luffy" }
   ],
   projects: {
     inkflow: {
@@ -5066,21 +5062,19 @@ const PORTFOLIO_CONFIG = {
   let start = null;
   let loaderDone = false;
 
-  // Pick initial random quote
-  let quoteIndex = Math.floor(Math.random() * PORTFOLIO_CONFIG.quotes.length);
-  function renderQuote(idx) {
-    const qObj = PORTFOLIO_CONFIG.quotes[idx];
+  // Fixed Monkey D. Luffy Quote
+  function renderQuote() {
+    const qObj = PORTFOLIO_CONFIG.quotes[0];
     if (qEl && byEl) {
       qEl.textContent = qObj.quote;
       byEl.textContent = qObj.by;
     }
   }
-  renderQuote(quoteIndex);
+  renderQuote();
 
   if (hatClicker) {
     hatClicker.addEventListener("click", function() {
-      quoteIndex = (quoteIndex + 1) % PORTFOLIO_CONFIG.quotes.length;
-      renderQuote(quoteIndex);
+      renderQuote();
       playPenScratch();
     });
   }
