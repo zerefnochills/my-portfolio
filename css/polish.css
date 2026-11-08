@@ -1,0 +1,208 @@
+/* ==========================================================
+   polish.css — loads after the main <style> block in index.html
+   Fixes missing styles, alignment, and adds the Grand Line strip.
+   ========================================================== */
+
+/* ---------- Layout: wider page, no whole-page wobble ---------- */
+/* The SVG wobble filter on <main> distorted every letter and made the
+   page repaint on scroll. Borders already have hand-drawn radii. */
+main {
+  max-width: 1160px;
+  filter: none;
+}
+
+/* ---------- Navbar: one row instead of wrapping ---------- */
+@media (min-width: 681px) {
+  nav.nav-island { flex-wrap: nowrap; }
+  .nav-brand-row, .controls-bar { flex-shrink: 0; }
+  .nav-links-dock { flex-shrink: 1; min-width: 0; }
+}
+@media (min-width: 681px) and (max-width: 1180px) {
+  .control-btn span, .brand .logo-stamp { display: none; }
+  .control-btn { padding: 6px 9px; }
+}
+
+/* ---------- Hero: wanted poster note no longer covers the bounty ---------- */
+.hero { padding-bottom: 96px; }
+.wanted-annotation-note {
+  bottom: -74px;
+  right: 14px;
+  max-width: 190px;
+  font-family: var(--hand), 'Patrick Hand', cursive;
+  transform: rotate(3deg);
+}
+.bounty-dash { margin-left: 2px; }
+
+/* Poster drops in once, after the loader leaves */
+html.js-polish .wanted-poster-frame:not(.poster-in) { opacity: 0; }
+.wanted-poster-frame.poster-in { animation: posterDrop 0.95s cubic-bezier(0.2, 0.9, 0.3, 1.25) backwards; }
+@keyframes posterDrop {
+  0%   { opacity: 0; transform: translateY(-70px) rotate(-9deg); }
+  60%  { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0) rotate(2deg); }
+}
+
+/* ---------- Scroll progress ---------- */
+#scrollProgress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--accent, #ef4444);
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 60;
+  pointer-events: none;
+}
+
+/* ==========================================================
+   GRAND LINE STRIP — tilted black marquee (skills section top)
+   ========================================================== */
+.skills-showcase-section { padding-top: 90px; }
+
+.skills-ticker-tape {
+  position: relative;
+  left: 50%;
+  width: 112vw;
+  margin: 10px 0 70px -56vw;
+  background: #000;
+  color: #fff;
+  transform: rotate(-1.8deg);
+  overflow: hidden;
+  box-shadow: 0 6px 0 var(--shadow, rgba(0, 0, 0, 0.18));
+}
+.skills-ticker-track {
+  display: flex;
+  width: max-content;
+  animation: stripScroll 42s linear infinite;
+}
+.skills-ticker-tape:hover .skills-ticker-track { animation-play-state: paused; }
+.ticker-content-loop {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 20px 0;
+}
+.ticker-pill {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.05rem, 2.1vw, 1.65rem);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+.ticker-pill i { display: none; }
+.ticker-dot {
+  flex-shrink: 0;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  margin: 0 clamp(20px, 3vw, 38px);
+}
+@keyframes stripScroll {
+  to { transform: translateX(-50%); }
+}
+
+/* ==========================================================
+   SKILLS SHOWCASE
+   ========================================================== */
+.skills-header-wrap { text-align: center; margin-bottom: 8px; }
+.skills-header-wrap .hof-meta-tag { margin-bottom: 4px; }
+
+.skills-categories-deck {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+  gap: 28px;
+  align-items: start;
+  margin-top: 8px;
+}
+.skill-category-block {
+  border: 2.5px solid var(--ink);
+  border-radius: 20px 255px 18px 240px / 240px 18px 255px 20px;
+  background: var(--paper-card);
+  padding: 22px 24px 26px;
+  box-shadow: 5px 7px 0 var(--shadow);
+}
+.category-header-row { margin-bottom: 18px; }
+.category-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 16px;
+  border: 2px solid var(--ink);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  background: #fde047;
+  color: #1c1917;
+  transform: rotate(-1deg);
+}
+.cat-emoji { display: none; }
+.cat-title {
+  font-family: var(--hand);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+.tech-tiles-row { display: flex; flex-wrap: wrap; gap: 14px; }
+.tech-icon-tile {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 14px 6px 16px 6px / 6px 16px 6px 14px;
+  background: var(--paper);
+  cursor: default;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.tech-icon-tile i { font-size: 2.1rem; line-height: 1; color: var(--ink); }
+.tech-icon-tile i.colored { color: inherit; }
+.tech-icon-tile:hover,
+.tech-icon-tile:focus-visible {
+  transform: translateY(-4px) rotate(-3deg);
+  box-shadow: 3px 5px 0 var(--shadow);
+  outline: none;
+}
+.tech-icon-tile:focus-visible { outline: 3px solid var(--accent, #2d2a9c); outline-offset: 3px; }
+.tech-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translate(-50%, 4px);
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--hand);
+  font-size: 1rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 5;
+}
+.tech-icon-tile:hover .tech-tooltip,
+.tech-icon-tile:focus-visible .tech-tooltip {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 680px) {
+  .wanted-annotation-note { right: 0; bottom: -64px; max-width: 160px; }
+  .skills-ticker-tape { margin-bottom: 50px; }
+  .tech-icon-tile { width: 56px; height: 56px; }
+  .tech-icon-tile i { font-size: 1.8rem; }
+}
+
+/* ---------- Respect reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .skills-ticker-track { animation: none; }
+  .wanted-poster-frame.poster-in { animation: none; }
+  html.js-polish .wanted-poster-frame:not(.poster-in) { opacity: 1; }
+  #scrollProgress { display: none; }
+}
