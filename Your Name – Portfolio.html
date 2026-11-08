@@ -10,7 +10,7 @@
 <meta property="og:description" content="A hand-crafted developer and designer portfolio sketched in ink and paper with interactive One Piece wanted poster, sound effects, and digital sketchbook studio.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23fcf3c6' stroke='%232d2a9c' stroke-width='2'/><path d='M6 18c0-4 6-6 10-6s10 2 10 6-5 5-10 5-10-1-10-5z' fill='%23eab308' stroke='%232d2a9c' stroke-width='1.5'/><path d='M10 16c0-6 12-6 12 0' fill='%23eab308' stroke='%232d2a9c' stroke-width='1.5'/><path d='M10 15c4 2 8 2 12 0' stroke='%23dc2626' stroke-width='1.8'/></svg>">
-<title>Your Name – Portfolio &amp; Digital Sketchbook</title>
+<title>Deepak Pandey – Founder @ Synapse Calyx | Portfolio & Digital Sketchbook</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Spicy+Rice&family=Mrs+Saint+Delafield&family=Patrick+Hand&family=Caveat:wght@600&family=Space+Grotesk:wght@600;700;800&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
@@ -2548,12 +2548,13 @@ footer {
 }
 
 /* =========================================================================
-   LEFT-SIDE PAPER POP-UP / DRAWER (COVERING HALF SCREEN)
+   LEFT-SIDE PAPER POP-UP / DRAWER (STRICTLY DOCKED TO SCREEN EDGE)
    ========================================================================= */
 .board-popup-modal {
   position: fixed;
   inset: 0;
   z-index: 1000;
+  display: block;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -2563,19 +2564,21 @@ footer {
   pointer-events: auto;
 }
 .board-popup-backdrop {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 .board-popup-card {
   position: fixed;
   top: 0;
   left: 0;
-  width: clamp(340px, 48vw, 620px); /* Covering half the screen */
+  bottom: 0;
+  width: clamp(340px, 46vw, 600px); /* Hugs the screen edge, covering ~half screen */
   height: 100vh;
   height: 100dvh;
+  margin: 0;
   background: var(--paper);
   background-image: 
     radial-gradient(var(--ink-soft) 0.6px, transparent 0.6px),
@@ -2584,7 +2587,7 @@ footer {
   border: none;
   border-right: 3.5px solid var(--ink);
   border-radius: 0 16px 16px 0;
-  box-shadow: 10px 0 32px rgba(0, 0, 0, 0.2);
+  box-shadow: 12px 0 36px rgba(0, 0, 0, 0.16), 4px 0 12px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -3671,8 +3674,8 @@ nav.nav-island:hover {
             </svg>
           </div>
           <div class="brand-text-col">
-            <span class="logo" id="siteLogoName">Your Name</span>
-            <span class="logo-sub-tag">LOGBOOK &bull; 2026</span>
+            <span class="logo" id="siteLogoName">Deepak Pandey</span>
+            <span class="logo-sub-tag">FOUNDER @ SYNAPSE CALYX &bull; 2026</span>
           </div>
           <span class="logo-stamp">portfolio</span>
         </a>
@@ -3728,11 +3731,11 @@ nav.nav-island:hover {
     <div>
 
 
-      <h1 class="write" data-t="2.2s" id="heroName">Your Name</h1>
+      <h1 class="write" data-t="2.2s" id="heroName">Deepak Pandey</h1>
       <svg class="doodle draw" style="width:min(420px,85%);height:16px;display:block;margin:0 0 16px" viewBox="0 0 380 16" preserveAspectRatio="none" aria-hidden="true">
         <path d="M4 10C80 2 160 16 240 8S340 4 376 9"/>
       </svg>
-      <p class="hero-tagline ink" id="heroTagline">Full-stack software developer and creative designer. I craft robust web apps, responsive systems, and sketch ideas on paper first.</p>
+      <p class="hero-tagline ink" id="heroTagline">Founder at Synapse Calyx (digital services company), Event Organiser at Cluster Community | GU, and former Tech Lead at Ralph Co. I craft robust web apps, scale digital platforms, and sketch systems on paper first.</p>
       
       <div class="hero-actions ink">
         <a class="hero-btn primary" href="#work">
@@ -3747,19 +3750,22 @@ nav.nav-island:hover {
 
       <div class="status-pill ink">
         <span class="status-dot"></span>
-        <span id="availabilityText">AVAILABLE FOR NEW PROJECTS &middot; 2026</span>
+        <span id="availabilityText">FOUNDER @ SYNAPSE CALYX &middot; OPEN FOR COLLABORATIONS &middot; 2026</span>
       </div>
 
       <!-- Hero Stats Badges Row -->
       <div class="hero-stats-row">
-        <div class="hero-stat-badge" title="Shipped production web apps">
-          <span>25+ Voyages Shipped</span>
+        <div class="hero-stat-badge" title="Founder at Synapse Calyx (Digital Services)">
+          <span>Founder &bull; Synapse Calyx</span>
         </div>
-        <div class="hero-stat-badge" title="Independent & creative code">
-          <span>100% Handcrafted</span>
+        <div class="hero-stat-badge" title="Event Organiser at Cluster Community | GU">
+          <span>Cluster Community | GU</span>
+        </div>
+        <div class="hero-stat-badge" title="Former Tech Lead at Ralph Co.">
+          <span>Ex-Tech Lead &bull; Ralph Co.</span>
         </div>
         <div class="hero-stat-badge" title="One Piece Bounty Record">
-          <span>฿</span> <span>3.0B Bounty Record</span>
+          <span>฿</span> <span>3.0B Bounty</span>
         </div>
       </div>
 
@@ -3845,7 +3851,7 @@ nav.nav-island:hover {
         </div>
 
         <div class="wanted-dead-or-alive">DEAD OR ALIVE</div>
-        <div class="wanted-name" id="wantedPosterName">YOUR NAME</div>
+        <div class="wanted-name" id="wantedPosterName">DEEPAK PANDEY</div>
         
         <div class="wanted-bounty-row" id="wantedBountyRow" style="cursor:pointer" title="Click to raise bounty! +100M ฿">
           <span class="berry-symbol">฿</span>
@@ -3866,7 +3872,7 @@ nav.nav-island:hover {
       </div>
       <!-- Taped Note Annotation -->
       <div class="wanted-annotation-note" aria-hidden="true">
-        <span>Wanted: Relentless curiosity &amp; pure craft</span>
+        <span>Deepak Pandey: Founder @ Synapse Calyx &bull; Relentless curiosity &amp; pure craft</span>
       </div>
     </div>
   </header>
@@ -3941,15 +3947,16 @@ nav.nav-island:hover {
         </div>
         <p class="manifesto-quote-lead">“Software should feel like sorcery, not sterile paperwork.”</p>
         <p class="manifesto-text">
-          I fell in love with software engineering because it is the closest thing to alchemy. You begin with a blank page, a notebook of handwritten equations and state diagrams, and hours later you have summoned a living, reactive system that didn't exist before.
+          I'm <strong>Deepak Pandey</strong>—Founder at <strong>Synapse Calyx</strong> (digital services studio), Event Organiser at <strong>Cluster Community | GU</strong>, and former Tech Lead at <strong>Ralph Co.</strong> Whether leading technical sprints, organizing high-energy community hackathons, or architecting digital platforms from scratch, I believe in hand-crafted excellence.
         </p>
         <p class="manifesto-text">
-          In an era filled with bloated frameworks and soulless boilerplate, I believe in <strong>handcrafted precision</strong>. I craft software that is blazing fast, rock-solid in architecture, and joyful in tactile interaction.
+          I fell in love with software engineering because it is the closest thing to modern alchemy. You begin with a blank page, a notebook of handwritten architecture diagrams, and hours later you have summoned a living, reactive system that didn't exist before.
         </p>
         <div class="manifesto-tags-row">
-          <span class="manifesto-tag">Chai &amp; Deep Work</span>
+          <span class="manifesto-tag">Synapse Calyx</span>
+          <span class="manifesto-tag">Cluster Community | GU</span>
+          <span class="manifesto-tag">Ralph Co. Tech Lead</span>
           <span class="manifesto-tag">Notebook First</span>
-          <span class="manifesto-tag">60 FPS Canvas</span>
           <span class="manifesto-tag">Inherited Will</span>
         </div>
       </div>
@@ -4100,45 +4107,48 @@ nav.nav-island:hover {
   <!-- JOURNEY SECTION -->
   <section id="journey">
     <h2 class="section-title write">my journey</h2>
-    <p class="section-subtitle ink">Milestones along the voyage so far—from the first line of code to production software.</p>
+    <p class="section-subtitle ink">Milestones along the voyage—from tech leadership and community organizing to founding Synapse Calyx.</p>
     
     <div class="trail">
       <div class="step ink">
         <div class="step-header">
-          <span class="step-year">2026</span>
-          <span class="step-role">Senior Full-Stack &amp; Creative Craft</span>
+          <span class="step-year">2025 – 2026</span>
+          <span class="step-role">Founder &amp; Principal — Synapse Calyx</span>
         </div>
-        <p class="step-desc">Leading feature architecture, optimizing performance, and designing intuitive web experiences with modern TypeScript, React, and server-side runtimes.</p>
+        <p class="step-desc">Founded Synapse Calyx, delivering bespoke digital services, scalable full-stack web platforms, client architectures, and high-performance digital products for modern enterprises.</p>
         <div class="step-stack">
+          <span class="step-chip">Digital Services</span>
+          <span class="step-chip">Venture Building</span>
+          <span class="step-chip">System Architecture</span>
+          <span class="step-chip">Client Solutions</span>
+        </div>
+      </div>
+
+      <div class="step ink">
+        <div class="step-header">
+          <span class="step-year">2025 – Present</span>
+          <span class="step-role">Event Organiser — Cluster Community | GU</span>
+        </div>
+        <p class="step-desc">Organizing developer hackathons, technical workshops, community codefests, and student mentorship at Galgotias University (GU). Fostering an energetic builder and developer ecosystem.</p>
+        <div class="step-stack">
+          <span class="step-chip">Community Leadership</span>
+          <span class="step-chip">Event Organization</span>
+          <span class="step-chip">Hackathons &amp; Sprints</span>
+          <span class="step-chip">Mentorship</span>
+        </div>
+      </div>
+
+      <div class="step ink">
+        <div class="step-header">
+          <span class="step-year">2024 – 2025</span>
+          <span class="step-role">Tech Lead — Ralph Co.</span>
+        </div>
+        <p class="step-desc">Served as Tech Lead managing engineering sprints, architecting resilient web platforms, establishing code review and test standards, and mentoring full-stack engineers to ship production releases on time.</p>
+        <div class="step-stack">
+          <span class="step-chip">Technical Leadership</span>
+          <span class="step-chip">Sprint Planning</span>
           <span class="step-chip">Full-Stack Architecture</span>
-          <span class="step-chip">Performance Optimization</span>
-          <span class="step-chip">Design Systems</span>
-        </div>
-      </div>
-
-      <div class="step ink">
-        <div class="step-header">
-          <span class="step-year">2024</span>
-          <span class="step-role">Full-Stack Engineer &amp; Open Source</span>
-        </div>
-        <p class="step-desc">Built scalable APIs, engineered responsive web client architectures, and contributed to open-source developer tooling and interactive canvas components.</p>
-        <div class="step-stack">
-          <span class="step-chip">REST &amp; GraphQL</span>
-          <span class="step-chip">PostgreSQL &amp; Redis</span>
-          <span class="step-chip">Testing &amp; CI/CD</span>
-        </div>
-      </div>
-
-      <div class="step ink">
-        <div class="step-header">
-          <span class="step-year">2022</span>
-          <span class="step-role">The First Ink Stroke &amp; Midnight Code</span>
-        </div>
-        <p class="step-desc">Wrote my first lines of JavaScript, fallen in love with UI design and state machines, and spent nights turning notebook scribbles into living browser applications.</p>
-        <div class="step-stack">
-          <span class="step-chip">HTML5 / Modern CSS</span>
-          <span class="step-chip">Core JavaScript</span>
-          <span class="step-chip">Algorithms &amp; UX</span>
+          <span class="step-chip">Team Mentorship</span>
         </div>
       </div>
     </div>
@@ -4309,14 +4319,14 @@ nav.nav-island:hover {
               </svg>
             </div>
             <div class="speech-bubble ink">
-              If professionals hate doing it by hand, or you've got an ambitious build in mind, I want to hear about it.
+              Whether you need bespoke digital services at Synapse Calyx, want to collaborate with Cluster Community | GU, or have an ambitious build in mind, I want to hear about it.
             </div>
           </div>
 
           <div class="contact-email-section ink">
             <span class="contact-field-label">EMAIL</span>
             <div class="email-copy-box">
-              <span class="email-text-val" id="contactEmailDisplay">you@example.com</span>
+              <span class="email-text-val" id="contactEmailDisplay">deepak@synapsecalyx.com</span>
               <button class="copy-email-btn" id="copyEmailBtn" type="button" title="Copy email address to clipboard">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
                   <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -4569,20 +4579,62 @@ nav.nav-island:hover {
  * Easily customize your details below! All changes will reflect across the site.
  */
 const PORTFOLIO_CONFIG = {
-  name: "Your Name",
+  name: "Deepak Pandey",
   bounty: "3,000,000,000",
   photoUrl: "", // Path to your photo e.g. "photo.jpg" (or click the Wanted Poster to upload directly!)
-  tagline: "Full-stack software developer and creative designer. I craft robust web apps, responsive systems, and sketch ideas on paper first.",
-  email: "you@example.com",
-  status: "AVAILABLE FOR NEW PROJECTS · 2026",
+  tagline: "Founder at Synapse Calyx (digital services company), Event Organiser at Cluster Community | GU, and former Tech Lead at Ralph Co. I craft robust web apps, scale digital platforms, and sketch systems on paper first.",
+  email: "deepak@synapsecalyx.com",
+  status: "FOUNDER @ SYNAPSE CALYX · OPEN FOR COLLABORATIONS · 2026",
   socials: {
-    github: "https://github.com",
+    github: "https://github.com/zerefnochills",
     linkedin: "https://linkedin.com",
     resume: "#"
   },
   achievements: [
     {
-      id: "ach-default-1",
+      id: "ach-deepak-1",
+      category: "milestone",
+      icon: "★",
+      badge: "FOUNDER",
+      badgeColor: "gold",
+      title: "Founded Synapse Calyx — Digital Services & Engineering Studio",
+      issuer: "Synapse Calyx",
+      date: "2025 – Present",
+      description: "Launched Synapse Calyx to deliver premium digital services, high-throughput cloud architectures, and bespoke web platforms for modern enterprises.",
+      tags: ["Founder", "Digital Services", "Architecture"],
+      link: "#",
+      linkLabel: "Synapse Calyx ↗"
+    },
+    {
+      id: "ach-deepak-2",
+      category: "award",
+      icon: "★",
+      badge: "EVENT ORGANISER",
+      badgeColor: "purple",
+      title: "Lead Event Organiser — Cluster Community | GU",
+      issuer: "Cluster Community · Galgotias University",
+      date: "2025 – Present",
+      description: "Spearheaded flagship tech hackathons, developer workshops, and tech meetups, empowering hundreds of student developers and creative coders.",
+      tags: ["Community", "Hackathons", "Cluster GU"],
+      link: "#",
+      linkLabel: "Community Hub ↗"
+    },
+    {
+      id: "ach-deepak-3",
+      category: "opensource",
+      icon: "★",
+      badge: "TECH LEAD",
+      badgeColor: "blue",
+      title: "Tech Lead — Ralph Co.",
+      issuer: "Ralph Co.",
+      date: "2024 – 2025",
+      description: "Served as Tech Lead directing engineering sprints, mentoring developer teams, establishing code quality benchmarks, and shipping high-impact client systems.",
+      tags: ["Tech Lead", "Leadership", "Ralph Co."],
+      link: "#",
+      linkLabel: "Engineering Log ↗"
+    },
+    {
+      id: "ach-deepak-4",
       category: "hackathon",
       icon: "★",
       badge: "1ST PLACE",
@@ -4596,49 +4648,7 @@ const PORTFOLIO_CONFIG = {
       linkLabel: "View Project ↗"
     },
     {
-      id: "ach-default-2",
-      category: "opensource",
-      icon: "★",
-      badge: "TOP CONTRIBUTOR",
-      badgeColor: "blue",
-      title: "Core Contributor — Ink Engine & Vector Canvas",
-      issuer: "GitHub Open Source Collective",
-      date: "2025 – 2026",
-      description: "Engineered ultra-low-latency Bézier stroke smoothing algorithms and dynamic pressure curves adopted by 12,000+ developer sketch tools worldwide.",
-      tags: ["TypeScript", "Canvas API", "Algorithms"],
-      link: "https://github.com",
-      linkLabel: "GitHub Repo ↗"
-    },
-    {
-      id: "ach-default-3",
-      category: "award",
-      icon: "★",
-      badge: "EXCELLENCE AWARD",
-      badgeColor: "purple",
-      title: "Best System Architecture & UI Craft Award",
-      issuer: "DevExpo & Design Guild 2025",
-      date: "Nov 2025",
-      description: "Recognized for exceptional tactile web craftsmanship, zero-dependency procedural sound engine, and hand-drawn responsive design aesthetic.",
-      tags: ["UI/UX", "Architecture", "Best in Class"],
-      link: "#",
-      linkLabel: "Read Case Study ↗"
-    },
-    {
-      id: "ach-default-4",
-      category: "hackathon",
-      icon: "★",
-      badge: "RUNNER UP",
-      badgeColor: "silver",
-      title: "2nd Prize — Global AI & Agentic Systems Sprint",
-      issuer: "Anthropic & DeepTech Accelerator",
-      date: "Aug 2025",
-      description: "Designed a multi-agent orchestration terminal that visualized automated reasoning graphs and codebase transformations on an interactive paper parchment.",
-      tags: ["Agents", "Automation", "2nd Place"],
-      link: "#",
-      linkLabel: "Demo Video ↗"
-    },
-    {
-      id: "ach-default-5",
+      id: "ach-deepak-5",
       category: "milestone",
       icon: "★",
       badge: "BOUNTY RECORD",
@@ -4646,8 +4656,8 @@ const PORTFOLIO_CONFIG = {
       title: "3,000,000,000฿ Bounty Club Unlocked",
       issuer: "Grand Line Engineering Fleet",
       date: "2026",
-      description: "Achieved legendary status across 20+ shipped production apps, 99.99% uptime systems, and an unwavering commitment to craft and inherited will.",
-      tags: ["One Piece", "Full Stack", "Legendary"],
+      description: "Achieved legendary status across shipped production services, client architectures, and relentless pursuit of technical excellence.",
+      tags: ["Deepak Pandey", "Full Stack", "Legendary"],
       link: "#wantedPoster",
       linkLabel: "Inspect Bounty ↗"
     }
@@ -5344,28 +5354,28 @@ const PORTFOLIO_CONFIG = {
     {
       id: "pin-default-1",
       type: "event",
-      title: "Global Game Jam & Creative Codefest",
+      title: "Cluster Community | GU — Flagship Hackathon & Codefest",
       date: "Winter 2026",
-      location: "Innovation Hub",
-      caption: "Spent 48 hours crafting procedural audio synthesizers and canvas physics with brilliant minds. Sleepless, caffeinated, and pure creative joy.",
-      imageUrl: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 360' width='100%' height='100%'><rect width='100%' height='100%' fill='%231e293b'/><circle cx='300' cy='180' r='90' fill='%23facc15' opacity='0.2'/><path d='M100 280 L200 120 L300 240 L400 90 L500 280' stroke='%2338bdf8' stroke-width='4' fill='none'/><circle cx='200' cy='120' r='8' fill='%23f43f5e'/><circle cx='400' cy='90' r='8' fill='%2310b981'/><text x='300' y='320' font-family='sans-serif' font-size='20' font-weight='bold' fill='%23f8fafc' text-anchor='middle'>48H SYNTHESIS HACKATHON</text></svg>"
+      location: "Galgotias University (GU)",
+      caption: "Organized and hosted an exhilarating 48-hour builder hackathon for Cluster Community. Hundreds of developers, non-stop shipping, caffeinated energy, and pure creative joy.",
+      imageUrl: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 360' width='100%' height='100%'><rect width='100%' height='100%' fill='%231e293b'/><circle cx='300' cy='180' r='90' fill='%23facc15' opacity='0.2'/><path d='M100 280 L200 120 L300 240 L400 90 L500 280' stroke='%2338bdf8' stroke-width='4' fill='none'/><circle cx='200' cy='120' r='8' fill='%23f43f5e'/><circle cx='400' cy='90' r='8' fill='%2310b981'/><text x='300' y='320' font-family='sans-serif' font-size='20' font-weight='bold' fill='%23f8fafc' text-anchor='middle'>CLUSTER COMMUNITY | GU</text></svg>"
     },
     {
       id: "pin-default-2",
       type: "insight",
-      tag: "#Engineering #Mindset",
+      tag: "#SynapseCalyx #FounderMindset",
       date: "Autumn 2026",
       color: "yellow",
-      text: "Motivation is a spark, but disciplined systems and small daily rituals are the engine. The best code I've written was on days I simply sat down and moved one function forward at a time."
+      text: "Building Synapse Calyx taught me: Motivation is a spark, but disciplined systems and small daily rituals are the engine. The best digital services are crafted by teams that treat client problems like their own."
     },
     {
       id: "pin-default-3",
       type: "event",
-      title: "Systems Summit: The Future of Agentic Canvas",
-      date: "Summer 2026",
-      location: "Mainstage Hall",
-      caption: "Showcasing local-first generative interfaces and real-time canvas architectures. The energy in the auditorium was unforgettable.",
-      imageUrl: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 360' width='100%' height='100%'><rect width='100%' height='100%' fill='%230f172a'/><path d='M50 200 Q 150 50 300 200 T 550 200' stroke='%23a855f7' stroke-width='6' fill='none'/><rect x='220' y='120' width='160' height='100' rx='12' fill='%23fef08a' stroke='%230f172a' stroke-width='3'/><text x='300' y='180' font-family='sans-serif' font-size='22' font-weight='bold' fill='%230f172a' text-anchor='middle'>MAINSTAGE 2026</text></svg>"
+      title: "Ralph Co. Engineering Retrospective & Architecture Review",
+      date: "Summer 2025",
+      location: "Ralph Co. HQ",
+      caption: "Reflecting on my time as Tech Lead at Ralph Co.—directing sprints, optimizing system bottlenecks, and building a culture where engineers take pride in zero-debt code.",
+      imageUrl: "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 360' width='100%' height='100%'><rect width='100%' height='100%' fill='%230f172a'/><path d='M50 200 Q 150 50 300 200 T 550 200' stroke='%23a855f7' stroke-width='6' fill='none'/><rect x='220' y='120' width='160' height='100' rx='12' fill='%23fef08a' stroke='%230f172a' stroke-width='3'/><text x='300' y='180' font-family='sans-serif' font-size='22' font-weight='bold' fill='%230f172a' text-anchor='middle'>RALPH CO. TECH LEAD</text></svg>"
     },
     {
       id: "pin-default-4",
