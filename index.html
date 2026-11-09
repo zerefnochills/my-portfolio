@@ -744,21 +744,24 @@
     .wanted-poster-frame {
       position: relative;
       width: 100%;
-      max-width: 380px;
+      max-width: 348px;
+      aspect-ratio: 3 / 4;
+      box-sizing: border-box;
       justify-self: end;
       margin-left: auto;
-      background: var(--paper-sticky);
+      background: var(--paper-sticky, #f5deb3);
       border: 3.5px solid var(--ink);
       border-radius: 12px 18px 14px 16px/16px 14px 18px 12px;
-      padding: 22px 18px 14px;
+      padding: 0;
       box-shadow: 6px 10px 0 var(--shadow);
-      transform: rotate(2deg);
+      transform: none;
       transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
       user-select: none;
+      overflow: visible;
     }
 
     .wanted-poster-frame:hover {
-      transform: rotate(0deg) scale(1.02) translateY(-4px);
+      transform: translateY(-4px) scale(1.02);
       box-shadow: 8px 14px 0 var(--shadow);
     }
 
@@ -787,54 +790,26 @@
       border-radius: 50%;
     }
 
-    .wanted-inner {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      border: 1.5px dashed var(--ink-faint);
-      padding: 10px 10px 8px;
-      border-radius: 8px;
-      position: relative;
-    }
-
-    .wanted-header {
-      font-family: var(--badge), "Impact", "Arial Black", sans-serif;
-      font-weight: 700;
-      font-size: 2.8rem;
-      letter-spacing: 0.22em;
-      line-height: 1;
-      color: var(--ink);
-      margin-bottom: 8px;
-      text-shadow: 1px 1px 0 var(--paper);
-    }
-
+    .wanted-poster-media-wrap,
     .wanted-photo-container {
       width: 100%;
-      aspect-ratio: 4 / 3.7;
-      border: 2.5px solid var(--ink);
+      height: 100%;
+      aspect-ratio: 3 / 4;
       border-radius: 6px;
       background: rgba(0, 0, 0, 0.03);
       position: relative;
       overflow: hidden;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
       transition: all 0.2s ease;
     }
 
-    .wanted-photo-container:hover,
-    .wanted-photo-container.dragover {
-      border-color: var(--accent);
-      background: var(--ink-faint);
-      transform: scale(1.01);
-    }
-
+    .wanted-poster-image,
     .wanted-img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      aspect-ratio: 3 / 4;
+      object-fit: fill;
       display: block;
     }
 
@@ -4512,7 +4487,8 @@
       <div class="wanted-poster-frame ink" id="wantedPoster" role="region"
         aria-label="One Piece Wanted Bounty Poster Frame">
         <!-- Chopper Spot 1: Reverse-Peeking Chopper -->
-        <div class="chopper-peeking-wrap" id="chopperPeeking" title="Tony Tony Chopper peeking! Click him!">
+        <div class="chopper-peeking-wrap wanted-chopper-peeker" id="chopperPeeking"
+          title="Tony Tony Chopper peeking! Click him!">
           <svg viewBox="0 0 120 120" width="85" height="85" class="doodle" aria-hidden="true">
             <!-- Antlers -->
             <path d="M24 38 C14 26 12 14 22 8 C25 14 28 22 32 30" fill="#a16207" stroke="var(--ink)" stroke-width="2.5"
@@ -4558,60 +4534,42 @@
           </div>
         </div>
         <div class="poster-pin" aria-hidden="true"></div>
-        <div class="wanted-inner">
-          <div class="wanted-header">WANTED</div>
 
-          <div class="wanted-photo-container" id="wantedPhotoContainer" title="Click or drag & drop your photo here!"
-            tabindex="0" role="button" aria-label="Upload photo to Wanted Poster">
-            <!-- User photo img -->
-            <img id="wantedPhotoImg" src="images/deepak-wanted.jpg" alt="Portrait of Deepak Pandey" class="wanted-img"
-              style="display:block;" />
+        <div class="wanted-poster-media-wrap wanted-photo-container" id="wantedPhotoContainer"
+          title="Official One Piece Wanted Poster">
+          <!-- User photo img -->
+          <img id="wantedPhotoImg" src="images/media_1794201865931_238ddac4.jpg"
+            alt="One Piece Wanted Bounty Poster - Deepak Pandey" class="wanted-poster-image wanted-img"
+            style="display:block;" />
 
-            <!-- Default Hand-Drawn One Piece Pirate Silhouette Placeholder -->
-            <div id="wantedPlaceholder" class="wanted-placeholder" style="display:none;">
-              <svg class="doodle" viewBox="0 0 160 140" width="105" height="92" aria-hidden="true">
-                <!-- Straw Hat on top of head -->
-                <path d="M20 54C20 40 55 34 80 34S140 40 140 54 110 70 80 70 20 64 20 54Z" fill="var(--paper)" />
-                <path d="M48 42C46 10 114 10 112 42" />
-                <path d="M50 34C75 42 85 42 110 34" stroke="var(--stamp)" />
-                <!-- Head silhouette & smile -->
-                <path d="M55 58C55 86 65 106 80 106S105 86 105 58" />
-                <!-- Big D-Smile -->
-                <path d="M68 84Q80 96 92 84Z" />
-                <!-- Collar / shoulders -->
-                <path d="M30 134Q50 110 70 116M130 134Q110 110 90 116" />
-                <!-- Jolly Roger crossbones in background faint -->
-                <path d="M24 18L38 32M136 18L122 32M24 32L38 18M136 32L122 18" stroke-width="1.8" opacity="0.6" />
-              </svg>
-              <span class="upload-hint">Click or drop photo here</span>
+          <!-- Interactive name and bounty overlay -->
+          <div class="wanted-overlay-content">
+            <div class="wanted-character-box">
+              <div class="wanted-character-title">CAPTAIN</div>
+              <div class="wanted-name" id="wantedPosterName">DEEPAK PANDEY</div>
+              <div class="wanted-character-subtitle">“SOFTWARE CRAFTSMAN”</div>
             </div>
-
-            <span class="photo-change-badge" id="photoChangeBadge">change photo ↺</span>
-            <input type="file" id="wantedPhotoInput" accept="image/*" style="display:none;" />
-          </div>
-
-          <div class="wanted-dead-or-alive">DEAD OR ALIVE</div>
-          <div class="wanted-name" id="wantedPosterName">DEEPAK PANDEY</div>
-
-          <div class="wanted-bounty-row" id="wantedBountyRow" style="cursor:pointer"
-            title="Click to raise bounty! +100M ฿">
-            <span class="berry-symbol">฿</span>
-            <span class="bounty-amount" id="wantedPosterBounty">3,000,000,000</span>
-            <span class="bounty-dash">-</span>
-          </div>
-
-          <div class="wanted-footer">
-            <span class="marine-text">MARINE</span>
+            <div class="wanted-bounty-row" id="wantedBountyRow" style="cursor:pointer"
+              title="Click to raise bounty! +100M ฿">
+              <span class="berry-symbol">฿</span>
+              <span class="bounty-amount" id="wantedPosterBounty">3,000,000,000</span>
+              <span class="bounty-dash">-</span>
+            </div>
             <span class="marine-stamp" id="marineStampToggle" title="World Government Marine Seal (Click to inspect!)"
-              style="cursor:pointer">
+              style="display:none; cursor:pointer">
               <svg viewBox="0 0 44 26" width="30" height="18" class="doodle" aria-hidden="true">
-                <!-- Marine Seagull emblem -->
                 <path d="M3 14 Q12 4 22 14 Q32 4 41 14" stroke-width="2" />
                 <path d="M22 14 L22 23 M17 21 L27 21" stroke-width="1.8" />
               </svg>
             </span>
           </div>
+
+          <!-- Default Hand-Drawn One Piece Pirate Silhouette Placeholder -->
+          <div id="wantedPlaceholder" class="wanted-placeholder" style="display:none;"></div>
+          <span class="photo-change-badge" id="photoChangeBadge" style="display:none;">change photo ↺</span>
+          <input type="file" id="wantedPhotoInput" accept="image/*" style="display:none;" />
         </div>
+
         <!-- Taped Note Annotation -->
         <div class="wanted-annotation-note" aria-hidden="true">
           <span>Wanted: Relentless curiosity &amp; pure craft ✦</span>
@@ -4643,7 +4601,8 @@
     <!-- ABOUT SECTION: CAPTAIN'S LOGBOOK & MANIFESTO -->
     <section class="about-container" id="about">
       <!-- Top Infinite Looping Ticker Tape (Inspired by Image 3) -->
-      <div class="skills-ticker-tape skills-ticker-wrap skills-ticker-track skills-ticker skills-strip" aria-label="Animated loop of core software, languages, and frameworks">
+      <div class="skills-ticker-tape skills-ticker-wrap skills-ticker-track skills-ticker skills-strip"
+        aria-label="Animated loop of core software, languages, and frameworks">
         <div class="skills-ticker-loop-track">
           <div class="ticker-content-loop">
 
@@ -5163,7 +5122,8 @@
           <path d="M4 10C70 2 140 14 200 8S280 4 316 9" />
         </svg>
         <p class="section-subtitle ink">
-          Milestones along the Grand Line voyage—from engineering leadership and community organizing to founding Synapse Calyx.
+          Milestones along the Grand Line voyage—from engineering leadership and community organizing to founding
+          Synapse Calyx.
         </p>
       </div>
 
@@ -5186,23 +5146,27 @@
           </div>
 
           <!-- Sailing Ship Indicator -->
-          <div class="voyage-ship-avatar" id="voyageShipAvatar" style="left: 0%;" title="Going Merry cruising through the Grand Line!">
+          <div class="voyage-ship-avatar" id="voyageShipAvatar" style="left: 0%;"
+            title="Going Merry cruising through the Grand Line!">
             <svg viewBox="0 0 64 64" width="38" height="38" class="ship-svg" aria-hidden="true">
               <!-- Jolly Roger Flag -->
-              <path d="M32 6 L32 24" stroke="#09090b" stroke-width="2.5" stroke-linecap="round"/>
-              <path d="M32 8 C38 6 42 12 36 15 C34 16 32 17 32 17 Z" fill="#dc2626" stroke="#09090b" stroke-width="1.5"/>
+              <path d="M32 6 L32 24" stroke="#09090b" stroke-width="2.5" stroke-linecap="round" />
+              <path d="M32 8 C38 6 42 12 36 15 C34 16 32 17 32 17 Z" fill="#dc2626" stroke="#09090b"
+                stroke-width="1.5" />
               <!-- Main Sail -->
-              <path d="M20 18 C30 16 42 16 48 18 C46 29 44 34 22 34 Z" fill="#ffffff" stroke="#09090b" stroke-width="2"/>
-              <path d="M34 20 C34 26 38 28 34 32" stroke="#dc2626" stroke-width="2" fill="none"/>
-              <circle cx="34" cy="24" r="3" fill="#dc2626"/>
+              <path d="M20 18 C30 16 42 16 48 18 C46 29 44 34 22 34 Z" fill="#ffffff" stroke="#09090b"
+                stroke-width="2" />
+              <path d="M34 20 C34 26 38 28 34 32" stroke="#dc2626" stroke-width="2" fill="none" />
+              <circle cx="34" cy="24" r="3" fill="#dc2626" />
               <!-- Hull / Caravel Ship -->
-              <path d="M12 36 C14 48 50 48 54 36 Z" fill="#78350f" stroke="#09090b" stroke-width="2.5"/>
-              <path d="M10 36 H56" stroke="#09090b" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M12 36 C14 48 50 48 54 36 Z" fill="#78350f" stroke="#09090b" stroke-width="2.5" />
+              <path d="M10 36 H56" stroke="#09090b" stroke-width="2.5" stroke-linecap="round" />
               <!-- Figurehead (Merry Sheep) -->
-              <circle cx="56" cy="34" r="4.5" fill="#fef08a" stroke="#09090b" stroke-width="1.5"/>
-              <path d="M57 32 C59 30 61 34 58 36" stroke="#09090b" stroke-width="1.5" fill="none"/>
+              <circle cx="56" cy="34" r="4.5" fill="#fef08a" stroke="#09090b" stroke-width="1.5" />
+              <path d="M57 32 C59 30 61 34 58 36" stroke="#09090b" stroke-width="1.5" fill="none" />
               <!-- Wave ripples underneath -->
-              <path d="M8 44 C16 42 22 46 30 44 C38 42 46 46 56 44" stroke="#0284c7" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <path d="M8 44 C16 42 22 46 30 44 C38 42 46 46 56 44" stroke="#0284c7" stroke-width="2"
+                stroke-linecap="round" fill="none" />
             </svg>
           </div>
 
@@ -5235,7 +5199,7 @@
 
       <!-- PROGRESSIVE MILESTONES STREAM -->
       <div class="voyage-stream-trail" id="voyageStreamTrail">
-        
+
         <!-- MILESTONE 1 (Visible initially) -->
         <article class="voyage-milestone-card is-revealed" data-milestone="1" id="milestone-1">
           <div class="voyage-card-spine">
@@ -5257,15 +5221,19 @@
             <h3 class="voyage-role-title">Tech Lead — Ralph Co.</h3>
 
             <p class="voyage-narrative">
-              Served as Tech Lead managing engineering sprints, architecting resilient web platforms, establishing code review and test standards, and mentoring full-stack engineers to ship production releases on time.
+              Served as Tech Lead managing engineering sprints, architecting resilient web platforms, establishing code
+              review and test standards, and mentoring full-stack engineers to ship production releases on time.
             </p>
 
             <div class="voyage-highlights-box">
               <div class="highlights-title">Key Voyage Log &amp; Achievements:</div>
               <ul class="highlights-list">
-                <li>Directed agile engineering sprints across multi-disciplinary developers, achieving 100% on-time milestone delivery.</li>
-                <li>Architected modular, resilient full-stack web applications with high test coverage and zero-downtime CI/CD workflows.</li>
-                <li>Mentored junior and mid-level software engineers on clean architecture, modern React state management, and Node APIs.</li>
+                <li>Directed agile engineering sprints across multi-disciplinary developers, achieving 100% on-time
+                  milestone delivery.</li>
+                <li>Architected modular, resilient full-stack web applications with high test coverage and zero-downtime
+                  CI/CD workflows.</li>
+                <li>Mentored junior and mid-level software engineers on clean architecture, modern React state
+                  management, and Node APIs.</li>
               </ul>
             </div>
 
@@ -5301,15 +5269,19 @@
             <h3 class="voyage-role-title">Event Organiser — Cluster Community | GU</h3>
 
             <p class="voyage-narrative">
-              Organizing developer hackathons, technical workshops, community codefests, and student mentorship at Galgotias University (GU). Fostering an energetic builder and developer ecosystem.
+              Organizing developer hackathons, technical workshops, community codefests, and student mentorship at
+              Galgotias University (GU). Fostering an energetic builder and developer ecosystem.
             </p>
 
             <div class="voyage-highlights-box">
               <div class="highlights-title">Key Voyage Log &amp; Achievements:</div>
               <ul class="highlights-list">
-                <li>Spearheaded university-wide hackathons and collaborative build sprints engaging hundreds of student developers.</li>
-                <li>Led hands-on technical workshops demystifying modern web toolchains, open-source Git practices, and developer tooling.</li>
-                <li>Cultivated an energetic developer collective, connecting talented student builders directly with tech mentors and opportunities.</li>
+                <li>Spearheaded university-wide hackathons and collaborative build sprints engaging hundreds of student
+                  developers.</li>
+                <li>Led hands-on technical workshops demystifying modern web toolchains, open-source Git practices, and
+                  developer tooling.</li>
+                <li>Cultivated an energetic developer collective, connecting talented student builders directly with
+                  tech mentors and opportunities.</li>
               </ul>
             </div>
 
@@ -5345,15 +5317,19 @@
             <h3 class="voyage-role-title">Founder &amp; Principal — Synapse Calyx</h3>
 
             <p class="voyage-narrative">
-              Founded Synapse Calyx, delivering bespoke digital services, scalable full-stack web platforms, client architectures, and high-performance digital products for modern enterprises.
+              Founded Synapse Calyx, delivering bespoke digital services, scalable full-stack web platforms, client
+              architectures, and high-performance digital products for modern enterprises.
             </p>
 
             <div class="voyage-highlights-box">
               <div class="highlights-title">Key Voyage Log &amp; Achievements:</div>
               <ul class="highlights-list">
-                <li>Architecting and launching end-to-end full-stack platforms engineered for scale, lightning-fast TTFB, and rock-solid uptime.</li>
-                <li>Partnering with founders and enterprises to transform ambiguous concepts into high-converting, bespoke digital products.</li>
-                <li>Pioneering artisanal web craft: handcrafted CSS, tactile micro-interactions, responsive architectures, and zero-bloat code.</li>
+                <li>Architecting and launching end-to-end full-stack platforms engineered for scale, lightning-fast
+                  TTFB, and rock-solid uptime.</li>
+                <li>Partnering with founders and enterprises to transform ambiguous concepts into high-converting,
+                  bespoke digital products.</li>
+                <li>Pioneering artisanal web craft: handcrafted CSS, tactile micro-interactions, responsive
+                  architectures, and zero-bloat code.</li>
               </ul>
             </div>
 
@@ -5388,13 +5364,15 @@
             <h3 class="voyage-role-title">The Horizon — Autonomous AI &amp; Global Ventures</h3>
 
             <p class="voyage-narrative">
-              Sailing into uncharted waters—expanding Synapse Calyx into an internationally recognized digital studio, engineering autonomous agent systems, and building high-impact open-source platforms.
+              Sailing into uncharted waters—expanding Synapse Calyx into an internationally recognized digital studio,
+              engineering autonomous agent systems, and building high-impact open-source platforms.
             </p>
 
             <div class="voyage-highlights-box">
               <div class="highlights-title">Visionary Horizons &amp; Focus Areas:</div>
               <ul class="highlights-list">
-                <li>Building intelligent autonomous agent workflows, reactive sensory interfaces, and edge-native AI applications.</li>
+                <li>Building intelligent autonomous agent workflows, reactive sensory interfaces, and edge-native AI
+                  applications.</li>
                 <li>Expanding global engineering partnerships and scaling high-impact venture incubation.</li>
                 <li>Advancing the frontier of hand-crafted developer tools with kinetic, tactile feedback.</li>
               </ul>
@@ -5426,7 +5404,8 @@
             <span class="sub-icon">📜</span>
             <span id="journeyShowAllBtnText">Reveal All Chapters</span>
           </button>
-          <button class="journey-sub-btn" id="journeyResetBtn" type="button" title="Start journey from Chapter 1" style="display:none;">
+          <button class="journey-sub-btn" id="journeyResetBtn" type="button" title="Start journey from Chapter 1"
+            style="display:none;">
             <span class="sub-icon">↺</span>
             <span>Reset Voyage</span>
           </button>
@@ -5437,7 +5416,8 @@
           <span class="banner-sparkle">✦</span>
           <div class="banner-content">
             <strong>VOYAGE ARCHIVE COMPLETE!</strong>
-            <span class="banner-subtext">“There is no limit to what can be built when passion meets hand-crafted code.”</span>
+            <span class="banner-subtext">“There is no limit to what can be built when passion meets hand-crafted
+              code.”</span>
           </div>
           <span class="banner-sparkle">✦</span>
         </div>
@@ -6246,7 +6226,8 @@
     const PORTFOLIO_CONFIG = {
       name: "Deepak Pandey",
       bounty: "3,000,000,000",
-      photoUrl: "images/deepak-wanted.jpg", // Official Wanted Poster Anime Portrait e.g. "photo.jpg" (or click the Wanted Poster to upload directly!)
+      photoUrl: "images/media_1794201865931_238ddac4.jpg", // Official Wanted Poster Template
+      wantedPosterPhoto: "images/media_1794201865931_238ddac4.jpg",
       tagline: "Founder & Software Craftsman · Crafting scalable web platforms, digital systems, and creative code.",
       email: "deepak@synapsecalyx.com",
       status: "FOUNDER @ SYNAPSE CALYX · OPEN FOR COLLABORATIONS · 2026",
@@ -6520,7 +6501,7 @@
       if (savedPhoto && savedPhoto.startsWith("data:image")) {
         setWantedPhoto(savedPhoto);
       } else {
-        setWantedPhoto(PORTFOLIO_CONFIG.photoUrl || "images/deepak-wanted.jpg");
+        setWantedPhoto(PORTFOLIO_CONFIG.photoUrl || PORTFOLIO_CONFIG.wantedPosterPhoto || "images/media_1794201865931_238ddac4.jpg");
       }
 
       if (wantedPhotoContainer && wantedPhotoInput) {
@@ -7022,6 +7003,7 @@
       let currentBountyNum = 3000000000;
       if (bountyRow && bountyDisplay) {
         bountyRow.addEventListener("click", function (e) {
+          e.stopPropagation();
           currentBountyNum += 100000000;
           bountyDisplay.textContent = currentBountyNum.toLocaleString();
           playCoinAudio();

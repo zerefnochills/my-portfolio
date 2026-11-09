@@ -44,8 +44,8 @@
 | # | Name | Scope | Dependencies | Status |
 |---|------|-------|-------------|--------|
 | M1 | Layout Shift & Proportion Correction | Root containment, ticker tape, coffee stain, navbar wrap, logbook spread, ribbons, hero gutters | none | DONE |
-| M2 | Wanted Poster Asset Replacement | Copy asset to `images/`, update markup/config, apply 3:4 aspect ratio styling, mobile containment | none | PLANNED |
-| M3 | 'My Journey' Scroll-Accumulated Chapters | Restructure DOM to scroll steps, sticky deck CSS, IntersectionObserver synchronizer, audio/waypoint handling | M1 | PLANNED |
+| M2 | Wanted Poster Asset Replacement | Copy asset to `images/`, update markup/config, apply 3:4 aspect ratio styling, mobile containment | none | DONE |
+| M3 | 'My Journey' Scroll-Accumulated Chapters | Restructure DOM to scroll steps, sticky deck CSS, IntersectionObserver synchronizer, audio/waypoint handling | M1 | IN_PROGRESS |
 | M4 | Final E2E Verification & Adversarial Hardening | Execute full test suite (Tiers 1-4), verify 100% pass across all viewports, white-box coverage hardening (Tier 5) | M1, M2, M3 | PLANNED |
 
 ## Interface Contracts

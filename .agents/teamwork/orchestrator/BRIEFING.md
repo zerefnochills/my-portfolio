@@ -28,11 +28,11 @@ Orchestrate portfolio website updates: correct layout shift & proportions, repla
 - **Work items**:
   1. Survey & Map scope [done]
   2. M1: Layout Shift and Viewport Proportion Correction [done]
-  3. M2: Wanted Poster Asset Replacement [in-progress]
-  4. M3: 'My Journey' Scroll-Accumulated Chapters [pending]
+  3. M2: Wanted Poster Asset Replacement [done]
+  4. M3: 'My Journey' Scroll-Accumulated Chapters [in-progress]
   5. E2E Verification & Hardening [pending]
-- **Current phase**: 2
-- **Current focus**: Milestone 2 Wanted Poster Asset Replacement
+- **Current phase**: 3
+- **Current focus**: Milestone 3 'My Journey' Scroll-Accumulated Chapters
 
 ## 🔒 Key Constraints
 - NEVER write, modify, or create source code files directly.
@@ -69,20 +69,26 @@ Orchestrate portfolio website updates: correct layout shift & proportions, repla
 | challenger_m1_1 | teamwork_challenger | M1: Viewport Stress & Boundary Challenger | completed | e1b3aef8-0cb9-4b31-b338-34c55704ca24 |
 | challenger_m1_2 | teamwork_challenger | M1: Collision & Interactive Stress Challenger | completed | bb5b7998-c650-4e8a-b8f1-c3519eb5a9e4 |
 | auditor_m1 | teamwork_auditor | M1: Forensic Integrity Verification | completed | a83e80d3-4179-4380-84f3-694e9e3fdf4e |
-| worker_m2 | teamwork_worker | M2: Wanted Poster Asset Replacement Implementation | in-progress | 4771d513-792d-4c4f-97bf-ad89e2e4aa54 |
+| worker_m2 | teamwork_worker | M2: Wanted Poster Asset Replacement Implementation | completed | 4771d513-792d-4c4f-97bf-ad89e2e4aa54 |
+| reviewer_m2_1 | teamwork_reviewer | M2: Asset Loading & Integration Review | completed | 336507ef-a177-4fd4-975f-5e4c1cd5f837 |
+| reviewer_m2_2 | teamwork_reviewer | M2: Aspect Ratio & Responsive Styling Review | completed | 68316ffa-b7cb-484e-96f6-51c2d92c71b8 |
+| challenger_m2_1 | teamwork_challenger | M2: Boundary & Distortion Stress Challenger | completed | 6781952b-8c89-45c0-9b86-b0270cd5ed46 |
+| challenger_m2_2 | teamwork_challenger | M2: Interaction & Dynamic Hook Challenger | completed | f2160b30-86c3-469e-bf77-07fae1dadb31 |
+| auditor_m2 | teamwork_auditor | M2: Forensic Integrity Verification | completed | bee00396-b9c2-4363-9675-651e2a4a51ad |
+| worker_m3 | teamwork_worker | M3: 'My Journey' Scroll-Accumulated Chapters Implementation | in-progress | 3897c223-1152-4980-8e19-4c29c5625d41 |
 
 ## Succession Status
 - Succession required: no
-- Spawn count: 14 / 16
-- Pending subagents: 4771d513-792d-4c4f-97bf-ad89e2e4aa54
+- Spawn count: 20 / 16
+- Pending subagents: 3897c223-1152-4980-8e19-4c29c5625d41
 - Predecessor: none
 - Successor spawned: not yet spawned
 - Successor generation: none
 - Successor state folder: none
 
 ## Active Timers
-- Heartbeat cron: 02af6f8c-f418-493b-9aa8-b21796c4e706/task-383
-- Safety timer: 02af6f8c-f418-493b-9aa8-b21796c4e706/task-385
+- Heartbeat cron: 02af6f8c-f418-493b-9aa8-b21796c4e706/task-521
+- Safety timer: 02af6f8c-f418-493b-9aa8-b21796c4e706/task-523
 - On succession: kill all timers before spawning successor
 - On context truncation: handle timers as step 4 of the State Recovery section of your prompt says
 
