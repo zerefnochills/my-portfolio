@@ -1028,8 +1028,30 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
   border-radius: 12px;
   padding: 16px 22px 20px;
   box-shadow: 5px 6px 0 var(--ink, #09090b);
-  margin-bottom: 36px;
-  position: relative;
+  margin-bottom: 24px;
+  position: sticky;
+  top: 76px;
+  z-index: 25;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Scroll hint pill */
+.voyage-scroll-hint {
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 18px;
+}
+
+.voyage-scroll-hint span {
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #64748b;
+  background: #f1f5f9;
+  border: 1px dashed #cbd5e1;
+  padding: 4px 12px;
+  border-radius: 999px;
+  display: inline-block;
 }
 
 .voyage-route-header {
@@ -1218,29 +1240,114 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
   font-weight: 750;
 }
 
-/* Progressive Milestones Stream Trail */
-.voyage-stream-trail {
+/* Deck Track & Controlled Scroll Steps */
+:root {
+  --voyage-step-h: 560px;
+}
+
+@media (max-width: 680px) {
+  :root {
+    --voyage-step-h: 460px;
+  }
+}
+
+.voyage-deck-track {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+}
+
+.voyage-card-step {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 52vh;
+}
+
+.voyage-card-step:nth-child(1) {
+  height: calc(var(--voyage-step-h) * 4);
+}
+
+.voyage-card-step:nth-child(2) {
+  height: calc(var(--voyage-step-h) * 3);
+  margin-top: calc(var(--voyage-step-h) * -3);
+}
+
+.voyage-card-step:nth-child(3) {
+  height: calc(var(--voyage-step-h) * 2);
+  margin-top: calc(var(--voyage-step-h) * -2);
+}
+
+.voyage-card-step:nth-child(4) {
+  height: var(--voyage-step-h);
+  margin-top: calc(var(--voyage-step-h) * -1);
+}
+
+/* Progressive Milestones Stream Trail */
+.voyage-stream-trail {
   position: relative;
 }
 
-/* Milestone Cards */
+/* Sticky Stacking Milestone Cards */
 .voyage-milestone-card {
-  display: flex;
+  display: flex !important;
   gap: 20px;
   align-items: stretch;
-  position: relative;
+  position: sticky;
+  top: 220px;
+  opacity: 0.45;
+  transform: translateY(16px) scale(0.985);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.35s ease,
+              box-shadow 0.3s ease;
+  will-change: transform, opacity;
 }
 
-.voyage-milestone-card.is-hidden {
-  display: none !important;
+.voyage-milestone-card.stack-card {
+  position: sticky;
+  display: flex !important;
+}
+
+/* Stacking Top Offsets & Z-Indexes */
+.voyage-card-step:nth-child(1) .voyage-milestone-card,
+.voyage-milestone-card[data-milestone="1"] {
+  top: 220px;
+  z-index: 10;
+}
+
+.voyage-card-step:nth-child(2) .voyage-milestone-card,
+.voyage-milestone-card[data-milestone="2"] {
+  top: 232px;
+  z-index: 11;
+}
+
+.voyage-card-step:nth-child(3) .voyage-milestone-card,
+.voyage-milestone-card[data-milestone="3"] {
+  top: 244px;
+  z-index: 12;
+}
+
+.voyage-card-step:nth-child(4) .voyage-milestone-card,
+.voyage-milestone-card[data-milestone="4"] {
+  top: 256px;
+  z-index: 13;
+}
+
+/* Active & Stacked Card States */
+.voyage-milestone-card.is-stacked {
+  opacity: 1 !important;
+  transform: translateY(0) scale(1) !important;
 }
 
 .voyage-milestone-card.is-revealed {
-  display: flex;
-  animation: milestoneUnfurl 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  display: flex !important;
+}
+
+.voyage-milestone-card.is-active .voyage-card-body {
+  box-shadow: 6px 8px 0 var(--ink, #09090b);
+}
+
+.voyage-milestone-card.is-hidden {
+  /* Deprecated: cards use stacked deck rather than display: none */
 }
 
 @keyframes milestoneUnfurl {
@@ -2179,7 +2286,32 @@ header.site-header {
 
   /* Interactive Journey on Mobile */
   .voyage-route-dock {
+    top: 64px !important;
     padding: 12px 14px 16px !important;
+  }
+
+  .voyage-card-step {
+    min-height: 48vh;
+  }
+
+  .voyage-card-step:nth-child(1) .voyage-milestone-card,
+  .voyage-milestone-card[data-milestone="1"] {
+    top: 190px !important;
+  }
+
+  .voyage-card-step:nth-child(2) .voyage-milestone-card,
+  .voyage-milestone-card[data-milestone="2"] {
+    top: 198px !important;
+  }
+
+  .voyage-card-step:nth-child(3) .voyage-milestone-card,
+  .voyage-milestone-card[data-milestone="3"] {
+    top: 206px !important;
+  }
+
+  .voyage-card-step:nth-child(4) .voyage-milestone-card,
+  .voyage-milestone-card[data-milestone="4"] {
+    top: 214px !important;
   }
 
   .voyage-route-track {

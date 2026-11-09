@@ -5128,14 +5128,14 @@
       </div>
 
       <!-- GRAND LINE WAYPOINT ROUTE BAR -->
-      <div class="voyage-route-dock" aria-label="Grand Line Voyage Navigation">
+      <div class="voyage-route-dock" id="voyageRouteDock" aria-label="Grand Line Voyage Navigation">
         <div class="voyage-route-header">
           <div class="voyage-route-title">
             <span class="route-icon">🧭</span>
             <span>GRAND LINE ROUTE LOG</span>
           </div>
           <div class="voyage-route-counter" id="voyageRouteCounter">
-            <span class="count-pill">Chapter 1 of 4 Unlocked</span>
+            <span class="count-pill">Chapter 1 of 4 Unfurled</span>
           </div>
         </div>
 
@@ -5197,11 +5197,17 @@
         </div>
       </div>
 
-      <!-- PROGRESSIVE MILESTONES STREAM -->
-      <div class="voyage-stream-trail" id="voyageStreamTrail">
+      <!-- Scroll hint pill -->
+      <div class="voyage-scroll-hint" id="voyageScrollHint" aria-hidden="true">
+        <span>↓ Scroll naturally to cruise the Grand Line</span>
+      </div>
 
-        <!-- MILESTONE 1 (Visible initially) -->
-        <article class="voyage-milestone-card is-revealed" data-milestone="1" id="milestone-1">
+      <!-- PROGRESSIVE MILESTONES STREAM / SCROLL DECK TRACK -->
+      <div class="voyage-deck-track voyage-stream-trail" id="voyageDeckTrack">
+
+        <!-- STEP 1 -->
+        <div class="voyage-card-step" data-step="1" id="step-1">
+          <article class="voyage-milestone-card stack-card is-stacked is-active" data-milestone="1" id="milestone-1">
           <div class="voyage-card-spine">
             <div class="spine-node">
               <span class="node-dot">01</span>
@@ -5247,9 +5253,11 @@
             </div>
           </div>
         </article>
+        </div>
 
-        <!-- MILESTONE 2 (Revealed on click 1) -->
-        <article class="voyage-milestone-card is-hidden" data-milestone="2" id="milestone-2">
+        <!-- STEP 2 -->
+        <div class="voyage-card-step" data-step="2" id="step-2">
+          <article class="voyage-milestone-card stack-card" data-milestone="2" id="milestone-2">
           <div class="voyage-card-spine">
             <div class="spine-node">
               <span class="node-dot">02</span>
@@ -5295,9 +5303,11 @@
             </div>
           </div>
         </article>
+        </div>
 
-        <!-- MILESTONE 3 (Revealed on click 2) -->
-        <article class="voyage-milestone-card is-hidden" data-milestone="3" id="milestone-3">
+        <!-- STEP 3 -->
+        <div class="voyage-card-step" data-step="3" id="step-3">
+          <article class="voyage-milestone-card stack-card" data-milestone="3" id="milestone-3">
           <div class="voyage-card-spine">
             <div class="spine-node">
               <span class="node-dot">03</span>
@@ -5343,9 +5353,11 @@
             </div>
           </div>
         </article>
+        </div>
 
-        <!-- MILESTONE 4 (Revealed on click 3) -->
-        <article class="voyage-milestone-card is-hidden" data-milestone="4" id="milestone-4">
+        <!-- STEP 4 -->
+        <div class="voyage-card-step" data-step="4" id="step-4">
+          <article class="voyage-milestone-card stack-card" data-milestone="4" id="milestone-4">
           <div class="voyage-card-spine">
             <div class="spine-node">
               <span class="node-dot">04</span>
@@ -5386,41 +5398,20 @@
               <span class="voyage-chip">Inherited Will</span>
               <span class="voyage-chip">Bespoke Studios</span>
             </div>
+
+            <!-- CELEBRATORY BANNER (Revealed when all 4 chapters are accumulated) -->
+            <div class="voyage-celebration-banner" id="voyageCelebrationBanner" style="display:none;">
+              <span class="banner-sparkle">✦</span>
+              <div class="banner-content">
+                <strong>VOYAGE ARCHIVE COMPLETE!</strong>
+                <span class="banner-subtext">“There is no limit to what can be built when passion meets hand-crafted code.”</span>
+              </div>
+              <span class="banner-sparkle">✦</span>
+            </div>
           </div>
         </article>
-
-      </div>
-
-      <!-- INTERACTIVE ACTION BAR (REVEALS MILESTONES ONE AFTER ANOTHER) -->
-      <div class="journey-actions-dock">
-        <button class="journey-reveal-btn" id="journeyRevealBtn" type="button" aria-live="polite">
-          <span class="btn-ship-icon">⛵</span>
-          <span class="btn-text" id="journeyRevealBtnText">Unfurl Next Milestone (Chapter 2 of 4)</span>
-          <span class="btn-arrow">→</span>
-        </button>
-
-        <div class="journey-subcontrols">
-          <button class="journey-sub-btn" id="journeyShowAllBtn" type="button" title="View all milestones at once">
-            <span class="sub-icon">📜</span>
-            <span id="journeyShowAllBtnText">Reveal All Chapters</span>
-          </button>
-          <button class="journey-sub-btn" id="journeyResetBtn" type="button" title="Start journey from Chapter 1"
-            style="display:none;">
-            <span class="sub-icon">↺</span>
-            <span>Reset Voyage</span>
-          </button>
         </div>
 
-        <!-- CELEBRATORY BANNER (Revealed when all 4 chapters are unlocked) -->
-        <div class="voyage-celebration-banner" id="voyageCelebrationBanner" style="display:none;">
-          <span class="banner-sparkle">✦</span>
-          <div class="banner-content">
-            <strong>VOYAGE ARCHIVE COMPLETE!</strong>
-            <span class="banner-subtext">“There is no limit to what can be built when passion meets hand-crafted
-              code.”</span>
-          </div>
-          <span class="banner-sparkle">✦</span>
-        </div>
       </div>
     </section>
 
@@ -6559,6 +6550,8 @@
       }
 
       // 2. Synthesized Web Audio Sound Effects (Zero External Files)
+      window.AUDIO_COOLDOWN = 220;
+      window.lastPenAudioTime = 0;
       let audioCtx = null;
       let soundEnabled = localStorage.getItem("portfolio_sound") === "true";
 
@@ -6574,6 +6567,9 @@
       }
 
       function playPenScratch() {
+        const now = Date.now();
+        if (now - (window.lastPenAudioTime || 0) < (window.AUDIO_COOLDOWN || 220)) return;
+        window.lastPenAudioTime = now;
         if (!soundEnabled) return;
         const ctx = getAudioContext();
         if (!ctx) return;
@@ -6598,6 +6594,7 @@
           noise.start();
         } catch (e) { }
       }
+      window.playPenScratch = playPenScratch;
 
       function playPaperRustle() {
         if (!soundEnabled) return;
@@ -7037,6 +7034,7 @@
           osc.stop(ctx.currentTime + 0.36);
         } catch (e) { }
       }
+      window.playCoinAudio = playCoinAudio;
 
       // 10c. IRL & Personal Insights Popup Engine
       const boardPopupModal = document.getElementById("boardPopupModal");
@@ -7747,52 +7745,66 @@
         });
       });
 
-      // 18. Interactive Grand Line Journey Stepper & Reveal Controller
-      function initInteractiveJourney() {
+      // 18. Scroll-Driven Grand Line Journey Stepper Controller
+      function initScrollDrivenJourney() {
         const journeySection = document.getElementById("journey");
         if (!journeySection) return;
 
-        const milestones = Array.from(journeySection.querySelectorAll(".voyage-milestone-card"));
-        const revealBtn = document.getElementById("journeyRevealBtn");
-        const revealBtnText = document.getElementById("journeyRevealBtnText");
-        const showAllBtn = document.getElementById("journeyShowAllBtn");
-        const showAllBtnText = document.getElementById("journeyShowAllBtnText");
-        const resetBtn = document.getElementById("journeyResetBtn");
-        const counterPill = document.getElementById("voyageRouteCounter");
+        const steps = Array.from(journeySection.querySelectorAll(".voyage-card-step"));
+        const cards = Array.from(journeySection.querySelectorAll(".voyage-milestone-card"));
+        const waypoints = Array.from(journeySection.querySelectorAll(".voyage-waypoint"));
         const trackFill = document.getElementById("voyageTrackFill");
         const shipAvatar = document.getElementById("voyageShipAvatar");
+        const counterPill = document.getElementById("voyageRouteCounter");
         const celebrationBanner = document.getElementById("voyageCelebrationBanner");
-        const waypoints = Array.from(journeySection.querySelectorAll(".voyage-waypoint"));
 
-        if (!milestones.length) return;
+        if (!steps.length || !cards.length) return;
 
-        let revealedCount = 1;
-        const total = milestones.length;
+        const total = steps.length;
+        let activeStep = 1;
+        let isWaypointClicking = false;
+        let clickTimeout = null;
 
-        function updateUI(scrollTargetId) {
-          milestones.forEach((card, index) => {
-            if (index < revealedCount) {
-              if (card.classList.contains("is-hidden")) {
-                card.classList.remove("is-hidden");
-                card.classList.add("is-revealed");
-              }
+        function updateJourneyState(newStep, userInitiated = false) {
+          if (newStep < 1) newStep = 1;
+          if (newStep > total) newStep = total;
+
+          const changed = newStep !== activeStep;
+          activeStep = newStep;
+
+          // 1. Update Card Classes
+          cards.forEach((card, idx) => {
+            const stepNum = idx + 1;
+            if (stepNum <= activeStep) {
+              card.classList.add("is-stacked");
+              card.classList.add("is-revealed");
+              card.classList.remove("is-hidden");
             } else {
+              card.classList.remove("is-stacked");
               card.classList.remove("is-revealed");
-              card.classList.add("is-hidden");
+            }
+            if (stepNum === activeStep) {
+              card.classList.add("is-active");
+            } else {
+              card.classList.remove("is-active");
             }
           });
 
-          const pct = total > 1 ? ((revealedCount - 1) / (total - 1)) * 100 : 0;
+          // 2. Update Progress Fill & Ship Avatar
+          const pct = total > 1 ? ((activeStep - 1) / (total - 1)) * 100 : 0;
           if (trackFill) trackFill.style.width = pct + "%";
           if (shipAvatar) {
             shipAvatar.style.left = pct + "%";
-            shipAvatar.classList.add("sailing");
-            setTimeout(() => shipAvatar.classList.remove("sailing"), 600);
+            if (changed) {
+              shipAvatar.classList.add("sailing");
+              setTimeout(() => shipAvatar.classList.remove("sailing"), 500);
+            }
           }
 
-          waypoints.forEach((wp, index) => {
-            const chapter = index + 1;
-            if (chapter <= revealedCount) {
+          // 3. Update Waypoints
+          waypoints.forEach((wp, idx) => {
+            const wpChapter = idx + 1;
+            if (wpChapter <= activeStep) {
               wp.classList.add("active");
               wp.classList.remove("locked");
             } else {
@@ -7801,121 +7813,124 @@
             }
           });
 
+          // 4. Update Counter Pill
           if (counterPill) {
-            counterPill.innerHTML = `<span class="count-pill">Chapter ${revealedCount} of ${total} Unlocked</span>`;
+            counterPill.innerHTML = `<span class="count-pill">Chapter ${activeStep} of ${total} Unfurled</span>`;
           }
 
-          if (revealedCount < total) {
-            const nextChapter = revealedCount + 1;
-            const nextCard = milestones[revealedCount];
-            const nextTitle = nextCard ? (nextCard.querySelector(".voyage-role-title")?.textContent || `Chapter ${nextChapter}`) : `Chapter ${nextChapter}`;
-            const shortTitle = nextTitle.split("—")[0].trim();
-
-            if (revealBtnText) {
-              revealBtnText.textContent = `Unfurl Next Milestone (Chapter ${nextChapter} of ${total}: ${shortTitle})`;
-            }
-            if (revealBtn) {
-              revealBtn.style.display = "inline-flex";
-              revealBtn.classList.remove("btn-complete");
-            }
-            if (resetBtn) resetBtn.style.display = revealedCount > 1 ? "inline-flex" : "none";
-            if (showAllBtn) {
-              showAllBtn.style.display = "inline-flex";
-              if (showAllBtnText) showAllBtnText.textContent = "Reveal All Chapters";
-            }
-            if (celebrationBanner) celebrationBanner.style.display = "none";
-          } else {
-            if (revealBtnText) {
-              revealBtnText.textContent = "↺ Replay Journey from Chapter 1";
-            }
-            if (revealBtn) {
-              revealBtn.classList.add("btn-complete");
-            }
-            if (resetBtn) resetBtn.style.display = "none";
-            if (showAllBtn) {
-              showAllBtn.style.display = "inline-flex";
-              if (showAllBtnText) showAllBtnText.textContent = "Collapse to Chapter 1";
-            }
-            if (celebrationBanner) celebrationBanner.style.display = "flex";
-            if (soundEnabled && typeof playCoinAudio === "function") {
-              playCoinAudio();
-            }
-          }
-
-          if (scrollTargetId) {
-            const targetEl = document.getElementById(scrollTargetId);
-            if (targetEl && typeof targetEl.scrollIntoView === "function") {
-              setTimeout(() => {
-                targetEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
-              }, 120);
-            }
-          }
-        }
-
-        if (revealBtn) {
-          revealBtn.addEventListener("click", function () {
-            if (revealedCount < total) {
-              revealedCount++;
-              if (soundEnabled && typeof playPenScratch === "function") {
-                playPenScratch();
-              }
-              updateUI(`milestone-${revealedCount}`);
+          // 5. Celebration Fanfare Banner
+          if (celebrationBanner) {
+            if (activeStep === total) {
+              celebrationBanner.style.display = "flex";
+              celebrationBanner.classList.add("is-visible");
+              celebrationBanner.classList.remove("is-hidden");
             } else {
-              revealedCount = 1;
-              if (soundEnabled && typeof playPaperRustle === "function") {
-                playPaperRustle();
-              }
-              updateUI("milestone-1");
+              celebrationBanner.style.display = "none";
+              celebrationBanner.classList.remove("is-visible");
+              celebrationBanner.classList.add("is-hidden");
             }
-          });
+          }
+
+          // 6. Throttled Audio Cues
+          if (changed && soundEnabled) {
+            const now = Date.now();
+            if (now - (window.lastPenAudioTime || 0) >= (window.AUDIO_COOLDOWN || 220)) {
+              window.lastPenAudioTime = now;
+              if (activeStep === total && typeof window.playCoinAudio === "function") {
+                window.playCoinAudio();
+              } else if (typeof window.playPenScratch === "function") {
+                window.playPenScratch();
+              }
+            }
+          }
         }
 
-        if (showAllBtn) {
-          showAllBtn.addEventListener("click", function () {
-            if (revealedCount < total) {
-              revealedCount = total;
-              if (soundEnabled && typeof playPenScratch === "function") {
-                playPenScratch();
-              }
-              updateUI(`milestone-${total}`);
-            } else {
-              revealedCount = 1;
-              if (soundEnabled && typeof playPaperRustle === "function") {
-                playPaperRustle();
-              }
-              updateUI("milestone-1");
-            }
-          });
+        function getActiveStepFromScroll() {
+          const scrollY = window.scrollY;
+          if (scrollY < 200) return 1;
+
+          const jTop = journeySection.offsetTop;
+          const relY = scrollY - jTop;
+
+          if (relY < 140) {
+            return 1;
+          }
+          if (relY < 280) {
+            return 2;
+          }
+          if (relY < 420) {
+            return 3;
+          }
+          return 4;
         }
 
-        if (resetBtn) {
-          resetBtn.addEventListener("click", function () {
-            revealedCount = 1;
-            if (soundEnabled && typeof playPaperRustle === "function") {
-              playPaperRustle();
-            }
-            updateUI("milestone-1");
-          });
+        // Calculate step from scroll position
+        function onScrollJourney() {
+          if (window.scrollY < 200) {
+            isWaypointClicking = false;
+            if (clickTimeout) clearTimeout(clickTimeout);
+          }
+          if (isWaypointClicking) return;
+
+          const newStep = getActiveStepFromScroll();
+          updateJourneyState(newStep);
         }
 
+        window.addEventListener("scroll", onScrollJourney, { passive: true });
+        window.addEventListener("resize", onScrollJourney, { passive: true });
+
+        // IntersectionObserver for native 60fps tracking
+        if ("IntersectionObserver" in window) {
+          const observerOptions = {
+            root: null,
+            rootMargin: "-20% 0px -35% 0px",
+            threshold: [0.15, 0.5]
+          };
+
+          const observer = new IntersectionObserver((entries) => {
+            if (isWaypointClicking) return;
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const stepNum = parseInt(entry.target.getAttribute("data-step"), 10);
+                if (!isNaN(stepNum)) {
+                  updateJourneyState(stepNum);
+                }
+              }
+            });
+          }, observerOptions);
+
+          steps.forEach((step) => observer.observe(step));
+        }
+
+        // Waypoint Click-to-Scroll Support
         waypoints.forEach((wp) => {
-          wp.addEventListener("click", function () {
+          wp.addEventListener("click", function (e) {
+            e.preventDefault();
             const targetChapter = parseInt(wp.getAttribute("data-chapter"), 10);
             if (isNaN(targetChapter)) return;
-            if (targetChapter > revealedCount) {
-              revealedCount = targetChapter;
-            }
-            if (soundEnabled && typeof playPenScratch === "function") {
-              playPenScratch();
-            }
-            updateUI(`milestone-${targetChapter}`);
+
+            isWaypointClicking = true;
+            if (clickTimeout) clearTimeout(clickTimeout);
+            clickTimeout = setTimeout(() => { isWaypointClicking = false; }, 800);
+
+            updateJourneyState(targetChapter, true);
+
+            const jTop = journeySection.offsetTop;
+            let targetY = 0;
+            if (targetChapter === 1) targetY = jTop + 50;
+            else if (targetChapter === 2) targetY = jTop + 200;
+            else if (targetChapter === 3) targetY = jTop + 350;
+            else if (targetChapter === 4) targetY = jTop + 500;
+
+            window.scrollTo({ top: Math.max(0, targetY), behavior: "smooth" });
           });
         });
 
-        updateUI();
+        // Initial sync
+        onScrollJourney();
       }
 
-      initInteractiveJourney();
+      initScrollDrivenJourney();
 
       // 19. Audio cue on link hovers
       document.querySelectorAll("a, button, .card").forEach(function (interactiveEl) {

@@ -75,7 +75,7 @@ Orchestrate portfolio website updates: correct layout shift & proportions, repla
 | challenger_m2_1 | teamwork_challenger | M2: Boundary & Distortion Stress Challenger | completed | 6781952b-8c89-45c0-9b86-b0270cd5ed46 |
 | challenger_m2_2 | teamwork_challenger | M2: Interaction & Dynamic Hook Challenger | completed | f2160b30-86c3-469e-bf77-07fae1dadb31 |
 | auditor_m2 | teamwork_auditor | M2: Forensic Integrity Verification | completed | bee00396-b9c2-4363-9675-651e2a4a51ad |
-| worker_m3 | teamwork_worker | M3: 'My Journey' Scroll-Accumulated Chapters Implementation | in-progress | 3897c223-1152-4980-8e19-4c29c5625d41 |
+| worker_m3 | teamwork_worker | M3: 'My Journey' Scroll-Accumulated Chapters Implementation | in-progress (active DOM/CSS/JS editing) | 3897c223-1152-4980-8e19-4c29c5625d41 |
 
 ## Succession Status
 - Succession required: no
@@ -88,7 +88,7 @@ Orchestrate portfolio website updates: correct layout shift & proportions, repla
 
 ## Active Timers
 - Heartbeat cron: 02af6f8c-f418-493b-9aa8-b21796c4e706/task-521
-- Safety timer: 02af6f8c-f418-493b-9aa8-b21796c4e706/task-523
+- Safety timer: 02af6f8c-f418-493b-9aa8-b21796c4e706/task-610
 - On succession: kill all timers before spawning successor
 - On context truncation: handle timers as step 4 of the State Recovery section of your prompt says
 
