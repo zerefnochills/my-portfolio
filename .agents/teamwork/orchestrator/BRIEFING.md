@@ -26,13 +26,13 @@ Orchestrate portfolio website updates: correct layout shift & proportions, repla
    - Escalate: report to parent (sub-orchestrators only, last resort)
 4. **Succession**: At 16 spawns, write handoff.md, spawn successor.
 - **Work items**:
-  1. Survey & Map scope [pending]
-  2. M1: Layout Shift and Viewport Proportion Correction [pending]
-  3. M2: Wanted Poster Asset Replacement [pending]
+  1. Survey & Map scope [done]
+  2. M1: Layout Shift and Viewport Proportion Correction [done]
+  3. M2: Wanted Poster Asset Replacement [in-progress]
   4. M3: 'My Journey' Scroll-Accumulated Chapters [pending]
   5. E2E Verification & Hardening [pending]
-- **Current phase**: 1
-- **Current focus**: Milestone 1 Gate Verification (2 Reviewers, 2 Challengers, 1 Auditor)
+- **Current phase**: 2
+- **Current focus**: Milestone 2 Wanted Poster Asset Replacement
 
 ## 🔒 Key Constraints
 - NEVER write, modify, or create source code files directly.
@@ -51,7 +51,7 @@ Orchestrate portfolio website updates: correct layout shift & proportions, repla
 - Formulated PROJECT.md, TEST_INFRA.md, GATE_STATUS.md, and DEAD_ENDS.md.
 - Spanned dual tracks: E2E Test Suite Creation (82 assertions ready in tests/e2e/runner.js) and Milestone 1 Exploration (completed by 3 Explorers).
 - Dispatched worker_m1 for Milestone 1 implementation; worker completed and verified 0 horizontal overflow.
-- Dispatched 2 Reviewers, 2 Challengers, and 1 Auditor for Milestone 1 Gate.
+- Milestone 1 Gate PASSED unanimously: Reviewer 1 (APPROVE), Reviewer 2 (APPROVE), Challenger 1 (APPROVE), Challenger 2 (APPROVE), Forensic Auditor (CLEAN).
 
 ## Team Roster
 | Agent | Type | Work Item | Status | Conv ID |
@@ -68,20 +68,21 @@ Orchestrate portfolio website updates: correct layout shift & proportions, repla
 | reviewer_m1_2 | teamwork_reviewer | M1: Robustness & Responsive Layout Review | completed | bc775523-d954-4c09-a222-84eebef74909 |
 | challenger_m1_1 | teamwork_challenger | M1: Viewport Stress & Boundary Challenger | completed | e1b3aef8-0cb9-4b31-b338-34c55704ca24 |
 | challenger_m1_2 | teamwork_challenger | M1: Collision & Interactive Stress Challenger | completed | bb5b7998-c650-4e8a-b8f1-c3519eb5a9e4 |
-| auditor_m1 | teamwork_auditor | M1: Forensic Integrity Verification | in-progress | a83e80d3-4179-4380-84f3-694e9e3fdf4e |
+| auditor_m1 | teamwork_auditor | M1: Forensic Integrity Verification | completed | a83e80d3-4179-4380-84f3-694e9e3fdf4e |
+| worker_m2 | teamwork_worker | M2: Wanted Poster Asset Replacement Implementation | in-progress | 4771d513-792d-4c4f-97bf-ad89e2e4aa54 |
 
 ## Succession Status
 - Succession required: no
-- Spawn count: 13 / 16
-- Pending subagents: c8476458-f7d7-454c-96c1-dda0e894f500, bc775523-d954-4c09-a222-84eebef74909, e1b3aef8-0cb9-4b31-b338-34c55704ca24, bb5b7998-c650-4e8a-b8f1-c3519eb5a9e4, a83e80d3-4179-4380-84f3-694e9e3fdf4e
+- Spawn count: 14 / 16
+- Pending subagents: 4771d513-792d-4c4f-97bf-ad89e2e4aa54
 - Predecessor: none
 - Successor spawned: not yet spawned
 - Successor generation: none
 - Successor state folder: none
 
 ## Active Timers
-- Heartbeat cron: 02af6f8c-f418-493b-9aa8-b21796c4e706/task-275
-- Safety timer: 02af6f8c-f418-493b-9aa8-b21796c4e706/task-277
+- Heartbeat cron: 02af6f8c-f418-493b-9aa8-b21796c4e706/task-383
+- Safety timer: 02af6f8c-f418-493b-9aa8-b21796c4e706/task-385
 - On succession: kill all timers before spawning successor
 - On context truncation: handle timers as step 4 of the State Recovery section of your prompt says
 

@@ -41,3 +41,7 @@ Replace the button-click chapter reveal mechanism in the 'My Journey' section wi
 ## Follow-up — 2026-11-09T09:08:28Z
 
 The user asked: "check if it is done or not if not then continue doing it". A server restart recently stopped background tasks. Please report your current progress status, resume execution if work remains on the milestones (Milestone 2: Wanted Poster, Milestone 3: My Journey Scroll Accumulation, Milestone 4: E2E Hardening), and continue until all tasks are complete.
+
+## Follow-up — 2026-11-09T09:28:10Z
+
+what is it thats taking these small changes so lonng to do? like just few ui tweaks why taking hours
