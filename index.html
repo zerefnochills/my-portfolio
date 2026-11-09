@@ -7763,6 +7763,17 @@
         const total = steps.length;
         let activeStep = 1;
         let lockedWaypoint = null;
+        let waypointLockTimer = null;
+        let lastWaypointTargetY = null;
+
+        function clearWaypointLock() {
+          if (waypointLockTimer) {
+            clearTimeout(waypointLockTimer);
+            waypointLockTimer = null;
+          }
+          lockedWaypoint = null;
+          lastWaypointTargetY = null;
+        }
 
         function updateJourneyState(newStep, userInitiated = false) {
           if (newStep < 1) newStep = 1;
@@ -7852,18 +7863,28 @@
           const jDocTop = Math.round(rect.top + scrollY);
           const relY = scrollY - jDocTop;
 
-          if (relY < 150) return 1;
-          if (relY < 325) return 2;
-          if (relY < 475) return 3;
+          const isMobile = window.innerWidth <= 680;
+          const stepH = isMobile ? 460 : 560;
+
+          if (relY < stepH) return 1;
+          if (relY < stepH * 2) return 2;
+          if (relY < stepH * 3) return 3;
           return 4;
         }
 
         // Calculate step from scroll position
         function onScrollJourney() {
           if (window.scrollY < 200) {
-            lockedWaypoint = null;
+            clearWaypointLock();
           }
-          if (lockedWaypoint !== null) return;
+
+          if (lockedWaypoint !== null) {
+            if (typeof lastWaypointTargetY === "number" && Math.abs(window.scrollY - lastWaypointTargetY) > 40) {
+              clearWaypointLock();
+            } else {
+              return;
+            }
+          }
 
           const newStep = getActiveStepFromScroll();
           updateJourneyState(newStep);
@@ -7871,23 +7892,12 @@
 
         window.addEventListener("scroll", onScrollJourney, { passive: true });
         window.addEventListener("resize", onScrollJourney, { passive: true });
-        window.addEventListener("wheel", () => { lockedWaypoint = null; }, { passive: true });
-        window.addEventListener("touchmove", () => { lockedWaypoint = null; }, { passive: true });
-        window.addEventListener("keydown", () => { lockedWaypoint = null; }, { passive: true });
-
-        // IntersectionObserver for native 60fps tracking
-        if ("IntersectionObserver" in window) {
-          const observerOptions = {
-            root: null,
-            rootMargin: "-20% 0px -35% 0px",
-            threshold: [0.15, 0.5]
-          };
-
-          const observer = new IntersectionObserver((entries) => {
-            // Observer active for viewport tracking
-          }, observerOptions);
-
-          steps.forEach((step) => observer.observe(step));
+        window.addEventListener("wheel", () => { clearWaypointLock(); onScrollJourney(); }, { passive: true });
+        window.addEventListener("touchmove", () => { clearWaypointLock(); onScrollJourney(); }, { passive: true });
+        window.addEventListener("keydown", () => { clearWaypointLock(); onScrollJourney(); }, { passive: true });
+        window.addEventListener("pointerdown", () => { clearWaypointLock(); }, { passive: true });
+        if ("onscrollend" in window) {
+          window.addEventListener("scrollend", clearWaypointLock, { passive: true });
         }
 
         // Waypoint Click-to-Scroll Support
@@ -7897,18 +7907,27 @@
             const targetChapter = parseInt(wp.getAttribute("data-chapter"), 10);
             if (isNaN(targetChapter)) return;
 
+            clearWaypointLock();
             lockedWaypoint = targetChapter;
             updateJourneyState(targetChapter, true);
 
-            const rect = journeySection.getBoundingClientRect();
-            const jDocTop = Math.round(rect.top + window.scrollY);
-            let targetY = 0;
-            if (targetChapter === 1) targetY = jDocTop + 50;
-            else if (targetChapter === 2) targetY = jDocTop + 220;
-            else if (targetChapter === 3) targetY = jDocTop + 380;
-            else if (targetChapter === 4) targetY = jDocTop + 550;
+            const stepEl = document.getElementById("step-" + targetChapter) || steps[targetChapter - 1];
+            const cardEl = document.getElementById("milestone-" + targetChapter) || cards[targetChapter - 1];
 
-            window.scrollTo({ top: Math.max(0, targetY), behavior: "instant" });
+            if (stepEl && cardEl) {
+              const stepDocTop = stepEl.getBoundingClientRect().top + window.scrollY;
+              const isMobile = window.innerWidth <= 680;
+              const dockTop = parseFloat(window.getComputedStyle(cardEl).top) || (isMobile ? (190 + (targetChapter - 1) * 8) : (220 + (targetChapter - 1) * 12));
+              const targetY = Math.round(stepDocTop - dockTop);
+
+              lastWaypointTargetY = targetY;
+              waypointLockTimer = setTimeout(clearWaypointLock, 450);
+
+              window.scrollTo({
+                top: Math.max(0, targetY),
+                behavior: "instant"
+              });
+            }
           });
         });
 

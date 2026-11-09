@@ -84,22 +84,28 @@ Orchestrate portfolio website updates: correct layout shift & proportions, repla
 | challenger_m3_1 | teamwork_challenger | M3: Bidirectional Scrubbing & Rapid Scroll Stress | completed | 881eb4cd-64a4-4518-a013-f4f13608aca9 |
 | challenger_m3_2 | teamwork_challenger | M3: Waypoint Navigation & Audio FX Stress | completed | 0c13c2a3-92f9-4395-bd80-b89a56768e7d |
 | auditor_m3 | teamwork_auditor | M3: Forensic Integrity & Anti-Cheating Verification | completed | 01c07282-b896-4cc1-8197-586c3f6ae4d8 |
-| explorer_m3_fix_1 | teamwork_explorer | M3 Remediation: Scroll Geometry & Progression Explorer | in-progress | e74394ef-e8c1-474d-94c2-6d44439f22e1 |
-| explorer_m3_fix_2 | teamwork_explorer | M3 Remediation: Observer Facade & Waypoint Jump Explorer | in-progress | 21cc9414-c8df-49f5-9f1d-bfe20347d8ed |
-| explorer_m3_fix_3 | teamwork_explorer | M3 Remediation: Scrollbar Drag Lockout & Polish Explorer | in-progress | 985c0666-9b95-456d-ac0d-06166c8a4231 |
+| explorer_m3_fix_1 | teamwork_explorer | M3 Remediation: Scroll Geometry & Progression Explorer | completed | e74394ef-e8c1-474d-94c2-6d44439f22e1 |
+| explorer_m3_fix_2 | teamwork_explorer | M3 Remediation: Observer Facade & Waypoint Jump Explorer | completed | 21cc9414-c8df-49f5-9f1d-bfe20347d8ed |
+| explorer_m3_fix_3 | teamwork_explorer | M3 Remediation: Scrollbar Drag Lockout & Polish Explorer | completed | 985c0666-9b95-456d-ac0d-06166c8a4231 |
+| worker_m3_remediation | teamwork_worker | M3 Remediation Implementation Worker | completed | 9d4056f3-7c77-4b35-88ae-77aad91f6436 |
+| reviewer_m3_fix_1 | teamwork_reviewer | M3 Remediation Reviewer 1 (Findings 1-4 Verification) | completed (APPROVE) | 2e2261b3-5f79-4518-b1fa-feaf9519c05e |
+| reviewer_m3_fix_2 | teamwork_reviewer | M3 Remediation Reviewer 2 (Responsive & Compactness) | in-progress | 75f5e102-64d5-487c-9268-a2e2c2c89103 |
+| challenger_m3_fix_1 | teamwork_challenger | M3 Remediation Challenger 1 (Rapid Scrub & Teleport) | completed (APPROVE) | 4a5d98fe-bff3-432f-bf47-47883c82d740 |
+| challenger_m3_fix_2 | teamwork_challenger | M3 Remediation Challenger 2 (Waypoint Dock & Drag Unlock) | completed (APPROVE) | 788a8d95-ac65-482f-ab1c-967d92e22f4c |
+| auditor_m3_fix | teamwork_auditor | M3 Remediation Forensic Auditor (Integrity Forensics) | completed (CLEAN) | f919c892-5205-4aba-9e1f-69fbaeae3c16 |
 
 ## Succession Status
 - Succession required: no
-- Spawn count: 28 / 16
-- Pending subagents: e74394ef-e8c1-474d-94c2-6d44439f22e1, 21cc9414-c8df-49f5-9f1d-bfe20347d8ed, 985c0666-9b95-456d-ac0d-06166c8a4231
+- Spawn count: 34 / 16
+- Pending subagents: 75f5e102-64d5-487c-9268-a2e2c2c89103
 - Predecessor: none
 - Successor spawned: not yet spawned
 - Successor generation: none
 - Successor state folder: none
 
 ## Active Timers
-- Heartbeat cron: 02af6f8c-f418-493b-9aa8-b21796c4e706/task-521
-- Safety timer: 02af6f8c-f418-493b-9aa8-b21796c4e706/task-765
+- Heartbeat cron: 02af6f8c-f418-493b-9aa8-b21796c4e706/task-796
+- Safety timer: 02af6f8c-f418-493b-9aa8-b21796c4e706/task-914
 - On succession: kill all timers before spawning successor
 - On context truncation: handle timers as step 4 of the State Recovery section of your prompt says
 

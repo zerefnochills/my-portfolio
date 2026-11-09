@@ -309,10 +309,11 @@ async function runTier2(harness) {
     actual: `${shipBottomClamp}%`
   });
 
-  // B4.3: Rapid scroll stress test (teleport 0 -> 4000px in single step)
+  // B4.3: Rapid scroll stress test (teleport 0 -> end of journey in single step)
   await harness.scrollTo(0);
   await new Promise(r => setTimeout(r, 100));
-  await harness.scrollTo(4200);
+  const jTopB4 = await harness.evaluate(`Math.round(document.getElementById('journey').getBoundingClientRect().top + window.scrollY)`);
+  await harness.scrollTo(jTopB4 + 2200);
   await new Promise(r => setTimeout(r, 250));
   const rapidForward = await harness.evaluate(`
     (() => {

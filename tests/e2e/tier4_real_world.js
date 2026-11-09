@@ -138,7 +138,8 @@ async function runTier4(harness) {
   `);
 
   // Scroll through Journey and check celebration fanfare banner
-  await harness.scrollTo(3500);
+  const jTopW3 = await harness.evaluate(`Math.round(document.getElementById('journey').getBoundingClientRect().top + window.scrollY)`);
+  await harness.scrollTo(jTopW3 + 2200);
   await new Promise(r => setTimeout(r, 300));
   const w3_celebration = await harness.evaluate(`
     (() => {
@@ -158,7 +159,8 @@ async function runTier4(harness) {
   // ---------------------------------------------------------
   console.log('\n-- Workflow 4.4: Bidirectional Journey Scrubbing --');
   // Scroll down to Chapter 4
-  await harness.scrollTo(3200);
+  const jTopW4 = await harness.evaluate(`Math.round(document.getElementById('journey').getBoundingClientRect().top + window.scrollY)`);
+  await harness.scrollTo(jTopW4 + 2200);
   await new Promise(r => setTimeout(r, 200));
   const w4_fwd = await harness.evaluate(`
     (() => {
