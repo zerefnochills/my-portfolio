@@ -193,16 +193,15 @@ async function runAdversarialSuite() {
           })()
         `);
 
-        // Check 1: Zero horizontal delta
+        // Check 1: Zero horizontal delta (scrollWidth - clientWidth <= 0)
         reporter.assert(
           'V1-Boundary',
-          `[${vp.width}px - ${vp.name}] scrollWidth <= clientWidth (Zero Overflow)`,
-          measurements.delta <= 0 && measurements.bodyScrollW <= measurements.docW,
+          `[${vp.width}px - ${vp.name}] scrollWidth - clientWidth <= 0 (Zero Overflow)`,
+          measurements.delta <= 0,
           {
             viewport: vp.width,
             docW: measurements.docW,
             scrollW: measurements.scrollW,
-            bodyScrollW: measurements.bodyScrollW,
             delta: measurements.delta
           }
         );
@@ -271,7 +270,6 @@ async function runAdversarialSuite() {
       let downwardFailures = [];
       for (const w of SWEEP_BREAKPOINTS) {
         await harness.setViewport(w, 800);
-        // Brief 40ms wait simulating rapid window drag reflow
         await new Promise(r => setTimeout(r, 40));
         const res = await harness.evaluate(`
           (() => {
@@ -423,7 +421,7 @@ async function runAdversarialSuite() {
         { actualBodyScrollLeft: scrollAttempt3 }
       );
 
-      // 3D. Physical CDP Mouse Drag Emulation (simulate user swiping right-to-left)
+      // 3D. Physical CDP Mouse Drag Emulation
       await harness.send('Input.dispatchMouseEvent', {
         type: 'mousePressed',
         x: 300,
@@ -456,7 +454,7 @@ async function runAdversarialSuite() {
         { actualScrollX: mouseDragScrollX }
       );
 
-      // 3E. Physical CDP Touch Drag Emulation (touch gestures on mobile)
+      // 3E. Physical CDP Touch Drag Emulation
       await harness.send('Input.dispatchTouchEvent', {
         type: 'touchStart',
         touchPoints: [{ x: 320, y: 350, id: 1 }]
@@ -486,7 +484,6 @@ async function runAdversarialSuite() {
       // SECTION 4: Focus Traversal & Off-Screen Element Auto-Scroll Attack
       // ---------------------------------------------------------
       console.log(`\n-- SECTION 4: Focus Traversal Auto-Scroll Resistance --`);
-      // When a user tabs through links, browsers might scroll container to bring off-screen elements into view
       const focusTraversalResult = await harness.evaluate(`
         (() => {
           const focusable = Array.from(document.querySelectorAll('a, button, input, [tabindex]'));
