@@ -498,6 +498,798 @@ html.js-polish .wanted-poster-frame:not(.poster-in) { opacity: 0; }
 }
 
 /* ==========================================================
+   ABOUT / MANIFESTO READABILITY OVERHAUL
+   Crisp, high-contrast, editorial typography
+   ========================================================== */
+.about-container {
+  position: relative;
+  margin-top: 48px;
+}
+.about-container .section-subtitle {
+  margin-bottom: 34px !important;
+}
+
+.logbook-spread {
+  display: grid;
+  grid-template-columns: 1.25fr 0.95fr;
+  gap: 28px;
+  margin-top: 28px;
+  position: relative;
+}
+
+.logbook-page {
+  background: var(--paper-card, #ffffff) !important;
+  border: 2.5px solid var(--ink) !important;
+  border-radius: 10px !important;
+  padding: 28px 24px !important;
+  box-shadow: 6px 7px 0 var(--ink) !important;
+  position: relative;
+}
+
+.logbook-page.rules {
+  background: #ffffff !important;
+  border: 2.5px dashed var(--ink) !important;
+}
+
+.logbook-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 12px;
+  margin-bottom: 18px;
+}
+
+.logbook-page-title {
+  font-family: var(--sans, 'Space Grotesk', system-ui, -apple-system, sans-serif) !important;
+  font-weight: 800 !important;
+  font-size: 1.25rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: var(--ink, #09090b) !important;
+  margin: 0 !important;
+}
+
+.logbook-page-num {
+  font-family: var(--mono, 'JetBrains Mono', monospace) !important;
+  font-size: 0.8rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.06em !important;
+  color: #dc2626 !important;
+  background: rgba(220, 38, 38, 0.08) !important;
+  padding: 2px 8px !important;
+  border: 1.5px solid #dc2626 !important;
+  border-radius: 4px !important;
+}
+
+/* Striking editorial callout quote */
+.manifesto-quote-lead {
+  font-family: var(--sans, 'Space Grotesk', system-ui, -apple-system, sans-serif) !important;
+  font-size: 1.35rem !important;
+  font-weight: 800 !important;
+  line-height: 1.38 !important;
+  color: #dc2626 !important;
+  border-left: 4px solid #dc2626 !important;
+  padding-left: 16px !important;
+  margin: 12px 0 18px !important;
+  letter-spacing: -0.015em !important;
+}
+
+/* Crystal-clear, readable body typography */
+.manifesto-text {
+  font-family: var(--sans, 'Space Grotesk', system-ui, -apple-system, sans-serif) !important;
+  font-size: 1.03rem !important;
+  line-height: 1.7 !important;
+  color: #1e293b !important;
+  letter-spacing: -0.005em !important;
+  margin: 0 0 16px !important;
+  font-weight: 450 !important;
+}
+
+.manifesto-text strong {
+  font-weight: 750 !important;
+  color: #09090b !important;
+}
+
+.manifesto-tags-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+
+.manifesto-tag {
+  font-family: var(--mono, 'JetBrains Mono', monospace) !important;
+  font-size: 0.8rem !important;
+  font-weight: 700 !important;
+  background: #f8fafc !important;
+  border: 1.5px solid var(--ink, #09090b) !important;
+  border-radius: 6px !important;
+  padding: 4px 10px !important;
+  color: #09090b !important;
+  transition: transform 0.15s ease, background 0.15s ease !important;
+}
+
+.manifesto-tag:hover {
+  transform: translateY(-2px) !important;
+  background: #fee2e2 !important;
+  border-color: #dc2626 !important;
+  color: #dc2626 !important;
+}
+
+/* Doctor Chopper mascot perched neatly on page corner without text collision */
+.chopper-doctor-wrap {
+  position: absolute !important;
+  top: -22px !important;
+  right: 20px !important;
+  left: auto !important;
+  z-index: 10 !important;
+  cursor: pointer !important;
+  transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.chopper-doctor-wrap:hover {
+  transform: translateY(-4px) scale(1.1) !important;
+}
+
+/* Rules of the Crew */
+.crew-rules-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.crew-rule-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  background: #fafaf9 !important;
+  border: 1.5px solid var(--ink) !important;
+  border-radius: 8px !important;
+  box-shadow: 2.5px 3px 0 var(--ink) !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.crew-rule-item:hover {
+  transform: translateX(4px);
+  box-shadow: 4px 4px 0 var(--ink) !important;
+  background: #ffffff !important;
+}
+
+.crew-rule-num {
+  font-family: var(--mono, 'JetBrains Mono', monospace) !important;
+  font-size: 0.85rem !important;
+  font-weight: 800 !important;
+  background: #dc2626 !important;
+  color: #ffffff !important;
+  border: 1.5px solid var(--ink) !important;
+  border-radius: 6px !important;
+  padding: 3px 8px !important;
+  flex-shrink: 0;
+  box-shadow: 1.5px 1.5px 0 var(--ink);
+}
+
+.crew-rule-text h4 {
+  font-family: var(--sans, 'Space Grotesk', system-ui, -apple-system, sans-serif) !important;
+  font-size: 1.06rem !important;
+  font-weight: 800 !important;
+  margin: 0 0 3px !important;
+  color: #09090b !important;
+  letter-spacing: -0.01em !important;
+}
+
+.crew-rule-text p {
+  font-family: var(--sans, 'Space Grotesk', system-ui, -apple-system, sans-serif) !important;
+  font-size: 0.94rem !important;
+  line-height: 1.55 !important;
+  color: #374151 !important;
+  margin: 0 !important;
+}
+
+.logbook-page-footer {
+  margin-top: 18px !important;
+  padding-top: 14px !important;
+  border-top: 1.5px dashed var(--ink) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+.reading-label {
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif) !important;
+  font-size: 0.95rem !important;
+  font-weight: 600 !important;
+  color: #64748b !important;
+}
+.reading-title {
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif) !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  color: #dc2626 !important;
+}
+.logbook-page-footer strong {
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif) !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  color: #dc2626 !important;
+}
+
+/* ==========================================================
+   JOURNEY SECTION — INTERACTIVE GRAND LINE VOYAGE
+   ========================================================== */
+.journey-voyage-section {
+  position: relative;
+  padding-top: 48px;
+  padding-bottom: 32px;
+}
+.journey-header-block {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.journey-header-block .hof-meta-tag {
+  margin-bottom: 4px;
+}
+
+/* Grand Line Waypoint Route Dock */
+.voyage-route-dock {
+  background: var(--paper-card, #ffffff);
+  border: 2.5px solid var(--ink, #09090b);
+  border-radius: 12px;
+  padding: 16px 22px 20px;
+  box-shadow: 5px 6px 0 var(--ink, #09090b);
+  margin-bottom: 36px;
+  position: relative;
+}
+.voyage-route-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  padding-bottom: 8px;
+  border-bottom: 1.5px dashed rgba(9, 9, 11, 0.15);
+}
+.voyage-route-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif);
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--ink, #09090b);
+  text-transform: uppercase;
+}
+.voyage-route-title .route-icon {
+  font-size: 1.15rem;
+}
+.count-pill {
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #dc2626;
+  background: #fee2e2;
+  border: 1.5px solid #dc2626;
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+/* Route Track & Progress */
+.voyage-route-track {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 10px;
+  margin-top: 14px;
+}
+.voyage-track-line {
+  position: absolute;
+  top: 18px;
+  left: 28px;
+  right: 28px;
+  height: 4px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  z-index: 1;
+}
+.voyage-track-fill {
+  height: 100%;
+  background: #dc2626;
+  border-radius: 4px;
+  transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Sailing Ship Marker */
+.voyage-ship-avatar {
+  position: absolute;
+  top: -30px;
+  transform: translateX(-50%);
+  z-index: 5;
+  transition: left 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none;
+}
+.ship-svg {
+  filter: drop-shadow(0 3px 2px rgba(0, 0, 0, 0.25));
+  animation: shipSailBob 2.8s ease-in-out infinite;
+}
+@keyframes shipSailBob {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-3deg);
+  }
+}
+.voyage-ship-avatar.sailing .ship-svg {
+  animation: shipSailSprint 0.5s ease-in-out;
+}
+@keyframes shipSailSprint {
+  0% { transform: translateY(0) rotate(-6deg) scale(1.15); }
+  50% { transform: translateY(-7px) rotate(4deg) scale(1.2); }
+  100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+
+/* Waypoint Nodes */
+.voyage-waypoint {
+  position: relative;
+  z-index: 2;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  outline: none;
+  min-width: 68px;
+  transition: transform 0.2s ease;
+}
+.voyage-waypoint:hover {
+  transform: translateY(-2px);
+}
+.waypoint-num {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2.5px solid var(--ink, #09090b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #64748b;
+  box-shadow: 2px 2px 0 var(--ink, #09090b);
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.voyage-waypoint.active .waypoint-num {
+  background: #dc2626;
+  color: #ffffff;
+  border-color: #09090b;
+  box-shadow: 3px 3px 0 #09090b;
+  transform: scale(1.12);
+}
+.voyage-waypoint.locked .waypoint-num {
+  background: #f1f5f9;
+  color: #94a3b8;
+  border-style: dashed;
+}
+.waypoint-label {
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif);
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--ink, #09090b);
+  white-space: nowrap;
+}
+.voyage-waypoint.locked .waypoint-label {
+  color: #94a3b8;
+}
+.waypoint-year {
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 0.72rem;
+  color: #64748b;
+  font-weight: 600;
+}
+.voyage-waypoint.active .waypoint-year {
+  color: #dc2626;
+  font-weight: 750;
+}
+
+/* Progressive Milestones Stream Trail */
+.voyage-stream-trail {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+}
+
+/* Milestone Cards */
+.voyage-milestone-card {
+  display: flex;
+  gap: 20px;
+  align-items: stretch;
+  position: relative;
+}
+.voyage-milestone-card.is-hidden {
+  display: none !important;
+}
+.voyage-milestone-card.is-revealed {
+  display: flex;
+  animation: milestoneUnfurl 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes milestoneUnfurl {
+  0% {
+    opacity: 0;
+    transform: translateY(26px) scale(0.98);
+    filter: blur(2px);
+  }
+  60% {
+    transform: translateY(-4px) scale(1.005);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: none;
+  }
+}
+
+/* Card Spine & Connector */
+.voyage-card-spine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 44px;
+}
+.spine-node {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2.5px solid var(--ink, #09090b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 3px 3px 0 var(--ink, #09090b);
+  z-index: 2;
+  transition: transform 0.25s ease;
+}
+.voyage-milestone-card:hover .spine-node {
+  transform: scale(1.15) rotate(6deg);
+  background: #dc2626;
+}
+.voyage-milestone-card:hover .spine-node .node-dot {
+  color: #ffffff;
+}
+.node-dot {
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #09090b;
+}
+.spine-line {
+  flex: 1;
+  width: 3px;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--ink, #09090b) 0px,
+    var(--ink, #09090b) 8px,
+    transparent 8px,
+    transparent 14px
+  );
+  margin: 6px 0;
+}
+
+/* Card Body */
+.voyage-card-body {
+  flex: 1;
+  background: var(--paper-card, #ffffff);
+  border: 2.5px solid var(--ink, #09090b);
+  border-radius: 10px;
+  padding: 24px 22px;
+  box-shadow: 5px 6px 0 var(--ink, #09090b);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+}
+.voyage-card-body:hover {
+  transform: translateY(-3px);
+  box-shadow: 7px 8px 0 var(--ink, #09090b);
+}
+.voyage-card-body.future-card {
+  background: #fffdf5;
+  border: 2.5px dashed var(--ink, #09090b);
+}
+
+/* Badges */
+.voyage-card-top {
+  margin-bottom: 12px;
+}
+.voyage-meta-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.voyage-chapter-badge {
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  background: #09090b;
+  color: #ffffff;
+  padding: 3px 8px;
+  border-radius: 4px;
+  box-shadow: 1.5px 1.5px 0 rgba(0, 0, 0, 0.2);
+}
+.voyage-chapter-badge.highlight {
+  background: #dc2626;
+  color: #ffffff;
+}
+.voyage-chapter-badge.gold {
+  background: #b45309;
+  color: #ffffff;
+}
+
+.voyage-year-badge {
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 0.82rem;
+  font-weight: 800;
+  background: #f1f5f9;
+  color: #09090b;
+  border: 1.5px solid #09090b;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.voyage-year-badge.red {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #dc2626;
+}
+.voyage-year-badge.gold {
+  background: #fef3c7;
+  color: #92400e;
+  border-color: #b45309;
+}
+
+.voyage-status-pill {
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  background: #f8fafc;
+  color: #64748b;
+}
+.voyage-status-pill.active {
+  background: #ecfdf5;
+  color: #047857;
+  border-color: #10b981;
+}
+.voyage-status-pill.founder {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #ef4444;
+  font-weight: 800;
+}
+.voyage-status-pill.future {
+  background: #fef9c3;
+  color: #854d0e;
+  border-color: #eab308;
+  font-weight: 800;
+}
+
+/* Typography in cards */
+.voyage-role-title {
+  font-family: var(--sans, 'Space Grotesk', system-ui, -apple-system, sans-serif) !important;
+  font-size: 1.35rem !important;
+  font-weight: 800 !important;
+  color: #09090b !important;
+  margin: 8px 0 10px !important;
+  letter-spacing: -0.015em !important;
+}
+.voyage-narrative {
+  font-family: var(--sans, 'Space Grotesk', system-ui, -apple-system, sans-serif) !important;
+  font-size: 1.02rem !important;
+  line-height: 1.65 !important;
+  color: #1e293b !important;
+  margin: 0 0 16px !important;
+  font-weight: 450 !important;
+}
+
+/* Highlights Box */
+.voyage-highlights-box {
+  background: #f8fafc;
+  border-left: 3.5px solid #dc2626;
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+}
+.highlights-title {
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #dc2626;
+  margin-bottom: 8px;
+}
+.highlights-list {
+  margin: 0;
+  padding-left: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.highlights-list li {
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif);
+  font-size: 0.94rem;
+  line-height: 1.55;
+  color: #334155;
+}
+
+/* Tech Chips */
+.voyage-stack-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.voyage-chip {
+  font-family: var(--mono, 'JetBrains Mono', monospace) !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  background: #ffffff !important;
+  border: 1.5px solid var(--ink, #09090b) !important;
+  border-radius: 6px !important;
+  padding: 4px 10px !important;
+  color: #09090b !important;
+  box-shadow: 1.5px 1.5px 0 var(--ink, #09090b);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.voyage-chip:hover {
+  transform: translateY(-2px);
+  background: #fee2e2 !important;
+  border-color: #dc2626 !important;
+  color: #dc2626 !important;
+}
+.voyage-chip.highlight {
+  background: #fee2e2 !important;
+  border-color: #dc2626 !important;
+  color: #dc2626 !important;
+}
+
+/* Actions Dock */
+.journey-actions-dock {
+  margin-top: 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Primary Reveal Button */
+.journey-reveal-btn {
+  background: #dc2626 !important;
+  color: #ffffff !important;
+  border: 2.5px solid var(--ink, #09090b) !important;
+  border-radius: 8px !important;
+  padding: 13px 28px !important;
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif) !important;
+  font-size: 1.1rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.02em !important;
+  box-shadow: 4px 5px 0 var(--ink, #09090b) !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease !important;
+  min-height: 50px;
+}
+.journey-reveal-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 5px 7px 0 var(--ink, #09090b) !important;
+  background: #b91c1c !important;
+}
+.journey-reveal-btn:active {
+  transform: translateY(2px) !important;
+  box-shadow: 2px 2px 0 var(--ink, #09090b) !important;
+}
+.journey-reveal-btn.btn-complete {
+  background: #09090b !important;
+}
+.journey-reveal-btn.btn-complete:hover {
+  background: #27272a !important;
+}
+.btn-ship-icon {
+  font-size: 1.25rem;
+}
+.btn-arrow {
+  font-size: 1.25rem;
+  transition: transform 0.2s ease;
+}
+.journey-reveal-btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Sub-controls */
+.journey-subcontrols {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.journey-sub-btn {
+  background: #ffffff;
+  border: 1.5px solid var(--ink, #09090b);
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-family: var(--mono, 'JetBrains Mono', monospace);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--ink, #09090b);
+  box-shadow: 2px 2px 0 var(--ink, #09090b);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.journey-sub-btn:hover {
+  transform: translateY(-2px);
+  background: #f8fafc;
+}
+.journey-sub-btn:active {
+  transform: translateY(1px);
+  box-shadow: 1px 1px 0 var(--ink, #09090b);
+}
+
+/* Celebration Banner */
+.voyage-celebration-banner {
+  background: #ffffff;
+  border: 2.5px solid #dc2626;
+  border-radius: 8px;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 4px 4px 0 #dc2626;
+  margin-top: 10px;
+  animation: bannerPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+@keyframes bannerPop {
+  0% { transform: scale(0.92); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.banner-sparkle {
+  color: #dc2626;
+  font-size: 1.35rem;
+}
+.banner-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.banner-content strong {
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #dc2626;
+}
+.banner-subtext {
+  font-family: var(--sans, system-ui, sans-serif);
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+/* ==========================================================
    MOBILE & VIEWPORT RATIO OPTIMIZATIONS (Android & iOS)
    ========================================================== */
 
@@ -834,14 +1626,91 @@ header.site-header {
   }
   .chopper-doctor-wrap {
     top: -18px !important;
-    right: 8px !important;
-    transform: scale(0.85);
+    right: 12px !important;
+    left: auto !important;
+    transform: scale(0.82) !important;
   }
   .manifesto-quote-lead {
-    font-size: 1.25rem !important;
+    font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif) !important;
+    font-size: 1.2rem !important;
+    line-height: 1.38 !important;
   }
   .manifesto-text {
-    font-size: 1.05rem !important;
+    font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif) !important;
+    font-size: 0.98rem !important;
+    line-height: 1.65 !important;
+    color: #1e293b !important;
+  }
+  .crew-rule-text h4 {
+    font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif) !important;
+    font-size: 1rem !important;
+  }
+  .crew-rule-text p {
+    font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif) !important;
+    font-size: 0.9rem !important;
+  }
+
+  /* Interactive Journey on Mobile */
+  .voyage-route-dock {
+    padding: 12px 14px 16px !important;
+  }
+  .voyage-route-track {
+    padding: 0 4px !important;
+  }
+  .voyage-track-line {
+    left: 18px !important;
+    right: 18px !important;
+  }
+  .voyage-waypoint {
+    min-width: 52px !important;
+    gap: 4px !important;
+  }
+  .waypoint-num {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 0.78rem !important;
+  }
+  .waypoint-label {
+    font-size: 0.72rem !important;
+  }
+  .waypoint-year {
+    font-size: 0.65rem !important;
+  }
+  .voyage-milestone-card {
+    gap: 12px !important;
+  }
+  .voyage-card-spine {
+    width: 32px !important;
+  }
+  .spine-node {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  .node-dot {
+    font-size: 0.75rem !important;
+  }
+  .voyage-card-body {
+    padding: 18px 14px !important;
+  }
+  .voyage-role-title {
+    font-size: 1.15rem !important;
+  }
+  .voyage-narrative {
+    font-size: 0.96rem !important;
+    line-height: 1.55 !important;
+  }
+  .highlights-list li {
+    font-size: 0.88rem !important;
+  }
+  .journey-reveal-btn {
+    width: 100% !important;
+    font-size: 0.96rem !important;
+    padding: 12px 16px !important;
+    text-align: center;
+  }
+  .journey-subcontrols {
+    width: 100%;
+    justify-content: center;
   }
 
   /* Journey / Trail Mobile Alignment */
