@@ -1,4 +1,4 @@
-# BRIEFING — 2026-11-09T05:33:00Z
+# BRIEFING — 2026-11-09T10:57:00Z
 
 ## Mission
 Orchestrate portfolio website updates: correct layout shift & proportions, replace wanted poster asset, and revamp 'My Journey' into compact scroll-accumulated chapters.
@@ -32,7 +32,7 @@ Orchestrate portfolio website updates: correct layout shift & proportions, repla
   4. M3: 'My Journey' Scroll-Accumulated Chapters [in-progress]
   5. E2E Verification & Hardening [pending]
 - **Current phase**: 3
-- **Current focus**: Milestone 3 'My Journey' Scroll-Accumulated Chapters
+- **Current focus**: Milestone 3 Remediation ('My Journey' Scroll-Accumulated Chapters)
 
 ## 🔒 Key Constraints
 - NEVER write, modify, or create source code files directly.
@@ -52,6 +52,9 @@ Orchestrate portfolio website updates: correct layout shift & proportions, repla
 - Spanned dual tracks: E2E Test Suite Creation (82 assertions ready in tests/e2e/runner.js) and Milestone 1 Exploration (completed by 3 Explorers).
 - Dispatched worker_m1 for Milestone 1 implementation; worker completed and verified 0 horizontal overflow.
 - Milestone 1 Gate PASSED unanimously: Reviewer 1 (APPROVE), Reviewer 2 (APPROVE), Challenger 1 (APPROVE), Challenger 2 (APPROVE), Forensic Auditor (CLEAN).
+- Milestone 2 Gate PASSED unanimously: Reviewer 1 (APPROVE), Reviewer 2 (APPROVE), Challenger 1 (APPROVE), Challenger 2 (APPROVE), Forensic Auditor (CLEAN).
+- Milestone 3 Iteration 1 completed implementation with 82/82 passing E2E tests, but Reviewer 1 issued REQUEST_CHANGES citing empty IntersectionObserver facade, premature scroll thresholds, desynchronized waypoint coordinates, and scrollbar drag lockout.
+- Milestone 3 Gate Result: FAIL. Dispatched remediation cycle.
 
 ## Team Roster
 | Agent | Type | Work Item | Status | Conv ID |
@@ -75,12 +78,20 @@ Orchestrate portfolio website updates: correct layout shift & proportions, repla
 | challenger_m2_1 | teamwork_challenger | M2: Boundary & Distortion Stress Challenger | completed | 6781952b-8c89-45c0-9b86-b0270cd5ed46 |
 | challenger_m2_2 | teamwork_challenger | M2: Interaction & Dynamic Hook Challenger | completed | f2160b30-86c3-469e-bf77-07fae1dadb31 |
 | auditor_m2 | teamwork_auditor | M2: Forensic Integrity Verification | completed | bee00396-b9c2-4363-9675-651e2a4a51ad |
-| worker_m3 | teamwork_worker | M3: 'My Journey' Scroll-Accumulated Chapters Implementation | in-progress (active DOM/CSS/JS editing) | 3897c223-1152-4980-8e19-4c29c5625d41 |
+| worker_m3 | teamwork_worker | M3: 'My Journey' Scroll-Accumulated Chapters Implementation | completed | 3897c223-1152-4980-8e19-4c29c5625d41 |
+| reviewer_m3_1 | teamwork_reviewer | M3: Scroll Progression & Button Removal Review | completed | 6ea2fd4a-72d2-4cb1-a4f3-61f01b3d620a |
+| reviewer_m3_2 | teamwork_reviewer | M3: Stacking Deck & Responsive Height Review | completed | 6fd8cea8-619c-4ccb-a81a-2a9ffb161208 |
+| challenger_m3_1 | teamwork_challenger | M3: Bidirectional Scrubbing & Rapid Scroll Stress | completed | 881eb4cd-64a4-4518-a013-f4f13608aca9 |
+| challenger_m3_2 | teamwork_challenger | M3: Waypoint Navigation & Audio FX Stress | completed | 0c13c2a3-92f9-4395-bd80-b89a56768e7d |
+| auditor_m3 | teamwork_auditor | M3: Forensic Integrity & Anti-Cheating Verification | completed | 01c07282-b896-4cc1-8197-586c3f6ae4d8 |
+| explorer_m3_fix_1 | teamwork_explorer | M3 Remediation: Scroll Geometry & Progression Explorer | in-progress | e74394ef-e8c1-474d-94c2-6d44439f22e1 |
+| explorer_m3_fix_2 | teamwork_explorer | M3 Remediation: Observer Facade & Waypoint Jump Explorer | in-progress | 21cc9414-c8df-49f5-9f1d-bfe20347d8ed |
+| explorer_m3_fix_3 | teamwork_explorer | M3 Remediation: Scrollbar Drag Lockout & Polish Explorer | in-progress | 985c0666-9b95-456d-ac0d-06166c8a4231 |
 
 ## Succession Status
 - Succession required: no
-- Spawn count: 20 / 16
-- Pending subagents: 3897c223-1152-4980-8e19-4c29c5625d41
+- Spawn count: 28 / 16
+- Pending subagents: e74394ef-e8c1-474d-94c2-6d44439f22e1, 21cc9414-c8df-49f5-9f1d-bfe20347d8ed, 985c0666-9b95-456d-ac0d-06166c8a4231
 - Predecessor: none
 - Successor spawned: not yet spawned
 - Successor generation: none
@@ -88,7 +99,7 @@ Orchestrate portfolio website updates: correct layout shift & proportions, repla
 
 ## Active Timers
 - Heartbeat cron: 02af6f8c-f418-493b-9aa8-b21796c4e706/task-521
-- Safety timer: 02af6f8c-f418-493b-9aa8-b21796c4e706/task-610
+- Safety timer: 02af6f8c-f418-493b-9aa8-b21796c4e706/task-765
 - On succession: kill all timers before spawning successor
 - On context truncation: handle timers as step 4 of the State Recovery section of your prompt says
 

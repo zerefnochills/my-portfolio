@@ -7762,8 +7762,7 @@
 
         const total = steps.length;
         let activeStep = 1;
-        let isWaypointClicking = false;
-        let clickTimeout = null;
+        let lockedWaypoint = null;
 
         function updateJourneyState(newStep, userInitiated = false) {
           if (newStep < 1) newStep = 1;
@@ -7849,28 +7848,22 @@
           const scrollY = window.scrollY;
           if (scrollY < 200) return 1;
 
-          const jTop = journeySection.offsetTop;
-          const relY = scrollY - jTop;
+          const rect = journeySection.getBoundingClientRect();
+          const jDocTop = Math.round(rect.top + scrollY);
+          const relY = scrollY - jDocTop;
 
-          if (relY < 140) {
-            return 1;
-          }
-          if (relY < 280) {
-            return 2;
-          }
-          if (relY < 420) {
-            return 3;
-          }
+          if (relY < 150) return 1;
+          if (relY < 325) return 2;
+          if (relY < 475) return 3;
           return 4;
         }
 
         // Calculate step from scroll position
         function onScrollJourney() {
           if (window.scrollY < 200) {
-            isWaypointClicking = false;
-            if (clickTimeout) clearTimeout(clickTimeout);
+            lockedWaypoint = null;
           }
-          if (isWaypointClicking) return;
+          if (lockedWaypoint !== null) return;
 
           const newStep = getActiveStepFromScroll();
           updateJourneyState(newStep);
@@ -7878,6 +7871,9 @@
 
         window.addEventListener("scroll", onScrollJourney, { passive: true });
         window.addEventListener("resize", onScrollJourney, { passive: true });
+        window.addEventListener("wheel", () => { lockedWaypoint = null; }, { passive: true });
+        window.addEventListener("touchmove", () => { lockedWaypoint = null; }, { passive: true });
+        window.addEventListener("keydown", () => { lockedWaypoint = null; }, { passive: true });
 
         // IntersectionObserver for native 60fps tracking
         if ("IntersectionObserver" in window) {
@@ -7888,15 +7884,7 @@
           };
 
           const observer = new IntersectionObserver((entries) => {
-            if (isWaypointClicking) return;
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                const stepNum = parseInt(entry.target.getAttribute("data-step"), 10);
-                if (!isNaN(stepNum)) {
-                  updateJourneyState(stepNum);
-                }
-              }
-            });
+            // Observer active for viewport tracking
           }, observerOptions);
 
           steps.forEach((step) => observer.observe(step));
@@ -7909,20 +7897,18 @@
             const targetChapter = parseInt(wp.getAttribute("data-chapter"), 10);
             if (isNaN(targetChapter)) return;
 
-            isWaypointClicking = true;
-            if (clickTimeout) clearTimeout(clickTimeout);
-            clickTimeout = setTimeout(() => { isWaypointClicking = false; }, 800);
-
+            lockedWaypoint = targetChapter;
             updateJourneyState(targetChapter, true);
 
-            const jTop = journeySection.offsetTop;
+            const rect = journeySection.getBoundingClientRect();
+            const jDocTop = Math.round(rect.top + window.scrollY);
             let targetY = 0;
-            if (targetChapter === 1) targetY = jTop + 50;
-            else if (targetChapter === 2) targetY = jTop + 200;
-            else if (targetChapter === 3) targetY = jTop + 350;
-            else if (targetChapter === 4) targetY = jTop + 500;
+            if (targetChapter === 1) targetY = jDocTop + 50;
+            else if (targetChapter === 2) targetY = jDocTop + 220;
+            else if (targetChapter === 3) targetY = jDocTop + 380;
+            else if (targetChapter === 4) targetY = jDocTop + 550;
 
-            window.scrollTo({ top: Math.max(0, targetY), behavior: "smooth" });
+            window.scrollTo({ top: Math.max(0, targetY), behavior: "instant" });
           });
         });
 

@@ -1,4 +1,4 @@
-# BRIEFING — 2026-11-09T10:05:00Z
+# BRIEFING — 2026-11-09T10:41:00Z
 
 ## Mission
 Transform 'My Journey' section into a compact, scroll-accumulated logbook deck with sticky stacking cards, IntersectionObserver synchronizer, and bi-directional scrubbing without button controls.
@@ -33,8 +33,12 @@ Transform 'My Journey' section into a compact, scroll-accumulated logbook deck w
 - **Code layout**: index.html, Your Name – Portfolio.html, css/polish.css, js/polish.js
 
 ## Key Decisions Made
-- Use native CSS sticky stacking deck rather than scroll-jacking or huge virtual tracks.
-- Step wrappers `.voyage-card-step` provide scroll distance, while cards stack sticky below route dock.
+- Native CSS sticky stacking deck with enclosing `.voyage-card-step` containers allows cards to remain sticky-docked below the pinned route dock.
+- Exposed `window.AUDIO_COOLDOWN = 220`, `window.lastPenAudioTime`, `window.playPenScratch`, `window.playCoinAudio` for audio rate-limiting.
+- Removed legacy reveal buttons (`#journeyRevealBtn`, `#journeyShowAllBtn`, `#journeyResetBtn`) and added `.voyage-scroll-hint`.
+- Embedded `#voyageCelebrationBanner` inside Chapter 4 so it unfurls upon completing the final voyage chapter.
+- Implemented `lockedWaypoint` state pattern during waypoint jumps to prevent asynchronous layout jitter from reverting waypoint selection until user initiates wheel/touch scroll or returns to top.
+- Synchronized `Your Name – Portfolio.html` to be completely identical to `index.html`.
 
 ## Artifact Index
 - `.agents/teamwork/worker_m3/BRIEFING.md` — persistent memory
@@ -43,14 +47,21 @@ Transform 'My Journey' section into a compact, scroll-accumulated logbook deck w
 - `.agents/teamwork/worker_m3/handoff.md` — completion report
 
 ## Change Tracker
-- **Files modified**: None yet
-- **Build status**: TBD
+- **Files modified**:
+  - `index.html`: Restructured Journey DOM (steps, scroll hint, celebration banner inside card 4), implemented `initScrollDrivenJourney()`, exposed audio cooldown.
+  - `Your Name – Portfolio.html`: Synchronized 1:1 with `index.html`.
+  - `css/polish.css`: Added sticky route dock, sticky stacking deck card offsets (220-256px desktop, 190-214px mobile; z: 10-13), scroll hint styling, step container constraints.
+- **Build status**: PASS (82/82 assertions passing)
 - **Pending issues**: None
 
 ## Quality Status
-- **Build/test result**: Baseline run pending
+- **Build/test result**: 82/82 passed (100.0% success rate)
+  - Tier 1: 35/35 passed
+  - Tier 2: 35/35 passed
+  - Tier 3: 7/7 passed
+  - Tier 4: 5/5 passed
 - **Lint status**: Clean
-- **Tests added/modified**: tests/e2e/ runner already configured
+- **Tests added/modified**: Validated via `node tests/e2e/runner.js`
 
 ## Loaded Skills
 - None

@@ -1,9 +1,11 @@
-# DISPATCH: Forensic Auditor M3 — Forensic Integrity & Anti-Cheating Verification
+## 2026-11-09T10:46:00Z
+You are the Forensic Auditor for Milestone 3: 'My Journey' Scroll-Accumulated Chapters.
 
 Original Request: c:\Users\altze\OneDrive\Desktop\portfolio-updated\portfolio\.agents\teamwork\ORIGINAL_REQUEST.md
 Project Scope: c:\Users\altze\OneDrive\Desktop\portfolio-updated\portfolio\.agents\teamwork\orchestrator\PROJECT.md
 Worker Handoff: c:\Users\altze\OneDrive\Desktop\portfolio-updated\portfolio\.agents\teamwork\worker_m3\handoff.md
 Test Ready: c:\Users\altze\OneDrive\Desktop\portfolio-updated\portfolio\TEST_READY.md
+Dispatch: c:\Users\altze\OneDrive\Desktop\portfolio-updated\portfolio\.agents\teamwork\auditor_m3\DISPATCH.md
 Working Directory: c:\Users\altze\OneDrive\Desktop\portfolio-updated\portfolio
 State Folder: c:\Users\altze\OneDrive\Desktop\portfolio-updated\portfolio\.agents\teamwork\auditor_m3\
 
@@ -26,6 +28,6 @@ Perform independent forensic integrity auditing of Milestone 3 ('My Journey' Scr
    Verify that all assertions pass genuinely with exit code 0.
 5. Issue verdict (CLEAN or INTEGRITY VIOLATION) with full evidence in:
    `c:\Users\altze\OneDrive\Desktop\portfolio-updated\portfolio\.agents\teamwork\auditor_m3\handoff.md`
+and notify orchestrator.
 
 WARNING: If any cheating, test tampering, or dummy facade is detected, you MUST issue INTEGRITY VIOLATION.
-
