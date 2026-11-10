@@ -148,18 +148,18 @@ div[id] {
   max-width: none !important;
   white-space: nowrap !important;
   overflow: hidden !important;
-  border-radius: 0 10px 10px 0 !important;
+  border-radius: 0 14px 14px 0 !important;
   box-sizing: border-box !important;
   z-index: 85 !important;
   display: flex !important;
   align-items: center !important;
-  gap: 8px !important;
-  padding: 8px 14px 8px 10px !important;
+  gap: 12px !important;
+  padding: 12px 22px 12px 14px !important;
   cursor: pointer !important;
   user-select: none !important;
-  border: 2px solid var(--ink, #18181b) !important;
+  border: 2.5px solid var(--ink, #18181b) !important;
   border-left: none !important;
-  box-shadow: 3px 5px 0 var(--shadow) !important;
+  box-shadow: 4px 6px 0 var(--shadow) !important;
   transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275),
     box-shadow 0.2s ease,
     background-color 0.2s ease !important;
@@ -180,67 +180,76 @@ div[id] {
   display: flex !important;
   flex-direction: column !important;
   align-items: flex-start !important;
-  gap: 1px !important;
+  gap: 2px !important;
   overflow: hidden !important;
+}
+
+.irl-ribbon-btn .ribbon-icon-wrap,
+.sketchbook-ribbon-btn .ribbon-icon-wrap {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
 }
 
 .irl-ribbon-btn .ribbon-text {
   font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif) !important;
   font-weight: 800 !important;
-  font-size: 0.85rem !important;
+  font-size: 1.05rem !important;
   letter-spacing: 0.02em !important;
   color: #ffffff !important;
-  line-height: 1.15 !important;
+  line-height: 1.2 !important;
 }
 
 .irl-ribbon-btn .ribbon-fold-hint {
   font-family: var(--hand, 'Patrick Hand', cursive) !important;
-  font-size: 0.8rem !important;
-  color: rgba(255, 255, 255, 0.92) !important;
+  font-size: 0.88rem !important;
+  color: rgba(255, 255, 255, 0.95) !important;
   line-height: 1 !important;
+  font-weight: 600 !important;
 }
 
 .sketchbook-ribbon-btn .ribbon-text {
   font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif) !important;
   font-weight: 800 !important;
-  font-size: 0.85rem !important;
+  font-size: 1.05rem !important;
   letter-spacing: 0.02em !important;
   color: #18181b !important;
-  line-height: 1.15 !important;
+  line-height: 1.2 !important;
 }
 
 .sketchbook-ribbon-btn .ribbon-fold-hint {
   font-family: var(--hand, 'Patrick Hand', cursive) !important;
-  font-size: 0.8rem !important;
+  font-size: 0.88rem !important;
   color: #52525b !important;
   line-height: 1 !important;
+  font-weight: 600 !important;
 }
 
 /* Wide Desktop (>= 1100px): Clean floating bookmark tabs in left gutter */
 @media (min-width: 1100px) {
   .irl-ribbon-btn {
-    top: calc(50% - 36px) !important;
+    top: calc(50% - 50px) !important;
     bottom: auto !important;
     transform: translateY(-50%) !important;
   }
 
   .sketchbook-ribbon-btn {
-    top: calc(50% + 30px) !important;
+    top: calc(50% + 46px) !important;
     bottom: auto !important;
     transform: translateY(-50%) !important;
   }
 
   .irl-ribbon-btn:hover,
   .irl-ribbon-btn:focus-visible {
-    transform: translateY(-50%) translateX(6px) !important;
-    box-shadow: 5px 8px 0 var(--shadow) !important;
+    transform: translateY(-50%) translateX(8px) !important;
+    box-shadow: 6px 9px 0 var(--shadow) !important;
     background: #ef4444 !important;
   }
 
   .sketchbook-ribbon-btn:hover,
   .sketchbook-ribbon-btn:focus-visible {
-    transform: translateY(-50%) translateX(6px) !important;
-    box-shadow: 5px 8px 0 var(--shadow) !important;
+    transform: translateY(-50%) translateX(8px) !important;
+    box-shadow: 6px 9px 0 var(--shadow) !important;
     background: #ffffff !important;
   }
 }
@@ -252,35 +261,45 @@ div[id] {
     bottom: 96px !important;
     left: 0 !important;
     transform: none !important;
-    padding: 7px 12px 7px 8px !important;
-    border-radius: 0 8px 8px 0 !important;
-    box-shadow: 2px 4px 0 var(--shadow) !important;
+    padding: 10px 16px 10px 12px !important;
+    border-radius: 0 10px 10px 0 !important;
+    box-shadow: 3px 5px 0 var(--shadow) !important;
     z-index: 85 !important;
   }
 
   .sketchbook-ribbon-btn {
     top: auto !important;
-    bottom: 40px !important;
+    bottom: 38px !important;
     left: 0 !important;
     transform: none !important;
-    padding: 7px 12px 7px 8px !important;
-    border-radius: 0 8px 8px 0 !important;
-    box-shadow: 2px 4px 0 var(--shadow) !important;
+    padding: 10px 16px 10px 12px !important;
+    border-radius: 0 10px 10px 0 !important;
+    box-shadow: 3px 5px 0 var(--shadow) !important;
     z-index: 85 !important;
+  }
+
+  .irl-ribbon-btn .ribbon-text,
+  .sketchbook-ribbon-btn .ribbon-text {
+    font-size: 0.95rem !important;
+  }
+
+  .irl-ribbon-btn .ribbon-fold-hint,
+  .sketchbook-ribbon-btn .ribbon-fold-hint {
+    font-size: 0.82rem !important;
   }
 
   .irl-ribbon-btn:hover,
   .irl-ribbon-btn:focus-visible,
   .irl-ribbon-btn:active {
-    transform: translateX(4px) !important;
-    box-shadow: 3px 5px 0 var(--shadow) !important;
+    transform: translateX(6px) !important;
+    box-shadow: 4px 6px 0 var(--shadow) !important;
   }
 
   .sketchbook-ribbon-btn:hover,
   .sketchbook-ribbon-btn:focus-visible,
   .sketchbook-ribbon-btn:active {
-    transform: translateX(4px) !important;
-    box-shadow: 3px 5px 0 var(--shadow) !important;
+    transform: translateX(6px) !important;
+    box-shadow: 4px 6px 0 var(--shadow) !important;
   }
 }
 
@@ -2055,38 +2074,48 @@ header.site-header {
   /* Edge Ribbon Bookmarks - Clean mobile bottom-left docking without overflow */
   .irl-ribbon-btn {
     top: auto !important;
-    bottom: 90px !important;
+    bottom: 96px !important;
     left: 0 !important;
     transform: none !important;
-    padding: 6px 12px 6px 8px !important;
-    border-radius: 0 8px 8px 0 !important;
-    box-shadow: 2px 3px 0 var(--shadow) !important;
-    z-index: 80 !important;
+    padding: 10px 16px 10px 12px !important;
+    border-radius: 0 10px 10px 0 !important;
+    box-shadow: 3px 5px 0 var(--shadow) !important;
+    z-index: 85 !important;
   }
 
   .sketchbook-ribbon-btn {
     top: auto !important;
-    bottom: 34px !important;
+    bottom: 38px !important;
     left: 0 !important;
     transform: none !important;
-    padding: 6px 12px 6px 8px !important;
-    border-radius: 0 8px 8px 0 !important;
-    box-shadow: 2px 3px 0 var(--shadow) !important;
-    z-index: 80 !important;
+    padding: 10px 16px 10px 12px !important;
+    border-radius: 0 10px 10px 0 !important;
+    box-shadow: 3px 5px 0 var(--shadow) !important;
+    z-index: 85 !important;
+  }
+
+  .irl-ribbon-btn .ribbon-text,
+  .sketchbook-ribbon-btn .ribbon-text {
+    font-size: 0.95rem !important;
+  }
+
+  .irl-ribbon-btn .ribbon-fold-hint,
+  .sketchbook-ribbon-btn .ribbon-fold-hint {
+    font-size: 0.82rem !important;
   }
 
   .irl-ribbon-btn:hover,
   .irl-ribbon-btn:focus-visible,
   .irl-ribbon-btn:active {
-    transform: translateX(4px) !important;
-    box-shadow: 3px 5px 0 var(--shadow) !important;
+    transform: translateX(6px) !important;
+    box-shadow: 4px 6px 0 var(--shadow) !important;
   }
 
   .sketchbook-ribbon-btn:hover,
   .sketchbook-ribbon-btn:focus-visible,
   .sketchbook-ribbon-btn:active {
-    transform: translateX(4px) !important;
-    box-shadow: 3px 5px 0 var(--shadow) !important;
+    transform: translateX(6px) !important;
+    box-shadow: 4px 6px 0 var(--shadow) !important;
   }
 
   /* Hero Section Mobile Proportions - Centered & Symmetrical */

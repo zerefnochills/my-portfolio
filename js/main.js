@@ -702,30 +702,21 @@
         }
       });
 
-      // 8. Left Ribbon Sketchbook Button & 3D Paper Page Fold Transition
+      // 8. Left Ribbon Sketchbook Button Transition
       const ribbonBtn = document.getElementById("sketchbookRibbonBtn");
-      const pageFlipper = document.getElementById("paperPageFlipper");
 
       if (ribbonBtn) {
-        ribbonBtn.addEventListener("click", function () {
+        ribbonBtn.addEventListener("click", function (e) {
+          e.preventDefault();
           ribbonBtn.disabled = true;
-          playPaperRustle();
-
-          if (pageFlipper) {
-            pageFlipper.classList.add("active");
+          if (window.PageTransition) {
+            window.PageTransition.navigate("doodle.html");
+          } else {
+            playPaperRustle();
+            setTimeout(function () {
+              window.location.href = "doodle.html";
+            }, 300);
           }
-
-          const mainEl = document.querySelector("main");
-          if (mainEl) {
-            mainEl.style.transition = "transform 0.65s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.65s ease";
-            mainEl.style.transformOrigin = "left center";
-            mainEl.style.transform = "rotateY(-85deg) scale(0.92)";
-            mainEl.style.opacity = "0.1";
-          }
-
-          setTimeout(function () {
-            window.location.href = "doodle.html?from=fold";
-          }, 550);
         });
       }
 

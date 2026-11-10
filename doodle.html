@@ -9,7 +9,8 @@
 <title>The Digital Sketchbook Studio – Draw &amp; Doodle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Spicy+Rice&family=Mrs+Saint+Delafield&family=Patrick+Hand&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Spicy+Rice&family=Mrs+Saint+Delafield&family=Patrick+Hand&family=Caveat:wght@600&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/page-transition.css">
 <style>
 /* LOCAL FONT FACES: Chewy & Spicy Rice */
 @font-face {
@@ -906,18 +907,18 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
     if (pageFlipper) pageFlipper.classList.remove("active");
   }, 600);
 
-  // Return to portfolio with 3D fold
+  // Return to portfolio with transition
   if (studioBackBtn) {
     studioBackBtn.addEventListener("click", function(e) {
       e.preventDefault();
-      playPaperRustle();
-      if (pageFlipper && pageLeaf) {
-        pageLeaf.className = "paper-page-leaf fold-animation";
-        pageFlipper.classList.add("active");
+      if (window.PageTransition) {
+        window.PageTransition.navigate("index.html");
+      } else {
+        playPaperRustle();
+        setTimeout(function() {
+          window.location.href = "index.html";
+        }, 300);
       }
-      setTimeout(function() {
-        window.location.href = "index.html";
-      }, 500);
     });
   }
 
@@ -1475,5 +1476,6 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
 
 })();
 </script>
+<script src="js/page-transition.js"></script>
 </body>
 </html>

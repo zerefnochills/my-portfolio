@@ -25,6 +25,7 @@
   <!-- Official Devicon Tech Stack Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   <link rel="stylesheet" href="css/polish.css">
+  <link rel="stylesheet" href="css/page-transition.css">
 </head>
 
 <body class="zoro-cursor-active">
@@ -47,8 +48,14 @@
     <div class="ribbon-crease" aria-hidden="true"></div>
     <div class="ribbon-content">
       <div class="ribbon-icon-wrap">
-        <span class="ribbon-text" style="font-family:var(--sans);font-weight:800;letter-spacing:0.02em;">IRL &bull;
-          Insights</span>
+        <svg class="doodle ribbon-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+          <polyline points="14 2 14 8 20 8"></polyline>
+          <line x1="16" y1="13" x2="8" y2="13"></line>
+          <line x1="16" y1="17" x2="8" y2="17"></line>
+          <polyline points="10 9 9 9 8 9"></polyline>
+        </svg>
+        <span class="ribbon-text">IRL &bull; Insights</span>
       </div>
       <span class="ribbon-fold-hint">open paper ⮞</span>
     </div>
@@ -60,14 +67,14 @@
     <div class="ribbon-crease" aria-hidden="true"></div>
     <div class="ribbon-content">
       <div class="ribbon-icon-wrap">
-        <svg class="doodle ribbon-quill" viewBox="0 0 32 32" width="24" height="24" aria-hidden="true">
+        <svg class="doodle ribbon-quill" viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
           <path d="M26 4 C24 10 16 16 6 26" stroke-width="2.4" />
           <path d="M26 4 C18 4 12 12 10 20" stroke-width="2" />
           <path d="M6 26 L10 27 L11 23 Z" fill="var(--ink)" />
           <circle cx="25" cy="5" r="1.5" fill="var(--accent)" />
         </svg>
+        <span class="ribbon-text">Doodle Studio</span>
       </div>
-      <span class="ribbon-text">Doodle Studio</span>
       <span class="ribbon-fold-hint">turn page ⮞</span>
     </div>
   </button>
@@ -2001,6 +2008,7 @@
 
   <script src="js/main.js"></script>
   <script src="js/polish.js"></script>
+  <script src="js/page-transition.js"></script>
 </body>
 
 </html>
