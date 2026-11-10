@@ -536,8 +536,6 @@ a.treasure-chest-widget:active {
   transform: translateY(1px) scale(0.98);
   box-shadow: 2px 2px 0 var(--shadow, #111) !important;
 }
-  box-shadow: 2px 2px 0 var(--shadow, #111) !important;
-}
 
 a.treasure-chest-widget .chest-icon {
   font-size: 1.2rem;

@@ -296,9 +296,12 @@
           wantedPlaceholder.style.display = "none";
           if (photoChangeBadge) photoChangeBadge.style.display = "block";
         } else {
-          wantedPhotoImg.src = "";
+          wantedPhotoImg.removeAttribute("src");
           wantedPhotoImg.style.display = "none";
-          if (wantedPortraitImg) wantedPortraitImg.style.display = "none";
+          if (wantedPortraitImg) {
+            wantedPortraitImg.removeAttribute("src");
+            wantedPortraitImg.style.display = "none";
+          }
           wantedPlaceholder.style.display = "flex";
           if (photoChangeBadge) photoChangeBadge.style.display = "none";
         }
@@ -1130,7 +1133,10 @@
             const reader = new FileReader();
             reader.onload = function (evt) {
               newPinImageData = evt.target.result;
-              if (pinPhotoPreviewImg) pinPhotoPreviewImg.src = newPinImageData;
+              if (pinPhotoPreviewImg) {
+                pinPhotoPreviewImg.src = newPinImageData;
+                pinPhotoPreviewImg.style.display = "block";
+              }
               if (pinPhotoPreviewZone) pinPhotoPreviewZone.style.display = "block";
             };
             reader.readAsDataURL(file);
@@ -1142,6 +1148,10 @@
           newPinImageData = "";
           if (pinPhotoFileInput) pinPhotoFileInput.value = "";
           if (pinPhotoPreviewZone) pinPhotoPreviewZone.style.display = "none";
+          if (pinPhotoPreviewImg) {
+            pinPhotoPreviewImg.removeAttribute("src");
+            pinPhotoPreviewImg.style.display = "none";
+          }
         });
       }
 
