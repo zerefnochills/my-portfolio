@@ -79,12 +79,14 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
       gap: 12px;
       background: var(--paper-sticky);
       border: 2px solid var(--ink);
       border-radius: 16px;
       padding: 10px 18px;
       box-shadow: 0 4px 0 var(--ink), 0 8px 20px var(--shadow);
+      box-sizing: border-box;
     }
     .trial-nav a.back-link {
       display: inline-flex;
@@ -466,15 +468,30 @@
       .trial-nav {
         padding: 8px 12px;
         margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: space-between;
       }
       .trial-nav a.back-link {
-        font-size: 1.1rem;
+        font-size: 1rem;
+        padding: 4px 10px;
+        flex-shrink: 0;
       }
-      .bounty-tally {
+      .bounty-badge-counter {
         padding: 4px 10px;
         font-size: 0.95rem;
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
       }
-      .trial-hero h1 {
+      .sound-toggle-btn {
+        padding: 4px 10px;
+        font-size: 0.92rem;
+        flex-shrink: 0;
+        margin-left: auto;
+      }
+      .trial-header-block .trial-title {
         font-size: 2.1rem;
       }
       .trial-subtitle {
@@ -485,16 +502,23 @@
         height: 34px;
         font-size: 1rem;
       }
-      .trial-box {
+      .quiz-card {
         padding: 20px 16px;
       }
-      .question-text {
+      .question-prompt {
         font-size: 1.25rem;
       }
-      .option-btn {
+      .answer-btn {
         padding: 10px 14px;
         font-size: 1.05rem;
         min-height: 48px;
+      }
+      .open-chest-cta-btn {
+        padding: 12px 20px;
+        font-size: clamp(1.05rem, 4.2vw, 1.45rem);
+        max-width: 100%;
+        box-sizing: border-box;
+        justify-content: center;
       }
       .victory-box {
         padding: 24px 16px;
@@ -502,6 +526,19 @@
       .victory-title {
         font-size: 2.2rem;
       }
+    }
+
+    /* Android GPU & Scroll Optimization */
+    html.is-android body {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+    }
+    html.is-android .quiz-card,
+    html.is-android .trial-nav,
+    html.is-android .answer-btn,
+    html.is-android .step-checkpoint {
+      transform: translateZ(0);
+      will-change: transform;
     }
   </style>
 </head>

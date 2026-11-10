@@ -1027,7 +1027,13 @@
 
     @media (max-width: 780px) {
       .project-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr) !important;
+        max-width: 100% !important;
+      }
+      .card {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
       }
     }
 
@@ -4153,7 +4159,11 @@
       font-size: 0.92rem;
       color: #991b1b;
       box-shadow: 3px 3px 0 var(--ink);
-      white-space: nowrap;
+      white-space: normal;
+      text-align: center;
+      word-break: break-word;
+      max-width: min(280px, calc(100vw - 32px));
+      box-sizing: border-box;
       pointer-events: none;
       opacity: 0;
       transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
@@ -4194,42 +4204,42 @@
 
     /* Zoro Enma Katana Conqueror's Haki Text Selection */
     ::selection {
-      background-color: #8b2fa8 !important;
+      background-color: #9333ea !important;
       color: #ffffff !important;
       -webkit-text-fill-color: #ffffff !important;
       text-shadow: none !important;
     }
 
     *::selection {
-      background-color: #8b2fa8 !important;
+      background-color: #9333ea !important;
       color: #ffffff !important;
       -webkit-text-fill-color: #ffffff !important;
       text-shadow: none !important;
     }
 
     p::selection, span::selection, h1::selection, h2::selection, h3::selection, h4::selection, h5::selection, h6::selection, a::selection, div::selection, strong::selection, em::selection, b::selection, i::selection, code::selection, pre::selection, button::selection, input::selection, textarea::selection, label::selection {
-      background-color: #8b2fa8 !important;
+      background-color: #9333ea !important;
       color: #ffffff !important;
       -webkit-text-fill-color: #ffffff !important;
       text-shadow: none !important;
     }
 
     ::-moz-selection {
-      background-color: #8b2fa8 !important;
+      background-color: #9333ea !important;
       color: #ffffff !important;
       -webkit-text-fill-color: #ffffff !important;
       text-shadow: none !important;
     }
 
     *::-moz-selection {
-      background-color: #8b2fa8 !important;
+      background-color: #9333ea !important;
       color: #ffffff !important;
       -webkit-text-fill-color: #ffffff !important;
       text-shadow: none !important;
     }
 
     p::-moz-selection, span::-moz-selection, h1::-moz-selection, h2::-moz-selection, h3::-moz-selection, h4::-moz-selection, h5::-moz-selection, h6::-moz-selection, a::-moz-selection, div::-moz-selection, strong::-moz-selection, em::-moz-selection, b::-moz-selection, i::-moz-selection, code::-moz-selection, pre::-moz-selection, button::-moz-selection, input::-moz-selection, textarea::-moz-selection, label::-moz-selection {
-      background-color: #8b2fa8 !important;
+      background-color: #9333ea !important;
       color: #ffffff !important;
       -webkit-text-fill-color: #ffffff !important;
       text-shadow: none !important;

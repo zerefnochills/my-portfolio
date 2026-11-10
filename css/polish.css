@@ -188,15 +188,24 @@ nav.nav-island {
 
 .nav-links-dock .nav-link:hover,
 .nav-links-dock .nav-link:focus-visible {
-  background: var(--ink, #09090b) !important;
+  background: #09090b !important;
   color: #ffffff !important;
-  border-color: var(--ink, #09090b) !important;
+  border-color: #09090b !important;
+}
+
+.nav-links-dock .nav-link:hover span,
+.nav-links-dock .nav-link:focus-visible span {
+  color: #ffffff !important;
 }
 
 .nav-links-dock .nav-link.active {
-  background: var(--ink, #09090b) !important;
+  background: #09090b !important;
   color: #ffffff !important;
-  border-color: var(--ink, #09090b) !important;
+  border-color: #09090b !important;
+}
+
+.nav-links-dock .nav-link.active span {
+  color: #ffffff !important;
 }
 
 .controls-bar {
@@ -2126,31 +2135,36 @@ header.site-header {
     padding: 0 !important;
   }
 
-  /* Responsive Navbar on Tablet (681px - 1024px) */
+  /* Responsive Navbar on Tablet (681px - 920px) */
   nav.nav-island {
     display: flex !important;
-    flex-wrap: nowrap !important;
+    flex-wrap: wrap !important;
     align-items: center !important;
     justify-content: space-between !important;
-    gap: 10px !important;
-    padding: 8px 16px !important;
+    gap: 8px 10px !important;
+    padding: 8px 14px !important;
     max-width: min(960px, 100%) !important;
     width: 100% !important;
     box-sizing: border-box !important;
   }
 
   .nav-brand-row {
-    flex: 0 0 auto !important;
+    flex: 1 1 auto !important;
     min-width: 0 !important;
   }
 
+  .controls-bar {
+    margin-left: auto !important;
+  }
+
   .nav-links-dock {
-    width: auto !important;
+    order: 3 !important;
+    width: 100% !important;
     display: flex !important;
-    justify-content: flex-end !important;
+    justify-content: center !important;
     flex-wrap: nowrap !important;
     gap: 6px !important;
-    padding: 2px 0 !important;
+    padding: 3px 0 !important;
     overflow: visible !important;
   }
 
@@ -2684,9 +2698,12 @@ header.site-header {
   .hof-filter-bar {
     overflow-x: auto;
     flex-wrap: nowrap !important;
+    justify-content: flex-start !important;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    padding-bottom: 4px;
+    padding: 4px 6px !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .hof-filter-bar::-webkit-scrollbar {
@@ -3140,35 +3157,35 @@ header.site-header {
    Matches the signature purple Conqueror's Haki flame aura of Zoro's Enma katana
    ========================================================================= */
 ::selection {
-  background-color: #8b2fa8 !important;
+  background-color: #9333ea !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   text-shadow: none !important;
 }
 
 *::selection {
-  background-color: #8b2fa8 !important;
+  background-color: #9333ea !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   text-shadow: none !important;
 }
 
 p::selection, span::selection, h1::selection, h2::selection, h3::selection, h4::selection, h5::selection, h6::selection, a::selection, div::selection, strong::selection, em::selection, b::selection, i::selection, code::selection, pre::selection, button::selection, input::selection, textarea::selection, label::selection {
-  background-color: #8b2fa8 !important;
+  background-color: #9333ea !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   text-shadow: none !important;
 }
 
 ::-moz-selection {
-  background-color: #8b2fa8 !important;
+  background-color: #9333ea !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   text-shadow: none !important;
 }
 
 *::-moz-selection {
-  background-color: #8b2fa8 !important;
+  background-color: #9333ea !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   text-shadow: none !important;
@@ -3330,89 +3347,114 @@ html.is-android .section-title {
   font-size: clamp(1.5rem, 5.5vw, 2rem) !important;
 }
 
-html.is-android .project-card {
-  padding: 16px 14px !important;
-  border-radius: 12px !important;
+html.is-android .project-card,
+html.is-android .card {
+  padding: 18px 16px !important;
+  border-radius: 14px !important;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
   transform: translateZ(0);
 }
 
-html.is-android .project-title {
-  font-size: 1.15rem !important;
+html.is-android .project-title,
+html.is-android .card h3 {
+  font-size: 1.2rem !important;
 }
 
-html.is-android .project-desc {
-  font-size: 0.88rem !important;
+html.is-android .project-desc,
+html.is-android .card p {
+  font-size: 0.95rem !important;
   line-height: 1.5 !important;
 }
 
-html.is-android .project-tags span {
-  font-size: 0.75rem !important;
-  padding: 3px 8px !important;
+html.is-android .project-tags span,
+html.is-android .card-top .tags,
+html.is-android .card-footer .tags {
+  font-size: 0.8rem !important;
+  padding: 3px 6px !important;
 }
 
 /* 6. Voyage Journey Section on Android */
-html.is-android .voyage-card {
-  padding: 16px !important;
+html.is-android .voyage-card,
+html.is-android .voyage-milestone-card,
+html.is-android .voyage-card-body {
+  padding: 18px 16px !important;
   border-radius: 12px !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
   transform: translateZ(0);
 }
 
-html.is-android .voyage-step {
+html.is-android .voyage-step,
+html.is-android .voyage-card-step {
   min-height: 48vh !important;
 }
 
-html.is-android .waypoint-node {
-  padding: 5px 10px !important;
+html.is-android .waypoint-node,
+html.is-android .voyage-waypoint {
+  padding: 5px 8px !important;
   font-size: 0.78rem !important;
 }
 
 /* 7. Skills & Tech Stack on Android */
 html.is-android .skill-pill,
-html.is-android .tech-chip {
+html.is-android .tech-chip,
+html.is-android .ticker-pill {
   padding: 4px 9px !important;
   font-size: 0.78rem !important;
 }
 
-/* 8. Logbook & Hall of Fame on Android */
-html.is-android .logbook-entry {
-  padding: 14px !important;
+html.is-android .tech-icon-tile {
+  width: 48px !important;
+  height: 48px !important;
 }
 
-html.is-android .fame-card {
-  padding: 14px !important;
+/* 8. Logbook & Hall of Fame on Android */
+html.is-android .logbook-entry,
+html.is-android .logbook-page {
+  padding: 16px !important;
+}
+
+html.is-android .fame-card,
+html.is-android .hof-card {
+  padding: 16px !important;
   border-radius: 12px !important;
 }
 
 /* 9. Contact Section & Postcard on Android */
-html.is-android .postcard-frame {
+html.is-android .postcard-frame,
+html.is-android .transmission-card {
   max-width: calc(100vw - 28px) !important;
-  padding: 16px !important;
+  padding: 18px 16px !important;
 }
 
 html.is-android .contact-form input,
-html.is-android .contact-form textarea {
+html.is-android .contact-form textarea,
+html.is-android .trans-form input,
+html.is-android .trans-form textarea {
   font-size: 16px !important;
 }
 
 /* 10. Doodle Studio & Interactive Subpages on Android */
 html.is-android .doodle-canvas-wrap,
-html.is-android canvas#doodleCanvas {
+html.is-android .canvas-card,
+html.is-android canvas#doodleCanvas,
+html.is-android canvas#mainCanvas {
   touch-action: none !important;
 }
 
-html.is-android .doodle-toolbar {
-  padding: 6px 10px !important;
-  gap: 6px !important;
+html.is-android .doodle-toolbar,
+html.is-android .header-actions {
+  padding: 4px 6px !important;
+  gap: 5px !important;
 }
 
-html.is-android .doodle-tool-btn {
-  padding: 6px 10px !important;
-  font-size: 0.82rem !important;
+html.is-android .doodle-tool-btn,
+html.is-android .tool-btn {
+  padding: 4px 8px !important;
+  font-size: 0.88rem !important;
 }
 
-html.is-android .vault-grid {
+html.is-android .vault-grid,
+html.is-android .vault-stash-grid {
   gap: 14px !important;
 }
 

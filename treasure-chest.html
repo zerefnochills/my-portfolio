@@ -77,12 +77,14 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
       gap: 12px;
       background: var(--paper-sticky);
       border: 2px solid var(--ink);
       border-radius: 16px;
       padding: 10px 18px;
       box-shadow: 0 4px 0 var(--ink), 0 8px 24px var(--shadow);
+      box-sizing: border-box;
     }
     .vault-nav a.nav-btn {
       display: inline-flex;
@@ -124,6 +126,7 @@
       max-width: 980px;
       margin: 0 auto;
       width: 100%;
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -537,6 +540,22 @@
       .vault-nav {
         padding: 8px 12px;
         margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: space-between;
+      }
+      .vault-nav a.nav-btn {
+        font-size: 1rem;
+        padding: 4px 10px;
+        flex-shrink: 0;
+      }
+      .vault-status-badge {
+        font-size: 0.95rem;
+        padding: 4px 10px;
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
       }
       .chest-box-container {
         width: min(300px, 86vw);
@@ -546,25 +565,49 @@
         width: 280px;
         height: 280px;
       }
-      .vault-hero h1 {
+      .vault-header-hero .vault-title {
         font-size: 2.1rem;
       }
       .vault-subtitle {
         font-size: 1.05rem;
       }
-      .vault-grid {
-        grid-template-columns: 1fr;
+      .stash-items-grid {
+        grid-template-columns: minmax(0, 1fr) !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
         gap: 20px;
       }
-      .vault-card {
+      .stash-card {
+        min-width: 0 !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
         padding: 20px 16px;
       }
-      .manifesto-parchment {
+      .manifesto-quote-card {
         padding: 20px 16px;
       }
-      .secret-code-display {
-        font-size: 1.25rem;
+      .token-copy-box {
+        font-size: 1.1rem;
       }
+      .return-ship-btn {
+        font-size: clamp(1.1rem, 4.5vw, 1.4rem);
+        padding: 10px 18px;
+        max-width: 100%;
+        box-sizing: border-box;
+      }
+    }
+
+    /* Android GPU & Scroll Optimization */
+    html.is-android body {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+    }
+    html.is-android .stash-card,
+    html.is-android .vault-nav,
+    html.is-android .chest-box-container {
+      transform: translateZ(0);
+      will-change: transform;
     }
   </style>
 </head>
@@ -738,6 +781,21 @@
     </div>
   </main>
 
+  <!-- Captain's Log Dispatch Modal Dialog -->
+  <div class="dispatch-modal-backdrop" id="dispatchModal" style="display:none;position:fixed;inset:0;background:rgba(9,9,11,0.65);z-index:99999;align-items:center;justify-content:center;padding:16px;">
+    <div class="dispatch-modal-card" style="background:#ffffff;border:3px solid #09090b;border-radius:18px;max-width:540px;width:100%;padding:28px 24px;box-shadow:6px 8px 0 #09090b;position:relative;">
+      <button type="button" id="closeDispatchBtn" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:1.5rem;font-weight:bold;cursor:pointer;color:#09090b;" aria-label="Close dialog">&times;</button>
+      <div style="font-family:var(--font-chewy);font-size:1.1rem;color:#dc2626;letter-spacing:0.06em;margin-bottom:6px;">✦ CAPTAIN'S LOG ENTRY</div>
+      <h3 style="font-family:var(--font-spicy);font-size:1.85rem;margin-bottom:12px;color:#09090b;">The Founder's Manifesto</h3>
+      <p style="font-family:var(--font-hand);font-size:1.25rem;line-height:1.45;color:#18181b;margin-bottom:18px;">
+        “Always build products you would be proud to show your idols. Keep your code clean, your architecture honest, and your curiosity boundless. When passion meets hand-crafted code, there is no horizon you cannot cross.”
+      </p>
+      <div style="font-family:var(--font-chewy);font-size:1.15rem;color:#991b1b;border-top:1.5px dashed rgba(9,9,11,0.2);padding-top:10px;">
+        — Deepak Pandey &bull; Founder @ Synapse Calyx
+      </div>
+    </div>
+  </div>
+
   <script>
     (function() {
       "use strict";
@@ -826,11 +884,32 @@
         });
       }
 
-      // 5. Read Full Dispatch Modal/Alert
+      // 5. Read Full Dispatch Modal
       const readBtn = document.getElementById("readManifestoBtn");
-      if (readBtn) {
+      const dispatchModal = document.getElementById("dispatchModal");
+      const closeDispatchBtn = document.getElementById("closeDispatchBtn");
+
+      if (readBtn && dispatchModal) {
         readBtn.addEventListener("click", function() {
-          alert("📜 CAPTAIN'S LOG ENTRY:\n\n'Always build products you would be proud to show your idols. Keep your code clean, your architecture honest, and your curiosity boundless.' — Deepak Pandey (Founder @ Synapse Calyx)");
+          dispatchModal.style.display = "flex";
+          playCoinChime();
+        });
+      }
+      if (closeDispatchBtn && dispatchModal) {
+        closeDispatchBtn.addEventListener("click", function() {
+          dispatchModal.style.display = "none";
+        });
+      }
+      if (dispatchModal) {
+        dispatchModal.addEventListener("click", function(e) {
+          if (e.target === dispatchModal) {
+            dispatchModal.style.display = "none";
+          }
+        });
+        window.addEventListener("keydown", function(e) {
+          if (e.key === "Escape" && dispatchModal.style.display === "flex") {
+            dispatchModal.style.display = "none";
+          }
         });
       }
 

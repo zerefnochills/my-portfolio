@@ -119,8 +119,7 @@ html, body {
 body {
   background-color: var(--paper);
   background-image: 
-    radial-gradient(ellipse at 50% 0, rgba(255, 255, 255, 0.45) 0, transparent 65%),
-    
+    radial-gradient(ellipse at 50% 0, rgba(255, 255, 255, 0.45) 0, transparent 65%);
   background-size: 100% 100%;
   background-attachment: fixed;
   color: var(--ink);
@@ -570,19 +569,72 @@ header.studio-header {
 @media (max-width: 768px) {
   .studio-header {
     height: auto;
-    padding: 8px 12px;
+    min-height: 52px;
+    padding: 6px 10px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .brand-group {
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 8px;
+  }
+  .studio-title {
+    font-size: clamp(1.1rem, 3.8vw, 1.35rem) !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .back-btn {
+    padding: 2px 8px;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .header-actions {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 2px 0 4px;
+    gap: 6px;
+    scrollbar-width: none;
+  }
+  .header-actions::-webkit-scrollbar {
+    display: none;
+  }
+  .tool-btn {
+    padding: 3px 8px;
+    font-size: 0.92rem;
+    flex-shrink: 0;
   }
   .studio-container {
-    height: calc(100vh - 80px);
-    height: calc(100dvh - 80px);
+    height: calc(100vh - 96px);
+    height: calc(100dvh - 96px);
     flex-direction: column;
+    padding: 6px 8px 8px;
+    gap: 8px;
+  }
+  .canvas-wrapper {
+    height: auto;
+    min-height: 0;
+    flex: 1 1 auto;
   }
   .toolbox {
     width: 100%;
     min-width: 100%;
-    height: 140px;
+    height: 135px;
     flex-shrink: 0;
+    padding: 8px 10px;
+    border-radius: 12px;
   }
+}
+
+/* Android GPU Acceleration & Smooth Touch Response */
+html.is-android .studio-container,
+html.is-android .canvas-card,
+html.is-android .toolbox {
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* ONE PIECE: RORONOA ZORO & GLOWING ENMA SWORD CUSTOM CURSORS */
@@ -934,7 +986,7 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
     canvas.height = targetH;
 
     if (tempCanvas) {
-      ctx.drawImage(tempCanvas, 0, 0, targetW, targetH);
+      ctx.drawImage(tempCanvas, 0, 0);
     } else {
       saveState();
     }
@@ -1173,6 +1225,7 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
   }, { passive: false });
 
   window.addEventListener("touchend", stopDrawing);
+  window.addEventListener("touchcancel", stopDrawing);
 
   // --- STAMP RENDERER ---
   function drawStamp(type, x, y, dpr) {
