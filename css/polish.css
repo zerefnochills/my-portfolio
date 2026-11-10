@@ -503,21 +503,22 @@ div[id] {
 a.treasure-chest-widget {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   width: auto;
   max-width: none;
   background: #dc2626 !important;
   background: linear-gradient(135deg, #ef4444 0%, #dc2626 55%, #b91c1c 100%) !important;
   border: 2.5px solid var(--ink, #111) !important;
-  border-radius: 999px;
-  padding: 10px 24px;
-  box-shadow: 3.5px 4px 0 var(--shadow, #111) !important;
+  border-radius: 8px !important;
+  padding: 13px 26px !important;
+  box-shadow: 4px 5.5px 0 var(--shadow, #111) !important;
   margin-top: 0;
   text-decoration: none;
   color: #ffffff !important;
-  font-family: var(--font-chewy, 'Chewy', cursive);
-  font-size: 1.1rem;
-  letter-spacing: 0.03em;
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif) !important;
+  font-size: 1.18rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45);
   position: relative;
   z-index: 1;
@@ -525,14 +526,16 @@ a.treasure-chest-widget {
 }
 
 a.treasure-chest-widget:hover {
-  transform: translateY(-2px) scale(1.03);
+  transform: translateY(-3px) scale(1.02);
   background: linear-gradient(135deg, #f87171 0%, #ef4444 55%, #dc2626 100%) !important;
-  box-shadow: 4.5px 6px 0 var(--shadow, #111) !important;
+  box-shadow: 5.5px 7.5px 0 var(--shadow, #111) !important;
   color: #ffffff !important;
 }
 
 a.treasure-chest-widget:active {
   transform: translateY(1px) scale(0.98);
+  box-shadow: 2px 2px 0 var(--shadow, #111) !important;
+}
   box-shadow: 2px 2px 0 var(--shadow, #111) !important;
 }
 
@@ -2281,8 +2284,9 @@ header.site-header {
     width: 100% !important;
     display: inline-flex !important;
     justify-content: center !important;
-    font-size: 1.02rem !important;
-    padding: 9px 16px !important;
+    font-size: 1.1rem !important;
+    padding: 12px 18px !important;
+    border-radius: 8px !important;
   }
 
   .stash-strawhat-decor {
@@ -2836,9 +2840,9 @@ header.site-header {
   font-weight: 700 !important;
 }
 
-/* 10. Captain's Secret Stash CTA: Bold Tactile Red Button with Strawhat */
+/* 10. Captain's Secret Stash CTA: Bold Tactile Red Rectangular Button (Larger than other buttons) */
 .captain-stash-wrap {
-  margin-top: 14px !important;
+  margin-top: 18px !important;
   display: flex !important;
   align-items: center !important;
 }
@@ -2848,15 +2852,15 @@ header.site-header {
   background: linear-gradient(135deg, #ef4444 0%, #dc2626 55%, #b91c1c 100%) !important;
   border: 2.5px solid var(--ink, #111) !important;
   color: #ffffff !important;
-  box-shadow: 3.5px 5px 0 var(--shadow, #111) !important;
-  font-size: 1.05rem !important;
+  box-shadow: 4px 5.5px 0 var(--shadow, #111) !important;
+  font-size: 1.18rem !important;
   font-weight: 700 !important;
-  padding: 10px 22px !important;
-  border-radius: 999px !important;
+  padding: 13px 26px !important;
+  border-radius: 8px !important;
   text-decoration: none !important;
   display: inline-flex !important;
   align-items: center !important;
-  gap: 10px !important;
+  gap: 12px !important;
   font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif) !important;
   letter-spacing: 0.02em !important;
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.15s ease, box-shadow 0.2s ease !important;
@@ -2864,9 +2868,9 @@ header.site-header {
 
 .treasure-chest-widget:hover {
   background: linear-gradient(135deg, #f87171 0%, #ef4444 55%, #dc2626 100%) !important;
-  box-shadow: 4.5px 7px 0 var(--shadow, #111) !important;
+  box-shadow: 5.5px 7.5px 0 var(--shadow, #111) !important;
   color: #ffffff !important;
-  transform: translateY(-2px) scale(1.02) !important;
+  transform: translateY(-3px) scale(1.02) !important;
 }
 
 .treasure-chest-widget:active {
@@ -2875,7 +2879,7 @@ header.site-header {
 }
 
 .treasure-chest-widget .chest-icon {
-  font-size: 1.15rem !important;
+  font-size: 1.25rem !important;
   color: #fef08a !important;
   text-shadow: 0 0 8px rgba(254, 240, 138, 0.7) !important;
 }
