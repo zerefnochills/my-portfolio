@@ -303,56 +303,63 @@ div[id] {
   }
 }
 
-.hero-left-col {
-  padding-left: 0;
+@media (min-width: 1100px) {
+  .hero-left-col {
+    padding-left: clamp(24px, 3.5vw, 60px) !important;
+  }
 }
 
-/* ---------- Hero: Continuous Looping Animation for Deepak Pandey ---------- */
+@media (max-width: 1099.98px) {
+  .hero-left-col {
+    padding-left: 0 !important;
+  }
+}
+
+/* ---------- Hero: Modern Bold Title (Non-cursive, Red "Pandey") ---------- */
 .hero h1#heroName {
   display: inline-block;
   position: relative;
-  font-family: var(--script);
-  font-size: clamp(3.8rem, 10vw, 7.8rem);
-  line-height: 0.95;
-  color: var(--ink);
-  white-space: nowrap;
-  clip-path: inset(-15% 100% -15% 0);
-  animation: heroNameWriteLoop 7s cubic-bezier(0.22, 1, 0.36, 1) infinite;
-  transition: none !important;
-  transform-origin: left center;
+  font-family: var(--sans, 'Space Grotesk', system-ui, -apple-system, sans-serif) !important;
+  font-weight: 800 !important;
+  font-size: clamp(3rem, 6.8vw, 5.4rem) !important;
+  letter-spacing: -0.025em !important;
+  line-height: 1.05 !important;
+  color: var(--ink, #18181b) !important;
+  white-space: nowrap !important;
+  clip-path: none !important;
+  animation: none !important;
   filter: drop-shadow(2px 2px 0 var(--paper));
 }
 
-@keyframes heroNameWriteLoop {
-  0% {
-    clip-path: inset(-15% 100% -15% 0);
-    opacity: 0.2;
-    transform: translateY(0) scale(0.99);
-  }
+.hero h1#heroName .name-first {
+  color: var(--ink, #18181b) !important;
+}
 
-  4% {
-    opacity: 1;
-  }
+.hero h1#heroName .name-last {
+  color: #dc2626 !important;
+  text-shadow: 0 0 24px rgba(220, 38, 38, 0.25);
+}
 
-  32%,
-  74% {
-    clip-path: inset(-15% -8% -15% 0);
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+.hero-tagline {
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif) !important;
+  font-size: clamp(1.05rem, 2.2vw, 1.25rem) !important;
+  line-height: 1.55 !important;
+  color: var(--ink, #18181b) !important;
+  min-height: 3.2em; /* Prevents vertical layout shift during typewriter loop */
+  max-width: 580px;
+}
 
-  84% {
-    clip-path: inset(-15% -8% -15% 0);
-    opacity: 0.2;
-    transform: translateY(-2px) scale(0.99);
-  }
+.typewriter-cursor {
+  display: inline-block;
+  margin-left: 2px;
+  color: #dc2626;
+  font-weight: 700;
+  animation: typewriterBlink 0.85s infinite;
+}
 
-  92%,
-  100% {
-    clip-path: inset(-15% 100% -15% 0);
-    opacity: 0;
-    transform: translateY(0) scale(0.99);
-  }
+@keyframes typewriterBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 /* Ensure hero contents are immediately visible */
@@ -2751,32 +2758,48 @@ header.site-header {
   font-weight: 700 !important;
 }
 
-/* 10. Downgraded secret stash CTA as subtle text link / badge */
+/* 10. Captain's Secret Stash CTA: Bold Tactile Red Button with Strawhat */
 .captain-stash-wrap {
-  margin-top: 8px !important;
+  margin-top: 14px !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
-.treasure-chest-widget.subtle-stash-link {
-  background: transparent !important;
-  border: 1.5px dashed var(--ink-soft, #71717a) !important;
-  color: var(--ink-soft, #52525b) !important;
-  box-shadow: none !important;
-  font-size: 0.95rem !important;
-  padding: 6px 14px !important;
-  border-radius: 20px !important;
+.treasure-chest-widget {
+  background: #dc2626 !important;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 55%, #b91c1c 100%) !important;
+  border: 2.5px solid var(--ink, #111) !important;
+  color: #ffffff !important;
+  box-shadow: 3.5px 5px 0 var(--shadow, #111) !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  padding: 10px 22px !important;
+  border-radius: 999px !important;
   text-decoration: none !important;
   display: inline-flex !important;
   align-items: center !important;
-  gap: 7px !important;
-  font-family: var(--hand, cursive) !important;
-  transition: all 0.2s ease !important;
+  gap: 10px !important;
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif) !important;
+  letter-spacing: 0.02em !important;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.15s ease, box-shadow 0.2s ease !important;
 }
 
-.treasure-chest-widget.subtle-stash-link:hover {
-  border-color: var(--accent, #dc2626) !important;
-  color: var(--accent, #dc2626) !important;
-  background: rgba(220, 38, 38, 0.05) !important;
-  transform: translateY(-1px) !important;
+.treasure-chest-widget:hover {
+  background: linear-gradient(135deg, #f87171 0%, #ef4444 55%, #dc2626 100%) !important;
+  box-shadow: 4.5px 7px 0 var(--shadow, #111) !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) scale(1.02) !important;
+}
+
+.treasure-chest-widget:active {
+  transform: translateY(1px) scale(0.98) !important;
+  box-shadow: 2px 2px 0 var(--shadow, #111) !important;
+}
+
+.treasure-chest-widget .chest-icon {
+  font-size: 1.15rem !important;
+  color: #fef08a !important;
+  text-shadow: 0 0 8px rgba(254, 240, 138, 0.7) !important;
 }
 
 .stash-inline-strawhat {

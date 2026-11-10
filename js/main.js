@@ -231,8 +231,20 @@
         const wantedPosterBounty = document.getElementById("wantedPosterBounty");
 
         if (logoName) logoName.textContent = PORTFOLIO_CONFIG.name;
-        if (heroName) heroName.textContent = PORTFOLIO_CONFIG.name;
-        if (heroTagline) heroTagline.textContent = PORTFOLIO_CONFIG.tagline;
+        if (heroName) {
+          const parts = (PORTFOLIO_CONFIG.name || "").split(" ");
+          if (parts.length > 1) {
+            heroName.innerHTML = `<span class="name-first">${parts.slice(0, -1).join(" ")}</span> <span class="name-last">${parts[parts.length - 1]}</span>`;
+          } else {
+            heroName.textContent = PORTFOLIO_CONFIG.name;
+          }
+        }
+        if (heroTagline) {
+          let typewriterEl = document.getElementById("typewriterText");
+          if (!typewriterEl) {
+            heroTagline.innerHTML = `<span class="typewriter-text" id="typewriterText">${PORTFOLIO_CONFIG.tagline || ""}</span><span class="typewriter-cursor" aria-hidden="true">|</span>`;
+          }
+        }
         if (availText) availText.textContent = PORTFOLIO_CONFIG.status;
         if (wantedPosterName) wantedPosterName.textContent = PORTFOLIO_CONFIG.name;
         if (wantedPosterBounty) wantedPosterBounty.textContent = PORTFOLIO_CONFIG.bounty;

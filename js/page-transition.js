@@ -13,25 +13,25 @@
       title: 'DOODLE STUDIO',
       sub: 'ENTERING DIGITAL SKETCHBOOK • CANVAS • INK',
       type: 'doodle',
-      colors: ['#facc15', '#ef4444', '#fb923c', '#38bdf8', '#a855f7', '#34d399', '#f43f5e', '#fbbf24', '#60a5fa', '#c084fc', '#4ade80', '#f472b6', '#38bdf8']
+      colors: ['#09090b', '#dc2626']
     },
     'index.html': {
       title: 'GRAND LINE',
       sub: "RETURNING TO CAPTAIN'S VOYAGE • DEEPAK PANDEY",
       type: 'ship',
-      colors: ['#facc15', '#f97316', '#ef4444', '#fbbf24', '#38bdf8', '#34d399', '#facc15', '#eab308', '#f87171', '#38bdf8']
+      colors: ['#09090b', '#dc2626']
     },
     'stash-trial.html': {
       title: "CAPTAIN'S VAULT",
       sub: 'UNLOCKING SECRET STASH • ฿ 3,000,000,000',
       type: 'chest',
-      colors: ['#facc15', '#fbbf24', '#f59e0b', '#d97706', '#ef4444', '#facc15', '#fbbf24', '#38bdf8', '#34d399', '#f59e0b', '#facc15', '#fbbf24', '#eab308', '#facc15']
+      colors: ['#09090b', '#dc2626']
     },
     'treasure-chest.html': {
       title: 'TREASURE VAULT',
       sub: 'ALL SECRETS UNLOCKED • PIRATE WEALTH',
       type: 'chest',
-      colors: ['#facc15', '#38bdf8', '#ef4444', '#fbbf24', '#a855f7', '#34d399', '#facc15', '#f97316', '#38bdf8', '#eab308', '#facc15', '#f43f5e', '#fbbf24', '#38bdf8']
+      colors: ['#09090b', '#dc2626']
     }
   };
 
@@ -146,7 +146,10 @@
     if (!titleEl) return;
     titleEl.innerHTML = '';
     const letters = Array.from(text);
-    let colorIdx = 0;
+    const nonSpaceCount = letters.filter(c => c !== ' ').length;
+    const midPoint = Math.ceil(nonSpaceCount / 2);
+    let letterIndex = 0;
+
     letters.forEach((char, i) => {
       if (char === ' ') {
         const space = document.createElement('span');
@@ -155,13 +158,19 @@
       } else {
         const span = document.createElement('span');
         span.className = 'trans-letter';
-        const color = colors[colorIdx % colors.length] || '#facc15';
-        colorIdx++;
-        span.style.setProperty('--c', color);
-        span.style.setProperty('--glow', color + '66');
-        span.style.setProperty('--delay', (i * 0.025) + 's');
+        
+        // Half letter black, half red:
+        // First half letters get half-black, second half get half-red
+        if (letterIndex < midPoint) {
+          span.classList.add('half-black');
+        } else {
+          span.classList.add('half-red');
+        }
+
+        span.style.setProperty('--delay', (i * 0.03) + 's');
         span.textContent = char;
         titleEl.appendChild(span);
+        letterIndex++;
       }
     });
   }
@@ -180,7 +189,7 @@
       title: 'VOYAGE ONWARD',
       sub: 'SETTING SAIL ACROSS THE GRAND LINE',
       type: 'ship',
-      colors: ['#facc15', '#ef4444', '#38bdf8']
+      colors: ['#09090b', '#dc2626']
     }, options);
 
     // Save transition state for entrance on target page
@@ -195,17 +204,17 @@
 
     // Render badge content
     if (iconEl) iconEl.innerHTML = ICONS[cfg.type] || ICONS.ship;
-    renderTitleLetters(cfg.title, cfg.colors || ['#facc15', '#ef4444', '#38bdf8']);
+    renderTitleLetters(cfg.title, cfg.colors || ['#09090b', '#dc2626']);
     if (subEl) subEl.textContent = cfg.sub;
 
-    // Trigger departure animation
+    // Trigger departure animation (increased duration for cinematic feel)
     playCurtainAudio();
     curtainEl.classList.remove('is-entering', 'reveal-out');
     curtainEl.classList.add('is-active', 'is-leaving');
 
     setTimeout(function () {
       window.location.href = url;
-    }, 400);
+    }, 780); // Increased from 400ms to 780ms
   }
 
   function checkEntrance() {
@@ -231,11 +240,11 @@
       title: 'ARRIVED',
       sub: 'GRAND LINE VOYAGE',
       type: 'ship',
-      colors: ['#facc15', '#38bdf8', '#ef4444']
+      colors: ['#09090b', '#dc2626']
     };
 
     if (iconEl) iconEl.innerHTML = ICONS[cfg.type] || ICONS.ship;
-    renderTitleLetters(cfg.title, cfg.colors || ['#facc15', '#ef4444', '#38bdf8']);
+    renderTitleLetters(cfg.title, cfg.colors || ['#09090b', '#dc2626']);
     if (subEl) subEl.textContent = cfg.sub;
 
     // Start closed
@@ -245,11 +254,11 @@
     // After brief display, slide curtain down off screen
     setTimeout(function () {
       curtainEl.classList.add('reveal-out');
-    }, 140);
+    }, 280); // Increased from 140ms to 280ms
 
     setTimeout(function () {
       curtainEl.classList.remove('is-active', 'is-entering', 'reveal-out');
-    }, 620);
+    }, 950); // Increased to match 0.62s reveal-out
   }
 
   function resetCurtain() {
@@ -350,3 +359,4 @@
     reset: resetCurtain
   };
 })();
+

@@ -1,7 +1,7 @@
 /* ==========================================================
    PAGE CURTAIN WIPE TRANSITION (CINEMATIC SHUTTER & MARQUEE)
-   Inspired by award-winning portfolio transitions with retro
-   One Piece & arcade-style animated character titles.
+   Features a slate-grey theme, cinematic animation timing,
+   and split two-tone (half black, half red) arcade lettering.
    ========================================================== */
 
 .page-curtain-transition {
@@ -23,18 +23,19 @@
   visibility: visible;
 }
 
+/* Grey themed panel (not black) with rich slate depth & One Piece crimson trim */
 .page-curtain-panel {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: #0d0e12;
+  background: #27272a;
   background-image: 
-    radial-gradient(circle at 50% 45%, rgba(250, 204, 21, 0.08), transparent 65%),
-    linear-gradient(180deg, #07080a 0%, #111217 50%, #07080a 100%);
-  border-bottom: 4px solid #facc15;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+    radial-gradient(circle at 50% 45%, rgba(220, 38, 38, 0.12), transparent 65%),
+    linear-gradient(180deg, #1c1e24 0%, #2a2d36 50%, #1c1e24 100%);
+  border-bottom: 4px solid #dc2626;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,10 +43,10 @@
   will-change: transform;
 }
 
-/* WIPE IN: Leaving current page (slides down to cover screen) */
+/* WIPE IN: Leaving current page (increased duration for cinematic feel) */
 .page-curtain-transition.is-leaving .page-curtain-panel {
   transform: translateY(0%);
-  transition: transform 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: transform 0.58s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 /* WIPE OUT: Entering new page (slides down off screen to reveal) */
@@ -55,10 +56,10 @@
 
 .page-curtain-transition.is-entering.reveal-out .page-curtain-panel {
   transform: translateY(100%);
-  transition: transform 0.44s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: transform 0.62s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-/* Center Content & Retro Arcade Badge */
+/* Center Content & Retro Badge */
 .page-curtain-content {
   display: flex;
   flex-direction: column;
@@ -74,10 +75,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   opacity: 0;
-  transform: scale(0.92) translateY(12px);
-  transition: opacity 0.26s ease, transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: scale(0.92) translateY(14px);
+  transition: opacity 0.32s ease, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .page-curtain-transition.is-leaving .page-curtain-badge,
@@ -87,26 +88,26 @@
 }
 
 .page-curtain-icon {
-  width: 64px;
-  height: 64px;
+  width: 68px;
+  height: 68px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.05);
-  border: 2px solid rgba(250, 204, 21, 0.4);
-  border-radius: 16px;
-  box-shadow: 0 0 24px rgba(250, 204, 21, 0.25);
-  animation: badgeIconPulse 1.6s ease-in-out infinite alternate;
+  background: rgba(24, 24, 27, 0.85);
+  border: 2.5px solid #dc2626;
+  border-radius: 18px;
+  box-shadow: 0 0 28px rgba(220, 38, 38, 0.4), inset 0 0 12px rgba(0, 0, 0, 0.5);
+  animation: badgeIconPulse 1.8s ease-in-out infinite alternate;
 }
 
 @keyframes badgeIconPulse {
   0% {
     transform: translateY(0) scale(1);
-    box-shadow: 0 0 16px rgba(250, 204, 21, 0.2);
+    box-shadow: 0 0 18px rgba(220, 38, 38, 0.3);
   }
   100% {
     transform: translateY(-4px) scale(1.06);
-    box-shadow: 0 0 32px rgba(250, 204, 21, 0.45);
+    box-shadow: 0 0 36px rgba(220, 38, 38, 0.6);
   }
 }
 
@@ -115,39 +116,58 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 3px;
+  gap: 4px;
   font-family: 'Space Grotesk', 'Chewy', 'Spicy Rice', system-ui, -apple-system, sans-serif;
-  font-size: clamp(2rem, 5.5vw, 3.8rem);
+  font-size: clamp(2.2rem, 6vw, 4.2rem);
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   line-height: 1.1;
-  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.9);
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.85);
 }
 
+/* Half letter black, half red while loading:
+   1) Each letter has a split gradient (top half deep black, bottom half crimson red)
+   2) First half of word ("DOODLE") has black emphasis, second half ("STUDIO") has red emphasis */
 .trans-letter {
   display: inline-block;
-  color: var(--c, #facc15);
-  animation: letterPop 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  font-family: 'Space Grotesk', 'Chewy', 'Spicy Rice', system-ui, -apple-system, sans-serif;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  animation: letterPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
   animation-delay: var(--delay, 0s);
-  text-shadow:
-    0 2px 0 rgba(0, 0, 0, 0.8),
-    0 0 20px var(--glow, rgba(250, 204, 21, 0.45));
+  background: linear-gradient(180deg, #09090b 48%, #dc2626 48%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.55)) drop-shadow(0 4px 16px rgba(0, 0, 0, 0.85));
+  -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.3);
+}
+
+.trans-letter.half-black {
+  background: linear-gradient(180deg, #09090b 52%, #ef4444 52%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.trans-letter.half-red {
+  background: linear-gradient(180deg, #18181b 44%, #dc2626 44%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .trans-space {
   display: inline-block;
-  width: 0.35em;
+  width: 0.4em;
 }
 
 @keyframes letterPop {
   0% {
     opacity: 0;
-    transform: translateY(22px) scale(0.7);
+    transform: translateY(24px) scale(0.68);
   }
   70% {
     opacity: 1;
-    transform: translateY(-4px) scale(1.1);
+    transform: translateY(-4px) scale(1.12);
   }
   100% {
     opacity: 1;
@@ -157,30 +177,30 @@
 
 .page-curtain-sub {
   font-family: var(--sans, 'Space Grotesk', monospace, sans-serif);
-  font-size: clamp(0.75rem, 1.8vw, 0.95rem);
+  font-size: clamp(0.78rem, 1.9vw, 0.98rem);
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.82);
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  color: #f4f4f5;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
   margin-top: 4px;
 }
 
 .page-curtain-track {
-  width: clamp(140px, 30vw, 240px);
-  height: 4px;
-  background: rgba(255, 255, 255, 0.12);
+  width: clamp(150px, 32vw, 260px);
+  height: 5px;
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 999px;
   overflow: hidden;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .page-curtain-bar {
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, #facc15, #ef4444, #38bdf8);
+  background: linear-gradient(90deg, #09090b, #dc2626, #ef4444);
   border-radius: 999px;
-  animation: curtainProgress 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: curtainProgress 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes curtainProgress {
