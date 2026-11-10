@@ -460,8 +460,7 @@
       position: sticky;
       top: 0;
       z-index: 40;
-      background: var(--paper);
-      background: linear-gradient(to bottom, var(--paper) 80%, transparent 100%);
+      background: transparent;
       padding-bottom: 8px;
     }
 
@@ -4371,6 +4370,54 @@
           <li><a class="nav-link" href="#hall-of-fame" data-section="hall-of-fame"><span>fame</span></a></li>
           <li><a class="nav-link" href="#contact" data-section="contact"><span>contact</span></a></li>
         </ul>
+
+        <!-- Tactile Toolbar Controls with Descriptive Tooltips -->
+        <div class="controls-bar" style="position:relative">
+          <button class="control-btn" id="soundToggle" type="button"
+            title="Toggle sound effects: tactual paper rustles & ocean audio"
+            aria-label="Toggle sound effects">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" width="16" height="16" aria-hidden="true">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path id="soundWave1" d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              <path id="soundWave2" d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+            </svg>
+            <span id="soundLabel">sound off</span>
+          </button>
+
+          <button class="control-btn active" id="cursorToggle" type="button"
+            title="Toggle Zoro's legendary Enma katana custom cursor"
+            aria-label="Toggle Zoro custom cursor">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="14.5" y1="17.5" x2="3" y2="6"></line>
+              <path d="M14 6l7 7"></path>
+              <path d="M19 1l4 4"></path>
+            </svg>
+            <span id="cursorLabel">zoro</span>
+          </button>
+
+          <button class="control-btn" id="themeBtn" type="button"
+            title="Select ink & parchment theme (Crimson White, Obsidian, Manga Noir, Bloodline)"
+            aria-label="Choose ink theme">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+            </svg>
+            <span>ink</span>
+          </button>
+
+          <div class="theme-picker-menu" id="themeMenu" role="menu" aria-label="Theme selection menu">
+            <button class="theme-opt" data-theme-val="parchment" type="button"><span class="color-dot"
+                style="background:#dc2626"></span> Crimson White</button>
+            <button class="theme-opt" data-theme-val="sepia" type="button"><span class="color-dot"
+                style="background:#ef4444"></span> Obsidian Red</button>
+            <button class="theme-opt" data-theme-val="botanical" type="button"><span class="color-dot"
+                style="background:#b91c1c"></span> Manga Noir</button>
+            <button class="theme-opt" data-theme-val="blueprint" type="button"><span class="color-dot"
+                style="background:#f43f5e"></span> Bloodline Dark</button>
+          </div>
+        </div>
       </nav>
     </header>
 
@@ -4390,55 +4437,64 @@
 
     <!-- HERO SECTION -->
     <header class="hero" id="top">
-      <div class="hero-left-col">
-        <h1 class="write" data-t="2.2s" id="heroName">Deepak Pandey</h1>
-        <svg class="doodle draw" style="width:min(420px,85%);height:16px;display:block;margin:0 0 16px"
-          viewBox="0 0 380 16" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M4 10C80 2 160 16 240 8S340 4 376 9" />
+      <!-- Faint Scattered Background Doodles (Subtle Hand-Drawn Depth) -->
+      <div class="hero-bg-doodles" aria-hidden="true">
+        <svg class="hero-bg-doodle hero-bg-star-1" viewBox="0 0 32 32">
+          <path d="M16 2 L20 12 L30 14 L22 22 L24 32 L16 26 L8 32 L10 22 L2 14 L12 12 Z" />
         </svg>
-        <p class="hero-tagline ink" id="heroTagline">Founder &amp; Software Craftsman &middot; Crafting scalable web
-          platforms, digital systems, and creative code.</p>
-
-        <div class="hero-actions ink">
-          <a class="hero-btn primary" href="#work">
-            <span>Explore Works</span>
-            <svg class="doodle" viewBox="0 0 24 24" width="20" height="20">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </a>
-          <a class="hero-btn" href="#contact">
-            <span>Say Hello</span>
-            <svg class="doodle" viewBox="0 0 24 24" width="20" height="20">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-              <polyline points="22,6 12,13 2,6" />
-            </svg>
-          </a>
-        </div>
-
-        <!-- Interactive Captain's Secret Stash Widget with Perched Straw Hat -->
-        <div class="captain-stash-wrap">
-          <div class="stash-strawhat-decor" aria-hidden="true" title="Luffy's Straw Hat">
-            <svg viewBox="0 0 120 70" width="58" height="34" class="strawhat-svg">
-              <!-- Hat Crown -->
-              <path d="M34 40 C32 14 88 14 86 40 Z" fill="#eab308" stroke="var(--ink, #111)" stroke-width="3"
-                stroke-linejoin="round" />
-              <!-- Red Ribbon -->
-              <path d="M33 34 C48 40 72 40 87 34 L88 39 C72 45 48 45 32 39 Z" fill="#dc2626" stroke="var(--ink, #111)"
-                stroke-width="2.2" stroke-linejoin="round" />
-              <!-- Hat Brim -->
-              <path d="M8 46 C8 32 34 30 60 30 C86 30 112 32 112 46 C96 58 78 60 60 60 C42 60 24 58 8 46 Z"
-                fill="#facc15" stroke="var(--ink, #111)" stroke-width="3" stroke-linejoin="round" />
-              <!-- Weave line detail -->
-              <path d="M36 48 Q60 54 84 48" stroke="rgba(0,0,0,0.22)" stroke-width="2" fill="none" />
-            </svg>
-          </div>
-          <a href="stash-trial.html" class="treasure-chest-widget" id="treasureChestBtn"
-            title="Click to embark on the Captain's Trial & unlock secret treasure stash!">
-            <span class="chest-icon">✦</span>
-            <span>Unlock Captain's Secret Stash ✦</span>
-          </a>
-        </div>
+        <svg class="hero-bg-doodle hero-bg-squiggle-1" viewBox="0 0 60 20">
+          <path d="M4 10 Q16 2 28 10 T52 10" />
+        </svg>
+        <svg class="hero-bg-doodle hero-bg-arrow-1" viewBox="0 0 40 40">
+          <path d="M8 32 L32 8 M32 8 L20 8 M32 8 L32 20" />
+        </svg>
+        <svg class="hero-bg-doodle hero-bg-star-2" viewBox="0 0 24 24">
+          <path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z" />
+        </svg>
       </div>
+
+      <!-- Hero Content Row: Balanced Columns -->
+      <div class="hero-content-row">
+        <div class="hero-left-col">
+          <h1 class="write" data-t="2.2s" id="heroName">Deepak Pandey</h1>
+          <svg class="doodle draw" style="width:min(420px,85%);height:16px;display:block;margin:0 0 16px"
+            viewBox="0 0 380 16" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M4 10C80 2 160 16 240 8S340 4 376 9" />
+          </svg>
+          <p class="hero-tagline ink" id="heroTagline">Founder &amp; Software Craftsman &middot; Crafting <strong>scalable</strong> web platforms, digital systems, and <strong>creative code</strong>.</p>
+
+          <div class="hero-actions ink">
+            <a class="hero-btn primary" href="#work">
+              <span>Explore Works</span>
+              <svg class="doodle" viewBox="0 0 24 24" width="20" height="20">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </a>
+            <a class="hero-btn" href="#contact">
+              <span>Say Hello</span>
+              <svg class="doodle" viewBox="0 0 24 24" width="20" height="20">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+            </a>
+          </div>
+
+          <!-- Downgraded Captain's Secret Stash Discovery Link (Subtle Easter Egg) -->
+          <div class="captain-stash-wrap">
+            <a href="stash-trial.html" class="treasure-chest-widget subtle-stash-link" id="treasureChestBtn"
+              title="Click to embark on the Captain's Trial &amp; unlock secret treasure stash!">
+              <span class="stash-inline-strawhat" aria-hidden="true">
+                <svg viewBox="0 0 120 70" width="22" height="14" class="strawhat-svg">
+                  <path d="M34 40 C32 14 88 14 86 40 Z" fill="#eab308" stroke="var(--ink, #111)" stroke-width="3" stroke-linejoin="round" />
+                  <path d="M33 34 C48 40 72 40 87 34 L88 39 C72 45 48 45 32 39 Z" fill="#dc2626" stroke="var(--ink, #111)" stroke-width="2.2" stroke-linejoin="round" />
+                  <path d="M8 46 C8 32 34 30 60 30 C86 30 112 32 112 46 C96 58 78 60 60 60 C42 60 24 58 8 46 Z" fill="#facc15" stroke="var(--ink, #111)" stroke-width="3" stroke-linejoin="round" />
+                </svg>
+              </span>
+              <span class="chest-icon">✦</span>
+              <span>Unlock Captain's Secret Stash &rarr;</span>
+            </a>
+          </div>
+        </div>
 
       <!-- One Piece Wanted Bounty Poster Frame -->
       <div class="wanted-poster-frame ink" id="wantedPoster" role="region"
@@ -4538,7 +4594,25 @@
           <span>Wanted: Relentless curiosity &amp; pure craft ✦</span>
         </div>
       </div>
-    </header>
+    </div>
+
+    <!-- Compact Hero Bottom Bar: Stats Row & Animated Scroll Hint -->
+    <div class="hero-bottom-bar" role="region" aria-label="Quick Highlights &amp; Navigation">
+      <div class="hero-stats-row">
+        <span class="hero-stat-pill"><strong class="stat-num">3+ yrs</strong> experience</span>
+        <span class="hero-stat-sep" aria-hidden="true">&middot;</span>
+        <span class="hero-stat-pill"><strong class="stat-num">10+</strong> projects</span>
+        <span class="hero-stat-sep" aria-hidden="true">&middot;</span>
+        <span class="hero-stat-pill"><strong class="stat-num">2</strong> products shipped</span>
+      </div>
+      <a class="hero-scroll-hint" href="#work" title="Scroll down to explore works" aria-label="Scroll down to explore works">
+        <span class="scroll-hint-label">scroll down</span>
+        <svg class="doodle scroll-hint-arrow" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+          <path d="M12 4v16m0 0l-5-5m5 5l5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
+    </div>
+  </header>
 
     <!-- DIVIDER -->
     <div class="nautical-divider">

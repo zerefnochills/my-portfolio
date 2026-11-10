@@ -2541,3 +2541,332 @@ header.site-header {
     display: block !important;
   }
 }
+
+/* ==========================================================
+   === HERO UI FIXES & REFINEMENTS (USER REQUEST 10) ===
+   ========================================================== */
+
+/* 1. Flat beige background paper-grain texture */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.038;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* 2. Navbar transparency - eradicate lighter rectangle behind header */
+header.site-header {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* 3. Widen content container on 1920px screen to ~1320px with sensible side padding */
+@media (min-width: 1600px) {
+  main {
+    max-width: 1320px !important;
+    padding: 0 clamp(20px, 3vw, 48px) !important;
+    margin: 0 auto !important;
+  }
+}
+
+@media (min-width: 1100px) and (max-width: 1599.98px) {
+  main {
+    max-width: 1160px !important;
+    padding: 0 clamp(16px, 2.5vw, 36px) !important;
+    margin: 0 auto !important;
+  }
+}
+
+/* 4. Hero full-viewport flex layout & centering */
+.hero {
+  min-height: calc(100vh - 105px) !important;
+  min-height: calc(100svh - 105px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: clamp(8px, 1.4vh, 18px) 0 clamp(8px, 1.4vh, 18px) !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+}
+
+/* Hero Content Row: Left Column & Wanted Poster */
+.hero-content-row {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  flex: 1 1 auto !important;
+  gap: clamp(24px, 4vw, 56px) !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* 5. Right-hand photo card on desktop with subtle overlap rotation */
+@media (min-width: 1025px) {
+  .wanted-poster-frame {
+    max-width: 338px !important;
+    transform: rotate(1.5deg) !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+  }
+
+  .wanted-poster-frame:hover {
+    transform: rotate(0deg) scale(1.02) !important;
+    box-shadow: 8px 14px 0 var(--shadow) !important;
+  }
+}
+
+/* On ultra-wide 1920px screens: expand poster card by 15-20% (up to 412px) with connected tilt */
+@media (min-width: 1600px) {
+  .wanted-poster-frame {
+    max-width: 412px !important;
+    transform: rotate(2deg) !important;
+  }
+}
+
+/* 6. Faint scattered background doodles behind content */
+.hero-bg-doodles {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+  overflow: hidden !important;
+}
+
+.hero-bg-doodle {
+  position: absolute !important;
+  stroke: var(--ink, #18181b) !important;
+  fill: none !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  opacity: 0.12 !important;
+  pointer-events: none !important;
+}
+
+.hero-bg-star-1 {
+  top: 14%;
+  left: 3%;
+  width: 32px;
+  height: 32px;
+  stroke-width: 2;
+  transform: rotate(15deg);
+}
+
+.hero-bg-squiggle-1 {
+  bottom: 22%;
+  left: 45%;
+  width: 58px;
+  height: 20px;
+  stroke-width: 2.2;
+}
+
+.hero-bg-arrow-1 {
+  top: 10%;
+  right: 18%;
+  width: 38px;
+  height: 38px;
+  stroke-width: 2;
+  transform: rotate(-10deg);
+}
+
+.hero-bg-star-2 {
+  bottom: 16%;
+  right: 6%;
+  width: 26px;
+  height: 26px;
+  stroke-width: 2;
+  transform: rotate(25deg);
+}
+
+/* 7. Deliberate hand-stamped coffee / tea mug ring */
+.coffee-stain {
+  border: clamp(4px, 0.6vw, 6px) solid rgba(180, 83, 9, 0.42) !important;
+  box-shadow: inset 0 0 10px rgba(180, 83, 9, 0.22), 0 0 4px rgba(180, 83, 9, 0.18) !important;
+  background: radial-gradient(circle, rgba(180, 83, 9, 0.04) 55%, rgba(180, 83, 9, 0.15) 100%) !important;
+  opacity: 0.9 !important;
+}
+
+/* 8. Poster text contrast (gold / cream on dark gradient for WCAG AAA) */
+.wanted-nameplate-title {
+  color: #fef08a !important;
+  letter-spacing: 0.28em !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95) !important;
+  font-weight: 700 !important;
+}
+
+.wanted-nameplate .wanted-name {
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 8px rgba(0, 0, 0, 0.85) !important;
+}
+
+.wanted-nameplate .wanted-character-subtitle {
+  color: #fde68a !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95) !important;
+}
+
+/* 9. Darkened tagline text & bold emphasis */
+.hero-tagline {
+  color: #27272a !important;
+}
+
+.hero-tagline strong {
+  color: #09090b !important;
+  font-weight: 700 !important;
+}
+
+/* 10. Downgraded secret stash CTA as subtle text link / badge */
+.captain-stash-wrap {
+  margin-top: 8px !important;
+}
+
+.treasure-chest-widget.subtle-stash-link {
+  background: transparent !important;
+  border: 1.5px dashed var(--ink-soft, #71717a) !important;
+  color: var(--ink-soft, #52525b) !important;
+  box-shadow: none !important;
+  font-size: 0.95rem !important;
+  padding: 6px 14px !important;
+  border-radius: 20px !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 7px !important;
+  font-family: var(--hand, cursive) !important;
+  transition: all 0.2s ease !important;
+}
+
+.treasure-chest-widget.subtle-stash-link:hover {
+  border-color: var(--accent, #dc2626) !important;
+  color: var(--accent, #dc2626) !important;
+  background: rgba(220, 38, 38, 0.05) !important;
+  transform: translateY(-1px) !important;
+}
+
+.stash-inline-strawhat {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 11. Compact Stats Row & Animated Scroll Hint */
+.hero-bottom-bar {
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-top: 14px !important;
+  padding-top: 10px !important;
+  border-top: 1.5px dashed rgba(24, 24, 27, 0.12) !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.hero-stats-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 12px !important;
+  flex-wrap: wrap !important;
+  font-family: var(--hand, 'Patrick Hand', cursive) !important;
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem) !important;
+  color: #3f3f46 !important;
+  margin: 0 !important;
+  max-width: none !important;
+}
+
+.hero-stat-pill {
+  display: inline-flex !important;
+  align-items: baseline !important;
+  gap: 5px !important;
+  padding: 3px 10px !important;
+  background: rgba(255, 255, 255, 0.6) !important;
+  border: 1.5px solid var(--ink, #18181b) !important;
+  border-radius: 12px 6px 14px 4px !important;
+  box-shadow: 2px 2px 0 var(--shadow, rgba(0, 0, 0, 0.08)) !important;
+}
+
+.hero-stat-pill .stat-num {
+  font-family: var(--sans, 'Space Grotesk', sans-serif) !important;
+  font-weight: 800 !important;
+  color: #b91c1c !important;
+}
+
+.hero-stat-sep {
+  color: #a1a1aa !important;
+  font-weight: bold !important;
+  user-select: none !important;
+}
+
+.hero-scroll-hint {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  font-family: var(--hand, 'Patrick Hand', cursive) !important;
+  font-size: 0.95rem !important;
+  color: var(--ink-soft, #52525b) !important;
+  text-decoration: none !important;
+  transition: color 0.2s ease !important;
+  animation: heroScrollBob 2s ease-in-out infinite !important;
+  margin-top: 2px !important;
+}
+
+.hero-scroll-hint:hover {
+  color: var(--accent, #dc2626) !important;
+}
+
+@keyframes heroScrollBob {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+/* 12. Responsive refinements across tablet & mobile viewports */
+@media (min-width: 681px) and (max-width: 1024px) {
+  .hero-content-row {
+    gap: clamp(16px, 3vw, 32px) !important;
+  }
+
+  .wanted-poster-frame {
+    max-width: 310px !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero {
+    min-height: auto !important;
+    padding-top: 14px !important;
+    padding-bottom: 40px !important;
+  }
+
+  .hero-content-row {
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 20px !important;
+  }
+
+  .hero-stats-row {
+    gap: 6px !important;
+    font-size: 0.9rem !important;
+  }
+
+  .hero-stat-sep {
+    display: none !important;
+  }
+
+  .wanted-poster-frame {
+    max-width: 280px !important;
+    transform: none !important;
+  }
+}
