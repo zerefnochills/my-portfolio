@@ -127,8 +127,8 @@ html.page-is-transitioning .page-curtain-badge {
   justify-content: center;
   flex-wrap: wrap;
   gap: 4px;
-  font-family: 'Space Grotesk', 'Chewy', 'Spicy Rice', system-ui, -apple-system, sans-serif;
-  font-size: clamp(2.2rem, 6vw, 4.2rem);
+  font-family: 'Chewy', 'Spicy Rice', 'Space Grotesk', system-ui, cursive, sans-serif;
+  font-size: clamp(2.4rem, 6.5vw, 4.4rem);
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -141,7 +141,7 @@ html.page-is-transitioning .page-curtain-badge {
    2) First half of word ("DOODLE") has black emphasis, second half ("STUDIO") has red emphasis */
 .trans-letter {
   display: inline-block;
-  font-family: 'Space Grotesk', 'Chewy', 'Spicy Rice', system-ui, -apple-system, sans-serif;
+  font-family: 'Chewy', 'Spicy Rice', 'Space Grotesk', system-ui, cursive, sans-serif;
   font-weight: 900;
   letter-spacing: 0.05em;
   animation: letterPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
@@ -185,10 +185,10 @@ html.page-is-transitioning .page-curtain-badge {
 }
 
 .page-curtain-sub {
-  font-family: var(--sans, 'Space Grotesk', monospace, sans-serif);
-  font-size: clamp(0.78rem, 1.9vw, 0.98rem);
+  font-family: var(--hand, 'Patrick Hand', 'Space Grotesk', cursive, sans-serif);
+  font-size: clamp(0.9rem, 2.2vw, 1.15rem);
   font-weight: 700;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #27272a;
   text-shadow: none;
