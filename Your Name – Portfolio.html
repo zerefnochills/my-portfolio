@@ -4296,7 +4296,7 @@
         <span class="ribbon-text" style="font-family:var(--sans);font-weight:800;letter-spacing:0.02em;">IRL &bull;
           Insights</span>
       </div>
-      <span class="ribbon-fold-hint" style="color:var(--ink-soft)">open paper ⮞</span>
+      <span class="ribbon-fold-hint">open paper ⮞</span>
     </div>
   </button>
 
@@ -4371,49 +4371,6 @@
           <li><a class="nav-link" href="#hall-of-fame" data-section="hall-of-fame"><span>fame</span></a></li>
           <li><a class="nav-link" href="#contact" data-section="contact"><span>contact</span></a></li>
         </ul>
-
-        <!-- Controls Bar -->
-        <div class="controls-bar" style="position:relative">
-          <!-- Sound FX toggle button -->
-          <button class="control-btn" id="soundToggle" type="button" title="Toggle sound effects">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-              <path id="soundWave1" d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-              <path id="soundWave2" d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
-            </svg>
-            <span id="soundLabel">sound</span>
-          </button>
-
-          <!-- Ink Theme Picker button -->
-          <button class="control-btn active" id="cursorToggle" type="button" title="Toggle Zoro & Enma Custom Cursor">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round">
-              <line x1="14.5" y1="17.5" x2="3" y2="6"></line>
-              <path d="M14 6l7 7"></path>
-              <path d="M19 1l4 4"></path>
-            </svg>
-            <span id="cursorLabel">zoro</span>
-          </button>
-
-          <button class="control-btn" id="themeBtn" type="button" title="Choose ink theme">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
-            </svg>
-            <span>ink</span>
-          </button>
-          <div class="theme-picker-menu" id="themeMenu">
-            <button class="theme-opt" data-theme-val="parchment" type="button"><span class="color-dot"
-                style="background:#dc2626"></span> Crimson White</button>
-            <button class="theme-opt" data-theme-val="sepia" type="button"><span class="color-dot"
-                style="background:#ef4444"></span> Obsidian Red</button>
-            <button class="theme-opt" data-theme-val="botanical" type="button"><span class="color-dot"
-                style="background:#b91c1c"></span> Manga Noir</button>
-            <button class="theme-opt" data-theme-val="blueprint" type="button"><span class="color-dot"
-                style="background:#f43f5e"></span> Bloodline Dark</button>
-          </div>
-        </div>
       </nav>
     </header>
 
@@ -4542,27 +4499,33 @@
             alt="One Piece Wanted Bounty Poster - Deepak Pandey" class="wanted-poster-image wanted-img"
             style="display:block;" />
 
-          <!-- Interactive name and bounty overlay -->
-          <div class="wanted-overlay-content">
-            <div class="wanted-character-box">
-              <div class="wanted-character-title">CAPTAIN</div>
+          <!-- Authentic Character Photo Cutout Window -->
+          <div class="wanted-portrait-cutout" id="wantedPortraitCutout">
+            <img id="wantedPortraitImg" src="images/deepak-wanted.jpg" alt="Deepak Pandey Portrait" class="wanted-portrait-img" />
+            <div class="wanted-nameplate">
+              <div class="wanted-nameplate-title">CAPTAIN</div>
               <div class="wanted-name" id="wantedPosterName">DEEPAK PANDEY</div>
               <div class="wanted-character-subtitle">“SOFTWARE CRAFTSMAN”</div>
             </div>
-            <div class="wanted-bounty-row" id="wantedBountyRow" style="cursor:pointer"
-              title="Click to raise bounty! +100M ฿">
-              <span class="berry-symbol">฿</span>
-              <span class="bounty-amount" id="wantedPosterBounty">3,000,000,000</span>
-              <span class="bounty-dash">-</span>
-            </div>
-            <span class="marine-stamp" id="marineStampToggle" title="World Government Marine Seal (Click to inspect!)"
-              style="display:none; cursor:pointer">
-              <svg viewBox="0 0 44 26" width="30" height="18" class="doodle" aria-hidden="true">
-                <path d="M3 14 Q12 4 22 14 Q32 4 41 14" stroke-width="2" />
-                <path d="M22 14 L22 23 M17 21 L27 21" stroke-width="1.8" />
-              </svg>
-            </span>
           </div>
+
+          <!-- Interactive Bounty Row Click Zone (positioned over the printed ฿ 3,000,000,000) -->
+          <div class="wanted-bounty-row" id="wantedBountyRow" style="cursor:pointer"
+            title="Click to raise bounty! +100M ฿" role="button" tabindex="0"
+            aria-label="Click to raise bounty">
+            <span class="berry-symbol">฿</span>
+            <span class="bounty-amount" id="wantedPosterBounty">3,000,000,000</span>
+            <span class="bounty-dash">-</span>
+          </div>
+
+          <!-- Marine Seal Inspection Stamp -->
+          <span class="marine-stamp" id="marineStampToggle" title="World Government Marine Seal (Click to inspect!)"
+            style="display:none; cursor:pointer">
+            <svg viewBox="0 0 44 26" width="30" height="18" class="doodle" aria-hidden="true">
+              <path d="M3 14 Q12 4 22 14 Q32 4 41 14" stroke-width="2" />
+              <path d="M22 14 L22 23 M17 21 L27 21" stroke-width="1.8" />
+            </svg>
+          </span>
 
           <!-- Default Hand-Drawn One Piece Pirate Silhouette Placeholder -->
           <div id="wantedPlaceholder" class="wanted-placeholder" style="display:none;"></div>
@@ -6469,19 +6432,34 @@
       const wantedPhotoContainer = document.getElementById("wantedPhotoContainer");
       const wantedPhotoInput = document.getElementById("wantedPhotoInput");
       const wantedPhotoImg = document.getElementById("wantedPhotoImg");
+      const wantedPortraitImg = document.getElementById("wantedPortraitImg");
       const wantedPlaceholder = document.getElementById("wantedPlaceholder");
       const photoChangeBadge = document.getElementById("photoChangeBadge");
 
       function setWantedPhoto(src) {
         if (!wantedPhotoImg || !wantedPlaceholder) return;
         if (src) {
-          wantedPhotoImg.src = src;
-          wantedPhotoImg.style.display = "block";
+          if (src.includes("media_1794201865931_238ddac4.jpg") || src.includes("wanted-poster-template.jpg")) {
+            wantedPhotoImg.src = src;
+            wantedPhotoImg.style.display = "block";
+            if (wantedPortraitImg) {
+              wantedPortraitImg.style.display = "block";
+              wantedPortraitImg.src = "images/deepak-wanted.jpg";
+            }
+          } else if (wantedPortraitImg) {
+            wantedPortraitImg.src = src;
+            wantedPortraitImg.style.display = "block";
+            wantedPhotoImg.style.display = "block";
+          } else {
+            wantedPhotoImg.src = src;
+            wantedPhotoImg.style.display = "block";
+          }
           wantedPlaceholder.style.display = "none";
           if (photoChangeBadge) photoChangeBadge.style.display = "block";
         } else {
           wantedPhotoImg.src = "";
           wantedPhotoImg.style.display = "none";
+          if (wantedPortraitImg) wantedPortraitImg.style.display = "none";
           wantedPlaceholder.style.display = "flex";
           if (photoChangeBadge) photoChangeBadge.style.display = "none";
         }
@@ -7003,6 +6981,7 @@
           e.stopPropagation();
           currentBountyNum += 100000000;
           bountyDisplay.textContent = currentBountyNum.toLocaleString();
+          bountyRow.classList.add("bounty-boosted");
           playCoinAudio();
 
           // Spawn floating badge
@@ -7667,6 +7646,7 @@
         treasureChestBtn.addEventListener("click", function (e) {
           currentBountyNum += 500000000;
           if (bountyDisplay) bountyDisplay.textContent = currentBountyNum.toLocaleString();
+          if (bountyRow) bountyRow.classList.add("bounty-boosted");
           playCoinAudio();
 
           if (treasureToast) {

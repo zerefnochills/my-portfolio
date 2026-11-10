@@ -138,73 +138,149 @@ div[id] {
 }
 
 /* ==========================================================
-   EDGE RIBBON BOOKMARKS (NON-COLLIDING PEEK TABS ARCHITECTURE)
+   EDGE RIBBON BOOKMARKS (CLEAN DOCKED TABS ARCHITECTURE)
    ========================================================== */
 .irl-ribbon-btn,
 .sketchbook-ribbon-btn {
   position: fixed !important;
   left: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  border-radius: 0 10px 10px 0 !important;
+  box-sizing: border-box !important;
   z-index: 85 !important;
-  transition: transform 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-    box-shadow 0.22s ease,
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 14px 8px 10px !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  border: 2px solid var(--ink, #18181b) !important;
+  border-left: none !important;
+  box-shadow: 3px 5px 0 var(--shadow) !important;
+  transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.2s ease,
     background-color 0.2s ease !important;
 }
 
-/* Wide Desktop (>= 1400px): Ribbons fit comfortably in the 140px outer margin gutter */
-@media (min-width: 1400px) {
+.irl-ribbon-btn {
+  background: #dc2626 !important;
+  color: #ffffff !important;
+}
+
+.sketchbook-ribbon-btn {
+  background: var(--paper-sticky, #fdfbf7) !important;
+  color: #18181b !important;
+}
+
+.irl-ribbon-btn .ribbon-content,
+.sketchbook-ribbon-btn .ribbon-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 1px !important;
+  overflow: hidden !important;
+}
+
+.irl-ribbon-btn .ribbon-text {
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif) !important;
+  font-weight: 800 !important;
+  font-size: 0.85rem !important;
+  letter-spacing: 0.02em !important;
+  color: #ffffff !important;
+  line-height: 1.15 !important;
+}
+
+.irl-ribbon-btn .ribbon-fold-hint {
+  font-family: var(--hand, 'Patrick Hand', cursive) !important;
+  font-size: 0.8rem !important;
+  color: rgba(255, 255, 255, 0.92) !important;
+  line-height: 1 !important;
+}
+
+.sketchbook-ribbon-btn .ribbon-text {
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif) !important;
+  font-weight: 800 !important;
+  font-size: 0.85rem !important;
+  letter-spacing: 0.02em !important;
+  color: #18181b !important;
+  line-height: 1.15 !important;
+}
+
+.sketchbook-ribbon-btn .ribbon-fold-hint {
+  font-family: var(--hand, 'Patrick Hand', cursive) !important;
+  font-size: 0.8rem !important;
+  color: #52525b !important;
+  line-height: 1 !important;
+}
+
+/* Wide Desktop (>= 1100px): Clean floating bookmark tabs in left gutter */
+@media (min-width: 1100px) {
   .irl-ribbon-btn {
-    top: calc(50% - 34px) !important;
+    top: calc(50% - 36px) !important;
     bottom: auto !important;
     transform: translateY(-50%) !important;
-    max-width: 125px !important;
   }
 
   .sketchbook-ribbon-btn {
-    top: calc(50% + 28px) !important;
+    top: calc(50% + 30px) !important;
     bottom: auto !important;
     transform: translateY(-50%) !important;
-    max-width: 125px !important;
   }
 
   .irl-ribbon-btn:hover,
   .irl-ribbon-btn:focus-visible {
     transform: translateY(-50%) translateX(6px) !important;
-    box-shadow: 4px 8px 0 var(--shadow) !important;
+    box-shadow: 5px 8px 0 var(--shadow) !important;
+    background: #ef4444 !important;
   }
 
   .sketchbook-ribbon-btn:hover,
   .sketchbook-ribbon-btn:focus-visible {
     transform: translateY(-50%) translateX(6px) !important;
-    box-shadow: 4px 8px 0 var(--shadow) !important;
+    box-shadow: 5px 8px 0 var(--shadow) !important;
+    background: #ffffff !important;
   }
 }
 
-/* Standard Desktop & Tablet (681px - 1399.98px):
-   Edge bookmark tabs peek 24px from left screen edge at rest, sliding out to full width on hover/focus */
-@media (max-width: 1399.98px) and (min-width: 681px) {
+/* Tablet & Mobile (< 1100px): Bottom-left docking to prevent collision with hero buttons */
+@media (max-width: 1099.98px) {
   .irl-ribbon-btn {
-    top: calc(50% - 34px) !important;
-    bottom: auto !important;
-    transform: translateY(-50%) translateX(calc(-100% + 24px)) !important;
+    top: auto !important;
+    bottom: 96px !important;
+    left: 0 !important;
+    transform: none !important;
+    padding: 7px 12px 7px 8px !important;
+    border-radius: 0 8px 8px 0 !important;
     box-shadow: 2px 4px 0 var(--shadow) !important;
+    z-index: 85 !important;
   }
 
   .sketchbook-ribbon-btn {
-    top: calc(50% + 28px) !important;
-    bottom: auto !important;
-    transform: translateY(-50%) translateX(calc(-100% + 24px)) !important;
+    top: auto !important;
+    bottom: 40px !important;
+    left: 0 !important;
+    transform: none !important;
+    padding: 7px 12px 7px 8px !important;
+    border-radius: 0 8px 8px 0 !important;
     box-shadow: 2px 4px 0 var(--shadow) !important;
+    z-index: 85 !important;
   }
 
   .irl-ribbon-btn:hover,
   .irl-ribbon-btn:focus-visible,
-  .irl-ribbon-btn:active,
+  .irl-ribbon-btn:active {
+    transform: translateX(4px) !important;
+    box-shadow: 3px 5px 0 var(--shadow) !important;
+  }
+
   .sketchbook-ribbon-btn:hover,
   .sketchbook-ribbon-btn:focus-visible,
   .sketchbook-ribbon-btn:active {
-    transform: translateY(-50%) translateX(0) !important;
-    box-shadow: 6px 10px 0 var(--shadow) !important;
-    z-index: 95 !important;
+    transform: translateX(4px) !important;
+    box-shadow: 3px 5px 0 var(--shadow) !important;
   }
 }
 
@@ -424,89 +500,132 @@ a.treasure-chest-widget .chest-icon {
   user-select: none;
 }
 
-.wanted-overlay-content {
+/* Authentic Character Photo Cutout Window */
+.wanted-portrait-cutout {
+  position: absolute;
+  top: 23.8%;
+  left: 14.1%;
+  width: 70.6%;
+  height: 50.4%;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #c29562;
+  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  pointer-events: auto;
+  z-index: 4;
+}
+
+.wanted-portrait-img {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
-  z-index: 5;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
 }
 
-.wanted-character-box {
-  position: absolute;
-  top: 24%;
-  left: 14%;
-  width: 72%;
-  height: 50%;
+/* Woodblock nameplate across lower edge of portrait cutout */
+.wanted-nameplate {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  background: linear-gradient(to top, rgba(14, 10, 6, 0.94) 0%, rgba(20, 15, 10, 0.78) 72%, transparent 100%);
+  padding: 16px 4px 6px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   pointer-events: none;
+  box-sizing: border-box;
 }
 
-.wanted-character-title {
+.wanted-nameplate-title {
   font-family: var(--badge), "Impact", sans-serif;
-  font-size: clamp(0.72rem, 2.1vw, 0.92rem);
-  letter-spacing: 0.26em;
-  color: #7c2d12;
-  margin-bottom: 2px;
+  font-size: clamp(0.58rem, 1.4vw, 0.72rem);
+  letter-spacing: 0.28em;
+  color: #f87171;
   font-weight: 700;
+  margin-bottom: 1px;
 }
 
-.wanted-name {
+.wanted-nameplate .wanted-name {
   font-family: var(--badge), "Impact", "Arial Black", sans-serif;
-  font-size: clamp(1.25rem, 3.8vw, 1.8rem);
-  letter-spacing: 0.1em;
+  font-size: clamp(1.05rem, 2.7vw, 1.42rem);
+  letter-spacing: 0.12em;
   font-weight: 800;
-  color: #261608;
+  color: #fffbeb;
   text-transform: uppercase;
   line-height: 1.1;
-  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.55);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 0 6px rgba(0, 0, 0, 0.85);
   pointer-events: auto;
   user-select: text;
 }
 
-.wanted-character-subtitle {
+.wanted-nameplate .wanted-character-subtitle {
   font-family: var(--hand), 'Patrick Hand', cursive;
-  font-size: clamp(0.85rem, 2.4vw, 1.05rem);
-  letter-spacing: 0.08em;
-  color: #553315;
-  margin-top: 4px;
+  font-size: clamp(0.68rem, 1.8vw, 0.85rem);
+  letter-spacing: 0.06em;
+  color: #fde68a;
+  margin-top: 1px;
   font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
 }
 
+/* Clickable Bounty Area (Over printed ฿ 3,000,000,000) */
 .wanted-bounty-row {
   position: absolute;
-  top: 77.2%;
+  top: 76.2%;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;
+  display: inline-flex;
   align-items: baseline;
   justify-content: center;
   gap: 3px;
+  cursor: pointer;
+  pointer-events: auto;
+  user-select: none;
+  background: transparent;
+  padding: 3px 14px;
+  border-radius: 4px;
+  white-space: nowrap;
+  box-shadow: none;
+  z-index: 6;
+  transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.15s ease;
+}
+
+.wanted-bounty-row .berry-symbol,
+.wanted-bounty-row .bounty-amount,
+.wanted-bounty-row .bounty-dash {
   font-family: var(--badge), "Impact", "Arial Black", sans-serif;
   font-weight: 700;
   font-size: clamp(1.15rem, 3.6vw, 1.6rem);
   letter-spacing: 0.06em;
   color: #5c1818;
-  cursor: pointer;
-  pointer-events: auto;
-  user-select: none;
-  background: rgba(239, 194, 131, 0.94);
-  padding: 1px 12px;
-  border-radius: 4px;
-  white-space: nowrap;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
-  transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.15s ease;
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
 
 .wanted-bounty-row:hover {
   transform: translateX(-50%) scale(1.05);
-  background: rgba(245, 205, 145, 0.98);
+}
+
+/* Revealed when bounty is boosted above initial printed value */
+.wanted-bounty-row.bounty-boosted {
+  background: rgba(239, 194, 131, 0.96);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(124, 45, 18, 0.6);
+}
+
+.wanted-bounty-row.bounty-boosted .berry-symbol,
+.wanted-bounty-row.bounty-boosted .bounty-amount,
+.wanted-bounty-row.bounty-boosted .bounty-dash {
+  opacity: 1;
 }
 
 /* Poster drops in once, after the loader leaves */
@@ -1776,10 +1895,10 @@ header.site-header {
   /* Responsive Navbar on Tablet (681px - 1024px) */
   nav.nav-island {
     display: flex !important;
-    flex-wrap: wrap !important;
+    flex-wrap: nowrap !important;
     align-items: center !important;
     justify-content: space-between !important;
-    gap: 8px 12px !important;
+    gap: 10px !important;
     padding: 8px 16px !important;
     max-width: min(960px, 100%) !important;
     width: 100% !important;
@@ -1787,33 +1906,18 @@ header.site-header {
   }
 
   .nav-brand-row {
-    flex: 1 1 auto !important;
+    flex: 0 0 auto !important;
     min-width: 0 !important;
   }
 
-  .controls-bar {
-    order: 2 !important;
-    margin-left: auto !important;
-    flex: 0 0 auto !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 6px !important;
-  }
-
   .nav-links-dock {
-    order: 3 !important;
-    width: 100% !important;
+    width: auto !important;
     display: flex !important;
-    justify-content: center !important;
+    justify-content: flex-end !important;
     flex-wrap: nowrap !important;
     gap: 6px !important;
     padding: 2px 0 !important;
-    overflow-x: auto !important;
-    scrollbar-width: none !important;
-  }
-
-  .nav-links-dock::-webkit-scrollbar {
-    display: none !important;
+    overflow: visible !important;
   }
 
   .nav-link {
@@ -1919,19 +2023,6 @@ header.site-header {
     height: 24px !important;
   }
 
-  .controls-bar {
-    flex: 0 0 auto;
-    margin-left: auto;
-    display: flex;
-    gap: 4px;
-  }
-
-  .control-btn {
-    padding: 4px 7px;
-    font-size: 0.8rem;
-    min-height: 32px;
-  }
-
   /* Mobile Links Dock - All 6 links fit across row 2 without cutoffs */
   .nav-links-dock {
     order: 3;
@@ -1961,13 +2052,13 @@ header.site-header {
     text-align: center;
   }
 
-  /* Edge Ribbon Bookmarks - Tucked edge peek tabs at bottom left (<= 18px peek) to eliminate wanted poster & hero collision */
+  /* Edge Ribbon Bookmarks - Clean mobile bottom-left docking without overflow */
   .irl-ribbon-btn {
     top: auto !important;
-    bottom: 72px !important;
+    bottom: 90px !important;
     left: 0 !important;
-    transform: translateX(calc(-100% + 18px)) !important;
-    padding: 6px 10px 6px 6px !important;
+    transform: none !important;
+    padding: 6px 12px 6px 8px !important;
     border-radius: 0 8px 8px 0 !important;
     box-shadow: 2px 3px 0 var(--shadow) !important;
     z-index: 80 !important;
@@ -1975,10 +2066,10 @@ header.site-header {
 
   .sketchbook-ribbon-btn {
     top: auto !important;
-    bottom: 24px !important;
+    bottom: 34px !important;
     left: 0 !important;
-    transform: translateX(calc(-100% + 18px)) !important;
-    padding: 6px 10px 6px 6px !important;
+    transform: none !important;
+    padding: 6px 12px 6px 8px !important;
     border-radius: 0 8px 8px 0 !important;
     box-shadow: 2px 3px 0 var(--shadow) !important;
     z-index: 80 !important;
@@ -1986,13 +2077,16 @@ header.site-header {
 
   .irl-ribbon-btn:hover,
   .irl-ribbon-btn:focus-visible,
-  .irl-ribbon-btn:active,
+  .irl-ribbon-btn:active {
+    transform: translateX(4px) !important;
+    box-shadow: 3px 5px 0 var(--shadow) !important;
+  }
+
   .sketchbook-ribbon-btn:hover,
   .sketchbook-ribbon-btn:focus-visible,
   .sketchbook-ribbon-btn:active {
-    transform: translateX(0) !important;
-    box-shadow: 4px 6px 0 var(--shadow) !important;
-    z-index: 95 !important;
+    transform: translateX(4px) !important;
+    box-shadow: 3px 5px 0 var(--shadow) !important;
   }
 
   /* Hero Section Mobile Proportions - Centered & Symmetrical */
