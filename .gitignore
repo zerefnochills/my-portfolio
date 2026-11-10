@@ -1,6 +1,8 @@
 # Dependencies
 node_modules/
 package-lock.json
+.vercel/
+_vercel/
 
 # Test outputs & temporary captures
 test_results.json

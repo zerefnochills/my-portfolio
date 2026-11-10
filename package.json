@@ -10,6 +10,9 @@
     "test:tier3": "node tests/e2e/runner.js --tier=3",
     "test:tier4": "node tests/e2e/runner.js --tier=4"
   },
+  "dependencies": {
+    "@vercel/analytics": "^1.4.1"
+  },
   "keywords": [
     "portfolio",
     "one-piece",

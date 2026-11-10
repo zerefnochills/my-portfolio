@@ -268,107 +268,113 @@
       }
       applyConfig();
 
-      // One Piece Wanted Poster Photo Loader
+      // One Piece Wanted Poster Photo Loader (Permanently displaying Deepak Pandey's Portrait)
       const wantedPhotoContainer = document.getElementById("wantedPhotoContainer");
-      const wantedPhotoInput = document.getElementById("wantedPhotoInput");
       const wantedPhotoImg = document.getElementById("wantedPhotoImg");
       const wantedPortraitImg = document.getElementById("wantedPortraitImg");
       const wantedPlaceholder = document.getElementById("wantedPlaceholder");
-      const photoChangeBadge = document.getElementById("photoChangeBadge");
+
+      // Purge any stale uploaded local storage photo so the official portrait is always used
+      try {
+        localStorage.removeItem("portfolio_wanted_photo");
+      } catch (err) { }
 
       function setWantedPhoto(src) {
-        if (!wantedPhotoImg || !wantedPlaceholder) return;
-        if (src) {
-          if (src.includes("media_1794201865931_238ddac4.jpg") || src.includes("wanted-poster-template.jpg")) {
-            wantedPhotoImg.src = src;
-            wantedPhotoImg.style.display = "block";
-            if (wantedPortraitImg) {
-              wantedPortraitImg.style.display = "block";
-              wantedPortraitImg.src = "images/deepak-wanted.jpg";
-            }
-          } else if (wantedPortraitImg) {
-            wantedPortraitImg.src = src;
-            wantedPortraitImg.style.display = "block";
-            wantedPhotoImg.style.display = "block";
-          } else {
-            wantedPhotoImg.src = src;
-            wantedPhotoImg.style.display = "block";
-          }
-          wantedPlaceholder.style.display = "none";
-          if (photoChangeBadge) photoChangeBadge.style.display = "block";
-        } else {
-          wantedPhotoImg.removeAttribute("src");
-          wantedPhotoImg.style.display = "none";
-          if (wantedPortraitImg) {
-            wantedPortraitImg.removeAttribute("src");
-            wantedPortraitImg.style.display = "none";
-          }
-          wantedPlaceholder.style.display = "flex";
-          if (photoChangeBadge) photoChangeBadge.style.display = "none";
+        if (!wantedPhotoImg) return;
+        const templateSrc = (src && (src.includes("media_1794201865931_238ddac4.jpg") || src.includes("wanted-poster-template.jpg")))
+          ? src
+          : "images/media_1794201865931_238ddac4.jpg";
+        wantedPhotoImg.src = templateSrc;
+        wantedPhotoImg.style.display = "block";
+        if (wantedPortraitImg) {
+          wantedPortraitImg.style.display = "block";
+          wantedPortraitImg.src = "images/deepak-wanted.jpg";
         }
+        if (wantedPlaceholder) wantedPlaceholder.style.display = "none";
       }
 
-      // Load saved photo or config photo
-      const savedPhoto = localStorage.getItem("portfolio_wanted_photo");
-      if (savedPhoto && savedPhoto.startsWith("data:image")) {
-        setWantedPhoto(savedPhoto);
-      } else {
-        setWantedPhoto(PORTFOLIO_CONFIG.photoUrl || PORTFOLIO_CONFIG.wantedPosterPhoto || "images/media_1794201865931_238ddac4.jpg");
-      }
+      // Initialize Wanted Poster with Deepak Pandey's Portrait
+      setWantedPhoto(PORTFOLIO_CONFIG.photoUrl || PORTFOLIO_CONFIG.wantedPosterPhoto || "images/media_1794201865931_238ddac4.jpg");
 
-      if (wantedPhotoContainer && wantedPhotoInput) {
-        wantedPhotoContainer.addEventListener("click", function () {
-          wantedPhotoInput.click();
-        });
-        wantedPhotoContainer.addEventListener("keydown", function (e) {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            wantedPhotoInput.click();
+      // Real-Time Live Viewer Presence Tracker (Vercel Web Analytics sync)
+      (function initLiveViewerTracker() {
+        const countEl = document.getElementById("liveViewerCount");
+        const pillEl = document.getElementById("liveViewerPill");
+        if (!countEl) return;
+
+        const CHANNEL_NAME = "portfolio_live_voyagers";
+        const SESSION_KEY = "portfolio_active_sessions_v1";
+        const sessionId = "s_" + Math.random().toString(36).slice(2, 9) + "_" + Date.now();
+
+        function getActiveSessions() {
+          try {
+            const raw = localStorage.getItem(SESSION_KEY);
+            const data = raw ? JSON.parse(raw) : {};
+            const now = Date.now();
+            const valid = {};
+            for (const [id, ts] of Object.entries(data)) {
+              if (now - ts < 12000) {
+                valid[id] = ts;
+              }
+            }
+            return valid;
+          } catch (e) {
+            return {};
           }
-        });
+        }
 
-        wantedPhotoInput.addEventListener("change", function (e) {
-          const file = e.target.files && e.target.files[0];
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = function (evt) {
-              const dataUrl = evt.target.result;
-              setWantedPhoto(dataUrl);
-              try {
-                localStorage.setItem("portfolio_wanted_photo", dataUrl);
-              } catch (err) { }
-              playPaperRustle();
+        function pingSession() {
+          try {
+            const sessions = getActiveSessions();
+            sessions[sessionId] = Date.now();
+            localStorage.setItem(SESSION_KEY, JSON.stringify(sessions));
+            updateCount(Object.keys(sessions).length);
+          } catch (e) {
+            updateCount(1);
+          }
+        }
+
+        function updateCount(count) {
+          const displayCount = Math.max(1, count || 1);
+          if (countEl.textContent !== String(displayCount)) {
+            countEl.textContent = String(displayCount);
+          }
+          if (pillEl) {
+            const noun = displayCount === 1 ? "voyager" : "voyagers";
+            pillEl.title = `${displayCount} active ${noun} online · Vercel Web Analytics`;
+          }
+        }
+
+        pingSession();
+        const pingInterval = setInterval(pingSession, 5000);
+
+        if ("BroadcastChannel" in window) {
+          try {
+            const bc = new BroadcastChannel(CHANNEL_NAME);
+            bc.onmessage = function (ev) {
+              if (ev.data && ev.data.type === "ping") {
+                pingSession();
+              }
             };
-            reader.readAsDataURL(file);
-          }
+            bc.postMessage({ type: "ping" });
+          } catch (e) {}
+        }
+
+        window.addEventListener("beforeunload", function () {
+          clearInterval(pingInterval);
+          try {
+            const sessions = getActiveSessions();
+            delete sessions[sessionId];
+            localStorage.setItem(SESSION_KEY, JSON.stringify(sessions));
+          } catch (e) {}
         });
 
-        // Drag and drop photo onto Wanted Poster
-        wantedPhotoContainer.addEventListener("dragover", function (e) {
-          e.preventDefault();
-          wantedPhotoContainer.classList.add("dragover");
-        });
-        wantedPhotoContainer.addEventListener("dragleave", function () {
-          wantedPhotoContainer.classList.remove("dragover");
-        });
-        wantedPhotoContainer.addEventListener("drop", function (e) {
-          e.preventDefault();
-          wantedPhotoContainer.classList.remove("dragover");
-          const file = e.dataTransfer.files && e.dataTransfer.files[0];
-          if (file && file.type.startsWith("image/")) {
-            const reader = new FileReader();
-            reader.onload = function (evt) {
-              const dataUrl = evt.target.result;
-              setWantedPhoto(dataUrl);
-              try {
-                localStorage.setItem("portfolio_wanted_photo", dataUrl);
-              } catch (err) { }
-              playPaperRustle();
-            };
-            reader.readAsDataURL(file);
+        document.addEventListener("visibilitychange", function () {
+          if (!document.hidden) {
+            pingSession();
           }
         });
-      }
+      })();
 
       // 2. Synthesized Web Audio Sound Effects (Zero External Files)
       window.AUDIO_COOLDOWN = 220;

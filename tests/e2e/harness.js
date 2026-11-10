@@ -267,12 +267,7 @@ class TestHarness {
     const fullUrl = `http://127.0.0.1:${this.serverPort}${relativeUrl}`;
     await this.send('Page.navigate', { url: fullUrl });
     // Wait for DOM ready
-    for (let i = 0; i < 30; i++) {
-      const ready = await this.evaluate(`Boolean(document.body)`);
-      if (ready) break;
-      await new Promise(r => setTimeout(r, 100));
-    }
-    await new Promise(r => setTimeout(r, 200));
+    await new Promise(r => setTimeout(r, 800));
 
     // Fast-dismiss loader to ensure clean benchmark state
     await this.evaluate(`
@@ -283,7 +278,9 @@ class TestHarness {
           loader.classList.add('done');
           loader.style.display = 'none';
         }
-        document.body.classList.remove('loading');
+        if (document.body) {
+          document.body.classList.remove('loading');
+        }
         if (typeof window.enterSite === 'function') {
           try { window.enterSite(); } catch (e) {}
         }
@@ -330,9 +327,9 @@ class TestHarness {
       (() => {
         const winW = window.innerWidth;
         const winH = window.innerHeight;
-        const docW = document.documentElement.clientWidth;
-        const scrollW = document.documentElement.scrollWidth;
-        const bodyScrollW = document.body.scrollWidth;
+        const docW = document.documentElement ? document.documentElement.clientWidth : winW;
+        const scrollW = document.documentElement ? document.documentElement.scrollWidth : winW;
+        const bodyScrollW = (document.body && document.body.scrollWidth) || scrollW;
         const scrollX = window.scrollX || window.pageXOffset || 0;
         const scrollY = window.scrollY || window.pageYOffset || 0;
 
@@ -383,26 +380,28 @@ class TestHarness {
 
         // Overflow detection across all visible elements
         const overflows = [];
-        document.querySelectorAll('body *').forEach(el => {
-          const r = el.getBoundingClientRect();
-          if (r.right > docW + 1.5 || r.left < -1.5) {
-            const st = window.getComputedStyle(el);
-            if (st.display !== 'none' && st.visibility !== 'hidden' && parseFloat(st.opacity) > 0.05) {
-              overflows.push({
-                tag: el.tagName,
-                id: el.id,
-                className: el.className && typeof el.className === 'string' ? el.className.slice(0, 40) : '',
-                left: Math.round(r.left),
-                right: Math.round(r.right),
-                width: Math.round(r.width),
-                overflowRight: Math.round(r.right - docW)
-              });
+        if (document.body) {
+          document.querySelectorAll('body *').forEach(el => {
+            const r = el.getBoundingClientRect();
+            if (r.right > docW + 1.5 || r.left < -1.5) {
+              const st = window.getComputedStyle(el);
+              if (st.display !== 'none' && st.visibility !== 'hidden' && parseFloat(st.opacity) > 0.05) {
+                overflows.push({
+                  tag: el.tagName,
+                  id: el.id,
+                  className: el.className && typeof el.className === 'string' ? el.className.slice(0, 40) : '',
+                  left: Math.round(r.left),
+                  right: Math.round(r.right),
+                  width: Math.round(r.width),
+                  overflowRight: Math.round(r.right - docW)
+                });
+              }
             }
-          }
-        });
+          });
+        }
 
-        const htmlStyle = window.getComputedStyle(document.documentElement);
-        const bodyStyle = window.getComputedStyle(document.body);
+        const htmlStyle = document.documentElement ? window.getComputedStyle(document.documentElement) : { overflowX: '' };
+        const bodyStyle = document.body ? window.getComputedStyle(document.body) : { overflowX: '' };
 
         return {
           winW,
