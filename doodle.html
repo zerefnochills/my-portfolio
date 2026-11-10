@@ -9,7 +9,7 @@
 <title>The Digital Sketchbook Studio – Draw &amp; Doodle</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Spicy+Rice&family=Mrs+Saint+Delafield&family=Patrick+Hand&family=Caveat:wght@600&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Spicy+Rice&family=Patrick+Hand&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/page-transition.css">
 <script>
   if (sessionStorage.getItem('page_transition_state')) {
@@ -84,11 +84,11 @@
 }
 
 :root {
-  --font-spicy: 'Spicy Rice', cursive, sans-serif;
-  --font-chewy: 'Chewy', 'Patrick Hand', cursive, sans-serif;
-  --script: "Mrs Saint Delafield", cursive;
-  --hand: 'Chewy', "Patrick Hand", cursive;
-  --badge: 'Chewy', "Caveat", cursive;
+  --font-spicy: 'Spicy Rice', 'Space Grotesk', sans-serif;
+  --font-chewy: 'Chewy', 'Patrick Hand', sans-serif;
+  --script: 'Space Grotesk', 'Chewy', sans-serif;
+  --hand: 'Patrick Hand', 'Space Grotesk', sans-serif;
+  --badge: 'Chewy', 'Space Grotesk', sans-serif;
 }
 
 *, *::before, *::after {
@@ -180,8 +180,10 @@ header.studio-header {
   background: var(--paper);
 }
 .studio-title {
-  font-family: var(--script);
-  font-size: 2.4rem;
+  font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: 1.85rem;
   line-height: 1;
   color: var(--ink);
   margin: 0;
@@ -848,10 +850,10 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
   };
 
   const PALETTES = {
-    strawhat: ["#2d2a9c", "#dc2626", "#eab308", "#d97706", "#18181b", "#ffffff"],
+    strawhat: ["#2d2a9c", "#dc2626", "#dc2626", "#b91c1c", "#18181b", "#ffffff"],
     classic: ["#2d2a9c", "#442817", "#166534", "#991b1b", "#334155", "#000000"],
     marine: ["#0284c7", "#0f172a", "#38bdf8", "#475569", "#dc2626", "#f8fafc"],
-    botanical: ["#166534", "#4ade80", "#65a30d", "#78350f", "#b45309", "#fef08a"]
+    botanical: ["#166534", "#4ade80", "#65a30d", "#78350f", "#b45309", "#dc2626"]
   };
 
   // --- DOM REFS ---

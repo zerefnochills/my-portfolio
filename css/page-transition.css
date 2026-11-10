@@ -24,19 +24,19 @@ html.page-is-transitioning .page-curtain-transition {
   visibility: visible;
 }
 
-/* Grey themed panel (not black) with rich slate depth & One Piece crimson trim */
+/* White themed panel (sketchbook paper) with clean depth & One Piece crimson trim */
 .page-curtain-panel {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: #27272a;
+  background: #ffffff;
   background-image: 
-    radial-gradient(circle at 50% 45%, rgba(220, 38, 38, 0.12), transparent 65%),
-    linear-gradient(180deg, #1c1e24 0%, #2a2d36 50%, #1c1e24 100%);
+    radial-gradient(circle at 50% 45%, rgba(220, 38, 38, 0.06), transparent 65%),
+    linear-gradient(180deg, #ffffff 0%, #faf9f6 50%, #f4f2eb 100%);
   border-bottom: 4px solid #dc2626;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.65);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.14);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,7 +44,7 @@ html.page-is-transitioning .page-curtain-transition {
   will-change: transform;
 }
 
-/* Pre-transition immediate coverage from frame 0 (prevents white canvas/DOM flash) */
+/* Pre-transition immediate coverage from frame 0 (prevents canvas/DOM flash) */
 html.page-is-transitioning .page-curtain-panel {
   transform: translateY(0%) !important;
   transition: none !important;
@@ -102,21 +102,21 @@ html.page-is-transitioning .page-curtain-badge {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(24, 24, 27, 0.85);
+  background: #ffffff;
   border: 2.5px solid #dc2626;
   border-radius: 18px;
-  box-shadow: 0 0 28px rgba(220, 38, 38, 0.4), inset 0 0 12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 20px rgba(220, 38, 38, 0.22), 3px 3px 0 #18181b;
   animation: badgeIconPulse 1.8s ease-in-out infinite alternate;
 }
 
 @keyframes badgeIconPulse {
   0% {
     transform: translateY(0) scale(1);
-    box-shadow: 0 0 18px rgba(220, 38, 38, 0.3);
+    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.2), 3px 3px 0 #18181b;
   }
   100% {
     transform: translateY(-4px) scale(1.06);
-    box-shadow: 0 0 36px rgba(220, 38, 38, 0.6);
+    box-shadow: 0 8px 24px rgba(220, 38, 38, 0.35), 4px 4px 0 #18181b;
   }
 }
 
@@ -132,7 +132,7 @@ html.page-is-transitioning .page-curtain-badge {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   line-height: 1.1;
-  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.85);
+  text-shadow: none;
 }
 
 /* Half letter black, half red while loading:
@@ -148,12 +148,11 @@ html.page-is-transitioning .page-curtain-badge {
   background: linear-gradient(180deg, #09090b 48%, #dc2626 48%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.55)) drop-shadow(0 4px 16px rgba(0, 0, 0, 0.85));
-  -webkit-text-stroke: 0.5px rgba(255, 255, 255, 0.3);
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.12));
 }
 
 .trans-letter.half-black {
-  background: linear-gradient(180deg, #09090b 52%, #ef4444 52%);
+  background: linear-gradient(180deg, #09090b 52%, #dc2626 52%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -190,24 +189,28 @@ html.page-is-transitioning .page-curtain-badge {
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #f4f4f5;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
-  margin-top: 4px;
+  color: #27272a;
+  text-shadow: none;
+  margin-top: 6px;
 }
 
 .page-curtain-track {
   width: clamp(150px, 32vw, 260px);
-  height: 5px;
-  background: rgba(255, 255, 255, 0.15);
+  height: 6px;
+  background: rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 999px;
   overflow: hidden;
-  margin-top: 12px;
+  margin-top: 14px;
 }
 
 .page-curtain-bar {
   width: 0%;
   height: 100%;
   background: linear-gradient(90deg, #09090b, #dc2626, #ef4444);
+  border-radius: 999px;
+  animation: curtainProgress 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
   border-radius: 999px;
   animation: curtainProgress 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }

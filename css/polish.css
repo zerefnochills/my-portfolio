@@ -201,7 +201,7 @@ div[id] {
 }
 
 .irl-ribbon-btn .ribbon-fold-hint {
-  font-family: var(--hand, 'Patrick Hand', cursive) !important;
+  font-family: var(--hand, 'Patrick Hand', sans-serif) !important;
   font-size: 0.88rem !important;
   color: rgba(255, 255, 255, 0.95) !important;
   line-height: 1 !important;
@@ -218,7 +218,7 @@ div[id] {
 }
 
 .sketchbook-ribbon-btn .ribbon-fold-hint {
-  font-family: var(--hand, 'Patrick Hand', cursive) !important;
+  font-family: var(--hand, 'Patrick Hand', sans-serif) !important;
   font-size: 0.88rem !important;
   color: #52525b !important;
   line-height: 1 !important;
@@ -541,8 +541,8 @@ a.treasure-chest-widget:active {
 
 a.treasure-chest-widget .chest-icon {
   font-size: 1.2rem;
-  color: #fef08a !important;
-  text-shadow: 0 0 6px rgba(254, 240, 138, 0.6);
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.85);
   animation: chestBounce 2.6s infinite ease-in-out;
 }
 
@@ -551,7 +551,7 @@ a.treasure-chest-widget .chest-icon {
   bottom: -74px;
   right: 14px;
   max-width: 190px;
-  font-family: var(--hand), 'Patrick Hand', cursive;
+  font-family: var(--hand), 'Patrick Hand', sans-serif;
   transform: rotate(3deg);
 }
 
@@ -672,10 +672,10 @@ a.treasure-chest-widget .chest-icon {
 }
 
 .wanted-nameplate .wanted-character-subtitle {
-  font-family: var(--hand), 'Patrick Hand', cursive;
+  font-family: var(--hand), 'Patrick Hand', sans-serif;
   font-size: clamp(0.68rem, 1.8vw, 0.85rem);
   letter-spacing: 0.06em;
-  color: #fde68a;
+  color: #fee2e2;
   margin-top: 1px;
   font-weight: 600;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
@@ -1693,7 +1693,7 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
 }
 
 .voyage-chapter-badge.gold {
-  background: #b45309;
+  background: #dc2626;
   color: #ffffff;
 }
 
@@ -1715,9 +1715,9 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
 }
 
 .voyage-year-badge.gold {
-  background: #fef3c7;
-  color: #92400e;
-  border-color: #b45309;
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #dc2626;
 }
 
 .voyage-status-pill {
@@ -1745,9 +1745,9 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
 }
 
 .voyage-status-pill.future {
-  background: #fef9c3;
-  color: #854d0e;
-  border-color: #eab308;
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #dc2626;
   font-weight: 800;
 }
 
@@ -2812,12 +2812,12 @@ header.site-header {
   opacity: 0.9 !important;
 }
 
-/* 8. Poster text contrast (gold / cream on dark gradient for WCAG AAA) */
+/* 8. Poster text contrast (red / white on dark gradient for WCAG AAA) */
 .wanted-nameplate-title {
-  color: #fef08a !important;
+  color: #ef4444 !important;
   letter-spacing: 0.28em !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95) !important;
-  font-weight: 700 !important;
+  font-weight: 800 !important;
 }
 
 .wanted-nameplate .wanted-name {
@@ -2826,7 +2826,7 @@ header.site-header {
 }
 
 .wanted-nameplate .wanted-character-subtitle {
-  color: #fde68a !important;
+  color: #fee2e2 !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95) !important;
 }
 
@@ -2880,8 +2880,8 @@ header.site-header {
 
 .treasure-chest-widget .chest-icon {
   font-size: 1.25rem !important;
-  color: #fef08a !important;
-  text-shadow: 0 0 8px rgba(254, 240, 138, 0.7) !important;
+  color: #ffffff !important;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.9) !important;
 }
 
 .stash-inline-strawhat {
@@ -2909,7 +2909,7 @@ header.site-header {
   justify-content: center !important;
   gap: 12px !important;
   flex-wrap: wrap !important;
-  font-family: var(--hand, 'Patrick Hand', cursive) !important;
+  font-family: var(--hand, 'Patrick Hand', sans-serif) !important;
   font-size: clamp(0.95rem, 1.4vw, 1.15rem) !important;
   color: #3f3f46 !important;
   margin: 0 !important;
@@ -2943,7 +2943,7 @@ header.site-header {
   display: inline-flex !important;
   align-items: center !important;
   gap: 5px !important;
-  font-family: var(--hand, 'Patrick Hand', cursive) !important;
+  font-family: var(--hand, 'Patrick Hand', sans-serif) !important;
   font-size: 0.95rem !important;
   color: var(--ink-soft, #52525b) !important;
   text-decoration: none !important;

@@ -37,28 +37,28 @@
 
   const ICONS = {
     doodle: `
-      <svg viewBox="0 0 32 32" width="36" height="36" fill="none" stroke="#facc15" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <svg viewBox="0 0 32 32" width="36" height="36" fill="none" stroke="#dc2626" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M26 4 C24 10 16 16 6 26" />
         <path d="M26 4 C18 4 12 12 10 20" stroke-width="2" />
-        <path d="M6 26 L10 27 L11 23 Z" fill="#facc15" />
+        <path d="M6 26 L10 27 L11 23 Z" fill="#dc2626" />
         <circle cx="25" cy="5" r="1.8" fill="#ef4444" />
-        <path d="M19 13 L22 10" stroke="#38bdf8" stroke-width="2" />
+        <path d="M19 13 L22 10" stroke="#09090b" stroke-width="2" />
       </svg>`,
     ship: `
-      <svg viewBox="0 0 32 32" width="36" height="36" fill="none" stroke="#facc15" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M4 22 C10 22 14 26 28 22 C26 27 18 29 4 27 Z" fill="#78350f" stroke="#facc15" />
-        <path d="M16 4 V22" stroke="#facc15" stroke-width="2.4" />
-        <path d="M16 6 C21 8 23 14 23 16 H16 Z" fill="#ffffff" stroke="#facc15" />
-        <path d="M16 8 C11 9 9 15 9 17 H16 Z" fill="#ffffff" stroke="#facc15" />
-        <circle cx="27" cy="18" r="3" fill="#f59e0b" stroke="#facc15" />
+      <svg viewBox="0 0 32 32" width="36" height="36" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 22 C10 22 14 26 28 22 C26 27 18 29 4 27 Z" fill="#78350f" stroke="#dc2626" />
+        <path d="M16 4 V22" stroke="#dc2626" stroke-width="2.4" />
+        <path d="M16 6 C21 8 23 14 23 16 H16 Z" fill="#ffffff" stroke="#dc2626" />
+        <path d="M16 8 C11 9 9 15 9 17 H16 Z" fill="#ffffff" stroke="#dc2626" />
+        <circle cx="27" cy="18" r="3" fill="#dc2626" stroke="#09090b" />
       </svg>`,
     chest: `
-      <svg viewBox="0 0 32 32" width="36" height="36" fill="none" stroke="#facc15" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <svg viewBox="0 0 32 32" width="36" height="36" fill="none" stroke="#dc2626" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M4 14 C4 10 28 10 28 14 V26 C28 27.5 26.5 28 25 28 H7 C5.5 28 4 27.5 4 26 Z" fill="#854d0e" />
-        <path d="M4 14 H28" stroke="#facc15" stroke-width="2.4" />
-        <circle cx="16" cy="17" r="2.5" fill="#facc15" stroke="#78350f" stroke-width="1.5" />
-        <path d="M16 19.5 V22" stroke="#facc15" stroke-width="2" />
-        <path d="M11 6 L12 9 M21 6 L20 9" stroke="#facc15" stroke-width="2" />
+        <path d="M4 14 H28" stroke="#dc2626" stroke-width="2.4" />
+        <circle cx="16" cy="17" r="2.5" fill="#dc2626" stroke="#78350f" stroke-width="1.5" />
+        <path d="M16 19.5 V22" stroke="#dc2626" stroke-width="2" />
+        <path d="M11 6 L12 9 M21 6 L20 9" stroke="#dc2626" stroke-width="2" />
       </svg>`
   };
 
