@@ -12,9 +12,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Spicy+Rice&family=Patrick+Hand&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/page-transition.css">
 <script>
-  if (sessionStorage.getItem('page_transition_state')) {
-    document.documentElement.classList.add('page-is-transitioning');
-  }
+  (function () {
+    if (sessionStorage.getItem('page_transition_state')) {
+      document.documentElement.classList.add('page-is-transitioning');
+    }
+    var ua = navigator.userAgent || navigator.vendor || window.opera || '';
+    if (/Android/i.test(ua)) {
+      document.documentElement.classList.add('is-android');
+    }
+  })();
 </script>
 <style>
 /* LOCAL FONT FACES: Chewy & Spicy Rice */

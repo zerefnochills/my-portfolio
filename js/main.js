@@ -187,8 +187,9 @@
         });
       }
 
-      // Crimson Conqueror's Haki Slash effect on click
+      // Crimson Conqueror's Haki Slash effect on click (skip on touch devices / Android for optimal performance)
       window.addEventListener("pointerdown", function (e) {
+        if (e.pointerType === "touch" || e.pointerType === "pen" || document.documentElement.classList.contains("is-android")) return;
         if (!document.body || !document.body.classList || !document.body.classList.contains("zoro-cursor-active")) return;
 
         // Spawn subtle crimson Haki crescent slash
@@ -1430,23 +1431,14 @@
       renderAchievements("all");
       updatePreviewThumbs(getStoredPins());
 
-      // 11. Back to Top Button
+      // 11. Back to Top Button & Scroll Spy with rAF Debouncing
       const backToTop = document.getElementById("backToTop");
-      window.addEventListener("scroll", function () {
-        if (window.scrollY > 400) {
-          if (backToTop) backToTop.classList.add("visible");
-        } else {
-          if (backToTop) backToTop.classList.remove("visible");
-        }
-      }, { passive: true });
-
       if (backToTop) {
         backToTop.addEventListener("click", function () {
           window.scrollTo({ top: 0, behavior: "smooth" });
           playPaperRustle();
         });
       }
-
 
       // 12. Active Nav Link Scroll Spy
       const navSections = [
@@ -1479,7 +1471,25 @@
         });
       }
 
-      window.addEventListener("scroll", updateActiveNav, { passive: true });
+      let navScrollTicking = false;
+      function handleUnifiedScroll() {
+        if (!navScrollTicking) {
+          navScrollTicking = true;
+          requestAnimationFrame(function () {
+            navScrollTicking = false;
+            if (backToTop) {
+              if (window.scrollY > 400) {
+                backToTop.classList.add("visible");
+              } else {
+                backToTop.classList.remove("visible");
+              }
+            }
+            updateActiveNav();
+          });
+        }
+      }
+
+      window.addEventListener("scroll", handleUnifiedScroll, { passive: true });
       updateActiveNav();
 
 
@@ -1689,8 +1699,9 @@
           const jDocTop = Math.round(rect.top + scrollY);
           const relY = scrollY - jDocTop;
 
+          const isAndroid = document.documentElement.classList.contains("is-android");
           const isMobile = window.innerWidth <= 680;
-          const stepH = isMobile ? 460 : 560;
+          const stepH = isAndroid ? 380 : (isMobile ? 460 : 560);
 
           if (relY < stepH) return 1;
           if (relY < stepH * 2) return 2;
@@ -1698,7 +1709,7 @@
           return 4;
         }
 
-        // Calculate step from scroll position
+        // Calculate step from scroll position with rAF debouncing
         function onScrollJourney() {
           if (window.scrollY < 200) {
             clearWaypointLock();
@@ -1716,11 +1727,22 @@
           updateJourneyState(newStep);
         }
 
-        window.addEventListener("scroll", onScrollJourney, { passive: true });
-        window.addEventListener("resize", onScrollJourney, { passive: true });
-        window.addEventListener("wheel", () => { clearWaypointLock(); onScrollJourney(); }, { passive: true });
-        window.addEventListener("touchmove", () => { clearWaypointLock(); onScrollJourney(); }, { passive: true });
-        window.addEventListener("keydown", () => { clearWaypointLock(); onScrollJourney(); }, { passive: true });
+        let journeyScrollTicking = false;
+        function scheduleJourneyScroll() {
+          if (!journeyScrollTicking) {
+            journeyScrollTicking = true;
+            requestAnimationFrame(function () {
+              journeyScrollTicking = false;
+              onScrollJourney();
+            });
+          }
+        }
+
+        window.addEventListener("scroll", scheduleJourneyScroll, { passive: true });
+        window.addEventListener("resize", scheduleJourneyScroll, { passive: true });
+        window.addEventListener("wheel", () => { clearWaypointLock(); scheduleJourneyScroll(); }, { passive: true });
+        window.addEventListener("touchmove", () => { clearWaypointLock(); scheduleJourneyScroll(); }, { passive: true });
+        window.addEventListener("keydown", () => { clearWaypointLock(); scheduleJourneyScroll(); }, { passive: true });
         window.addEventListener("pointerdown", () => { clearWaypointLock(); }, { passive: true });
         if ("onscrollend" in window) {
           window.addEventListener("scrollend", clearWaypointLock, { passive: true });

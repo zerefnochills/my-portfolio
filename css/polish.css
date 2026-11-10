@@ -358,6 +358,7 @@ div[id] {
   color: var(--ink, #18181b) !important;
   min-height: 3.5em; /* Prevents vertical layout shift during typewriter loop */
   max-width: 580px;
+  contain: layout paint;
 }
 
 /* Character-by-Character Typewriter Animation with Spring Scale */
@@ -3007,7 +3008,13 @@ header.site-header {
    ZORO'S ENMA SWORD HAKI: CUSTOM TEXT SELECTION
    Matches the signature purple Conqueror's Haki flame aura of Zoro's Enma katana
    ========================================================================= */
-::selection,
+::selection {
+  background-color: #8b2fa8 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: none !important;
+}
+
 *::selection {
   background-color: #8b2fa8 !important;
   color: #ffffff !important;
@@ -3015,10 +3022,269 @@ header.site-header {
   text-shadow: none !important;
 }
 
-::-moz-selection,
+p::selection, span::selection, h1::selection, h2::selection, h3::selection, h4::selection, h5::selection, h6::selection, a::selection, div::selection, strong::selection, em::selection, b::selection, i::selection, code::selection, pre::selection, button::selection, input::selection, textarea::selection, label::selection {
+  background-color: #8b2fa8 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+::-moz-selection {
+  background-color: #8b2fa8 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: none !important;
+}
+
 *::-moz-selection {
   background-color: #8b2fa8 !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   text-shadow: none !important;
+}
+
+p::-moz-selection, span::-moz-selection, h1::-moz-selection, h2::-moz-selection, h3::-moz-selection, h4::-moz-selection, h5::-moz-selection, h6::-moz-selection, a::-moz-selection, div::-moz-selection, strong::-moz-selection, em::-moz-selection, b::-moz-selection, i::-moz-selection, code::-moz-selection, pre::-moz-selection, button::-moz-selection, input::-moz-selection, textarea::-moz-selection, label::-moz-selection {
+  background-color: #8b2fa8 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+/* =========================================================================
+   ANDROID MOBILE SPECIALIZATION & SMOOTH PERFORMANCE SUITE
+   Strictly scoped under html.is-android to guarantee Windows & Mac remain 100% unaltered.
+   Counteracts Android Chrome font inflation, optimizes high-DPI scaling,
+   eliminates touch & scroll latency, and enforces perfectly balanced component fit.
+   ========================================================================= */
+
+html.is-android {
+  -webkit-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
+  font-size: 14.5px !important;
+  scroll-behavior: smooth !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior-y: none;
+  touch-action: manipulation;
+}
+
+html.is-android body {
+  -webkit-text-size-adjust: 100% !important;
+  text-size-adjust: 100% !important;
+  font-size: 1rem !important;
+  touch-action: manipulation;
+}
+
+/* Touchscreens have no mouse cursor: eliminate cursor texture memory & hit-test overhead */
+html.is-android,
+html.is-android *,
+html.is-android body,
+html.is-android body * {
+  cursor: auto !important;
+}
+
+html.is-android a,
+html.is-android button,
+html.is-android [role="button"],
+html.is-android input,
+html.is-android textarea {
+  cursor: pointer !important;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(220, 38, 38, 0.15);
+}
+
+/* Hide desktop cursor mode toggle switch on Android */
+html.is-android #cursorToggle,
+html.is-android #cursorToggleBtn,
+html.is-android .cursor-mode-toggle {
+  display: none !important;
+}
+
+/* 1. Header & Navigation Dock on Android */
+html.is-android .site-header {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+}
+
+html.is-android .nav-links-dock {
+  padding: 4px 6px !important;
+  gap: 3px !important;
+}
+
+html.is-android .nav-links-dock .nav-link {
+  padding: 5px 8px !important;
+  font-size: 0.8rem !important;
+}
+
+html.is-android .site-logo-wrap {
+  padding: 4px 8px !important;
+  gap: 6px !important;
+}
+
+html.is-android #siteLogoName {
+  font-size: 0.88rem !important;
+}
+
+/* 2. Left Floating Ribbons (IRL & Doodle) on Android */
+html.is-android .irl-ribbon-btn,
+html.is-android .sketchbook-ribbon-btn {
+  max-width: 105px !important;
+  padding: 6px 10px 6px 6px !important;
+  font-size: 0.78rem !important;
+  animation: none !important;
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.16) !important;
+}
+
+/* 3. Hero Section Proportional Sizing on Android */
+html.is-android #heroName {
+  font-size: clamp(1.85rem, 7.5vw, 2.5rem) !important;
+  line-height: 1.15 !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+html.is-android .hero-tagline {
+  font-size: clamp(0.88rem, 3.2vw, 1.02rem) !important;
+  line-height: 1.48 !important;
+  min-height: 3.1em !important;
+  max-width: 100% !important;
+  contain: layout paint;
+}
+
+html.is-android .hero-cta-group {
+  gap: 8px !important;
+  margin-top: 14px !important;
+}
+
+html.is-android .hero-btn {
+  padding: 8px 14px !important;
+  font-size: 0.88rem !important;
+  min-height: 38px !important;
+}
+
+html.is-android a.treasure-chest-widget {
+  font-size: 0.86rem !important;
+  padding: 8px 12px !important;
+  max-width: 275px !important;
+  margin-top: 8px !important;
+}
+
+html.is-android .wanted-poster-frame {
+  max-width: min(225px, 66vw) !important;
+  margin: 0 auto !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18) !important;
+  filter: none !important;
+  transform: none !important;
+}
+
+html.is-android .hero-stats-row {
+  gap: 6px !important;
+  margin-top: 14px !important;
+}
+
+html.is-android .hero-stat-badge {
+  font-size: 0.78rem !important;
+  padding: 4px 10px !important;
+}
+
+/* 4. Disable heavy idle animations on Android to preserve battery and 60-120fps scrolling */
+html.is-android .runner-sprite,
+html.is-android .chopper-peeking-wrap img,
+html.is-android .chest-icon,
+html.is-android .treasure-chest-widget::before {
+  animation: none !important;
+}
+
+/* 5. Works / Projects Section on Android */
+html.is-android .section-title {
+  font-size: clamp(1.5rem, 5.5vw, 2rem) !important;
+}
+
+html.is-android .project-card {
+  padding: 16px 14px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08) !important;
+  transform: translateZ(0);
+}
+
+html.is-android .project-title {
+  font-size: 1.15rem !important;
+}
+
+html.is-android .project-desc {
+  font-size: 0.88rem !important;
+  line-height: 1.5 !important;
+}
+
+html.is-android .project-tags span {
+  font-size: 0.75rem !important;
+  padding: 3px 8px !important;
+}
+
+/* 6. Voyage Journey Section on Android */
+html.is-android .voyage-card {
+  padding: 16px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
+  transform: translateZ(0);
+}
+
+html.is-android .voyage-step {
+  min-height: 48vh !important;
+}
+
+html.is-android .waypoint-node {
+  padding: 5px 10px !important;
+  font-size: 0.78rem !important;
+}
+
+/* 7. Skills & Tech Stack on Android */
+html.is-android .skill-pill,
+html.is-android .tech-chip {
+  padding: 4px 9px !important;
+  font-size: 0.78rem !important;
+}
+
+/* 8. Logbook & Hall of Fame on Android */
+html.is-android .logbook-entry {
+  padding: 14px !important;
+}
+
+html.is-android .fame-card {
+  padding: 14px !important;
+  border-radius: 12px !important;
+}
+
+/* 9. Contact Section & Postcard on Android */
+html.is-android .postcard-frame {
+  max-width: calc(100vw - 28px) !important;
+  padding: 16px !important;
+}
+
+html.is-android .contact-form input,
+html.is-android .contact-form textarea {
+  font-size: 16px !important;
+}
+
+/* 10. Doodle Studio & Interactive Subpages on Android */
+html.is-android .doodle-canvas-wrap,
+html.is-android canvas#doodleCanvas {
+  touch-action: none !important;
+}
+
+html.is-android .doodle-toolbar {
+  padding: 6px 10px !important;
+  gap: 6px !important;
+}
+
+html.is-android .doodle-tool-btn {
+  padding: 6px 10px !important;
+  font-size: 0.82rem !important;
+}
+
+html.is-android .vault-grid {
+  gap: 14px !important;
+}
+
+html.is-android .stash-card {
+  padding: 16px 14px !important;
 }
