@@ -76,6 +76,24 @@ nav.nav-island {
   font-size: clamp(0.92rem, 1.05vw, 1.05rem);
   padding: 3px 8px;
   white-space: nowrap;
+  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.nav-links-dock .nav-link::after {
+  display: none !important;
+}
+
+.nav-links-dock .nav-link:hover,
+.nav-links-dock .nav-link:focus-visible {
+  background: var(--ink, #09090b) !important;
+  color: #ffffff !important;
+  border-color: var(--ink, #09090b) !important;
+}
+
+.nav-links-dock .nav-link.active {
+  background: var(--ink, #09090b) !important;
+  color: #ffffff !important;
+  border-color: var(--ink, #09090b) !important;
 }
 
 .controls-bar {
@@ -1516,10 +1534,13 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
   align-items: stretch;
   position: sticky;
   top: 220px;
-  opacity: 0.45;
-  transform: translateY(16px) scale(0.985);
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: translateY(24px) scale(0.985);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.35s ease,
+              opacity 0.3s ease,
+              visibility 0.3s ease,
               box-shadow 0.3s ease;
   will-change: transform, opacity;
 }
@@ -1555,17 +1576,24 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
 }
 
 /* Active & Stacked Card States */
-.voyage-milestone-card.is-stacked {
-  opacity: 1 !important;
-  transform: translateY(0) scale(1) !important;
-}
-
+.voyage-milestone-card.is-stacked,
 .voyage-milestone-card.is-revealed {
-  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  transform: translateY(0) scale(1) !important;
 }
 
 .voyage-milestone-card.is-active .voyage-card-body {
   box-shadow: 6px 8px 0 var(--ink, #09090b);
+}
+
+/* Hide non-active stacked card body content so only active card text is readable during scroll */
+.voyage-milestone-card.is-stacked:not(.is-active) .voyage-narrative,
+.voyage-milestone-card.is-stacked:not(.is-active) .voyage-highlights-box,
+.voyage-milestone-card.is-stacked:not(.is-active) .voyage-stack-row {
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 .voyage-milestone-card.is-hidden {
@@ -1643,7 +1671,7 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
 /* Card Body */
 .voyage-card-body {
   flex: 1;
-  background: var(--paper-card, #ffffff);
+  background: var(--paper-card, #ffffff) !important;
   border: 2.5px solid var(--ink, #09090b);
   border-radius: 10px;
   padding: 24px 22px;

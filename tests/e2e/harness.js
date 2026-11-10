@@ -267,7 +267,12 @@ class TestHarness {
     const fullUrl = `http://127.0.0.1:${this.serverPort}${relativeUrl}`;
     await this.send('Page.navigate', { url: fullUrl });
     // Wait for DOM ready
-    await new Promise(r => setTimeout(r, 800));
+    for (let i = 0; i < 30; i++) {
+      const ready = await this.evaluate(`Boolean(document.body)`);
+      if (ready) break;
+      await new Promise(r => setTimeout(r, 100));
+    }
+    await new Promise(r => setTimeout(r, 200));
 
     // Fast-dismiss loader to ensure clean benchmark state
     await this.evaluate(`

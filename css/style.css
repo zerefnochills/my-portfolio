@@ -3576,21 +3576,25 @@
       transition: transform 0.18s ease;
     }
 
-    .nav-link:hover {
-      background: var(--paper-card, #fff);
-      border-color: var(--ink);
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      background: var(--ink, #09090b);
+      color: #ffffff;
+      border-color: var(--ink, #09090b);
       transform: translateY(-2px);
-      box-shadow: 2px 2px 0 var(--ink);
+      box-shadow: 2px 2px 0 var(--ink, #09090b);
     }
 
-    .nav-link:hover .nav-icon {
+    .nav-link:hover .nav-icon,
+    .nav-link:focus-visible .nav-icon {
       transform: scale(1.2) rotate(4deg);
+      opacity: 1;
     }
 
     .nav-link.active {
-      background: var(--ink);
-      color: var(--paper);
-      border-color: var(--ink);
+      background: var(--ink, #09090b);
+      color: #ffffff;
+      border-color: var(--ink, #09090b);
       box-shadow: 2px 2px 0 var(--shadow);
     }
 
