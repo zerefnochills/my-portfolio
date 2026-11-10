@@ -6,7 +6,11 @@
   var root = document.documentElement;
   root.classList.add("js-polish");
 
-  function loaderGone() { return !document.getElementById("loader"); }
+  function loaderGone() {
+    var l = document.getElementById("loader");
+    if (!l) return true;
+    return l.classList.contains("done") || l.style.display === "none";
+  }
 
   /* 1. Headings fix.
      The original observer never fires on .write elements: they start with a
@@ -61,49 +65,115 @@
     initHeroTypewriter();
   }
 
-  /* 4. Hero Tagline Word-by-Word Typewriter Animation Loop */
+  /* 4. Hero Tagline Character-by-Character Scaling Typewriter Animation Loop */
   function initHeroTypewriter() {
     var textEl = document.getElementById("typewriterText");
+    var cursor = document.querySelector(".typewriter-cursor");
     if (!textEl) return;
 
-    var tokens = [
-      "Founder", "&", "Software", "Craftsman", "·",
-      "Crafting", "<strong>scalable</strong>", "web", "platforms,",
-      "digital", "systems,", "and", "<strong>creative code</strong>."
+    var words = [
+      { text: "Founder", bold: false },
+      { text: "&", bold: false },
+      { text: "Software", bold: false },
+      { text: "Craftsman", bold: false },
+      { text: "·", bold: false, pause: 180 },
+      { text: "Crafting", bold: false },
+      { text: "scalable", bold: true },
+      { text: "web", bold: false },
+      { text: "platforms,", bold: false, pause: 130 },
+      { text: "digital", bold: false },
+      { text: "systems,", bold: false, pause: 130 },
+      { text: "and", bold: false },
+      { text: "creative", bold: true },
+      { text: "code.", bold: true }
     ];
 
-    var idx = 0;
-    var deleting = false;
+    var charStack = [];
+    var wordIdx = 0;
+    var charIdx = 0;
+    var currentWordEl = null;
 
-    function step() {
-      if (!deleting) {
-        idx++;
-        textEl.innerHTML = tokens.slice(0, idx).join(" ");
-        if (idx >= tokens.length) {
-          // Finished full sentence: hold for 2.4s so user can read it
-          setTimeout(function () {
-            deleting = true;
-            step();
-          }, 2400);
-          return;
+    // Clear initial static content before starting typewriter loop
+    textEl.innerHTML = "";
+
+    function typeNext() {
+      if (wordIdx >= words.length) {
+        // Sentence fully typed: stop cursor blink suppression, hold for 2.6s for comfortable reading
+        if (cursor) cursor.classList.remove("typing");
+        setTimeout(startDelete, 2600);
+        return;
+      }
+
+      var w = words[wordIdx];
+
+      // If at start of a word, create word container (preserves clean word wrap)
+      if (charIdx === 0) {
+        currentWordEl = document.createElement(w.bold ? "strong" : "span");
+        currentWordEl.className = "tw-word" + (w.bold ? " tw-bold" : "");
+        textEl.appendChild(currentWordEl);
+        if (cursor) cursor.classList.add("typing");
+      }
+
+      // Create individual character span with scale animation
+      var char = w.text[charIdx];
+      var charSpan = document.createElement("span");
+      charSpan.className = "tw-char";
+      charSpan.textContent = char;
+      currentWordEl.appendChild(charSpan);
+      charStack.push({ type: "char", el: charSpan, parent: currentWordEl });
+
+      charIdx++;
+      if (charIdx >= w.text.length) {
+        // Word complete
+        wordIdx++;
+        charIdx = 0;
+        if (wordIdx < words.length) {
+          var space = document.createTextNode(" ");
+          textEl.appendChild(space);
+          charStack.push({ type: "space", el: space });
         }
-        setTimeout(step, 190);
+        var delay = w.pause || 36;
+        setTimeout(typeNext, delay);
       } else {
-        // Disappear and loop
-        idx -= 2;
-        if (idx <= 0) {
-          idx = 0;
-          deleting = false;
-          textEl.innerHTML = "";
-          setTimeout(step, 650); // brief pause before looping again
-          return;
-        }
-        textEl.innerHTML = tokens.slice(0, idx).join(" ");
-        setTimeout(step, 70);
+        setTimeout(typeNext, 34);
       }
     }
 
-    setTimeout(step, 500);
+    function startDelete() {
+      if (cursor) cursor.classList.add("typing");
+
+      function deleteNext() {
+        if (charStack.length === 0) {
+          textEl.innerHTML = "";
+          wordIdx = 0;
+          charIdx = 0;
+          currentWordEl = null;
+          if (cursor) cursor.classList.remove("typing");
+          setTimeout(typeNext, 450);
+          return;
+        }
+
+        var item = charStack.pop();
+        if (item.type === "char") {
+          item.el.classList.add("tw-out");
+          setTimeout(function () {
+            if (item.el && item.el.parentNode) item.el.remove();
+            if (item.parent && item.parent.children.length === 0 && item.parent.parentNode) {
+              item.parent.remove();
+            }
+          }, 70);
+        } else if (item.type === "space") {
+          if (item.el && item.el.parentNode) item.el.remove();
+        }
+
+        setTimeout(deleteNext, 14);
+      }
+
+      deleteNext();
+    }
+
+    // Start typing after brief initial settle
+    setTimeout(typeNext, 300);
   }
 
   var poll = setInterval(function () {

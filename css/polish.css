@@ -356,8 +356,58 @@ div[id] {
   font-size: clamp(1.05rem, 2.2vw, 1.25rem) !important;
   line-height: 1.55 !important;
   color: var(--ink, #18181b) !important;
-  min-height: 3.2em; /* Prevents vertical layout shift during typewriter loop */
+  min-height: 3.5em; /* Prevents vertical layout shift during typewriter loop */
   max-width: 580px;
+}
+
+/* Character-by-Character Typewriter Animation with Spring Scale */
+.tw-word {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.tw-word.tw-bold,
+.hero-tagline strong.tw-word {
+  font-weight: 700 !important;
+  color: var(--ink, #18181b) !important;
+}
+
+.tw-char {
+  display: inline-block;
+  opacity: 0;
+  transform: scale(0.35) translateY(2px);
+  will-change: transform, opacity;
+  animation: twLetterScaleIn 0.22s cubic-bezier(0.2, 0.9, 0.3, 1.25) forwards;
+}
+
+.tw-char.tw-out {
+  animation: twLetterScaleOut 0.12s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes twLetterScaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.35) translateY(2px);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(1.16) translateY(-1px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes twLetterScaleOut {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.35) translateY(2px);
+  }
 }
 
 .typewriter-cursor {
@@ -368,9 +418,23 @@ div[id] {
   animation: typewriterBlink 0.85s infinite;
 }
 
+.typewriter-cursor.typing {
+  animation: none !important;
+  opacity: 1 !important;
+}
+
 @keyframes typewriterBlink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tw-char,
+  .tw-char.tw-out {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 /* Ensure hero contents are immediately visible */
