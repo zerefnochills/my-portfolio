@@ -228,3 +228,24 @@ html.page-is-transitioning .page-curtain-badge {
     transform: none !important;
   }
 }
+
+/* =========================================================================
+   ZORO'S ENMA SWORD HAKI: CUSTOM TEXT SELECTION
+   Matches the signature purple Conqueror's Haki flame aura of Zoro's Enma katana
+   ========================================================================= */
+::selection,
+*::selection {
+  background-color: #8b2fa8 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: none !important;
+}
+
+::-moz-selection,
+*::-moz-selection {
+  background-color: #8b2fa8 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow: none !important;
+}
+
