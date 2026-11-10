@@ -112,7 +112,7 @@
   let subEl = null;
 
   function ensureCurtainDOM() {
-    if (curtainEl) return;
+    if (curtainEl && panelEl) return;
     curtainEl = document.getElementById('pageCurtainTransition');
     if (!curtainEl) {
       curtainEl = document.createElement('div');
@@ -229,42 +229,38 @@
 
     const urlParams = new URLSearchParams(window.location.search);
     const hasFoldParam = urlParams.get('from') === 'fold' || urlParams.get('from') === 'trans';
+    const isTransitioning = document.documentElement.classList.contains('page-is-transitioning');
 
-    if (!pending && !hasFoldParam) {
+    if (!pending && !hasFoldParam && !isTransitioning) {
       return;
     }
 
     ensureCurtainDOM();
-    const currentKey = getTargetKey(window.location.pathname);
-    const cfg = pending || ROUTE_CONFIG[currentKey] || {
-      title: 'ARRIVED',
-      sub: 'GRAND LINE VOYAGE',
-      type: 'ship',
-      colors: ['#09090b', '#dc2626']
-    };
 
-    if (iconEl) iconEl.innerHTML = ICONS[cfg.type] || ICONS.ship;
-    renderTitleLetters(cfg.title, cfg.colors || ['#09090b', '#dc2626']);
-    if (subEl) subEl.textContent = cfg.sub;
-
-    // Start closed
+    // Start with curtain already smoothly covering the page
     curtainEl.classList.add('is-active', 'is-entering');
-    playCurtainAudio();
 
-    // After brief display, slide curtain down off screen
+    // Pause briefly (80ms) so layout is fully settled behind the curtain,
+    // then smoothly slide the curtain down off the screen (reveal-out)
+    // without repeating the title pop animation.
     setTimeout(function () {
       curtainEl.classList.add('reveal-out');
-    }, 280); // Increased from 140ms to 280ms
+    }, 80);
 
     setTimeout(function () {
       curtainEl.classList.remove('is-active', 'is-entering', 'reveal-out');
-    }, 950); // Increased to match 0.62s reveal-out
+      document.documentElement.classList.remove('page-is-transitioning');
+      if (panelEl) {
+        panelEl.style.transform = '';
+      }
+    }, 620);
   }
 
   function resetCurtain() {
     if (curtainEl) {
       curtainEl.classList.remove('is-active', 'is-leaving', 'is-entering', 'reveal-out');
     }
+    document.documentElement.classList.remove('page-is-transitioning');
   }
 
   // Intercept navigation links

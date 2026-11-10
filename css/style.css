@@ -623,7 +623,7 @@
       font-size: clamp(4.4rem, 12vw, 8.8rem);
       line-height: 0.9;
       margin: 0 0 10px;
-      transform: rotate(-2.5deg);
+      transform: none;
       transform-origin: left;
     }
 

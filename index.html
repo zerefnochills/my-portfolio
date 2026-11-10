@@ -26,9 +26,30 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   <link rel="stylesheet" href="css/polish.css">
   <link rel="stylesheet" href="css/page-transition.css">
+  <script>
+    if (sessionStorage.getItem('page_transition_state')) {
+      document.documentElement.classList.add('page-is-transitioning');
+    }
+  </script>
 </head>
 
 <body class="zoro-cursor-active">
+
+  <!-- CINEMATIC SHUTTER CURTAIN TRANSITION -->
+  <div class="page-curtain-transition" id="pageCurtainTransition" aria-hidden="true">
+    <div class="page-curtain-panel" id="pageCurtainPanel">
+      <div class="page-curtain-content">
+        <div class="page-curtain-badge" id="pageCurtainBadge">
+          <div class="page-curtain-icon" id="pageCurtainIcon"></div>
+          <div class="page-curtain-title" id="pageCurtainTitle"></div>
+          <div class="page-curtain-sub" id="pageCurtainSub"></div>
+          <div class="page-curtain-track">
+            <div class="page-curtain-bar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- SVG Turbulence Filter for Hand-Drawn Wobble -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -78,11 +99,6 @@
       <span class="ribbon-fold-hint">turn page ⮞</span>
     </div>
   </button>
-
-  <!-- 3D PAPER PAGE FLIPPER OVERLAY -->
-  <div class="paper-page-flipper" id="paperPageFlipper" aria-hidden="true">
-    <div class="paper-page-leaf"></div>
-  </div>
 
   <!-- LOADER -->
   <div id="loader" role="status" aria-label="Loading sketchpad portfolio">
@@ -219,9 +235,9 @@
       <div class="hero-content-row">
         <div class="hero-left-col">
           <h1 id="heroName"><span class="name-first">Deepak</span> <span class="name-last">Pandey</span></h1>
-          <svg class="doodle draw" style="width:min(420px,85%);height:16px;display:block;margin:0 0 16px"
-            viewBox="0 0 380 16" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M4 10C80 2 160 16 240 8S340 4 376 9" />
+          <svg class="doodle draw" style="width:min(420px,85%);height:8px;display:block;margin:2px 0 16px"
+            viewBox="0 0 380 8" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M2 4 L378 4" stroke="var(--ink, #18181b)" stroke-width="3" stroke-linecap="round" />
           </svg>
           <p class="hero-tagline ink" id="heroTagline" aria-label="Founder &amp; Software Craftsman &middot; Crafting scalable web platforms, digital systems, and creative code.">
             <span class="typewriter-text" id="typewriterText">Founder &amp; Software Craftsman &middot; Crafting scalable web platforms, digital systems, and creative code.</span><span class="typewriter-cursor" aria-hidden="true">|</span>

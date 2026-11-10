@@ -536,6 +536,12 @@
         if (byEl) byEl.classList.add("on");
       });
 
+      const isTransitionReturn = Boolean(sessionStorage.getItem("portfolio_visited") === "true" && (sessionStorage.getItem("page_transition_state") || document.documentElement.classList.contains("page-is-transitioning")));
+      if (isTransitionReturn) {
+        enterSite();
+        return;
+      }
+
       setTimeout(enterSite, 6200); // Safety timeout guarantee
       function tick(ts) {
         if (loaderDone) return;
