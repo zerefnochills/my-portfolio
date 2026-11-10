@@ -1,96 +1,126 @@
-# ✒️ Hand-Drawn Digital Sketchbook Portfolio
+# ✒️ Deepak Pandey — Portfolio & Digital Sketchbook
 
-A distinctive, hand-crafted developer & designer portfolio built with tactile ink-on-parchment aesthetics, SVG turbulence wobble filters, interactive guest doodle canvas, synthesized pen audio, and One Piece / Luffy inspired touches.
-
----
-
-## 🎨 New Features & Enhancements
-
-1. **One Piece Wanted Bounty Poster Frame (Hero Section)**:
-   - Iconic One Piece Wanted poster pinned to the page with a red pushpin.
-   - Includes **"WANTED"**, **"DEAD OR ALIVE"**, dynamic Name, Berry bounty (`฿ 3,000,000,000 -`), and Marine seagull anchor seal stamp.
-   - **Adding your photo is effortless**:
-     - **Option 1**: Simply click on the photo frame on the web page to select an image from your computer, or drag & drop any photo file directly onto it! (Persists automatically in browser storage).
-     - **Option 2**: Place your image as `photo.jpg` in the portfolio directory and set `photoUrl: "photo.jpg"` in `PORTFOLIO_CONFIG`.
-     - *If no photo is uploaded, it shows a hand-drawn Straw Hat pirate silhouette doodle.*
-
-2. **Theme Switcher (`ink` palette dropdown in navigation)**:
-   - **Indigo Paper** (Classic warm parchment with royal blue ink)
-   - **Walnut Sepia** (Vintage aged paper with deep espresso tones)
-   - **Forest Green** (Botanical sketchbook with pine ink)
-   - **Blueprint Dark** (Architect night mode with chalk cyan accents)
-   - *Saves preference in `localStorage` across visits.*
-
-2. **Zero-Dependency Synthesized Audio (Web Audio API)**:
-   - Tactile fountain pen scratch sounds on drawing, button clicks, and link hovers.
-   - Paper rustle sounds when opening case study dialogs or changing tabs.
-   - Easily toggled on/off with the handwritten `sound on / sound off` button.
-
-3. **Interactive Project Showcase & Sketchbook Modal**:
-   - Filter projects by domain: **All Sketches**, **Full Stack**, **Creative UI**, **Tools & Experiments**.
-   - Clicking any card opens a hand-drawn sketchbook dialog with architectural highlights, key craftsmanship notes, live demo links, and GitHub links.
-   - Full keyboard accessibility (Enter/Space to open, Esc to close, tab navigation).
-
-4. **Interactive Guest Doodle Canvas**:
-   - Visitors can draw directly onto the parchment in real-time with smooth Bézier curve interpolation.
-   - 4 ink colors (Indigo, Crimson, Forest, Sepia).
-   - Stamp button to stamp Luffy's straw hat onto the page.
-   - Save button (`.png` download) and wipe clear button.
-
-5. **Dedicated Digital Sketchbook Studio & 3D Paper Page Fold**:
-   - The main home page is streamlined without the embedded canvas or navbar clutter.
-   - **Floating Left Bookmark Ribbon**: A hand-drawn paper bookmark tab pinned to the left edge with continuous paper flutter and a scribbling feather quill doodle animation (`ribbonFloat` & `quillScribble`).
-   - **3D Paper Turn Page Transition**: Clicking the left ribbon physically folds the current page in 3D perspective along its spine with real-time paper rustle audio, turning over into `doodle.html`!
-   - Returning from `doodle.html` via **`← Portfolio`** smoothly flips the page back.
-   - **Studio Capabilities**: 6 brush types (Fountain, Calligraphy, Pencil, Marker, Splatter, Eraser), custom color wheel & palettes, One Piece stamps (Straw Hat 👒, Skull ☠️, Anchor ⚓, etc.), Undo/Redo (`Ctrl+Z`, `Ctrl+Y`), 4 paper textures, and high-res image download.
-
-6. **Handwritten Postcard & Airmail Contact Form**:
-   - Vintage postcard layout with airmail border and postal stamp.
-   - Enter your name, email, and message.
-   - "Send Letter" action with paper airplane delivery animation, instant feedback, and pre-formatted mail client integration.
-
-6. **Interactive Easter Eggs**:
-   - **Coffee / Tea Ring**: Click the coffee stain in the top-right corner to leave faint coffee drops on the paper!
-   - **Straw Hat Quote Generator**: Click the straw hat during loader or visit to cycle inspirational quotes (Luffy, Zoro, Dr. Hiluluk, etc.).
-   - **Fast Loader**: Press Space or click `skip intro ↵` anytime to jump straight in; subsequent page visits automatically speed up.
+> A hand-crafted, ink-on-parchment developer & software craftsman portfolio inspired by tactile paper aesthetics, SVG turbulence wobble filters, interactive canvas drawing, synthesized Web Audio, and authentic One Piece voyage adventures.
 
 ---
 
-## ⚙️ Quick Customization (in 60 seconds!)
+## 🧭 Project Structure
 
-Open [`index.html`](file:///c:/Users/altze/OneDrive/Desktop/portfolio/index.html) or [`Your Name – Portfolio.html`](file:///c:/Users/altze/OneDrive/Desktop/portfolio/Your%20Name%20–%20Portfolio.html) and locate the `PORTFOLIO_CONFIG` object near line 640:
+```
+portfolio/
+├── index.html              # Main portfolio application entrypoint
+├── doodle.html             # Dedicated digital sketchbook studio (3D page fold)
+├── stash-trial.html        # Captain's Trial interactive quiz game
+├── treasure-chest.html     # Unlocked secret treasure stash vault
+├── favicon.ico             # Site favicon
+├── package.json            # NPM test runner scripts & metadata
+├── README.md               # Documentation
+│
+├── css/
+│   ├── style.css           # Core stylesheet (typography, layout, components, themes)
+│   └── polish.css          # Viewport ratios, One Piece Wanted poster & hero refinements
+│
+├── js/
+│   ├── main.js             # Core portfolio logic, audio synthesis, canvas, journey engine
+│   └── polish.js           # Dynamic heading triggers & scroll progress
+│
+├── images/                 # Graphic assets, avatar seal, character cutout & wanted poster
+├── cursors/                # Custom Roronoa Zoro katana & Enma sword cursor assets
+├── fonts/                  # Local font files (Chewy, Spicy Rice)
+│
+└── tests/
+    └── e2e/                # Automated 4-tier E2E testing harness (82 assertions)
+        ├── runner.js       # Main test runner
+        ├── harness.js      # Headless Chrome CDP test harness
+        ├── tier1_feature_coverage.js
+        ├── tier2_boundary_corner.js
+        ├── tier3_cross_feature.js
+        └── tier4_real_world.js
+```
+
+---
+
+## 🎨 Key Features & Architecture
+
+1. **One Piece Wanted Bounty Poster (Hero Section)**:
+   - High-fidelity Wanted Poster template with a character cutout window, Chopper peeker, and pushpin.
+   - Live clickable berry bounty (`฿ 3,000,000,000 -`) that increments with sound and celebration banner.
+   - Authentic gold/cream typography over dark gradient with WCAG AAA accessibility.
+
+2. **Scroll-Driven Voyage Journey (Sticky Stacking Deck)**:
+   - Zero-button smooth scroll progression: Milestone cards accumulate into a compact sticky deck.
+   - Synchronized Going Merry ship avatar and track fill percentage scrubbing dynamically.
+   - Interactive milestone waypoints for instant chapter teleportation.
+
+3. **Dedicated Doodle Studio & 3D Paper Flip (`doodle.html`)**:
+   - Pinned bookmark ribbon on the left edge with real-time flutter.
+   - 3D perspective paper fold transition with synthesized paper rustle audio.
+   - 6 brush presets (Fountain, Calligraphy, Pencil, Marker, Splatter, Eraser), color wheel, One Piece stamps, undo/redo, and PNG export.
+
+4. **Interactive Captain's Secret Stash Trial (`stash-trial.html` & `treasure-chest.html`)**:
+   - Multi-step interactive quiz game guarding the captain's private stash.
+   - Unlocks interactive 3D treasure chest reward vault with sound effects.
+
+5. **Tactile Zero-Dependency Web Audio API**:
+   - Synthesized pen scratches on drawing and hover.
+   - Paper rustle audio on modals, page turns, and drawer navigation.
+   - Toggled on/off via the handwritten `sound on / sound off` navbar button.
+
+6. **Zoro Katana Custom Cursor & Theme Switcher**:
+   - Roronoa Zoro's Enma katana custom pointer with crimson Conqueror's Haki click slashes.
+   - 4 live ink & parchment themes: Crimson White, Obsidian Red, Manga Noir, and Bloodline Dark.
+
+---
+
+## ⚙️ Customization
+
+Open [`js/main.js`](file:///c:/Users/altze/OneDrive/Desktop/portfolio-updated/portfolio/js/main.js) and locate the `PORTFOLIO_CONFIG` object near the top:
 
 ```javascript
 const PORTFOLIO_CONFIG = {
-  name: "Your Name",           // Your display name
-  bounty: "3,000,000,000",     // Wanted poster berry bounty amount
-  photoUrl: "",               // Path to your photo e.g. "photo.jpg" (or click the Wanted Poster to upload)
-  tagline: "...",             // Your hero bio
-  email: "you@example.com",   // Your contact email
-  status: "AVAILABLE FOR WORK · 2026",
+  name: "Deepak Pandey",
+  bounty: "3,000,000,000",
+  photoUrl: "images/media_1794201865931_238ddac4.jpg",
+  tagline: "Founder & Software Craftsman · Crafting scalable web platforms, digital systems, and creative code.",
+  email: "deepak@synapsecalyx.com",
+  status: "FOUNDER @ SYNAPSE CALYX · OPEN FOR COLLABORATIONS · 2026",
   socials: {
-    github: "https://github.com/yourusername",
-    linkedin: "https://linkedin.com/in/yourusername",
-    resume: "/resume.pdf"
-  },
-  quotes: [...],              // Quotes displayed on straw hat click
-  projects: { ... }           // Add, remove, or customize your projects
+    github: "https://github.com/zerefnochills",
+    linkedin: "https://linkedin.com",
+    resume: "#"
+  }
 };
 ```
-Everything updates dynamically across navigation, hero, postcard recipient, and modal case studies.
 
 ---
 
-## 🚀 How to Run & Deploy
+## 🧪 Running Automated E2E Tests
+
+All automated tests run headless Chrome over Chrome DevTools Protocol (CDP) across mobile (375px), tablet (768px), desktop (1024px), large desktop (1440px), and ultra-wide (1920px):
+
+```bash
+# Run all 4 test tiers (82 assertions)
+npm test
+
+# Run a specific tier
+npm run test:tier1
+npm run test:tier2
+npm run test:tier3
+npm run test:tier4
+```
+
+---
+
+## 🚀 Local Development & Deployment
 
 ### Local Preview
-- Simply double-click [`index.html`](file:///c:/Users/altze/OneDrive/Desktop/portfolio/index.html) in your file manager to open it in any browser!
-- Or run a local live server:
-  ```bash
-  npx serve .
-  ```
+Double-click `index.html` to run directly in any browser, or use any local static server:
 
-### Deployment
-- **GitHub Pages**: Push this directory to a GitHub repository, go to `Settings > Pages`, and select `main` branch.
-- **Vercel / Netlify**: Drag-and-drop the portfolio folder into the dashboard for instantaneous zero-config deployment.
+```bash
+npx serve .
+# or
+python -m http.server 8000
+```
 
+### GitHub Pages Deployment
+Push the repository to GitHub and enable **GitHub Pages** under `Settings > Pages` with source set to the `main` branch.

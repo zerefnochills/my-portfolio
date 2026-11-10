@@ -1,0 +1,22 @@
+{
+  "name": "deepak-pandey-portfolio",
+  "version": "2.0.0",
+  "description": "Interactive One Piece & Hand-Drawn Doodle Portfolio for Deepak Pandey",
+  "main": "index.html",
+  "scripts": {
+    "test": "node tests/e2e/runner.js",
+    "test:tier1": "node tests/e2e/runner.js --tier=1",
+    "test:tier2": "node tests/e2e/runner.js --tier=2",
+    "test:tier3": "node tests/e2e/runner.js --tier=3",
+    "test:tier4": "node tests/e2e/runner.js --tier=4"
+  },
+  "keywords": [
+    "portfolio",
+    "one-piece",
+    "doodle",
+    "creative-code",
+    "interactive"
+  ],
+  "author": "Deepak Pandey",
+  "license": "MIT"
+}

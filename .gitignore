@@ -1,6 +1,26 @@
-# Build & Scratch directory
-scratch/
+# Dependencies
+node_modules/
+package-lock.json
+
+# Test outputs & temporary captures
+test_results.json
+tests/screenshots_hero/
+*.log
+*.tmp
 *.bak
+
+# Scratch & build files
+scratch/
+
+# Agent & tool scratch
+.agents/
+.gemini/
+
+# Operating system files
 .DS_Store
 Thumbs.db
+desktop.ini
 
+# IDE & Editor folders
+.vscode/
+.idea/
