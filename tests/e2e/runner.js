@@ -93,8 +93,10 @@ async function main() {
     }
 
   } catch (err) {
-    console.error('\n\x1b[31m[FATAL ERROR]\x1b[0m Test runner encountered an unhandled exception:');
+    console.error("\n\x1b[31m[FATAL ERROR]\x1b[0m Test runner encountered an unhandled exception:");
+    if(err.message && err.message.includes("CDP")||err.message && err.message.includes("Chrome")){console.error("CDP Connection Error - Port:",harness.cdpPort||"unknown");}
     console.error(err.stack || err.message);
+    process.exit(1);
   } finally {
     console.log('\n[Teardown] Shutting down browser and server harness...');
     await cleanup();

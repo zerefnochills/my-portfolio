@@ -240,12 +240,8 @@
     // Start with curtain already smoothly covering the page
     curtainEl.classList.add('is-active', 'is-entering');
 
-    // Pause briefly (80ms) so layout is fully settled behind the curtain,
-    // then smoothly slide the curtain down off the screen (reveal-out)
-    // without repeating the title pop animation.
-    setTimeout(function () {
-      curtainEl.classList.add('reveal-out');
-    }, 80);
+    // Apply reveal-out immediately to eliminate flash
+    curtainEl.classList.add("reveal-out");
 
     setTimeout(function () {
       curtainEl.classList.remove('is-active', 'is-entering', 'reveal-out');
@@ -253,7 +249,7 @@
       if (panelEl) {
         panelEl.style.transform = '';
       }
-    }, 620);
+    }, 540);
   }
 
   function resetCurtain() {

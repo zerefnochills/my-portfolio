@@ -15,12 +15,17 @@
   /* 1. Headings fix.
      The original observer never fires on .write elements: they start with a
      zero-width clip-path, so IntersectionObserver treats them as invisible.
-     Here we measure position instead, which ignores clip-path. */
+     Here we measure position instead, which ignores clip-path.
+     Batch all getBoundingClientRect reads before any class writes to avoid forced layout. */
   function revealWrites() {
     if (!loaderGone()) return;
     var vh = window.innerHeight;
-    document.querySelectorAll(".write:not(#q):not(.on)").forEach(function (el) {
-      var r = el.getBoundingClientRect();
+    var els = Array.from(document.querySelectorAll(".write:not(#q):not(.on)"));
+    // Batch read phase — no DOM writes here
+    var rects = els.map(function(el) { return el.getBoundingClientRect(); });
+    // Write phase — apply classes after all reads
+    els.forEach(function(el, i) {
+      var r = rects[i];
       if (r.bottom > 0 && r.top < vh * 0.92) {
         if (el.dataset.t) el.style.setProperty("--t", el.dataset.t);
         el.classList.add("on");

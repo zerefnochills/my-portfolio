@@ -154,6 +154,8 @@
     };
 
     (function () {
+function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k)||d}catch(e){return d}},set:(k,v)=>{try{localStorage.setItem(k,v);return true}catch(e){return false}},remove:(k)=>{try{localStorage.removeItem(k);return true}catch(e){return false}}}}const storage=safeLocalStorage();
+
       "use strict";
 
 
@@ -162,7 +164,7 @@
       // =========================================================================
       const cursorToggleBtn = document.getElementById("cursorToggle");
       const cursorLabel = document.getElementById("cursorLabel");
-      const savedCursorState = localStorage.getItem("portfolio_zoro_cursor");
+      const savedCursorState = storage.get("portfolio_zoro_cursor",null);
 
       if (document.body && document.body.classList) {
         if (savedCursorState === "disabled") {
@@ -182,7 +184,7 @@
           const isNowActive = document.body.classList.toggle("zoro-cursor-active");
           cursorToggleBtn.classList.toggle("active", isNowActive);
           if (cursorLabel) cursorLabel.textContent = isNowActive ? "zoro" : "default";
-          localStorage.setItem("portfolio_zoro_cursor", isNowActive ? "enabled" : "disabled");
+          storage.set("portfolio_zoro_cursor", isNowActive ? "enabled" : "disabled");
           playPaperRustle();
         });
       }
@@ -380,7 +382,7 @@
       window.AUDIO_COOLDOWN = 220;
       window.lastPenAudioTime = 0;
       let audioCtx = null;
-      let soundEnabled = localStorage.getItem("portfolio_sound") === "true";
+      let soundEnabled = storage.get("portfolio_sound","false") === "true";
 
       function getAudioContext() {
         if (!audioCtx) {
@@ -388,7 +390,7 @@
           if (AudioContextClass) audioCtx = new AudioContextClass();
         }
         if (audioCtx && audioCtx.state === "suspended") {
-          audioCtx.resume();
+          try { audioCtx.resume().catch(function(){}); } catch(e) {}
         }
         return audioCtx;
       }
@@ -470,7 +472,7 @@
       if (soundBtn) {
         soundBtn.addEventListener("click", function () {
           soundEnabled = !soundEnabled;
-          localStorage.setItem("portfolio_sound", soundEnabled ? "true" : "false");
+          storage.set("portfolio_sound", soundEnabled ? "true" : "false");
           updateSoundUI();
           if (soundEnabled) {
             getAudioContext();
@@ -482,8 +484,8 @@
       // 3. Theme Engine
       const themeBtn = document.getElementById("themeBtn");
       const themeMenu = document.getElementById("themeMenu");
-      const savedTheme = localStorage.getItem("portfolio_theme") || "parchment";
-      document.documentElement.setAttribute("data-theme", savedTheme);
+      const savedTheme = storage.get("portfolio_theme","parchment") || "parchment";
+      // Note: data-theme is already applied by the inline head script to avoid FOUC; skip the duplicate setAttribute here
 
       if (themeBtn && themeMenu) {
         themeBtn.addEventListener("click", function (e) {
@@ -498,7 +500,7 @@
           opt.addEventListener("click", function () {
             const themeVal = opt.dataset.themeVal;
             document.documentElement.setAttribute("data-theme", themeVal);
-            localStorage.setItem("portfolio_theme", themeVal);
+            storage.set("portfolio_theme", themeVal);
             themeMenu.classList.remove("open");
             playPenScratch();
           });
@@ -845,7 +847,7 @@
       function playCoinAudio() {
         if (!soundEnabled) return;
         try {
-          const ctx = getAudioCtx();
+          const ctx = getAudioContext();
           const osc = ctx.createOscillator();
           const gain = ctx.createGain();
           osc.type = "sine";
@@ -1539,7 +1541,7 @@
         splatter.style.left = (e.clientX - 11) + "px";
         splatter.style.top = (e.clientY - 11) + "px";
         document.body.appendChild(splatter);
-        setTimeout(function () { splatter.remove(); }, 600);
+        setTimeout(function () { if (splatter.parentNode) splatter.parentNode.removeChild(splatter); }, 600);
         if (soundEnabled && Math.random() > 0.6) playPenScratch();
       });
 
@@ -1548,7 +1550,7 @@
       function playChopperChime() {
         if (!soundEnabled) return;
         try {
-          const ctx = getAudioCtx();
+          const ctx = getAudioContext();
           const osc = ctx.createOscillator();
           const gain = ctx.createGain();
           osc.type = "sine";
@@ -1697,13 +1699,19 @@
           }
         }
 
+        // Cache journey section top offset; invalidate on resize to avoid stale layout reads
+        let cachedJDocTop = null;
+        window.addEventListener("resize", function() { cachedJDocTop = null; }, { passive: true });
+
         function getActiveStepFromScroll() {
           const scrollY = window.scrollY;
           if (scrollY < 200) return 1;
 
-          const rect = journeySection.getBoundingClientRect();
-          const jDocTop = Math.round(rect.top + scrollY);
-          const relY = scrollY - jDocTop;
+          if (cachedJDocTop === null) {
+            const rect = journeySection.getBoundingClientRect();
+            cachedJDocTop = Math.round(rect.top + scrollY);
+          }
+          const relY = scrollY - cachedJDocTop;
 
           const isAndroid = document.documentElement.classList.contains("is-android");
           const isMobile = window.innerWidth <= 680;
@@ -1744,15 +1752,38 @@
           }
         }
 
-        window.addEventListener("scroll", scheduleJourneyScroll, { passive: true });
-        window.addEventListener("resize", scheduleJourneyScroll, { passive: true });
-        window.addEventListener("wheel", () => { clearWaypointLock(); scheduleJourneyScroll(); }, { passive: true });
-        window.addEventListener("touchmove", () => { clearWaypointLock(); scheduleJourneyScroll(); }, { passive: true });
-        window.addEventListener("keydown", () => { clearWaypointLock(); scheduleJourneyScroll(); }, { passive: true });
-        window.addEventListener("pointerdown", () => { clearWaypointLock(); }, { passive: true });
+        // Bug 6 fix: store named references so they can be removed on cleanup
+        const _jScrollHandler = scheduleJourneyScroll;
+        const _jResizeHandler = scheduleJourneyScroll;
+        const _jWheelHandler = function() { clearWaypointLock(); scheduleJourneyScroll(); };
+        const _jTouchHandler = function() { clearWaypointLock(); scheduleJourneyScroll(); };
+        const _jKeyHandler = function() { clearWaypointLock(); scheduleJourneyScroll(); };
+        const _jPointerHandler = function() { clearWaypointLock(); };
+        const _jScrollEndHandler = clearWaypointLock;
+
+        window.addEventListener("scroll", _jScrollHandler, { passive: true });
+        window.addEventListener("resize", _jResizeHandler, { passive: true });
+        window.addEventListener("wheel", _jWheelHandler, { passive: true });
+        window.addEventListener("touchmove", _jTouchHandler, { passive: true });
+        window.addEventListener("keydown", _jKeyHandler, { passive: true });
+        window.addEventListener("pointerdown", _jPointerHandler, { passive: true });
         if ("onscrollend" in window) {
-          window.addEventListener("scrollend", clearWaypointLock, { passive: true });
+          window.addEventListener("scrollend", _jScrollEndHandler, { passive: true });
         }
+
+        // Expose cleanup function for beforeunload
+        window._journeyCleanup = function() {
+          window.removeEventListener("scroll", _jScrollHandler);
+          window.removeEventListener("resize", _jResizeHandler);
+          window.removeEventListener("wheel", _jWheelHandler);
+          window.removeEventListener("touchmove", _jTouchHandler);
+          window.removeEventListener("keydown", _jKeyHandler);
+          window.removeEventListener("pointerdown", _jPointerHandler);
+          if ("onscrollend" in window) {
+            window.removeEventListener("scrollend", _jScrollEndHandler);
+          }
+          if (waypointLockTimer) clearTimeout(waypointLockTimer);
+        };
 
         // Waypoint Click-to-Scroll Support
         waypoints.forEach((wp) => {
@@ -1791,11 +1822,17 @@
 
       initScrollDrivenJourney();
 
-      // 19. Audio cue on link hovers
-      document.querySelectorAll("a, button, .card").forEach(function (interactiveEl) {
-        interactiveEl.addEventListener("mouseenter", function () {
-          if (soundEnabled && Math.random() > 0.4) playPenScratch();
-        });
+      // Bug 6: clean up journey scroll listeners on page unload
+      window.addEventListener("beforeunload", function() {
+        if (typeof window._journeyCleanup === "function") window._journeyCleanup();
       });
+
+      // 19. Audio cue on link hovers — single delegated listener instead of per-element
+      document.addEventListener("mouseenter", function(e) {
+        if (!soundEnabled) return;
+        if (e.target && e.target.closest && e.target.closest("a, button, .card") && Math.random() > 0.4) {
+          playPenScratch();
+        }
+      }, true); // capture phase
 
     })();
