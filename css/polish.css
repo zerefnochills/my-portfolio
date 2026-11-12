@@ -659,215 +659,36 @@ a.treasure-chest-widget .chest-icon {
   animation: chestBounce 2.6s infinite ease-in-out;
 }
 
-/* ---------- Hero: wanted poster note no longer covers the bounty ---------- */
-.wanted-annotation-note {
-  bottom: -74px;
-  right: 14px;
-  max-width: 190px;
-  font-family: var(--hand), 'Patrick Hand', sans-serif;
-  transform: rotate(3deg);
-}
-
-.bounty-dash {
-  margin-left: 2px;
-}
-
-/* Authentic 3:4 Wanted Bounty Poster Frame */
-.wanted-poster-frame {
+/* ---------- Hero: Clean Straight Portrait Photo with Normal Ink Border ---------- */
+.hero-portrait-frame {
   position: relative;
-  width: 100% !important;
-  max-width: 348px !important;
-  aspect-ratio: 3 / 4 !important;
-  box-sizing: border-box !important;
-  padding: 0 !important;
-  border: 3.5px solid var(--ink);
-  border-radius: 10px;
-  background: #f5deb3;
-  box-shadow: 6px 10px 0 var(--shadow);
-  transform: translateZ(0); /* promote to GPU layer from start; use translateZ(0) not "none" so hover can interpolate */
-  overflow: visible !important;
-}
-
-.wanted-poster-frame:hover {
-  transform: translateY(-4px) scale(1.02) !important;
-  box-shadow: 8px 14px 0 var(--shadow);
-}
-
-.wanted-poster-media-wrap,
-.wanted-photo-container {
   width: 100%;
-  height: 100%;
-  aspect-ratio: 3 / 4;
-  position: relative;
+  max-width: 396px;
+  aspect-ratio: 15 / 16;
+  box-sizing: border-box;
+  padding: 0;
+  border: 3px solid var(--ink, #18181b);
+  border-radius: 14px;
+  background: var(--paper-card, #ffffff);
+  box-shadow: 6px 6px 0 var(--ink, #18181b);
   overflow: hidden;
-  border-radius: 6px;
-  border: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  display: block !important;
+  transform: none;
+  flex-shrink: 0;
+  transition: box-shadow 0.2s ease;
 }
 
-.wanted-poster-image,
-.wanted-img {
-  width: 100% !important;
-  height: 100% !important;
-  aspect-ratio: 3 / 4;
-  object-fit: fill !important;
-  display: block !important;
-  user-select: none;
+.hero-portrait-frame:hover {
+  transform: none;
+  box-shadow: 8px 8px 0 var(--ink, #18181b);
 }
 
-/* Authentic Character Photo Cutout Window */
-.wanted-portrait-cutout {
-  position: absolute;
-  top: 23.8%;
-  left: 14.1%;
-  width: 70.6%;
-  height: 50.4%;
-  overflow: hidden;
-  border-radius: 2px;
-  background: #c29562;
-  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.4);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  pointer-events: auto;
-  z-index: 4;
-}
-
-.wanted-portrait-img {
-  position: absolute;
-  top: 0;
-  left: 0;
+.hero-portrait-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 20%;
+  object-position: center 18%;
   display: block;
-}
-
-/* Woodblock nameplate across lower edge of portrait cutout */
-.wanted-nameplate {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  background: linear-gradient(to top, rgba(14, 10, 6, 0.94) 0%, rgba(20, 15, 10, 0.78) 72%, transparent 100%);
-  padding: 16px 4px 6px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  pointer-events: none;
-  box-sizing: border-box;
-}
-
-.wanted-nameplate-title {
-  font-family: var(--badge), "Impact", sans-serif;
-  font-size: clamp(0.58rem, 1.4vw, 0.72rem);
-  letter-spacing: 0.28em;
-  color: #f87171;
-  font-weight: 700;
-  margin-bottom: 1px;
-}
-
-.wanted-nameplate .wanted-name {
-  font-family: var(--badge), "Impact", "Arial Black", sans-serif;
-  font-size: clamp(1.05rem, 2.7vw, 1.42rem);
-  letter-spacing: 0.12em;
-  font-weight: 800;
-  color: #fffbeb;
-  text-transform: uppercase;
-  line-height: 1.1;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 0 6px rgba(0, 0, 0, 0.85);
-  pointer-events: auto;
-  user-select: text;
-}
-
-.wanted-nameplate .wanted-character-subtitle {
-  font-family: var(--hand), 'Patrick Hand', sans-serif;
-  font-size: clamp(0.68rem, 1.8vw, 0.85rem);
-  letter-spacing: 0.06em;
-  color: #fee2e2;
-  margin-top: 1px;
-  font-weight: 600;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
-}
-
-/* Clickable Bounty Area (Over printed ฿ 3,000,000,000) */
-.wanted-bounty-row {
-  position: absolute;
-  top: 76.2%;
-  left: 50%;
-  transform: translateX(-50%);
-  display: inline-flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 3px;
-  cursor: pointer;
-  pointer-events: auto;
   user-select: none;
-  background: transparent;
-  padding: 3px 14px;
-  border-radius: 4px;
-  white-space: nowrap;
-  box-shadow: none;
-  z-index: 6;
-  transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.15s ease;
-}
-
-.wanted-bounty-row .berry-symbol,
-.wanted-bounty-row .bounty-amount,
-.wanted-bounty-row .bounty-dash {
-  font-family: var(--badge), "Impact", "Arial Black", sans-serif;
-  font-weight: 700;
-  font-size: clamp(1.15rem, 3.6vw, 1.6rem);
-  letter-spacing: 0.06em;
-  color: #5c1818;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.wanted-bounty-row:hover {
-  transform: translateX(-50%) scale(1.05);
-}
-
-/* Revealed when bounty is boosted above initial printed value */
-.wanted-bounty-row.bounty-boosted {
-  background: rgba(239, 194, 131, 0.96);
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.28);
-  border: 1px solid rgba(124, 45, 18, 0.6);
-}
-
-.wanted-bounty-row.bounty-boosted .berry-symbol,
-.wanted-bounty-row.bounty-boosted .bounty-amount,
-.wanted-bounty-row.bounty-boosted .bounty-dash {
-  opacity: 1;
-}
-
-/* Poster drops in once, after the loader leaves */
-html.js-polish .wanted-poster-frame:not(.poster-in) {
-  opacity: 0;
-}
-
-.wanted-poster-frame.poster-in {
-  animation: posterDrop 0.95s cubic-bezier(0.2, 0.9, 0.3, 1.25) backwards;
-}
-
-@keyframes posterDrop {
-  0% {
-    opacity: 0;
-    transform: translateY(-70px);
-  }
-
-  60% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* ---------- Scroll progress ---------- */
@@ -894,15 +715,15 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
 .skills-ticker-tape {
   position: relative;
   left: 50%;
-  right: 50%;
+  right: auto;
   width: 100vw;
-  max-width: 100vw;
+  max-width: none;
   margin: 10px 0 54px -50vw;
   box-sizing: border-box;
   background: #dc2626 !important;
   background: linear-gradient(90deg, #991b1b 0%, #dc2626 35%, #ef4444 65%, #991b1b 100%) !important;
   color: #fff;
-  transform: rotate(-1.5deg);
+  transform: rotate(-1.2deg);
   overflow: hidden;
   box-shadow: 0 8px 0 var(--shadow, rgba(0, 0, 0, 0.25));
   border-top: 3.5px solid var(--ink, #111);
@@ -1124,9 +945,7 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
    ABOUT / MANIFESTO READABILITY OVERHAUL
    Crisp, high-contrast, editorial typography
    ========================================================== */
-.about-container,
 #work,
-#journey,
 #skills,
 #hall-of-fame,
 #contact {
@@ -1370,35 +1189,53 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
   margin-bottom: 4px;
 }
 
-/* Grand Line Waypoint Route Dock */
+/* Sticky Arena unifying Route Dock & Milestone Deck */
+.voyage-sticky-stage {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  overflow-anchor: none;
+}
+
+.voyage-dock-rail {
+  grid-column: 1;
+  grid-row: 1;
+  z-index: 25;
+  pointer-events: none;
+  padding-bottom: var(--voyage-dock-exit-pad, 440px);
+}
+
+/* Grand Line Waypoint Route Dock — compact height so cards stay unobstructed */
 .voyage-route-dock {
+  pointer-events: auto;
   background: var(--paper-card, #ffffff);
   border: 2.5px solid var(--ink, #09090b);
-  border-radius: 12px;
-  padding: 16px 22px 20px;
-  box-shadow: 5px 6px 0 var(--ink, #09090b);
-  margin-bottom: 24px;
+  border-radius: 10px;
+  padding: 6px 14px 7px;
+  box-shadow: 4px 4px 0 var(--ink, #09090b);
+  margin-bottom: 4px;
   position: sticky;
-  top: 76px;
+  top: var(--voyage-dock-top, 96px);
   z-index: 25;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* Scroll hint pill */
 .voyage-scroll-hint {
+  pointer-events: auto;
   text-align: center;
-  margin-top: 8px;
-  margin-bottom: 18px;
+  margin-top: 2px;
+  margin-bottom: 6px;
 }
 
 .voyage-scroll-hint span {
   font-family: var(--mono, 'JetBrains Mono', monospace);
-  font-size: 0.76rem;
+  font-size: 0.7rem;
   font-weight: 700;
   color: #64748b;
   background: #f1f5f9;
   border: 1px dashed #cbd5e1;
-  padding: 4px 12px;
+  padding: 2px 10px;
   border-radius: 999px;
   display: inline-block;
 }
@@ -1407,36 +1244,39 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 22px;
-  padding-bottom: 8px;
+  gap: 8px;
+  margin-bottom: 6px;
+  padding-bottom: 4px;
   border-bottom: 1.5px dashed rgba(9, 9, 11, 0.15);
 }
 
 .voyage-route-title {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
   font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif);
-  font-size: 0.92rem;
+  font-size: 0.78rem;
   font-weight: 800;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   color: var(--ink, #09090b);
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .voyage-route-title .route-icon {
-  font-size: 1.15rem;
+  font-size: 0.95rem;
 }
 
 .count-pill {
   font-family: var(--mono, 'JetBrains Mono', monospace);
-  font-size: 0.8rem;
+  font-size: 0.68rem;
   font-weight: 800;
   color: #dc2626;
   background: #fee2e2;
   border: 1.5px solid #dc2626;
   border-radius: 999px;
-  padding: 3px 10px;
+  padding: 1px 8px;
+  white-space: nowrap;
 }
 
 /* Route Track & Progress */
@@ -1445,16 +1285,16 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 0 10px;
-  margin-top: 14px;
+  padding: 0 6px;
+  margin-top: 2px;
 }
 
 .voyage-track-line {
   position: absolute;
-  top: 18px;
-  left: 28px;
-  right: 28px;
-  height: 4px;
+  top: 12px;
+  left: 26px;
+  right: 26px;
+  height: 3.5px;
   background: #e2e8f0;
   border-radius: 4px;
   z-index: 1;
@@ -1470,7 +1310,7 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
 /* Sailing Ship Marker */
 .voyage-ship-avatar {
   position: absolute;
-  top: -30px;
+  top: -19px;
   transform: translateX(-50%);
   z-index: 5;
   transition: left 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -1478,7 +1318,9 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
 }
 
 .ship-svg {
-  filter: drop-shadow(0 3px 2px rgba(0, 0, 0, 0.25));
+  width: 22px;
+  height: 22px;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.22));
   animation: shipSailBob 2.8s ease-in-out infinite;
 }
 
@@ -1490,7 +1332,7 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
   }
 
   50% {
-    transform: translateY(-5px) rotate(-3deg);
+    transform: translateY(-4px) rotate(-3deg);
   }
 }
 
@@ -1504,7 +1346,7 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
   }
 
   50% {
-    transform: translateY(-7px) rotate(4deg) scale(1.2);
+    transform: translateY(-6px) rotate(4deg) scale(1.2);
   }
 
   100% {
@@ -1523,10 +1365,10 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 2px;
   text-align: center;
   outline: none;
-  min-width: 68px;
+  min-width: 58px;
   transition: transform 0.2s ease;
 }
 
@@ -1535,16 +1377,16 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
 }
 
 .waypoint-num {
-  width: 38px;
-  height: 38px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   background: #ffffff;
-  border: 2.5px solid var(--ink, #09090b);
+  border: 2px solid var(--ink, #09090b);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--mono, 'JetBrains Mono', monospace);
-  font-size: 0.88rem;
+  font-size: 0.72rem;
   font-weight: 800;
   color: #64748b;
   box-shadow: 2px 2px 0 var(--ink, #09090b);
@@ -1556,7 +1398,7 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
   color: #ffffff;
   border-color: #09090b;
   box-shadow: 3px 3px 0 #09090b;
-  transform: scale(1.12);
+  transform: scale(1.1);
 }
 
 .voyage-waypoint.locked .waypoint-num {
@@ -1567,8 +1409,9 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
 
 .waypoint-label {
   font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif);
-  font-size: 0.82rem;
+  font-size: 0.72rem;
   font-weight: 800;
+  line-height: 1.1;
   color: var(--ink, #09090b);
   white-space: nowrap;
 }
@@ -1579,7 +1422,8 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
 
 .waypoint-year {
   font-family: var(--mono, 'JetBrains Mono', monospace);
-  font-size: 0.72rem;
+  font-size: 0.62rem;
+  line-height: 1.1;
   color: #64748b;
   font-weight: 600;
 }
@@ -1601,9 +1445,12 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
 }
 
 .voyage-deck-track {
+  grid-column: 1;
+  grid-row: 1;
   position: relative;
   display: flex;
   flex-direction: column;
+  padding-top: var(--voyage-deck-top-pad, 150px);
 }
 
 .voyage-card-step {
@@ -1636,13 +1483,13 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
   position: relative;
 }
 
-/* Sticky Stacking Milestone Cards */
+/* Sticky Stacking Milestone Cards — strictly below Route Dock */
 .voyage-milestone-card {
   display: flex !important;
   gap: 20px;
   align-items: stretch;
   position: sticky;
-  top: 220px;
+  top: var(--voyage-card-top, 198px);
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
@@ -1662,25 +1509,25 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
 /* Stacking Top Offsets & Z-Indexes */
 .voyage-card-step:nth-child(1) .voyage-milestone-card,
 .voyage-milestone-card[data-milestone="1"] {
-  top: 220px;
+  top: var(--voyage-card-top, 198px);
   z-index: 10;
 }
 
 .voyage-card-step:nth-child(2) .voyage-milestone-card,
 .voyage-milestone-card[data-milestone="2"] {
-  top: 232px;
+  top: calc(var(--voyage-card-top, 198px) + var(--voyage-card-step-offset, 8px));
   z-index: 11;
 }
 
 .voyage-card-step:nth-child(3) .voyage-milestone-card,
 .voyage-milestone-card[data-milestone="3"] {
-  top: 244px;
+  top: calc(var(--voyage-card-top, 198px) + var(--voyage-card-step-offset, 8px) * 2);
   z-index: 12;
 }
 
 .voyage-card-step:nth-child(4) .voyage-milestone-card,
 .voyage-milestone-card[data-milestone="4"] {
-  top: 256px;
+  top: calc(var(--voyage-card-top, 198px) + var(--voyage-card-step-offset, 8px) * 3);
   z-index: 13;
 }
 
@@ -1697,10 +1544,8 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
   box-shadow: 6px 8px 0 var(--ink, #09090b);
 }
 
-/* Hide non-active stacked card body content so only active card text is readable during scroll */
-.voyage-milestone-card.is-stacked:not(.is-active) .voyage-narrative,
-.voyage-milestone-card.is-stacked:not(.is-active) .voyage-highlights-box,
-.voyage-milestone-card.is-stacked:not(.is-active) .voyage-stack-row {
+/* Hide non-active stacked card content completely so only active card text is readable during scroll */
+.voyage-milestone-card.is-stacked:not(.is-active) .voyage-card-body > * {
   opacity: 0 !important;
   visibility: hidden !important;
 }
@@ -1978,13 +1823,15 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
 .voyage-celebration-banner {
   background: #ffffff;
   border: 2.5px solid #dc2626;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 12px 20px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   box-shadow: 4px 4px 0 #dc2626;
-  margin-top: 10px;
+  max-width: 760px;
+  margin: 18px auto 0;
   animation: bannerPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -2121,14 +1968,14 @@ header.site-header {
     max-width: 26em !important;
   }
 
-  .wanted-poster-frame {
+  .hero-portrait-frame {
     width: 100% !important;
-    max-width: 308px !important;
-    aspect-ratio: 3 / 4 !important;
+    max-width: 320px !important;
+    aspect-ratio: 15 / 16 !important;
     box-sizing: border-box !important;
     margin: 0 0 0 auto !important;
     justify-self: end !important;
-    transform: translateY(0) scale(1);
+    transform: none !important;
     padding: 0 !important;
   }
 
@@ -2223,9 +2070,9 @@ header.site-header {
   /* Full-bleed Red Ticker Tape on Tablet */
   .skills-ticker-tape {
     width: 100vw !important;
-    max-width: 100vw !important;
+    max-width: none !important;
     left: 50% !important;
-    right: 50% !important;
+    right: auto !important;
     margin: 10px 0 48px -50vw !important;
     box-sizing: border-box !important;
     overflow: hidden !important;
@@ -2435,35 +2282,24 @@ header.site-header {
     transform: translateX(-50%) rotate(-5deg) !important;
   }
 
-  /* Centered Wanted Bounty Poster */
-  .wanted-poster-frame {
+  /* Centered Hero Portrait */
+  .hero-portrait-frame {
     margin: 18px auto 0 !important;
     justify-self: center !important;
     width: 100% !important;
-    max-width: min(285px, 80vw) !important;
-    aspect-ratio: 3 / 4 !important;
+    max-width: min(290px, 80vw) !important;
+    aspect-ratio: 15 / 16 !important;
     box-sizing: border-box !important;
-    transform: translateY(0) scale(1);
+    transform: none !important;
     padding: 0 !important;
-  }
-
-  .chopper-peeking-wrap {
-    left: -12px !important;
-    top: -40px !important;
-  }
-
-  .wanted-annotation-note {
-    right: 6px !important;
-    bottom: -44px !important;
-    max-width: 150px !important;
   }
 
   /* Full-bleed Red Ticker Tape without scroll blowout */
   .skills-ticker-tape {
     width: 100vw !important;
-    max-width: 100vw !important;
+    max-width: none !important;
     left: 50% !important;
-    right: 50% !important;
+    right: auto !important;
     margin: 8px 0 40px -50vw !important;
     padding: 12px 0 !important;
     box-sizing: border-box !important;
@@ -2542,8 +2378,24 @@ header.site-header {
 
   /* Interactive Journey on Mobile */
   .voyage-route-dock {
-    top: 64px !important;
-    padding: 12px 14px 16px !important;
+    top: var(--voyage-dock-top, 96px) !important;
+    padding: 6px 10px 6px !important;
+  }
+
+  .voyage-route-header {
+    margin-bottom: 4px !important;
+    padding-bottom: 3px !important;
+    gap: 6px !important;
+  }
+
+  .voyage-route-title {
+    font-size: 0.68rem !important;
+    letter-spacing: 0.03em !important;
+  }
+
+  .count-pill {
+    font-size: 0.62rem !important;
+    padding: 1px 6px !important;
   }
 
   .voyage-card-step {
@@ -2552,50 +2404,60 @@ header.site-header {
 
   .voyage-card-step:nth-child(1) .voyage-milestone-card,
   .voyage-milestone-card[data-milestone="1"] {
-    top: 190px !important;
+    top: var(--voyage-card-top, 200px) !important;
   }
 
   .voyage-card-step:nth-child(2) .voyage-milestone-card,
   .voyage-milestone-card[data-milestone="2"] {
-    top: 198px !important;
+    top: calc(var(--voyage-card-top, 200px) + var(--voyage-card-step-offset, 8px)) !important;
   }
 
   .voyage-card-step:nth-child(3) .voyage-milestone-card,
   .voyage-milestone-card[data-milestone="3"] {
-    top: 206px !important;
+    top: calc(var(--voyage-card-top, 200px) + var(--voyage-card-step-offset, 8px) * 2) !important;
   }
 
   .voyage-card-step:nth-child(4) .voyage-milestone-card,
   .voyage-milestone-card[data-milestone="4"] {
-    top: 214px !important;
+    top: calc(var(--voyage-card-top, 200px) + var(--voyage-card-step-offset, 8px) * 3) !important;
   }
 
   .voyage-route-track {
-    padding: 0 4px !important;
+    padding: 0 2px !important;
   }
 
   .voyage-track-line {
-    left: 18px !important;
-    right: 18px !important;
+    top: 11px !important;
+    left: 16px !important;
+    right: 16px !important;
+  }
+
+  .voyage-ship-avatar {
+    top: -17px !important;
+  }
+
+  .ship-svg {
+    width: 19px !important;
+    height: 19px !important;
   }
 
   .voyage-waypoint {
-    min-width: 52px !important;
-    gap: 4px !important;
+    min-width: 48px !important;
+    gap: 2px !important;
   }
 
   .waypoint-num {
-    width: 32px !important;
-    height: 32px !important;
-    font-size: 0.78rem !important;
+    width: 24px !important;
+    height: 24px !important;
+    font-size: 0.68rem !important;
   }
 
   .waypoint-label {
-    font-size: 0.72rem !important;
+    font-size: 0.63rem !important;
   }
 
   .waypoint-year {
-    font-size: 0.65rem !important;
+    font-size: 0.56rem !important;
   }
 
   .voyage-milestone-card {
@@ -2778,14 +2640,6 @@ header.site-header {
     animation: none;
   }
 
-  .wanted-poster-frame.poster-in {
-    animation: none;
-  }
-
-  html.js-polish .wanted-poster-frame:not(.poster-in) {
-    opacity: 1;
-  }
-
   #scrollProgress {
     display: none;
   }
@@ -2870,25 +2724,25 @@ header.site-header {
   z-index: 1 !important;
 }
 
-/* 5. Right-hand photo card on desktop with subtle overlap rotation */
+/* 5. Right-hand straight portrait photo on desktop (slightly large with normal border) */
 @media (min-width: 1025px) {
-  .wanted-poster-frame {
-    max-width: 338px !important;
-    transform: rotate(1.5deg) !important;
-    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+  .hero-portrait-frame {
+    max-width: 400px !important;
+    transform: none !important;
+    transition: box-shadow 0.2s ease !important;
   }
 
-  .wanted-poster-frame:hover {
-    transform: rotate(0deg) scale(1.02) !important;
-    box-shadow: 8px 14px 0 var(--shadow) !important;
+  .hero-portrait-frame:hover {
+    transform: none !important;
+    box-shadow: 8px 8px 0 var(--ink, #18181b) !important;
   }
 }
 
-/* On ultra-wide 1920px screens: expand poster card by 15-20% (up to 412px) with connected tilt */
+/* On ultra-wide 1920px screens: expand portrait photo proportionately */
 @media (min-width: 1600px) {
-  .wanted-poster-frame {
-    max-width: 412px !important;
-    transform: rotate(2deg) !important;
+  .hero-portrait-frame {
+    max-width: 452px !important;
+    transform: none !important;
   }
 }
 
@@ -2954,24 +2808,6 @@ header.site-header {
   box-shadow: inset 0 0 10px rgba(180, 83, 9, 0.22), 0 0 4px rgba(180, 83, 9, 0.18) !important;
   background: radial-gradient(circle, rgba(180, 83, 9, 0.04) 55%, rgba(180, 83, 9, 0.15) 100%) !important;
   opacity: 0.9 !important;
-}
-
-/* 8. Poster text contrast (red / white on dark gradient for WCAG AAA) */
-.wanted-nameplate-title {
-  color: #ef4444 !important;
-  letter-spacing: 0.28em !important;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95) !important;
-  font-weight: 800 !important;
-}
-
-.wanted-nameplate .wanted-name {
-  color: #ffffff !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.98), 0 0 8px rgba(0, 0, 0, 0.85) !important;
-}
-
-.wanted-nameplate .wanted-character-subtitle {
-  color: #fee2e2 !important;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95) !important;
 }
 
 /* 9. Darkened tagline text & bold emphasis */
@@ -3115,9 +2951,9 @@ header.site-header {
     gap: clamp(16px, 3vw, 32px) !important;
   }
 
-  .wanted-poster-frame {
-    max-width: 310px !important;
-    transform: translateY(0) scale(1);
+  .hero-portrait-frame {
+    max-width: 320px !important;
+    transform: none !important;
   }
 }
 
@@ -3143,9 +2979,9 @@ header.site-header {
     display: none !important;
   }
 
-  .wanted-poster-frame {
-    max-width: 280px !important;
-    transform: translateY(0) scale(1);
+  .hero-portrait-frame {
+    max-width: min(290px, 80vw) !important;
+    transform: none !important;
   }
 }
 
@@ -3313,12 +3149,12 @@ html.is-android a.treasure-chest-widget {
   margin-top: 8px !important;
 }
 
-html.is-android .wanted-poster-frame {
-  max-width: min(225px, 66vw) !important;
+html.is-android .hero-portrait-frame {
+  max-width: min(245px, 72vw) !important;
   margin: 0 auto !important;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18) !important;
+  box-shadow: 4px 4px 0 var(--ink, #18181b) !important;
   filter: none !important;
-  transform: translateY(0) scale(1);
+  transform: none !important;
 }
 
 html.is-android .hero-stats-row {
@@ -3372,12 +3208,10 @@ html.is-android .card-footer .tags {
 
 /* 6. Voyage Journey Section on Android */
 html.is-android .voyage-card,
-html.is-android .voyage-milestone-card,
 html.is-android .voyage-card-body {
-  padding: 18px 16px !important;
+  padding: 16px 14px !important;
   border-radius: 12px !important;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12) !important;
-  transform: translateZ(0);
 }
 
 html.is-android .voyage-step,

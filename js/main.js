@@ -7,8 +7,8 @@
     const PORTFOLIO_CONFIG = window.PORTFOLIO_CONFIG = {
       name: "Deepak Pandey",
       bounty: "3,000,000,000",
-      photoUrl: "images/media_1794201865931_238ddac4.jpg", // Official Wanted Poster Template
-      wantedPosterPhoto: "images/media_1794201865931_238ddac4.jpg",
+      photoUrl: "images/deepak-wanted.jpg",
+      heroPortraitPhoto: "images/deepak-wanted.jpg",
       tagline: "Founder & Software Craftsman · Crafting scalable web platforms, digital systems, and creative code.",
       email: "deepak@synapsecalyx.com",
       status: "FOUNDER @ SYNAPSE CALYX · OPEN FOR COLLABORATIONS · 2026",
@@ -85,8 +85,8 @@
           date: "2026",
           description: "Achieved legendary status across shipped production services, client architectures, and relentless pursuit of technical excellence.",
           tags: ["Deepak Pandey", "Full Stack", "Legendary"],
-          link: "#wantedPoster",
-          linkLabel: "Inspect Bounty ↗"
+          link: "#heroPortrait",
+          linkLabel: "Inspect Portrait ↗"
         }
       ],
       quotes: [
@@ -230,8 +230,6 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
         const ghLink = document.getElementById("githubLink");
         const liLink = document.getElementById("linkedinLink");
         const resLink = document.getElementById("resumeLink");
-        const wantedPosterName = document.getElementById("wantedPosterName");
-        const wantedPosterBounty = document.getElementById("wantedPosterBounty");
 
         if (logoName) logoName.textContent = PORTFOLIO_CONFIG.name;
         if (heroName) {
@@ -249,8 +247,6 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
           }
         }
         if (availText) availText.textContent = PORTFOLIO_CONFIG.status;
-        if (wantedPosterName) wantedPosterName.textContent = PORTFOLIO_CONFIG.name;
-        if (wantedPosterBounty) wantedPosterBounty.textContent = PORTFOLIO_CONFIG.bounty;
         if (directEmail) {
           directEmail.href = "mailto:" + PORTFOLIO_CONFIG.email;
           directEmail.querySelector("span").textContent = PORTFOLIO_CONFIG.email;
@@ -270,33 +266,20 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
       }
       applyConfig();
 
-      // One Piece Wanted Poster Photo Loader (Permanently displaying Deepak Pandey's Portrait)
-      const wantedPhotoContainer = document.getElementById("wantedPhotoContainer");
-      const wantedPhotoImg = document.getElementById("wantedPhotoImg");
-      const wantedPortraitImg = document.getElementById("wantedPortraitImg");
-      const wantedPlaceholder = document.getElementById("wantedPlaceholder");
+      // Hero Portrait Loader (Permanently displaying Deepak Pandey's Portrait)
+      const heroPortraitImg = document.getElementById("heroPortraitImg");
 
-      // Purge any stale uploaded local storage photo so the official portrait is always used
+      // Purge any stale uploaded local storage photo
       try {
         localStorage.removeItem("portfolio_wanted_photo");
       } catch (err) { }
 
-      function setWantedPhoto(src) {
-        if (!wantedPhotoImg) return;
-        const templateSrc = (src && (src.includes("media_1794201865931_238ddac4.jpg") || src.includes("wanted-poster-template.jpg")))
-          ? src
-          : "images/media_1794201865931_238ddac4.jpg";
-        wantedPhotoImg.src = templateSrc;
-        wantedPhotoImg.style.display = "block";
-        if (wantedPortraitImg) {
-          wantedPortraitImg.style.display = "block";
-          wantedPortraitImg.src = "images/deepak-wanted.jpg";
-        }
-        if (wantedPlaceholder) wantedPlaceholder.style.display = "none";
+      function setHeroPortrait(src) {
+        if (!heroPortraitImg) return;
+        heroPortraitImg.src = src || "images/deepak-wanted.jpg";
       }
 
-      // Initialize Wanted Poster with Deepak Pandey's Portrait
-      setWantedPhoto(PORTFOLIO_CONFIG.photoUrl || PORTFOLIO_CONFIG.wantedPosterPhoto || "images/media_1794201865931_238ddac4.jpg");
+      setHeroPortrait(PORTFOLIO_CONFIG.photoUrl || PORTFOLIO_CONFIG.heroPortraitPhoto || "images/deepak-wanted.jpg");
 
       // Real-Time Live Viewer Presence Tracker (Vercel Web Analytics sync)
       (function initLiveViewerTracker() {
@@ -817,30 +800,6 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
               if (transFeedback) transFeedback.textContent = "Transmission dispatched! Looking forward to replying.";
             }, 1500);
           }, 700);
-        });
-      }
-
-      // 10b. Wanted Poster Easter Egg: Bounty Increase & Coin Sound
-      const bountyRow = document.getElementById("wantedBountyRow");
-      const bountyDisplay = document.getElementById("wantedPosterBounty");
-      let currentBountyNum = 3000000000;
-      if (bountyRow && bountyDisplay) {
-        bountyRow.addEventListener("click", function (e) {
-          e.stopPropagation();
-          currentBountyNum += 100000000;
-          bountyDisplay.textContent = currentBountyNum.toLocaleString();
-          bountyRow.classList.add("bounty-boosted");
-          playCoinAudio();
-
-          // Spawn floating badge
-          const badge = document.createElement("div");
-          badge.className = "bounty-click-badge";
-          badge.textContent = "+100M ฿";
-          const rect = bountyRow.getBoundingClientRect();
-          badge.style.left = (e.clientX || (rect.left + rect.width / 2)) + "px";
-          badge.style.top = (e.clientY || rect.top) + "px";
-          document.body.appendChild(badge);
-          setTimeout(function () { badge.remove(); }, 1200);
         });
       }
 
@@ -1535,7 +1494,7 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
       // 15. Tactile Ink Splatter Ripple on Paper Click
       document.addEventListener("click", function (e) {
         // Only trigger if clicking on empty main paper background, not buttons or inputs
-        if (e.target.closest("button, a, input, textarea, select, .card, .wanted-poster-frame")) return;
+        if (e.target.closest("button, a, input, textarea, select, .card, .hero-portrait-frame")) return;
         const splatter = document.createElement("div");
         splatter.className = "ink-splatter-particle";
         splatter.style.left = (e.clientX - 11) + "px";
@@ -1601,6 +1560,8 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
         const shipAvatar = document.getElementById("voyageShipAvatar");
         const counterPill = document.getElementById("voyageRouteCounter");
         const celebrationBanner = document.getElementById("voyageCelebrationBanner");
+        const routeDock = document.getElementById("voyageRouteDock");
+        const scrollHint = document.getElementById("voyageScrollHint");
 
         if (!steps.length || !cards.length) return;
 
@@ -1609,6 +1570,68 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
         let lockedWaypoint = null;
         let waypointLockTimer = null;
         let lastWaypointTargetY = null;
+        let cachedJDocTop = null;
+        let cachedStepH = null;
+        let lastMeasuredNavBottom = 0;
+        let lastMeasuredDockH = 0;
+
+        function getStickyNavBottom() {
+          const headerEl = document.querySelector("header.site-header");
+          const navEl = headerEl ? headerEl.querySelector(".nav-island") : null;
+          const headerStyle = headerEl ? window.getComputedStyle(headerEl) : null;
+          const navTop = headerStyle ? (parseFloat(headerStyle.top) || 0) : 12;
+          const navPadTop = headerStyle ? (parseFloat(headerStyle.paddingTop) || 0) : 0;
+          const navH = navEl ? Math.ceil(navEl.getBoundingClientRect().height) : (headerEl ? headerEl.offsetHeight : 56);
+          return Math.ceil(navTop + navPadTop + navH);
+        }
+
+        function syncJourneyGeometry() {
+          const stickyNavBottom = getStickyNavBottom();
+          const dockTop = stickyNavBottom + 10;
+          const dockH = routeDock ? routeDock.offsetHeight : 96;
+          lastMeasuredNavBottom = stickyNavBottom;
+          lastMeasuredDockH = dockH;
+
+          const hintH = scrollHint ? (scrollHint.offsetHeight + 8) : 0;
+          const isMobile = window.innerWidth <= 680;
+          const isAndroid = document.documentElement.classList.contains("is-android");
+          const cardGap = isMobile ? 10 : 12;
+          const cardOffset = 8;
+          const cardTop = Math.ceil(dockTop + dockH + cardGap);
+          const deckTopPad = Math.ceil(dockH + hintH + 14);
+
+          let maxCardH = 340;
+          cards.forEach((c) => {
+            if (c.offsetHeight > maxCardH) maxCardH = c.offsetHeight;
+          });
+          const lastCard = cards[cards.length - 1];
+          const lastCardH = lastCard && lastCard.offsetHeight ? lastCard.offsetHeight : maxCardH;
+          const exitCardH = Math.max(maxCardH, lastCardH);
+
+          const baseStepH = isAndroid ? 380 : (isMobile ? 460 : 560);
+          cachedStepH = Math.max(baseStepH, maxCardH + 36);
+
+          // Ensure routeDock always exits in sync above the tallest card's top (+gap & stagger)
+          const dockExitPad = Math.ceil(exitCardH + cardGap + (cards.length - 1) * cardOffset + 24);
+
+          journeySection.style.setProperty("--voyage-dock-top", dockTop + "px");
+          journeySection.style.setProperty("--voyage-deck-top-pad", deckTopPad + "px");
+          journeySection.style.setProperty("--voyage-card-top", cardTop + "px");
+          journeySection.style.setProperty("--voyage-card-step-offset", cardOffset + "px");
+          journeySection.style.setProperty("--voyage-dock-exit-pad", dockExitPad + "px");
+          journeySection.style.setProperty("--voyage-step-h", cachedStepH + "px");
+
+          cachedJDocTop = null;
+        }
+
+        syncJourneyGeometry();
+        window.addEventListener("load", syncJourneyGeometry, { passive: true, once: true });
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(function () {
+            syncJourneyGeometry();
+            onScrollJourney();
+          }).catch(function () { });
+        }
 
         function clearWaypointLock() {
           if (waypointLockTimer) {
@@ -1699,9 +1722,7 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
           }
         }
 
-        // Cache journey section top offset; invalidate on resize to avoid stale layout reads
-        let cachedJDocTop = null;
-        window.addEventListener("resize", function() { cachedJDocTop = null; }, { passive: true });
+        window.addEventListener("resize", syncJourneyGeometry, { passive: true });
 
         function getActiveStepFromScroll() {
           const scrollY = window.scrollY;
@@ -1715,7 +1736,7 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
 
           const isAndroid = document.documentElement.classList.contains("is-android");
           const isMobile = window.innerWidth <= 680;
-          const stepH = isAndroid ? 380 : (isMobile ? 460 : 560);
+          const stepH = cachedStepH || (isAndroid ? 380 : (isMobile ? 460 : 560));
 
           if (relY < stepH) return 1;
           if (relY < stepH * 2) return 2;
@@ -1725,6 +1746,11 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
 
         // Calculate step from scroll position with rAF debouncing
         function onScrollJourney() {
+          const curNavB = getStickyNavBottom();
+          const curDockH = routeDock ? routeDock.offsetHeight : 96;
+          if (curNavB !== lastMeasuredNavBottom || curDockH !== lastMeasuredDockH) {
+            syncJourneyGeometry();
+          }
           if (window.scrollY < 200) {
             clearWaypointLock();
           }
@@ -1775,6 +1801,7 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
         window._journeyCleanup = function() {
           window.removeEventListener("scroll", _jScrollHandler);
           window.removeEventListener("resize", _jResizeHandler);
+          window.removeEventListener("resize", syncJourneyGeometry);
           window.removeEventListener("wheel", _jWheelHandler);
           window.removeEventListener("touchmove", _jTouchHandler);
           window.removeEventListener("keydown", _jKeyHandler);
@@ -1792,6 +1819,7 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
             const targetChapter = parseInt(wp.getAttribute("data-chapter"), 10);
             if (isNaN(targetChapter)) return;
 
+            syncJourneyGeometry();
             clearWaypointLock();
             lockedWaypoint = targetChapter;
             updateJourneyState(targetChapter, true);

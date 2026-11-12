@@ -10,7 +10,7 @@
   <!-- OpenGraph / Social Metadata -->
   <meta property="og:title" content="Portfolio &amp; Digital Sketchbook">
   <meta property="og:description"
-    content="A hand-crafted developer and designer portfolio sketched in ink and paper with interactive One Piece wanted poster, sound effects, and digital sketchbook studio.">
+    content="A hand-crafted developer and designer portfolio sketched in ink and paper with sound effects and digital sketchbook studio.">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="images/favicon.png">
   <link rel="shortcut icon" href="favicon.ico">
@@ -287,101 +287,11 @@
           </div>
         </div>
 
-      <!-- One Piece Wanted Bounty Poster Frame -->
-      <div class="wanted-poster-frame ink" id="wantedPoster" role="region"
-        aria-label="One Piece Wanted Bounty Poster Frame">
-        <!-- Chopper Spot 1: Reverse-Peeking Chopper -->
-        <div class="chopper-peeking-wrap wanted-chopper-peeker" id="chopperPeeking"
-          title="Tony Tony Chopper peeking! Click him!">
-          <svg viewBox="0 0 120 120" width="85" height="85" class="doodle" aria-hidden="true">
-            <!-- Antlers -->
-            <path d="M24 38 C14 26 12 14 22 8 C25 14 28 22 32 30" fill="#a16207" stroke="var(--ink)" stroke-width="2.5"
-              stroke-linejoin="round" />
-            <path d="M16 18 C10 14 8 8 14 6 C17 10 18 14 20 18" fill="#a16207" stroke="var(--ink)" stroke-width="2" />
-            <path d="M96 38 C106 26 108 14 98 8 C95 14 92 22 88 30" fill="#a16207" stroke="var(--ink)"
-              stroke-width="2.5" stroke-linejoin="round" />
-            <path d="M104 18 C110 14 112 8 106 6 C103 10 102 14 100 18" fill="#a16207" stroke="var(--ink)"
-              stroke-width="2" />
-            <!-- Ears -->
-            <ellipse cx="20" cy="54" rx="14" ry="9" transform="rotate(-25 20 54)" fill="#b45309" stroke="var(--ink)"
-              stroke-width="2.5" />
-            <ellipse cx="20" cy="54" rx="9" ry="5" transform="rotate(-25 20 54)" fill="#fbcfe8" />
-            <ellipse cx="100" cy="54" rx="14" ry="9" transform="rotate(25 100 54)" fill="#b45309" stroke="var(--ink)"
-              stroke-width="2.5" />
-            <ellipse cx="100" cy="54" rx="9" ry="5" transform="rotate(25 100 54)" fill="#fbcfe8" />
-            <!-- Pink Doctor Hat -->
-            <path d="M36 44 C34 16 86 16 84 44 Z" fill="#ec4899" stroke="var(--ink)" stroke-width="2.5" />
-            <path d="M56 22 H64 V38 H56 Z" fill="#ffffff" stroke="var(--ink)" stroke-width="1.5" />
-            <path d="M50 27 H70 V33 H50 Z" fill="#ffffff" stroke="var(--ink)" stroke-width="1.5" />
-            <ellipse cx="60" cy="45" rx="36" ry="10" fill="#06b6d4" stroke="var(--ink)" stroke-width="2.5" />
-            <!-- Chubby Reindeer Face -->
-            <circle cx="60" cy="68" r="28" fill="#d97706" stroke="var(--ink)" stroke-width="2.5" />
-            <!-- Eyes -->
-            <ellipse cx="48" cy="64" rx="5.5" ry="7.5" fill="#1e1b4b" />
-            <circle cx="46" cy="61" r="2.2" fill="#ffffff" />
-            <ellipse cx="72" cy="64" rx="5.5" ry="7.5" fill="#1e1b4b" />
-            <circle cx="70" cy="61" r="2.2" fill="#ffffff" />
-            <!-- Blue Nose -->
-            <ellipse cx="60" cy="72" rx="5.5" ry="4" fill="#0284c7" stroke="var(--ink)" stroke-width="1.8" />
-            <circle cx="58.5" cy="71" r="1.2" fill="#ffffff" />
-            <!-- Muzzle Smile -->
-            <path d="M54 77 Q60 82 66 77" fill="none" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" />
-            <!-- Cheeks -->
-            <ellipse cx="42" cy="72" rx="5" ry="3.5" fill="#f43f5e" opacity="0.8" />
-            <ellipse cx="78" cy="72" rx="5" ry="3.5" fill="#f43f5e" opacity="0.8" />
-            <!-- Hooves grabbing the frame -->
-            <ellipse cx="38" cy="94" rx="8" ry="7" fill="#78350f" stroke="var(--ink)" stroke-width="2.5" />
-            <ellipse cx="82" cy="94" rx="8" ry="7" fill="#78350f" stroke="var(--ink)" stroke-width="2.5" />
-          </svg>
-          <div class="chopper-bubble" id="chopperPeekingBubble">
-            “B-Baka! Looking at me won't make me happy, you bastard! (≧◡≦)”
-          </div>
-        </div>
-        <div class="poster-pin" aria-hidden="true"></div>
-
-        <div class="wanted-poster-media-wrap wanted-photo-container" id="wantedPhotoContainer"
-          title="Official One Piece Wanted Poster">
-          <!-- User photo img -->
-          <img id="wantedPhotoImg" src="images/media_1794201865931_238ddac4.jpg"
-            alt="One Piece Wanted Bounty Poster - Deepak Pandey" class="wanted-poster-image wanted-img"
-            style="display:block;" />
-
-          <!-- Authentic Character Photo Cutout Window -->
-          <div class="wanted-portrait-cutout" id="wantedPortraitCutout">
-            <img id="wantedPortraitImg" src="images/deepak-wanted.jpg" alt="Deepak Pandey Portrait" class="wanted-portrait-img" />
-            <div class="wanted-nameplate">
-              <div class="wanted-nameplate-title">CAPTAIN</div>
-              <div class="wanted-name" id="wantedPosterName">DEEPAK PANDEY</div>
-              <div class="wanted-character-subtitle">“SOFTWARE CRAFTSMAN”</div>
-            </div>
-          </div>
-
-          <!-- Interactive Bounty Row Click Zone (positioned over the printed ฿ 3,000,000,000) -->
-          <div class="wanted-bounty-row" id="wantedBountyRow" style="cursor:pointer"
-            title="Click to raise bounty! +100M ฿" role="button" tabindex="0"
-            aria-label="Click to raise bounty">
-            <span class="berry-symbol">฿</span>
-            <span class="bounty-amount" id="wantedPosterBounty">3,000,000,000</span>
-            <span class="bounty-dash">-</span>
-          </div>
-
-          <!-- Marine Seal Inspection Stamp -->
-          <span class="marine-stamp" id="marineStampToggle" title="World Government Marine Seal (Click to inspect!)"
-            style="display:none; cursor:pointer">
-            <svg viewBox="0 0 44 26" width="30" height="18" class="doodle" aria-hidden="true">
-              <path d="M3 14 Q12 4 22 14 Q32 4 41 14" stroke-width="2" />
-              <path d="M22 14 L22 23 M17 21 L27 21" stroke-width="1.8" />
-            </svg>
-          </span>
-
-          <!-- Default Hand-Drawn One Piece Pirate Silhouette Placeholder -->
-          <div id="wantedPlaceholder" class="wanted-placeholder" style="display:none;"></div>
-        </div>
-
-        <!-- Taped Note Annotation -->
-        <div class="wanted-annotation-note" aria-hidden="true">
-          <span>Wanted: Relentless curiosity &amp; pure craft ✦</span>
-        </div>
+      <!-- Clean Straight Hero Portrait Frame -->
+      <div class="hero-portrait-frame ink" id="heroPortrait" role="region"
+        aria-label="Deepak Pandey Portrait">
+        <img id="heroPortraitImg" src="images/deepak-wanted.jpg"
+          alt="Deepak Pandey Portrait" class="hero-portrait-img" />
       </div>
     </div>
 
@@ -959,6 +869,8 @@
         </p>
       </div>
 
+      <div class="voyage-sticky-stage" id="voyageStickyStage">
+        <div class="voyage-dock-rail" id="voyageDockRail">
       <!-- GRAND LINE WAYPOINT ROUTE BAR -->
       <div class="voyage-route-dock" id="voyageRouteDock" aria-label="Grand Line Voyage Navigation">
         <div class="voyage-route-header">
@@ -1033,6 +945,7 @@
       <div class="voyage-scroll-hint" id="voyageScrollHint" aria-hidden="true">
         <span>↓ Scroll naturally to cruise the Grand Line</span>
       </div>
+        </div>
 
       <!-- PROGRESSIVE MILESTONES STREAM / SCROLL DECK TRACK -->
       <div class="voyage-deck-track voyage-stream-trail" id="voyageDeckTrack">
@@ -1230,20 +1143,21 @@
               <span class="voyage-chip">Inherited Will</span>
               <span class="voyage-chip">Bespoke Studios</span>
             </div>
-
-            <!-- CELEBRATORY BANNER (Revealed when all 4 chapters are accumulated) -->
-            <div class="voyage-celebration-banner" id="voyageCelebrationBanner" style="display:none;">
-              <span class="banner-sparkle">✦</span>
-              <div class="banner-content">
-                <strong>VOYAGE ARCHIVE COMPLETE!</strong>
-                <span class="banner-subtext">“There is no limit to what can be built when passion meets hand-crafted code.”</span>
-              </div>
-              <span class="banner-sparkle">✦</span>
-            </div>
           </div>
         </article>
         </div>
 
+      </div>
+      </div>
+
+      <!-- CELEBRATORY BANNER (Revealed when all 4 chapters are accumulated, outside cards so milestone-4 height never shifts mid-scroll) -->
+      <div class="voyage-celebration-banner" id="voyageCelebrationBanner" style="display:none;">
+        <span class="banner-sparkle">✦</span>
+        <div class="banner-content">
+          <strong>VOYAGE ARCHIVE COMPLETE!</strong>
+          <span class="banner-subtext">“There is no limit to what can be built when passion meets hand-crafted code.”</span>
+        </div>
+        <span class="banner-sparkle">✦</span>
       </div>
     </section>
 

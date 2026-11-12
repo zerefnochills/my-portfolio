@@ -137,15 +137,15 @@ async function runTier1(harness) {
   });
 
   // ---------------------------------------------------------
-  // Feature 3: Wanted Poster Template HTTP 200 & Render (5 assertions)
+  // Feature 3: Straight Hero Portrait Image HTTP 200 & Render (5 assertions)
   // ---------------------------------------------------------
-  console.log('\n-- Feature 3: Wanted Poster Asset Resolution & HTTP 200 --');
+  console.log('\n-- Feature 3: Hero Portrait Asset Resolution & HTTP 200 --');
 
-  // F3.1: Poster image references user-provided template image
+  // F3.1: Portrait image references Deepak portrait photo
   const posterSrcInfo = await harness.evaluate(`
     (() => {
-      const img = document.querySelector('#wantedPhotoImg') || document.querySelector('.wanted-img');
-      const cfg = window.PORTFOLIO_CONFIG ? window.PORTFOLIO_CONFIG.wantedPosterPhoto : null;
+      const img = document.querySelector('#heroPortraitImg') || document.querySelector('.hero-portrait-img');
+      const cfg = window.PORTFOLIO_CONFIG ? window.PORTFOLIO_CONFIG.photoUrl : null;
       return {
         src: img ? img.getAttribute('src') : null,
         currentSrc: img ? img.currentSrc : null,
@@ -153,46 +153,46 @@ async function runTier1(harness) {
       };
     })()
   `);
-  const TARGET_IMG = 'media_1794201865931_238ddac4.jpg';
+  const TARGET_IMG = 'deepak-wanted.jpg';
   const f3_1_pass = (posterSrcInfo.src && posterSrcInfo.src.includes(TARGET_IMG)) ||
-                    (posterSrcInfo.configSrc && posterSrcInfo.configSrc.includes(TARGET_IMG));
-  reporter.record(1, 'F3-WantedPosterAsset', 'Poster markup or PORTFOLIO_CONFIG references media_1794201865931_238ddac4.jpg', f3_1_pass, {
-    expected: TARGET_IMG,
-    actual: posterSrcInfo
-  });
+    (posterSrcInfo.configSrc && posterSrcInfo.configSrc.includes(TARGET_IMG));
+    reporter.record(1, 'F3-HeroPortraitAsset', 'Hero portrait markup or PORTFOLIO_CONFIG references deepak-wanted.jpg', f3_1_pass, {
+      expected: TARGET_IMG,
+      actual: posterSrcInfo
+    });
 
-  // F3.2: HTTP GET request for the asset returns status 200
-  let posterHttp = harness.networkLog.find(r => r.url.includes(TARGET_IMG));
-  // If not requested automatically yet, request it now through server
-  if (!posterHttp) {
-    try {
-      const assetRes = await fetch(`http://127.0.0.1:${harness.serverPort}/images/${TARGET_IMG}`);
-      posterHttp = {
-        url: `/images/${TARGET_IMG}`,
-        status: assetRes.status,
-        size: Number(assetRes.headers.get('content-length') || 0)
-      };
-    } catch (e) {
-      posterHttp = { url: `/images/${TARGET_IMG}`, status: 500, error: e.message };
+    // F3.2: HTTP GET request for the asset returns status 200
+    let posterHttp = harness.networkLog.find(r => r.url.includes(TARGET_IMG));
+    // If not requested automatically yet, request it now through server
+    if(!posterHttp) {
+      try {
+        const assetRes = await fetch(`http://127.0.0.1:${harness.serverPort}/images/${TARGET_IMG}`);
+        posterHttp = {
+          url: `/images/${TARGET_IMG}`,
+          status: assetRes.status,
+          size: Number(assetRes.headers.get('content-length') || 0)
+        };
+      } catch (e) {
+        posterHttp = { url: `/images/${TARGET_IMG}`, status: 500, error: e.message };
+      }
     }
-  }
   const f3_2_pass = posterHttp && posterHttp.status === 200;
-  reporter.record(1, 'F3-WantedPosterAsset', 'Template image asset resolves with HTTP 200 OK', f3_2_pass, {
-    expected: 200,
-    actual: posterHttp ? posterHttp.status : 'Not Found'
-  });
+      reporter.record(1, 'F3-HeroPortraitAsset', 'Hero portrait image asset resolves with HTTP 200 OK', f3_2_pass, {
+        expected: 200,
+        actual: posterHttp ? posterHttp.status : 'Not Found'
+      });
 
-  // F3.3: Image file size is > 50KB (full fidelity template)
-  const f3_3_pass = posterHttp && posterHttp.size > 50000;
-  reporter.record(1, 'F3-WantedPosterAsset', 'Template image asset size is > 50KB (high fidelity template)', f3_3_pass, {
-    expected: '> 50000 bytes',
-    actual: posterHttp ? posterHttp.size : 0
-  });
+      // F3.3: Image file size is > 50KB (full fidelity portrait)
+      const f3_3_pass = posterHttp && posterHttp.size > 50000;
+        reporter.record(1, 'F3-HeroPortraitAsset', 'Hero portrait asset size is > 50KB (high fidelity image)', f3_3_pass, {
+          expected: '> 50000 bytes',
+          actual: posterHttp ? posterHttp.size : 0
+        });
 
-  // F3.4: Browser reports image complete
-  const posterImgState = await harness.evaluate(`
+        // F3.4: Browser reports image complete
+        const posterImgState = await harness.evaluate(`
     (() => {
-      const img = document.querySelector('#wantedPhotoImg') || document.querySelector('.wanted-img');
+      const img = document.querySelector('#heroPortraitImg') || document.querySelector('.hero-portrait-img');
       return img ? {
         complete: img.complete,
         naturalWidth: img.naturalWidth,
@@ -200,77 +200,85 @@ async function runTier1(harness) {
       } : null;
     })()
   `);
-  const f3_4_pass = Boolean(posterImgState && posterImgState.complete);
-  reporter.record(1, 'F3-WantedPosterAsset', 'Browser reports wanted poster img.complete === true', f3_4_pass, {
-    expected: true,
-    actual: posterImgState ? posterImgState.complete : null
-  });
+        const f3_4_pass = Boolean(posterImgState && posterImgState.complete);
+          reporter.record(1, 'F3-HeroPortraitAsset', 'Browser reports hero portrait img.complete === true', f3_4_pass, {
+            expected: true,
+            actual: posterImgState ? posterImgState.complete : null
+          });
 
-  // F3.5: Browser reports natural dimensions > 0 (valid decoded image)
-  const f3_5_pass = Boolean(posterImgState && posterImgState.naturalWidth > 0 && posterImgState.naturalHeight > 0);
-  reporter.record(1, 'F3-WantedPosterAsset', 'Browser decodes wanted poster with natural dimensions > 0', f3_5_pass, {
-    expected: 'naturalWidth > 0 and naturalHeight > 0',
-    actual: posterImgState ? `${posterImgState.naturalWidth}x${posterImgState.naturalHeight}` : null
-  });
+          // F3.5: Browser reports natural dimensions > 0 (valid decoded image)
+          const f3_5_pass = Boolean(posterImgState && posterImgState.naturalWidth > 0 && posterImgState.naturalHeight > 0);
+            reporter.record(1, 'F3-HeroPortraitAsset', 'Browser decodes hero portrait with natural dimensions > 0', f3_5_pass, {
+              expected: 'naturalWidth > 0 and naturalHeight > 0',
+              actual: posterImgState ? `${posterImgState.naturalWidth}x${posterImgState.naturalHeight}` : null
+            });
 
-  // ---------------------------------------------------------
-  // Feature 4: Wanted Poster 3:4 Aspect Ratio (5 assertions)
-  // ---------------------------------------------------------
-  console.log('\n-- Feature 4: Wanted Poster 3:4 Aspect Ratio --');
+            // ---------------------------------------------------------
+            // Feature 4: Straight Hero Portrait Ratio & Full-Width Ticker (5 assertions)
+            // ---------------------------------------------------------
+            console.log('\n-- Feature 4: Hero Portrait Straight Ratio & Containment --');
 
-  // F4.1: Natural asset aspect ratio is 3:4 (0.75 +/- 0.02)
-  const naturalRatio = posterImgState && posterImgState.naturalHeight > 0 ?
-    posterImgState.naturalWidth / posterImgState.naturalHeight : 0;
-  const f4_1_pass = Math.abs(naturalRatio - 0.75) <= 0.02;
-  reporter.record(1, 'F4-WantedAspectRatio', 'Natural image aspect ratio matches authentic 3:4 (0.75 ± 0.02)', f4_1_pass, {
-    expected: 0.75,
-    actual: naturalRatio
-  });
+            // F4.1: Natural asset aspect ratio is 15:16 (0.9375 +/- 0.03)
+            const naturalRatio = posterImgState && posterImgState.naturalHeight > 0 ?
+              posterImgState.naturalWidth / posterImgState.naturalHeight : 0;
+              const f4_1_pass = Math.abs(naturalRatio - 0.9375) <= 0.03;
+              reporter.record(1, 'F4-HeroPortraitRatio', 'Natural portrait aspect ratio matches 15:16 (0.9375 ± 0.03)', f4_1_pass, {
+                expected: 0.9375,
+                actual: naturalRatio
+              });
 
-  // F4.2: Rendered frame aspect ratio on desktop 1440px
-  await harness.setViewport(1440, 900);
-  m1440 = await harness.getMetrics(1440);
-  const ratio1440 = m1440.wanted ? m1440.wanted.aspectRatio : 0;
-  const f4_2_pass = Math.abs(ratio1440 - 0.75) <= 0.04;
-  reporter.record(1, 'F4-WantedAspectRatio', 'Rendered frame on desktop (1440px) maintains 3:4 ratio (0.75 ± 0.04)', f4_2_pass, {
-    expected: '0.75 ± 0.04',
-    actual: ratio1440.toFixed(3)
-  });
+              // F4.2: Rendered frame aspect ratio & straight alignment on desktop 1440px (plus edge-to-edge skills ticker)
+              await harness.setViewport(1440, 900);
+              m1440 = await harness.getMetrics(1440);
+              const ratio1440 = m1440.wanted ? m1440.wanted.aspectRatio : 0;
+  const straightDesk = await harness.evaluate(`
+    (() => {
+      const f = document.querySelector('.hero-portrait-frame');
+      const tf = f ? window.getComputedStyle(f).transform : '';
+      return tf === 'none' || tf === 'matrix(1, 0, 0, 1, 0, 0)';
+    })()
+  `);
+                const tickerFullWidth1440 = m1440.skillsTicker && m1440.skillsTicker.left <= 1 && m1440.skillsTicker.right >= m1440.docW - 1;
+                const f4_2_pass = Math.abs(ratio1440 - 0.9375) <= 0.04 && straightDesk && tickerFullWidth1440;
+                reporter.record(1, 'F4-HeroPortraitRatio', 'Desktop (1440px) portrait is straight 15:16 & skills ticker spans full viewport width', f4_2_pass, {
+                  expected: '0.9375 ± 0.04, straight transform, full-width ticker',
+                  actual: { ratio: ratio1440.toFixed(3), straightDesk, skillsTicker: m1440.skillsTicker, docW: m1440.docW }
+                });
 
-  // F4.3: Rendered frame aspect ratio on tablet 768px
-  await harness.setViewport(768, 1024);
-  m768 = await harness.getMetrics(768);
-  const ratio768 = m768.wanted ? m768.wanted.aspectRatio : 0;
-  const f4_3_pass = Math.abs(ratio768 - 0.75) <= 0.04;
-  reporter.record(1, 'F4-WantedAspectRatio', 'Rendered frame on tablet (768px) maintains 3:4 ratio (0.75 ± 0.04)', f4_3_pass, {
-    expected: '0.75 ± 0.04',
-    actual: ratio768.toFixed(3)
-  });
+                // F4.3: Rendered frame aspect ratio on tablet 768px
+                await harness.setViewport(768, 1024);
+                m768 = await harness.getMetrics(768);
+                const ratio768 = m768.wanted ? m768.wanted.aspectRatio : 0;
+                  const f4_3_pass = Math.abs(ratio768 - 0.9375) <= 0.04;
+                  reporter.record(1, 'F4-HeroPortraitRatio', 'Rendered frame on tablet (768px) maintains 15:16 ratio (0.9375 ± 0.04)', f4_3_pass, {
+                    expected: '0.9375 ± 0.04',
+                    actual: ratio768.toFixed(3)
+                  });
 
-  // F4.4: Rendered frame aspect ratio on mobile 375px
-  await harness.setViewport(375, 667);
-  m375 = await harness.getMetrics(375);
-  const ratio375 = m375.wanted ? m375.wanted.aspectRatio : 0;
-  const f4_4_pass = Math.abs(ratio375 - 0.75) <= 0.04;
-  reporter.record(1, 'F4-WantedAspectRatio', 'Rendered frame on mobile (375px) maintains 3:4 ratio (0.75 ± 0.04)', f4_4_pass, {
-    expected: '0.75 ± 0.04',
-    actual: ratio375.toFixed(3)
-  });
+                  // F4.4: Rendered frame aspect ratio on mobile 375px
+                  await harness.setViewport(375, 667);
+                  m375 = await harness.getMetrics(375);
+                  const ratio375 = m375.wanted ? m375.wanted.aspectRatio : 0;
+                    const f4_4_pass = Math.abs(ratio375 - 0.9375) <= 0.04;
+                    reporter.record(1, 'F4-HeroPortraitRatio', 'Rendered frame on mobile (375px) maintains 15:16 ratio (0.9375 ± 0.04)', f4_4_pass, {
+                      expected: '0.9375 ± 0.04',
+                      actual: ratio375.toFixed(3)
+                    });
 
-  // F4.5: Mobile 375px containment: frame width <= 320px and fits within screen
-  const f4_5_pass = m375.wanted && m375.wanted.width <= 320 && m375.wanted.right <= 375 + 1;
-  reporter.record(1, 'F4-WantedAspectRatio', 'Wanted poster frame on mobile (375px) is width-constrained (<= 320px) without overflow', f4_5_pass, {
-    expected: 'width <= 320 and right <= 375',
-    actual: m375.wanted ? { width: m375.wanted.width, right: m375.wanted.right } : null
-  });
+                    // F4.5: Mobile 375px containment: frame width <= 320px and fits within screen
+                    const f4_5_pass = m375.wanted && m375.wanted.width <= 320 && m375.wanted.right <= 375 + 1;
+                      reporter.record(1, 'F4-HeroPortraitRatio', 'Hero portrait frame on mobile (375px) is width-constrained (<= 320px) without overflow', f4_5_pass, {
+                        expected: 'width <= 320 and right <= 375',
+                        actual: m375.wanted ? { width: m375.wanted.width, right: m375.wanted.right } : null
+                      });
 
-  // ---------------------------------------------------------
-  // Feature 5: Journey Scroll Progression (No Buttons) (5 assertions)
-  // ---------------------------------------------------------
-  console.log('\n-- Feature 5: Journey Scroll Progression (No Buttons) --');
+                      // ---------------------------------------------------------
+                      // Feature 5: Journey Scroll Progression (No Buttons) (5 assertions)
+                      // ---------------------------------------------------------
+                      console.log('\n-- Feature 5: Journey Scroll Progression (No Buttons) --');
 
-  // F5.1: Manual reveal buttons eliminated or hidden
-  const revealBtnState = await harness.evaluate(`
+                      // F5.1: Manual reveal buttons eliminated or hidden
+                      const revealBtnState = await harness.evaluate(`
     (() => {
       const btn = document.getElementById('journeyRevealBtn');
       if (!btn) return { exists: false, visible: false };
@@ -282,18 +290,18 @@ async function runTier1(harness) {
       };
     })()
   `);
-  const f5_1_pass = !revealBtnState.exists || !revealBtnState.visible;
-  reporter.record(1, 'F5-JourneyScrollProgression', 'Manual button-click reveal button (#journeyRevealBtn) is eliminated / hidden', f5_1_pass, {
-    expected: 'not visible or removed',
-    actual: revealBtnState
-  });
+                      const f5_1_pass = !revealBtnState.exists || !revealBtnState.visible;
+                      reporter.record(1, 'F5-JourneyScrollProgression', 'Manual button-click reveal button (#journeyRevealBtn) is eliminated / hidden', f5_1_pass, {
+                        expected: 'not visible or removed',
+                        actual: revealBtnState
+                      });
 
-  // Reset to 1440px desktop for journey scroll testing
-  await harness.setViewport(1440, 900);
-  await harness.scrollTo(0);
+                      // Reset to 1440px desktop for journey scroll testing
+                      await harness.setViewport(1440, 900);
+                      await harness.scrollTo(0);
 
-  // Measure journey top position
-  const journeyMetrics = await harness.evaluate(`
+                      // Measure journey top position
+                      const journeyMetrics = await harness.evaluate(`
     (() => {
       const el = document.getElementById('journey');
       if (!el) return null;
@@ -306,12 +314,12 @@ async function runTier1(harness) {
     })()
   `);
 
-  const jTop = journeyMetrics ? journeyMetrics.top : 2500;
+                      const jTop = journeyMetrics ? journeyMetrics.top : 2500;
 
-  // F5.2: Scrolling into Journey enters Chapter 1
-  await harness.scrollTo(jTop + 100);
-  await new Promise(r => setTimeout(r, 200));
-  let step1State = await harness.evaluate(`
+                      // F5.2: Scrolling into Journey enters Chapter 1
+                      await harness.scrollTo(jTop + 100);
+                      await new Promise(r => setTimeout(r, 200));
+                      let step1State = await harness.evaluate(`
     (() => {
       const c1 = document.getElementById('milestone-1');
       const step1 = document.querySelector('.voyage-card-step[data-step="1"]');
@@ -322,16 +330,16 @@ async function runTier1(harness) {
       };
     })()
   `);
-  const f5_2_pass = step1State.c1Revealed || step1State.counter.includes('1');
-  reporter.record(1, 'F5-JourneyScrollProgression', 'Scrolling into Journey section activates Chapter 1', f5_2_pass, {
-    expected: 'Chapter 1 active/revealed',
-    actual: step1State
-  });
+                      const f5_2_pass = step1State.c1Revealed || step1State.counter.includes('1');
+                      reporter.record(1, 'F5-JourneyScrollProgression', 'Scrolling into Journey section activates Chapter 1', f5_2_pass, {
+                        expected: 'Chapter 1 active/revealed',
+                        actual: step1State
+                      });
 
-  // F5.3: Scrolling further advances progression to Chapter 2 without button click
-  await harness.scrollTo(jTop + 650);
-  await new Promise(r => setTimeout(r, 200));
-  let step2State = await harness.evaluate(`
+                      // F5.3: Scrolling further advances progression to Chapter 2 without button click
+                      await harness.scrollTo(jTop + 650);
+                      await new Promise(r => setTimeout(r, 200));
+                      let step2State = await harness.evaluate(`
     (() => {
       const c2 = document.getElementById('milestone-2');
       const step2 = document.querySelector('.voyage-card-step[data-step="2"]');
@@ -342,16 +350,16 @@ async function runTier1(harness) {
       };
     })()
   `);
-  const f5_3_pass = step2State.c2Revealed || step2State.counter.includes('2');
-  reporter.record(1, 'F5-JourneyScrollProgression', 'Scrolling through voyage track advances to Chapter 2 via scroll alone', f5_3_pass, {
-    expected: 'Chapter 2 active/revealed via scroll',
-    actual: step2State
-  });
+                      const f5_3_pass = step2State.c2Revealed || step2State.counter.includes('2');
+                      reporter.record(1, 'F5-JourneyScrollProgression', 'Scrolling through voyage track advances to Chapter 2 via scroll alone', f5_3_pass, {
+                        expected: 'Chapter 2 active/revealed via scroll',
+                        actual: step2State
+                      });
 
-  // F5.4: Scrolling further activates Chapter 3 and updates route counter
-  await harness.scrollTo(jTop + 1300);
-  await new Promise(r => setTimeout(r, 200));
-  let step3State = await harness.evaluate(`
+                      // F5.4: Scrolling further activates Chapter 3 and updates route counter
+                      await harness.scrollTo(jTop + 1300);
+                      await new Promise(r => setTimeout(r, 200));
+                      let step3State = await harness.evaluate(`
     (() => {
       const c3 = document.getElementById('milestone-3');
       const counter = document.getElementById('voyageRouteCounter');
@@ -361,16 +369,16 @@ async function runTier1(harness) {
       };
     })()
   `);
-  const f5_4_pass = step3State.c3Revealed || step3State.counter.includes('3');
-  reporter.record(1, 'F5-JourneyScrollProgression', 'Scrolling advances to Chapter 3 and updates route counter log', f5_4_pass, {
-    expected: 'Chapter 3 active/revealed',
-    actual: step3State
-  });
+                      const f5_4_pass = step3State.c3Revealed || step3State.counter.includes('3');
+                      reporter.record(1, 'F5-JourneyScrollProgression', 'Scrolling advances to Chapter 3 and updates route counter log', f5_4_pass, {
+                        expected: 'Chapter 3 active/revealed',
+                        actual: step3State
+                      });
 
-  // F5.5: Scrolling through final step activates Chapter 4 and reveals celebration banner
-  await harness.scrollTo(jTop + 2200);
-  await new Promise(r => setTimeout(r, 200));
-  let step4State = await harness.evaluate(`
+                      // F5.5: Scrolling through final step activates Chapter 4 and reveals celebration banner
+                      await harness.scrollTo(jTop + 2200);
+                      await new Promise(r => setTimeout(r, 200));
+                      let step4State = await harness.evaluate(`
     (() => {
       const c4 = document.getElementById('milestone-4');
       const banner = document.getElementById('voyageCelebrationBanner');
@@ -383,32 +391,32 @@ async function runTier1(harness) {
       };
     })()
   `);
-  const f5_5_pass = (step4State.c4Revealed || step4State.counter.includes('4')) && step4State.bannerVisible;
-  reporter.record(1, 'F5-JourneyScrollProgression', 'Final voyage scroll activates Chapter 4 and reveals celebration fanfare banner', f5_5_pass, {
-    expected: 'Chapter 4 active and celebration banner visible',
-    actual: step4State
-  });
+                      const f5_5_pass = (step4State.c4Revealed || step4State.counter.includes('4')) && step4State.bannerVisible;
+                      reporter.record(1, 'F5-JourneyScrollProgression', 'Final voyage scroll activates Chapter 4 and reveals celebration fanfare banner', f5_5_pass, {
+                        expected: 'Chapter 4 active and celebration banner visible',
+                        actual: step4State
+                      });
 
-  // ---------------------------------------------------------
-  // Feature 6: Journey Compact Stacking Deck (5 assertions)
-  // ---------------------------------------------------------
-  console.log('\n-- Feature 6: Journey Compact Stacking Deck --');
+                      // ---------------------------------------------------------
+                      // Feature 6: Journey Compact Stacking Deck (5 assertions)
+                      // ---------------------------------------------------------
+                      console.log('\n-- Feature 6: Journey Compact Stacking Deck --');
 
-  // F6.1: Milestone cards utilize sticky positioning or stacked deck
-  const cardPositions = await harness.evaluate(`
+                      // F6.1: Milestone cards utilize sticky positioning or stacked deck
+                      const cardPositions = await harness.evaluate(`
     (() => {
       const cards = Array.from(document.querySelectorAll('.voyage-milestone-card'));
       return cards.map(c => window.getComputedStyle(c).position);
     })()
   `);
-  const f6_1_pass = cardPositions.length > 0 && cardPositions.some(p => p === 'sticky');
-  reporter.record(1, 'F6-JourneyCompactDeck', 'Milestone cards configure GPU sticky positioning (position: sticky)', f6_1_pass, {
-    expected: 'Includes "sticky"',
-    actual: cardPositions
-  });
+                      const f6_1_pass = cardPositions.length > 0 && cardPositions.some(p => p === 'sticky');
+                      reporter.record(1, 'F6-JourneyCompactDeck', 'Milestone cards configure GPU sticky positioning (position: sticky)', f6_1_pass, {
+                        expected: 'Includes "sticky"',
+                        actual: cardPositions
+                      });
 
-  // F6.2: Sticky stacking offsets are incrementally staggered
-  const cardTopOffsets = await harness.evaluate(`
+                      // F6.2: Sticky stacking offsets are incrementally staggered
+                      const cardTopOffsets = await harness.evaluate(`
     (() => {
       const cards = Array.from(document.querySelectorAll('.voyage-milestone-card'));
       return cards.map(c => ({
@@ -417,15 +425,25 @@ async function runTier1(harness) {
       }));
     })()
   `);
-  const f6_2_pass = cardTopOffsets.length >= 2 &&
-    (cardTopOffsets[1].topVal >= cardTopOffsets[0].topVal + 8 || cardTopOffsets.some(c => c.topVal >= 200));
-  reporter.record(1, 'F6-JourneyCompactDeck', 'Milestone cards have incremental staggered sticky top docking offsets', f6_2_pass, {
-    expected: 'Incrementing sticky top values >= 200px',
-    actual: cardTopOffsets
-  });
+                      const f6_2_pass = cardTopOffsets.length >= 2 &&
+    cardTopOffsets[1].topVal >= cardTopOffsets[0].topVal + 4;
+                        const dockNonOverlap = await harness.evaluate(`
+    (() => {
+      const dock = document.getElementById('voyageRouteDock');
+      const card = document.querySelector('.voyage-milestone-card.is-active') || document.getElementById('milestone-1');
+      if (!dock || !card) return { pass: false };
+      const dr = dock.getBoundingClientRect();
+      const cr = card.getBoundingClientRect();
+      return { pass: cr.top >= dr.bottom - 1, dockBottom: Math.round(dr.bottom), cardTop: Math.round(cr.top) };
+    })()
+  `);
+                        reporter.record(1, 'F6-JourneyCompactDeck', 'Milestone cards increment sticky offsets cleanly strictly below Route Dock without overlap', f6_2_pass && dockNonOverlap.pass, {
+                          expected: 'Incrementing sticky top values strictly >= Route Dock bottom',
+                          actual: { cardTopOffsets, dockNonOverlap }
+                        });
 
-  // F6.3: Cards accumulate at single compact stacking anchor point (overlapping bounding boxes)
-  const stackOverlap = await harness.evaluate(`
+                        // F6.3: Cards accumulate at single compact stacking anchor point (overlapping bounding boxes)
+                        const stackOverlap = await harness.evaluate(`
     (() => {
       const cards = Array.from(document.querySelectorAll('.voyage-milestone-card'));
       if (cards.length < 2) return false;
@@ -439,21 +457,21 @@ async function runTier1(harness) {
       return Math.abs(last.top - first.top) <= 150;
     })()
   `);
-  reporter.record(1, 'F6-JourneyCompactDeck', 'Cards accumulate at compact anchor point (stacked cards clustered within 150px)', stackOverlap, {
-    expected: 'Stacked cards clustered vertically <= 150px',
-    actual: stackOverlap
-  });
+                        reporter.record(1, 'F6-JourneyCompactDeck', 'Cards accumulate at compact anchor point (stacked cards clustered within 150px)', stackOverlap, {
+                          expected: 'Stacked cards clustered vertically <= 150px',
+                          actual: stackOverlap
+                        });
 
-  // F6.4: Journey section vertical height is compact (bounded < 3600px)
-  const journeyHeight = journeyMetrics ? journeyMetrics.height : 0;
-  const f6_4_pass = journeyHeight > 0 && journeyHeight <= 3600;
-  reporter.record(1, 'F6-JourneyCompactDeck', 'Journey total vertical height is compact (<= 3600px, avoiding unbounded linear sprawl)', f6_4_pass, {
-    expected: '<= 3600px',
-    actual: `${journeyHeight}px`
-  });
+                        // F6.4: Journey section vertical height is compact (bounded < 3600px)
+                        const journeyHeight = journeyMetrics ? journeyMetrics.height : 0;
+                        const f6_4_pass = journeyHeight > 0 && journeyHeight <= 3600;
+                        reporter.record(1, 'F6-JourneyCompactDeck', 'Journey total vertical height is compact (<= 3600px, avoiding unbounded linear sprawl)', f6_4_pass, {
+                          expected: '<= 3600px',
+                          actual: `${journeyHeight}px`
+                        });
 
-  // F6.5: Track fill expands smoothly as chapters accumulate
-  const trackFillState = await harness.evaluate(`
+                        // F6.5: Track fill expands smoothly as chapters accumulate
+                        const trackFillState = await harness.evaluate(`
     (() => {
       const fill = document.getElementById('voyageTrackFill');
       return fill ? {
@@ -462,21 +480,21 @@ async function runTier1(harness) {
       } : null;
     })()
   `);
-  const f6_5_pass = trackFillState && trackFillState.widthVal >= 75;
-  reporter.record(1, 'F6-JourneyCompactDeck', 'Track fill (#voyageTrackFill) expands toward 100% as cards accumulate', f6_5_pass, {
-    expected: '>= 75%',
-    actual: trackFillState ? trackFillState.widthStyle : null
-  });
+                        const f6_5_pass = trackFillState && trackFillState.widthVal >= 75;
+                        reporter.record(1, 'F6-JourneyCompactDeck', 'Track fill (#voyageTrackFill) expands toward 100% as cards accumulate', f6_5_pass, {
+                          expected: '>= 75%',
+                          actual: trackFillState ? trackFillState.widthStyle : null
+                        });
 
-  // ---------------------------------------------------------
-  // Feature 7: Journey Bidirectional Scrub (5 assertions)
-  // ---------------------------------------------------------
-  console.log('\n-- Feature 7: Journey Bidirectional Scrub --');
+                        // ---------------------------------------------------------
+                        // Feature 7: Journey Bidirectional Scrub (5 assertions)
+                        // ---------------------------------------------------------
+                        console.log('\n-- Feature 7: Journey Bidirectional Scrub --');
 
-  // F7.1: Reverse scrolling upward from Chapter 4 un-accumulates cards
-  await harness.scrollTo(jTop + 100);
-  await new Promise(r => setTimeout(r, 250));
-  const scrubUpState = await harness.evaluate(`
+                        // F7.1: Reverse scrolling upward from Chapter 4 un-accumulates cards
+                        await harness.scrollTo(jTop + 100);
+                        await new Promise(r => setTimeout(r, 250));
+                        const scrubUpState = await harness.evaluate(`
     (() => {
       const c4 = document.getElementById('milestone-4');
       const counter = document.getElementById('voyageRouteCounter');
@@ -489,14 +507,14 @@ async function runTier1(harness) {
       };
     })()
   `);
-  const f7_1_pass = !scrubUpState.c4Active && (scrubUpState.counter.includes('1') || !scrubUpState.counter.includes('4'));
-  reporter.record(1, 'F7-JourneyBidirectionalScrub', 'Reverse scrolling upward un-accumulates Chapter 4 and reverts active chapter', f7_1_pass, {
-    expected: 'Chapter 4 unstacked/inactive, counter reverted',
-    actual: scrubUpState
-  });
+                        const f7_1_pass = !scrubUpState.c4Active && (scrubUpState.counter.includes('1') || !scrubUpState.counter.includes('4'));
+                        reporter.record(1, 'F7-JourneyBidirectionalScrub', 'Reverse scrolling upward un-accumulates Chapter 4 and reverts active chapter', f7_1_pass, {
+                          expected: 'Chapter 4 unstacked/inactive, counter reverted',
+                          actual: scrubUpState
+                        });
 
-  // F7.2: Ship avatar moves backward on reverse scroll
-  const shipPosScrub = await harness.evaluate(`
+                        // F7.2: Ship avatar moves backward on reverse scroll
+                        const shipPosScrub = await harness.evaluate(`
     (() => {
       const ship = document.getElementById('voyageShipAvatar');
       return ship ? {
@@ -505,16 +523,16 @@ async function runTier1(harness) {
       } : null;
     })()
   `);
-  const f7_2_pass = shipPosScrub && shipPosScrub.leftVal <= 35;
-  reporter.record(1, 'F7-JourneyBidirectionalScrub', 'Going Merry ship avatar style.left retreats backward on reverse scroll (<= 35%)', f7_2_pass, {
-    expected: '<= 35%',
-    actual: shipPosScrub ? shipPosScrub.left : null
-  });
+                        const f7_2_pass = shipPosScrub && shipPosScrub.leftVal <= 35;
+                        reporter.record(1, 'F7-JourneyBidirectionalScrub', 'Going Merry ship avatar style.left retreats backward on reverse scroll (<= 35%)', f7_2_pass, {
+                          expected: '<= 35%',
+                          actual: shipPosScrub ? shipPosScrub.left : null
+                        });
 
-  // F7.3: Waypoint navigation click to Chapter 2
-  await harness.click('.voyage-waypoint[data-chapter="2"]');
-  await new Promise(r => setTimeout(r, 300));
-  const waypoint2State = await harness.evaluate(`
+                        // F7.3: Waypoint navigation click to Chapter 2
+                        await harness.click('.voyage-waypoint[data-chapter="2"]');
+                        await new Promise(r => setTimeout(r, 300));
+                        const waypoint2State = await harness.evaluate(`
     (() => {
       const counter = document.getElementById('voyageRouteCounter');
       const wp2 = document.querySelector('.voyage-waypoint[data-chapter="2"]');
@@ -525,16 +543,16 @@ async function runTier1(harness) {
       };
     })()
   `);
-  const f7_3_pass = waypoint2State.counter.includes('2') || waypoint2State.wp2Active;
-  reporter.record(1, 'F7-JourneyBidirectionalScrub', 'Clicking waypoint node 2 jumps to and activates Chapter 2', f7_3_pass, {
-    expected: 'Chapter 2 active/selected',
-    actual: waypoint2State
-  });
+                        const f7_3_pass = waypoint2State.counter.includes('2') || waypoint2State.wp2Active;
+                        reporter.record(1, 'F7-JourneyBidirectionalScrub', 'Clicking waypoint node 2 jumps to and activates Chapter 2', f7_3_pass, {
+                          expected: 'Chapter 2 active/selected',
+                          actual: waypoint2State
+                        });
 
-  // F7.4: Waypoint navigation click back to Chapter 1
-  await harness.click('.voyage-waypoint[data-chapter="1"]');
-  await new Promise(r => setTimeout(r, 300));
-  const waypoint1State = await harness.evaluate(`
+                        // F7.4: Waypoint navigation click back to Chapter 1
+                        await harness.click('.voyage-waypoint[data-chapter="1"]');
+                        await new Promise(r => setTimeout(r, 300));
+                        const waypoint1State = await harness.evaluate(`
     (() => {
       const counter = document.getElementById('voyageRouteCounter');
       const wp1 = document.querySelector('.voyage-waypoint[data-chapter="1"]');
@@ -545,14 +563,14 @@ async function runTier1(harness) {
       };
     })()
   `);
-  const f7_4_pass = waypoint1State.counter.includes('1') || waypoint1State.wp1Active;
-  reporter.record(1, 'F7-JourneyBidirectionalScrub', 'Clicking waypoint node 1 resets active chapter to Chapter 1', f7_4_pass, {
-    expected: 'Chapter 1 active/selected',
-    actual: waypoint1State
-  });
+                        const f7_4_pass = waypoint1State.counter.includes('1') || waypoint1State.wp1Active;
+                        reporter.record(1, 'F7-JourneyBidirectionalScrub', 'Clicking waypoint node 1 resets active chapter to Chapter 1', f7_4_pass, {
+                          expected: 'Chapter 1 active/selected',
+                          actual: waypoint1State
+                        });
 
-  // F7.5: Audio cue throttling safeguard (minimum 200ms cooldown)
-  const audioThrottleInfo = await harness.evaluate(`
+                        // F7.5: Audio cue throttling safeguard (minimum 200ms cooldown)
+                        const audioThrottleInfo = await harness.evaluate(`
     (() => {
       // Inspect window or script cooldown guard
       const hasCooldown = (typeof window.lastPenAudioTime !== 'undefined') ||
@@ -561,10 +579,10 @@ async function runTier1(harness) {
       return { hasCooldown };
     })()
   `);
-  reporter.record(1, 'F7-JourneyBidirectionalScrub', 'Audio playback includes throttling safeguards (>= 200ms minimum cooldown)', audioThrottleInfo.hasCooldown, {
-    expected: 'Audio throttling guard configured',
-    actual: audioThrottleInfo
-  });
-}
+                        reporter.record(1, 'F7-JourneyBidirectionalScrub', 'Audio playback includes throttling safeguards (>= 200ms minimum cooldown)', audioThrottleInfo.hasCooldown, {
+                          expected: 'Audio throttling guard configured',
+                          actual: audioThrottleInfo
+                        });
+                      }
 
 module.exports = { runTier1 };

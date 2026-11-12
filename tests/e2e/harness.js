@@ -340,9 +340,9 @@ class TestHarness {
         const hero = document.querySelector('.hero');
         const heroRect = hero ? hero.getBoundingClientRect() : null;
 
-        const wanted = document.querySelector('.wanted-poster-frame');
+        const wanted = document.querySelector('.hero-portrait-frame') || document.querySelector('.wanted-poster-frame');
         const wantedRect = wanted ? wanted.getBoundingClientRect() : null;
-        const wantedImg = document.querySelector('#wantedPhotoImg') || document.querySelector('.wanted-img');
+        const wantedImg = document.querySelector('#heroPortraitImg') || document.querySelector('.hero-portrait-img') || document.querySelector('#wantedPhotoImg');
         const wantedImgNatural = wantedImg ? {
           complete: wantedImg.complete,
           naturalWidth: wantedImg.naturalWidth,
@@ -350,6 +350,11 @@ class TestHarness {
           src: wantedImg.src,
           currentSrc: wantedImg.currentSrc
         } : null;
+
+        const skillsTicker = document.querySelector('.skills-ticker-tape');
+        const skillsTickerRect = skillsTicker ? skillsTicker.getBoundingClientRect() : null;
+        const routeDock = document.getElementById('voyageRouteDock');
+        const routeDockRect = routeDock ? routeDock.getBoundingClientRect() : null;
 
         const journey = document.querySelector('#journey');
         const journeyRect = journey ? journey.getBoundingClientRect() : null;
@@ -436,6 +441,16 @@ class TestHarness {
             aspectRatio: wantedRect.height > 0 ? wantedRect.width / wantedRect.height : 0
           } : null,
           wantedImg: wantedImgNatural,
+          skillsTicker: skillsTickerRect ? {
+            left: Math.round(skillsTickerRect.left),
+            right: Math.round(skillsTickerRect.right),
+            width: Math.round(skillsTickerRect.width)
+          } : null,
+          routeDock: routeDockRect ? {
+            top: Math.round(routeDockRect.top),
+            bottom: Math.round(routeDockRect.bottom),
+            height: Math.round(routeDockRect.height)
+          } : null,
           journey: journeyRect ? {
             top: Math.round(journeyRect.top),
             bottom: Math.round(journeyRect.bottom),
@@ -473,22 +488,22 @@ class TestHarness {
 
   async close() {
     if (this.ws) {
-      try { this.ws.close(); } catch (e) {}
+      try { this.ws.close(); } catch (e) { }
     }
     if (this.chromeProcess) {
       try {
         this.chromeProcess.kill('SIGTERM');
-      } catch (e) {}
+      } catch (e) { }
     }
     if (this.server) {
       try {
         await new Promise(r => this.server.close(r));
-      } catch (e) {}
+      } catch (e) { }
     }
     if (this.tempUserDataDir && fs.existsSync(this.tempUserDataDir)) {
       try {
         fs.rmSync(this.tempUserDataDir, { recursive: true, force: true });
-      } catch (e) {}
+      } catch (e) { }
     }
   }
 }
