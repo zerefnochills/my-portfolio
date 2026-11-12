@@ -141,6 +141,7 @@
 
     /* Subtle paper texture overlay */
     body::before {
+  will-change: transform;
       content: "";
       position: fixed;
       inset: 0;

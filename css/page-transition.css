@@ -27,6 +27,7 @@ html.page-is-transitioning .page-curtain-transition {
 
 /* White themed panel (sketchbook paper) with clean depth & One Piece crimson trim */
 .page-curtain-panel {
+  will-change: transform;
   position: absolute;
   top: 0;
   left: 0;

@@ -274,8 +274,7 @@ div[id] {
   border-left: none !important;
   box-shadow: 4px 6px 0 var(--shadow) !important;
   transition: transform 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-    box-shadow 0.2s ease,
-    background-color 0.2s ease !important;
+    box-shadow 0.2s ease;
 }
 
 .irl-ribbon-btn {
@@ -373,7 +372,7 @@ div[id] {
     top: auto !important;
     bottom: 96px !important;
     left: 0 !important;
-    transform: none !important;
+    transform: translateY(0) scale(1);
     padding: 10px 16px 10px 12px !important;
     border-radius: 0 10px 10px 0 !important;
     box-shadow: 3px 5px 0 var(--shadow) !important;
@@ -384,7 +383,7 @@ div[id] {
     top: auto !important;
     bottom: 38px !important;
     left: 0 !important;
-    transform: none !important;
+    transform: translateY(0) scale(1);
     padding: 10px 16px 10px 12px !important;
     border-radius: 0 10px 10px 0 !important;
     box-shadow: 3px 5px 0 var(--shadow) !important;
@@ -443,28 +442,29 @@ div[id] {
   white-space: nowrap !important;
   clip-path: none !important;
   animation: none !important;
-  transform: none !important;
+  transform: translateY(0) scale(1);
   rotate: 0deg !important;
   margin: 0 0 6px 0 !important;
-  filter: drop-shadow(2px 2px 0 var(--paper));
+  filter: none; /* drop-shadow removed — it causes GPU re-rasterization on every repaint */
 }
 
 .hero h1#heroName .name-first {
   display: inline-block !important;
   color: var(--ink, #18181b) !important;
-  transform: none !important;
+  transform: translateY(0) scale(1);
   vertical-align: baseline !important;
 }
 
 .hero h1#heroName .name-last {
   display: inline-block !important;
   color: #dc2626 !important;
-  transform: none !important;
+  transform: translateY(0) scale(1);
   vertical-align: baseline !important;
   text-shadow: 0 0 24px rgba(220, 38, 38, 0.25);
 }
 
 .hero-tagline {
+  contain: layout paint;
   font-family: var(--sans, 'Space Grotesk', system-ui, sans-serif) !important;
   font-size: clamp(1.05rem, 2.2vw, 1.25rem) !important;
   line-height: 1.55 !important;
@@ -547,7 +547,7 @@ div[id] {
   .tw-char.tw-out {
     animation: none !important;
     opacity: 1 !important;
-    transform: none !important;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -580,6 +580,7 @@ div[id] {
   color: var(--ink-soft);
   max-width: 28em;
   margin: 12px 0 24px;
+  contain: layout paint; /* isolate paint zone for typewriter char animations */
 }
 
 .hero-actions {
@@ -683,7 +684,7 @@ a.treasure-chest-widget .chest-icon {
   border-radius: 10px;
   background: #f5deb3;
   box-shadow: 6px 10px 0 var(--shadow);
-  transform: none !important;
+  transform: translateZ(0); /* promote to GPU layer from start; use translateZ(0) not "none" so hover can interpolate */
   overflow: visible !important;
 }
 
@@ -911,9 +912,11 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
 
 .skills-ticker-loop-track,
 .skills-ticker-track-inner {
+  will-change: transform;
   display: flex;
   width: max-content;
   animation: stripScroll 42s linear infinite;
+  will-change: transform; /* keep marquee scroll on compositor */
 }
 
 .skills-ticker-tape:hover .skills-ticker-loop-track,
@@ -927,6 +930,7 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
   align-items: center;
   flex-shrink: 0;
   padding: 16px 0;
+  will-change: transform; /* promote ticker content to compositor layer */
 }
 
 .ticker-pill {
@@ -1120,6 +1124,16 @@ html.js-polish .wanted-poster-frame:not(.poster-in) {
    ABOUT / MANIFESTO READABILITY OVERHAUL
    Crisp, high-contrast, editorial typography
    ========================================================== */
+.about-container,
+#work,
+#journey,
+#skills,
+#hall-of-fame,
+#contact {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px;
+}
+
 .about-container {
   position: relative;
   margin-top: 48px;
@@ -2114,7 +2128,7 @@ header.site-header {
     box-sizing: border-box !important;
     margin: 0 0 0 auto !important;
     justify-self: end !important;
-    transform: none !important;
+    transform: translateY(0) scale(1);
     padding: 0 !important;
   }
 
@@ -2288,7 +2302,7 @@ header.site-header {
     top: auto !important;
     bottom: 96px !important;
     left: 0 !important;
-    transform: none !important;
+    transform: translateY(0) scale(1);
     padding: 10px 16px 10px 12px !important;
     border-radius: 0 10px 10px 0 !important;
     box-shadow: 3px 5px 0 var(--shadow) !important;
@@ -2299,7 +2313,7 @@ header.site-header {
     top: auto !important;
     bottom: 38px !important;
     left: 0 !important;
-    transform: none !important;
+    transform: translateY(0) scale(1);
     padding: 10px 16px 10px 12px !important;
     border-radius: 0 10px 10px 0 !important;
     box-shadow: 3px 5px 0 var(--shadow) !important;
@@ -2357,7 +2371,7 @@ header.site-header {
     word-break: keep-all !important;
     text-align: center !important;
     justify-content: center !important;
-    transform: none !important;
+    transform: translateY(0) scale(1);
     rotate: 0deg !important;
     margin-bottom: 4px !important;
   }
@@ -2429,7 +2443,7 @@ header.site-header {
     max-width: min(285px, 80vw) !important;
     aspect-ratio: 3 / 4 !important;
     box-sizing: border-box !important;
-    transform: none !important;
+    transform: translateY(0) scale(1);
     padding: 0 !important;
   }
 
@@ -3103,7 +3117,7 @@ header.site-header {
 
   .wanted-poster-frame {
     max-width: 310px !important;
-    transform: none !important;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -3131,7 +3145,7 @@ header.site-header {
 
   .wanted-poster-frame {
     max-width: 280px !important;
-    transform: none !important;
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -3304,7 +3318,7 @@ html.is-android .wanted-poster-frame {
   margin: 0 auto !important;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18) !important;
   filter: none !important;
-  transform: none !important;
+  transform: translateY(0) scale(1);
 }
 
 html.is-android .hero-stats-row {
