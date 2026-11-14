@@ -504,10 +504,20 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
       const hatClicker = document.getElementById("hatClicker");
 
       const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      // Requirement 1: Remove mandatory multi-second wait. Fast, non-blocking splash.
       const isRevisit = sessionStorage.getItem("portfolio_visited") === "true";
-      const total = reduceMotion ? 200 : (isRevisit ? 3000 : 5000);
+      const total = reduceMotion ? 0 : (isRevisit ? 350 : 650);
       let start = null;
       let loaderDone = false;
+
+      // Immediate skip for reduced motion
+      if (reduceMotion) {
+        if (loader) {
+          loader.classList.add("done");
+          loader.style.display = "none";
+        }
+        enterSite();
+      }
 
       // Fixed Monkey D. Luffy Quote
       function renderQuote() {
@@ -537,7 +547,7 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
         return;
       }
 
-      setTimeout(enterSite, 6200); // Safety timeout guarantee
+      setTimeout(enterSite, 1200); // Safety timeout guarantee
       function tick(ts) {
         if (loaderDone) return;
         if (!start) start = ts;
@@ -604,7 +614,8 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
           });
         }, { threshold: 0.15 });
 
-        document.querySelectorAll(".write:not(#q), .ink:not(#by), .draw").forEach(function (el) {
+        // Reveal headings and drawn strokes with IntersectionObserver
+        document.querySelectorAll(".section-title, .journey-header-block, h1, h2, h3, .write:not(#q), .ink:not(#by), .draw").forEach(function (el) {
           io.observe(el);
         });
       }
@@ -1438,12 +1449,14 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
         });
       }
 
-      let navScrollTicking = false;
-      function handleUnifiedScroll() {
-        if (!navScrollTicking) {
-          navScrollTicking = true;
+      // Shared unified requestAnimationFrame scheduler for all scroll updates
+      let sharedScrollTicking = false;
+      function scheduleSharedScroll() {
+        if (!sharedScrollTicking) {
+          sharedScrollTicking = true;
           requestAnimationFrame(function () {
-            navScrollTicking = false;
+            sharedScrollTicking = false;
+            // 1. Back to top button
             if (backToTop) {
               if (window.scrollY > 400) {
                 backToTop.classList.add("visible");
@@ -1451,102 +1464,51 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
                 backToTop.classList.remove("visible");
               }
             }
+            // 2. Active nav link (bidirectional)
             updateActiveNav();
+            // 3. Journey progress update (bidirectional)
+            if (typeof window._onJourneyScrollShared === "function") {
+              window._onJourneyScrollShared();
+            }
           });
         }
       }
 
-      window.addEventListener("scroll", handleUnifiedScroll, { passive: true });
+      window.addEventListener("scroll", scheduleSharedScroll, { passive: true });
       updateActiveNav();
 
-
-      // 14. Treasure Chest Secret Stash Easter Egg
-      const treasureChestBtn = document.getElementById("treasureChestBtn");
-      const treasureToast = document.getElementById("treasurePopupToast");
-      const marineStampToggle = document.getElementById("marineStampToggle");
-
-      if (treasureChestBtn) {
-        treasureChestBtn.addEventListener("click", function (e) {
-          currentBountyNum += 500000000;
-          if (bountyDisplay) bountyDisplay.textContent = currentBountyNum.toLocaleString();
-          if (bountyRow) bountyRow.classList.add("bounty-boosted");
-          playCoinAudio();
-
-          if (treasureToast) {
-            treasureToast.classList.add("open");
-            setTimeout(function () {
-              treasureToast.classList.remove("open");
-            }, 3600);
-          }
-        });
-      }
-
-      if (marineStampToggle) {
-        marineStampToggle.addEventListener("click", function () {
-          playPaperRustle();
-          marineStampToggle.style.transform = "scale(1.25) rotate(15deg)";
-          setTimeout(function () {
-            marineStampToggle.style.transform = "";
-          }, 300);
-        });
-      }
-
-      // 15. Tactile Ink Splatter Ripple on Paper Click
-      document.addEventListener("click", function (e) {
-        // Only trigger if clicking on empty main paper background, not buttons or inputs
-        if (e.target.closest("button, a, input, textarea, select, .card, .hero-portrait-frame")) return;
-        const splatter = document.createElement("div");
-        splatter.className = "ink-splatter-particle";
-        splatter.style.left = (e.clientX - 11) + "px";
-        splatter.style.top = (e.clientY - 11) + "px";
-        document.body.appendChild(splatter);
-        setTimeout(function () { if (splatter.parentNode) splatter.parentNode.removeChild(splatter); }, 600);
-        if (soundEnabled && Math.random() > 0.6) playPenScratch();
+      // 13B. Tab visibility & off-screen animation pausing
+      document.addEventListener("visibilitychange", function () {
+        document.documentElement.classList.toggle("tab-is-inactive", document.hidden);
       });
 
+      if ("IntersectionObserver" in window) {
+        const animObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.remove("anim-offscreen");
+            } else {
+              entry.target.classList.add("anim-offscreen");
+            }
+          });
+        }, { rootMargin: "100px 0px" });
 
-      // 17. Tony Tony Chopper Interactive Gags & Sounds
-      function playChopperChime() {
-        if (!soundEnabled) return;
-        try {
-          const ctx = getAudioContext();
-          const osc = ctx.createOscillator();
-          const gain = ctx.createGain();
-          osc.type = "sine";
-          // Happy high-pitched melodic chirp: F5 -> A5 -> C6 -> E6
-          osc.frequency.setValueAtTime(698.46, ctx.currentTime);
-          osc.frequency.setValueAtTime(880.00, ctx.currentTime + 0.07);
-          osc.frequency.setValueAtTime(1046.50, ctx.currentTime + 0.14);
-          osc.frequency.setValueAtTime(1318.51, ctx.currentTime + 0.21);
-          gain.gain.setValueAtTime(0.12, ctx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.38);
-          osc.connect(gain);
-          gain.connect(ctx.destination);
-          osc.start();
-          osc.stop(ctx.currentTime + 0.39);
-        } catch (e) { }
+        document.querySelectorAll(".skills-ticker-tape, .treasure-chest-widget, .runner-sprite, .voyage-ship-avatar").forEach(function (el) {
+          animObserver.observe(el);
+        });
       }
 
-      const chopperPeeking = document.getElementById("chopperPeeking");
-      const chopperDoctor = document.getElementById("chopperDoctor");
-      const chopperCottonCandy = document.getElementById("chopperCottonCandy");
-      const chopperFooter = document.getElementById("chopperFooter");
-
-      [chopperPeeking, chopperDoctor, chopperCottonCandy, chopperFooter].forEach(function (el) {
-        if (!el) return;
-        el.addEventListener("click", function (e) {
-          e.stopPropagation();
-          playChopperChime();
-          el.classList.add("dancing");
-          const bubble = el.querySelector(".chopper-bubble");
-          if (bubble) bubble.classList.add("show");
-
-          setTimeout(function () {
-            el.classList.remove("dancing");
-            if (bubble) bubble.classList.remove("show");
-          }, 1800);
-        });
-      });
+      // Keyboard focus detection to prevent mobile ribbon collision
+      window.addEventListener("focus", function (e) {
+        if (e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA")) {
+          document.body.classList.add("has-focused-input");
+        }
+      }, true);
+      window.addEventListener("blur", function (e) {
+        if (e.target && (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA")) {
+          document.body.classList.remove("has-focused-input");
+        }
+      }, true);
 
       // 18. Scroll-Driven Grand Line Journey Stepper Controller
       function initScrollDrivenJourney() {
@@ -1775,27 +1737,20 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
           updateJourneyState(newStep);
         }
 
-        let journeyScrollTicking = false;
-        function scheduleJourneyScroll() {
-          if (!journeyScrollTicking) {
-            journeyScrollTicking = true;
-            requestAnimationFrame(function () {
-              journeyScrollTicking = false;
-              onScrollJourney();
-            });
-          }
-        }
+        // Register journey callback with the shared unified rAF scheduler
+        window._onJourneyScrollShared = onScrollJourney;
 
-        // Bug 6 fix: store named references so they can be removed on cleanup
-        const _jScrollHandler = scheduleJourneyScroll;
-        const _jResizeHandler = scheduleJourneyScroll;
-        const _jWheelHandler = function() { clearWaypointLock(); scheduleJourneyScroll(); };
-        const _jTouchHandler = function() { clearWaypointLock(); scheduleJourneyScroll(); };
-        const _jKeyHandler = function() { clearWaypointLock(); scheduleJourneyScroll(); };
+        const _jScrollHandler = function() {
+          if (typeof scheduleSharedScroll === "function") scheduleSharedScroll();
+          else onScrollJourney();
+        };
+        const _jResizeHandler = _jScrollHandler;
+        const _jWheelHandler = function() { clearWaypointLock(); _jScrollHandler(); };
+        const _jTouchHandler = function() { clearWaypointLock(); _jScrollHandler(); };
+        const _jKeyHandler = function() { clearWaypointLock(); _jScrollHandler(); };
         const _jPointerHandler = function() { clearWaypointLock(); };
         const _jScrollEndHandler = clearWaypointLock;
 
-        window.addEventListener("scroll", _jScrollHandler, { passive: true });
         window.addEventListener("resize", _jResizeHandler, { passive: true });
         window.addEventListener("wheel", _jWheelHandler, { passive: true });
         window.addEventListener("touchmove", _jTouchHandler, { passive: true });

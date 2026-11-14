@@ -3344,3 +3344,133 @@ html.is-android .stash-card {
 .mob-tool-btn:active {
   transform: scale(0.95);
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   PERFORMANCE & ACCESSIBILITY OPTIMIZATIONS
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Skip Intro Button */
+.skip-loader-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 18px;
+  padding: 8px 20px;
+  min-height: 44px;
+  font-family: var(--badge, 'Space Grotesk', system-ui, sans-serif);
+  font-size: 0.88rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  color: var(--ink, #09090b);
+  background: var(--paper-card, #ffffff);
+  border: 2px solid var(--ink, #09090b);
+  border-radius: 999px;
+  box-shadow: 3px 3px 0 var(--ink, #09090b);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  touch-action: manipulation;
+}
+
+.skip-loader-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0 var(--ink, #09090b);
+}
+
+.skip-loader-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink, #09090b);
+}
+
+/* Pause all animations when tab is inactive */
+html.tab-is-inactive *,
+html.tab-is-inactive *::before,
+html.tab-is-inactive *::after {
+  animation-play-state: paused !important;
+}
+
+/* Pause ticker and decorative elements when scrolled off-screen */
+.skills-ticker-tape.anim-offscreen .skills-ticker-loop-track,
+.skills-ticker-tape.anim-offscreen .skills-ticker-track-inner,
+.skills-ticker-tape.anim-offscreen .skills-ticker-track,
+.skills-ticker-tape.anim-offscreen .ticker-runner,
+.treasure-chest-widget.anim-offscreen,
+.treasure-chest-widget.anim-offscreen::before,
+.treasure-chest-widget.anim-offscreen .chest-icon,
+.anim-offscreen .runner-sprite,
+.anim-offscreen .ship-svg,
+.anim-offscreen .voyage-ship-avatar {
+  animation-play-state: paused !important;
+}
+
+/* Modal and Input Overlap Protection on Mobile */
+body.modal-open .irl-ribbon-btn,
+body.modal-open .sketchbook-ribbon-btn {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body.has-focused-input .irl-ribbon-btn,
+body.has-focused-input .sketchbook-ribbon-btn {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Comfortable Mobile Touch Targets & Navigation */
+@media (max-width: 768px) {
+  .nav-island .nav-link,
+  .nav-island .control-btn,
+  .hero-btn,
+  .quick-action-link,
+  .filter-pill,
+  .modal-close-btn,
+  .voyage-node-btn {
+    min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  .nav-island .control-btn {
+    min-width: 44px;
+    padding: 8px 10px;
+  }
+}
+
+/* Comprehensive Reduced Motion Protection */
+@media (prefers-reduced-motion: reduce) {
+  #loader {
+    display: none !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .skills-ticker-loop-track,
+  .skills-ticker-track-inner,
+  .skills-ticker-track,
+  .ticker-runner,
+  .runner-sprite,
+  .chest-icon,
+  .treasure-chest-widget::before,
+  .sketchbook-ribbon-btn,
+  .irl-ribbon-btn,
+  .quill-icon,
+  .voyage-ship-avatar svg,
+  .ship-svg,
+  .hat,
+  .live-dot,
+  .live-indicator-dot,
+  .hero-scroll-indicator {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

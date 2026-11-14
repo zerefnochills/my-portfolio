@@ -1412,27 +1412,38 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
     const rect = canvasCard.getBoundingClientRect();
     if (rect.width <= 0 || rect.height <= 0) return;
 
-    // Use dpr for retina crispness
+    // Limit dpr to avoid extreme memory allocation on high-DPI displays
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const targetW = Math.floor(rect.width * dpr);
-    const targetH = Math.floor(rect.height * dpr);
+    const maxDim = 1920;
+    let targetW = Math.floor(rect.width * dpr);
+    let targetH = Math.floor(rect.height * dpr);
+
+    if (targetW > maxDim || targetH > maxDim) {
+      const scale = Math.min(maxDim / targetW, maxDim / targetH);
+      targetW = Math.floor(targetW * scale);
+      targetH = Math.floor(targetH * scale);
+    }
 
     if (canvas.width === targetW && canvas.height === targetH) return;
 
     // Save existing drawing buffer before resize
     let tempCanvas = null;
-    if (canvas.width > 0 && canvas.height > 0) {
+    const oldW = canvas.width;
+    const oldH = canvas.height;
+    if (oldW > 0 && oldH > 0) {
       tempCanvas = document.createElement("canvas");
-      tempCanvas.width = canvas.width;
-      tempCanvas.height = canvas.height;
+      tempCanvas.width = oldW;
+      tempCanvas.height = oldH;
       tempCanvas.getContext("2d").drawImage(canvas, 0, 0);
     }
 
     canvas.width = targetW;
     canvas.height = targetH;
 
-    if (tempCanvas) {
-      ctx.drawImage(tempCanvas, 0, 0);
+    if (tempCanvas && oldW > 0 && oldH > 0) {
+      // Requirement 4: Proportional scale to fit new canvas dimensions smoothly
+      ctx.drawImage(tempCanvas, 0, 0, tempCanvas.width, tempCanvas.height, 0, 0, targetW, targetH);
+      saveState();
     } else {
       saveState();
     }
@@ -1444,18 +1455,27 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
       resizeCanvas();
     });
     ro.observe(canvasCard);
-  } else {
-    window.addEventListener("resize", resizeCanvas);
   }
+  window.addEventListener("resize", resizeCanvas);
+  window.addEventListener("orientationchange", resizeCanvas);
   // Initial synchronous size
   resizeCanvas();
 
-  // --- HISTORY (UNDO / REDO) ---
+  // --- HISTORY (UNDO / REDO) WITH RESCALE SUPPORT & BOUNDED MEMORY ---
   function saveState() {
     if (canvas.width === 0 || canvas.height === 0) return;
     try {
-      state.undoStack.push(ctx.getImageData(0, 0, canvas.width, canvas.height));
-      if (state.undoStack.length > state.maxHistory) {
+      const snap = document.createElement("canvas");
+      snap.width = canvas.width;
+      snap.height = canvas.height;
+      const sCtx = snap.getContext("2d");
+      sCtx.drawImage(canvas, 0, 0);
+
+      state.undoStack.push(snap);
+
+      // Memory cap: 12 snapshots max to protect mobile and high-DPI RAM
+      const memoryCap = 12;
+      if (state.undoStack.length > memoryCap) {
         state.undoStack.shift();
       }
       state.redoStack = [];
@@ -1466,8 +1486,11 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
   function undo() {
     if (state.undoStack.length > 1) {
       state.redoStack.push(state.undoStack.pop());
-      const previous = state.undoStack[state.undoStack.length - 1];
-      ctx.putImageData(previous, 0, 0);
+      const prev = state.undoStack[state.undoStack.length - 1];
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (prev) {
+        ctx.drawImage(prev, 0, 0, prev.width, prev.height, 0, 0, canvas.width, canvas.height);
+      }
       updateUndoRedoUI();
       playPaperRustle();
     }
@@ -1477,7 +1500,10 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
     if (state.redoStack.length > 0) {
       const next = state.redoStack.pop();
       state.undoStack.push(next);
-      ctx.putImageData(next, 0, 0);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (next) {
+        ctx.drawImage(next, 0, 0, next.width, next.height, 0, 0, canvas.width, canvas.height);
+      }
       updateUndoRedoUI();
       playPaperRustle();
     }
@@ -1934,6 +1960,15 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
       showToast("Sound muted 🔇");
     }
   });
+
+  // Expose studio interface for test harnesses and diagnostics
+  window.doodleStudio = {
+    get state() { return state; },
+    saveState: saveState,
+    undo: undo,
+    redo: redo,
+    resizeCanvas: resizeCanvas
+  };
 
   // Keyboard Shortcuts
   window.addEventListener("keydown", function(e) {
