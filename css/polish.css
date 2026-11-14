@@ -2402,6 +2402,43 @@ header.site-header {
     min-height: 48vh;
   }
 
+  /* Compact & readable voyage milestone card content on mobile */
+  .voyage-card-body {
+    padding: 14px 12px !important;
+    max-height: calc(100vh - var(--voyage-card-top, 160px) - 20px) !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    overscroll-behavior: contain !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: rgba(9, 9, 11, 0.25) transparent !important;
+  }
+
+  .voyage-narrative {
+    font-size: 0.85rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 8px !important;
+  }
+
+  .voyage-highlights-box {
+    padding: 8px 10px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .highlights-list li {
+    font-size: 0.78rem !important;
+    line-height: 1.35 !important;
+    margin-bottom: 4px !important;
+  }
+
+  .voyage-stack-row {
+    gap: 4px !important;
+  }
+
+  .voyage-chip {
+    font-size: 0.7rem !important;
+    padding: 2px 6px !important;
+  }
+
   .voyage-card-step:nth-child(1) .voyage-milestone-card,
   .voyage-milestone-card[data-milestone="1"] {
     top: var(--voyage-card-top, 200px) !important;
@@ -3048,6 +3085,10 @@ html.is-android {
   touch-action: manipulation;
 }
 
+html.is-android body::before {
+  display: none !important;
+}
+
 html.is-android body {
   -webkit-text-size-adjust: 100% !important;
   text-size-adjust: 100% !important;
@@ -3291,4 +3332,15 @@ html.is-android .vault-stash-grid {
 
 html.is-android .stash-card {
   padding: 16px 14px !important;
+}
+
+/* Mobile Doodle Toolbar Button Interactive States */
+.mob-tool-btn:disabled {
+  opacity: 0.35 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
+.mob-tool-btn:active {
+  transform: scale(0.95);
 }

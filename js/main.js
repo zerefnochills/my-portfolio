@@ -331,7 +331,7 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
         }
 
         pingSession();
-        const pingInterval = setInterval(pingSession, 5000);
+        const pingInterval = setInterval(pingSession, 30000);
 
         if ("BroadcastChannel" in window) {
           try {
@@ -1608,8 +1608,11 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
           const lastCardH = lastCard && lastCard.offsetHeight ? lastCard.offsetHeight : maxCardH;
           const exitCardH = Math.max(maxCardH, lastCardH);
 
-          const baseStepH = isAndroid ? 380 : (isMobile ? 460 : 560);
-          cachedStepH = Math.max(baseStepH, maxCardH + 36);
+          const viewH = window.innerHeight;
+          const minReadTime = isAndroid
+            ? Math.max(viewH * 1.5, maxCardH + 200)
+            : (isMobile ? Math.max(viewH * 1.35, maxCardH + 160) : Math.max(580, maxCardH + 40));
+          cachedStepH = minReadTime;
 
           // Ensure routeDock always exits in sync above the tallest card's top (+gap & stagger)
           const dockExitPad = Math.ceil(exitCardH + cardGap + (cards.length - 1) * cardOffset + 24);
@@ -1626,6 +1629,16 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
 
         syncJourneyGeometry();
         window.addEventListener("load", syncJourneyGeometry, { passive: true, once: true });
+        if ("IntersectionObserver" in window && journeySection) {
+          const jObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                syncJourneyGeometry();
+              }
+            });
+          }, { rootMargin: "200px 0px" });
+          jObserver.observe(journeySection);
+        }
         if (document.fonts && document.fonts.ready) {
           document.fonts.ready.then(function () {
             syncJourneyGeometry();
@@ -1746,11 +1759,6 @@ function safeLocalStorage(){return{get:(k,d)=>{try{return localStorage.getItem(k
 
         // Calculate step from scroll position with rAF debouncing
         function onScrollJourney() {
-          const curNavB = getStickyNavBottom();
-          const curDockH = routeDock ? routeDock.offsetHeight : 96;
-          if (curNavB !== lastMeasuredNavBottom || curDockH !== lastMeasuredDockH) {
-            syncJourneyGeometry();
-          }
           if (window.scrollY < 200) {
             clearWaypointLock();
           }

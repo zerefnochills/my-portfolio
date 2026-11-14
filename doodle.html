@@ -1482,6 +1482,8 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
   function updateUndoRedoUI() {
     undoBtn.disabled = state.undoStack.length <= 1;
     redoBtn.disabled = state.redoStack.length === 0;
+    const mobUndo = document.getElementById("mobUndoBtn");
+    if (mobUndo) mobUndo.disabled = undoBtn.disabled;
   }
 
   undoBtn.addEventListener("click", undo);
@@ -1775,6 +1777,9 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
     activeBrushLabel.textContent = labels[bName] || bName;
     canvasStats.textContent = "Active Brush: " + (labels[bName] || bName);
     playScratchSound();
+    if (typeof window._studioOnBrushChange === 'function') {
+      window._studioOnBrushChange(bName);
+    }
   }
 
   brushCards.forEach(function(card) {
@@ -1828,6 +1833,9 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
       s.classList.toggle("active", s.style.backgroundColor === col || rgbToHex(s.style.backgroundColor) === col.toLowerCase());
     });
     if (state.brush === "eraser") setBrush("fountain");
+    if (typeof window._studioOnColorChange === 'function') {
+      window._studioOnColorChange(col);
+    }
   }
 
   function rgbToHex(rgb) {
@@ -1954,18 +1962,41 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
   renderSwatches("strawhat");
   updateNibPreview();
 
+  // Expose APIs for mobile controller & external integrations
+  window._studioSetColor = setColor;
+  window._studioSetBrush = setBrush;
+  window._studioGetBrush = function() { return state.brush; };
+  window._studioGetColor = function() { return state.color; };
+  window._studioSetSize = function(sz) {
+    state.size = parseInt(sz, 10);
+    if (brushSizeSlider) brushSizeSlider.value = state.size;
+    updateNibPreview();
+  };
+  window._studioSetOpacity = function(op) {
+    state.opacity = parseFloat(op) / 100;
+    if (brushOpacitySlider) brushOpacitySlider.value = op;
+    updateNibPreview();
+  };
+  window._studioToggleSound = function() {
+    soundToggle.click();
+    return soundEnabled;
+  };
+  window._studioGetSoundEnabled = function() { return soundEnabled; };
+  window._studioUndo = undo;
+  window._studioRedo = redo;
+  window._studioClear = function() { if (clearBtn) clearBtn.click(); };
+  window._studioDownload = function() { if (downloadBtn) downloadBtn.click(); };
+
 })();
 </script>
-<script src="js/page-transition.js">
+<script src="js/page-transition.js"></script>
+<script>
 
 /* ═══════════════════════════════════════════════════════════════
    MOBILE TOOLBAR & SETTINGS PANEL CONTROLLER
    ═══════════════════════════════════════════════════════════════ */
 (function() {
   'use strict';
-
-  // Only activate on mobile viewport
-  function isMobile() { return window.innerWidth <= 768; }
 
   const BRUSH_ICONS = {
     fountain: '✒️', calligraphy: '🖌️', pencil: '✏️',
@@ -1996,28 +2027,33 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
   const mobSwatchesGrid = document.getElementById('mobSwatchesGrid');
   const mobSoundBtn = document.getElementById('mobSoundBtn');
 
-  if (!panel) return; // Not on doodle page
+  if (!panel) return;
 
-  // Sync colour swatch in toolbar
   function syncMobColor(hex) {
     if (mobColorSwatch) mobColorSwatch.style.background = hex;
     if (mobColorInput) mobColorInput.value = hex;
-    if (mobHexLabel) mobHexLabel.textContent = hex.toUpperCase();
+    if (mobHexLabel) mobHexLabel.textContent = (hex || '').toUpperCase();
+    document.querySelectorAll('.mob-swatch').forEach(s => {
+      const match = s.dataset.color && s.dataset.color.toLowerCase() === (hex || '').toLowerCase();
+      s.classList.toggle('active', !!match);
+    });
   }
 
-  // Sync brush icon in toolbar
   function syncMobBrush(brushName) {
     if (mobBrushIcon) mobBrushIcon.textContent = BRUSH_ICONS[brushName] || '✒️';
     if (mobBrushLabel) mobBrushLabel.textContent = BRUSH_LABELS[brushName] || brushName;
     document.querySelectorAll('.mob-brush-card').forEach(c => {
       c.classList.toggle('active', c.dataset.brush === brushName);
     });
-    document.querySelectorAll('.mob-tool-btn').forEach(b => {
-      if (b.id === 'mobEraserBtn') b.classList.toggle('active', brushName === 'eraser');
-    });
+    const eraserBtn = document.getElementById('mobEraserBtn');
+    if (eraserBtn) eraserBtn.classList.toggle('active', brushName === 'eraser');
+    const brushBtn = document.getElementById('mobBrushBtn');
+    if (brushBtn) brushBtn.classList.toggle('active', brushName !== 'eraser');
   }
 
-  // Open / close panel
+  window._studioOnBrushChange = syncMobBrush;
+  window._studioOnColorChange = syncMobColor;
+
   function openPanel() {
     if (!panel) return;
     panel.style.display = 'flex';
@@ -2037,26 +2073,38 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
 
   // Clear canvas
   document.getElementById('mobClearFromPanel')?.addEventListener('click', function() {
-    document.getElementById('clearBtn')?.click();
+    if (typeof window._studioClear === 'function') {
+      window._studioClear();
+    } else {
+      document.getElementById('clearBtn')?.click();
+    }
     closePanel();
   });
 
   // Download
   document.getElementById('mobDownloadFromPanel')?.addEventListener('click', function() {
-    document.getElementById('downloadBtn')?.click();
+    if (typeof window._studioDownload === 'function') {
+      window._studioDownload();
+    } else {
+      document.getElementById('downloadBtn')?.click();
+    }
     closePanel();
   });
 
   // Undo from toolbar
   document.getElementById('mobUndoBtn')?.addEventListener('click', function() {
-    document.getElementById('undoBtn')?.click();
+    if (typeof window._studioUndo === 'function') {
+      window._studioUndo();
+    } else {
+      document.getElementById('undoBtn')?.click();
+    }
   });
 
   // Eraser shortcut in toolbar
   document.getElementById('mobEraserBtn')?.addEventListener('click', function() {
-    const eraserCard = document.querySelector('.brush-card[data-brush="eraser"]');
-    if (eraserCard) eraserCard.click();
-    syncMobBrush('eraser');
+    if (typeof window._studioSetBrush === 'function') {
+      window._studioSetBrush('eraser');
+    }
   });
 
   // Back button
@@ -2065,38 +2113,34 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
   });
 
   // Sound toggle
+  function updateSoundBtnText(enabled) {
+    if (!mobSoundBtn) return;
+    mobSoundBtn.textContent = enabled ? '🔊 Sound: On' : '🔇 Sound: Off';
+  }
+
   document.getElementById('mobSoundBtn')?.addEventListener('click', function() {
-    const mainSound = document.getElementById('soundToggle');
-    if (mainSound) mainSound.click();
-    const isOn = mainSound?.textContent?.includes('On') || this.textContent === 'Off';
-    this.textContent = isOn ? 'Off' : 'On';
+    if (typeof window._studioToggleSound === 'function') {
+      const enabled = window._studioToggleSound();
+      updateSoundBtnText(enabled);
+    }
   });
 
   // Mobile brush cards in panel
   document.querySelectorAll('.mob-brush-card').forEach(card => {
     card.addEventListener('click', function() {
       const brushName = this.dataset.brush;
-      const desktopCard = document.querySelector('.brush-card[data-brush="' + brushName + '"]');
-      if (desktopCard) desktopCard.click();
-      syncMobBrush(brushName);
+      if (typeof window._studioSetBrush === 'function') {
+        window._studioSetBrush(brushName);
+      }
       closePanel();
-    });
-  });
-
-  // Mirror desktop brush selection to mobile
-  document.querySelectorAll('.brush-card').forEach(card => {
-    card.addEventListener('click', function() {
-      syncMobBrush(this.dataset.brush);
     });
   });
 
   // Mobile size slider
   if (mobSizeSlider) {
     mobSizeSlider.addEventListener('input', function() {
-      const desktopSlider = document.getElementById('brushSizeSlider');
-      if (desktopSlider) {
-        desktopSlider.value = this.value;
-        desktopSlider.dispatchEvent(new Event('input'));
+      if (typeof window._studioSetSize === 'function') {
+        window._studioSetSize(this.value);
       }
       if (mobSizeDisplay) mobSizeDisplay.textContent = this.value + ' px';
     });
@@ -2105,10 +2149,8 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
   // Mobile opacity slider
   if (mobOpacitySlider) {
     mobOpacitySlider.addEventListener('input', function() {
-      const desktopSlider = document.getElementById('brushOpacitySlider');
-      if (desktopSlider) {
-        desktopSlider.value = this.value;
-        desktopSlider.dispatchEvent(new Event('input'));
+      if (typeof window._studioSetOpacity === 'function') {
+        window._studioSetOpacity(this.value);
       }
       if (mobOpacityDisplay) mobOpacityDisplay.textContent = this.value + '%';
     });
@@ -2117,12 +2159,9 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
   // Mobile custom color input
   if (mobColorInput) {
     mobColorInput.addEventListener('input', function() {
-      const desktopInput = document.getElementById('customColorInput');
-      if (desktopInput) {
-        desktopInput.value = this.value;
-        desktopInput.dispatchEvent(new Event('input'));
+      if (typeof window._studioSetColor === 'function') {
+        window._studioSetColor(this.value);
       }
-      syncMobColor(this.value);
     });
   }
 
@@ -2133,92 +2172,42 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
     mobSwatchesGrid.innerHTML = '';
     colors.forEach(c => {
       const btn = document.createElement('button');
+      btn.type = 'button';
       btn.className = 'mob-swatch';
       btn.style.background = c;
       btn.title = c;
+      btn.dataset.color = c;
+      const curColor = (window._studioGetColor ? window._studioGetColor() : '#2d2a9c');
+      if (c.toLowerCase() === curColor.toLowerCase()) btn.classList.add('active');
       btn.addEventListener('click', function() {
         document.querySelectorAll('.mob-swatch').forEach(s => s.classList.remove('active'));
         this.classList.add('active');
-        // Sync to desktop swatches
-        const desktopSwatch = document.querySelector('.swatch-btn[style*="' + c + '"]');
-        if (desktopSwatch) desktopSwatch.click();
-        // Also set color directly on canvas state
-        const ev = new CustomEvent('mob-color-pick', { detail: { color: c } });
-        document.dispatchEvent(ev);
-        syncMobColor(c);
+        if (typeof window._studioSetColor === 'function') {
+          window._studioSetColor(c);
+        }
       });
       mobSwatchesGrid.appendChild(btn);
     });
-    // Mark first active
-    const first = mobSwatchesGrid.querySelector('.mob-swatch');
-    if (first) first.classList.add('active');
   }
-  buildMobSwatches('strawhat');
 
-  document.querySelectorAll('.mob-palette-pill').forEach(pill => {
-    pill.addEventListener('click', function() {
-      document.querySelectorAll('.mob-palette-pill').forEach(p => p.classList.remove('active'));
+  // Palette tabs in mobile panel
+  document.querySelectorAll('.mob-palette-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.mob-palette-tab').forEach(t => t.classList.remove('active'));
       this.classList.add('active');
       buildMobSwatches(this.dataset.palette);
-      // Sync desktop palette
-      const desktopPill = document.querySelector('.palette-pill[data-palette="' + this.dataset.palette + '"]');
-      if (desktopPill) desktopPill.click();
     });
   });
 
-  // Mobile stamps in panel
-  document.querySelectorAll('.mob-stamp').forEach(stamp => {
-    stamp.addEventListener('click', function() {
-      const stampName = this.dataset.stamp;
-      const desktopStamp = document.querySelector('.stamp-btn[data-stamp="' + stampName + '"]');
-      if (desktopStamp) desktopStamp.click();
-      document.querySelectorAll('.mob-stamp').forEach(s => s.classList.remove('active'));
-      this.classList.toggle('active', true);
-      closePanel();
-    });
-  });
-
-  // Mobile paper patterns
-  document.querySelectorAll('.mob-pattern-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.mob-pattern-btn').forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      const desktopBtn = document.querySelector('.pattern-btn[data-pattern="' + this.dataset.pattern + '"]');
-      if (desktopBtn) desktopBtn.click();
-    });
-  });
-
-  // Sync undo button enabled state
-  const desktopUndo = document.getElementById('undoBtn');
-  if (desktopUndo && mobUndoBtn) {
-    const obs = new MutationObserver(() => {
-      mobUndoBtn.disabled = desktopUndo.disabled;
-    });
-    obs.observe(desktopUndo, { attributes: true });
+  // Initialize
+  buildMobSwatches('strawhat');
+  const initialColor = window._studioGetColor ? window._studioGetColor() : '#2d2a9c';
+  const initialBrush = window._studioGetBrush ? window._studioGetBrush() : 'fountain';
+  syncMobColor(initialColor);
+  syncMobBrush(initialBrush);
+  if (typeof window._studioGetSoundEnabled === 'function') {
+    updateSoundBtnText(window._studioGetSoundEnabled());
   }
-
-  // Listen to mob-color-pick events from mobile panel to set canvas state
-  document.addEventListener('mob-color-pick', function(e) {
-    // The main drawing engine reads from state.color; we need to trigger a swatch click
-    const targetColor = e.detail.color;
-    // Try matching any desktop swatch and clicking it
-    const allSwatches = document.querySelectorAll('.swatch-btn');
-    let matched = false;
-    allSwatches.forEach(s => {
-      if (s.style.background === targetColor || s.style.backgroundColor === targetColor) {
-        s.click(); matched = true;
-      }
-    });
-    if (!matched) {
-      // Update custom color input as fallback
-      const ci = document.getElementById('customColorInput');
-      if (ci) { ci.value = targetColor; ci.dispatchEvent(new Event('input')); }
-    }
-  });
-
-  // Initial sync
-  syncMobColor('#2d2a9c');
-  syncMobBrush('fountain');
 
 })();
 </script>
