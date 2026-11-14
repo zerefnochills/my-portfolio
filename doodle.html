@@ -566,73 +566,376 @@ header.studio-header {
   opacity: 1;
 }
 
+/* ============================================================
+   MOBILE-FIRST DOODLE STUDIO (≤768px) — Canvas-first design
+   ============================================================ */
 @media (max-width: 768px) {
+
+  /* Header: single tight row */
   .studio-header {
-    height: auto;
-    min-height: 52px;
-    padding: 6px 10px;
-    flex-wrap: wrap;
-    gap: 6px;
+    height: 48px;
+    min-height: 48px;
+    padding: 0 10px;
+    flex-wrap: nowrap;
+    gap: 8px;
+    overflow: hidden;
   }
+
   .brand-group {
     flex: 1 1 auto;
     min-width: 0;
-    gap: 8px;
+    gap: 6px;
+    overflow: hidden;
   }
+
   .studio-title {
-    font-size: clamp(1.1rem, 3.8vw, 1.35rem) !important;
+    font-size: 0.9rem !important;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
+
   .back-btn {
     padding: 2px 8px;
-    font-size: 1rem;
+    font-size: 0.85rem;
     flex-shrink: 0;
+    white-space: nowrap;
   }
+
+  /* Hide desktop actions row — replaced by bottom toolbar */
   .header-actions {
-    flex: 1 1 100%;
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 2px 0 4px;
-    gap: 6px;
-    scrollbar-width: none;
+    display: none !important;
   }
-  .header-actions::-webkit-scrollbar {
-    display: none;
-  }
-  .tool-btn {
-    padding: 3px 8px;
-    font-size: 0.92rem;
-    flex-shrink: 0;
-  }
+
+  /* Main container: full height minus header & bottom bar */
   .studio-container {
-    height: calc(100vh - 96px);
-    height: calc(100dvh - 96px);
+    height: calc(100dvh - 48px - 56px);
+    height: calc(100vh - 48px - 56px);
     flex-direction: column;
-    padding: 6px 8px 8px;
-    gap: 8px;
+    padding: 6px 6px 0;
+    gap: 0;
+    overflow: hidden;
   }
+
+  /* Canvas fills everything */
   .canvas-wrapper {
-    height: auto;
-    min-height: 0;
     flex: 1 1 auto;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
   }
+
+  .canvas-card {
+    border-radius: 10px;
+    border-width: 2.5px;
+  }
+
+  .canvas-status-bar {
+    height: 24px;
+    font-size: 0.72rem;
+    padding: 0 8px;
+  }
+
+  /* Desktop toolbox — hidden on mobile, tools in bottom bar instead */
   .toolbox {
-    width: 100%;
-    min-width: 100%;
-    height: 135px;
-    flex-shrink: 0;
-    padding: 8px 10px;
-    border-radius: 12px;
+    display: none !important;
   }
+
+  /* ── BOTTOM TOOLBAR (mobile-only) ── */
+  .mobile-toolbar {
+    display: flex !important;
+  }
+
+  /* ── SETTINGS PANEL (slide-up sheet, mobile-only) ── */
+  .mobile-settings-panel {
+    display: flex !important;
+  }
+}
+
+/* Mobile toolbar & panel — hidden on desktop */
+.mobile-toolbar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background: var(--paper-sticky);
+  border-top: 2.5px solid var(--ink);
+  z-index: 90;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 8px;
+  gap: 4px;
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.12);
+}
+
+.mob-tool-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1px;
+  background: none;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  padding: 4px 8px;
+  font-family: var(--hand);
+  font-size: 0.65rem;
+  color: var(--ink);
+  cursor: pointer;
+  min-width: 44px;
+  min-height: 44px;
+  touch-action: manipulation;
+  transition: background 0.15s, border-color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.mob-tool-btn .mob-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+.mob-tool-btn.active,
+.mob-tool-btn:active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.mob-tool-btn.accent-btn {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  border-radius: 12px;
+}
+.mob-tool-btn.accent-btn .mob-icon { font-size: 1.1rem; }
+
+/* Color swatch button in toolbar */
+.mob-color-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 3px solid var(--ink);
+  box-shadow: 2px 2px 0 var(--ink);
+  background: #2d2a9c;
+  cursor: pointer;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Size indicator dot */
+.mob-size-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ink);
+  transition: width 0.1s, height 0.1s;
+}
+
+/* ── MOBILE SETTINGS PANEL (bottom sheet) ── */
+.mobile-settings-panel {
+  display: none;
+  position: fixed;
+  bottom: 56px;
+  left: 0;
+  right: 0;
+  max-height: 60dvh;
+  max-height: 60vh;
+  background: var(--paper-card);
+  border-top: 2.5px solid var(--ink);
+  border-radius: 20px 20px 0 0;
+  z-index: 89;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 -8px 24px rgba(0,0,0,0.18);
+  transform: translateY(110%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mobile-settings-panel.open {
+  transform: translateY(0);
+}
+
+.mob-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px 6px;
+  border-bottom: 1.5px dashed var(--ink-faint);
+  flex-shrink: 0;
+}
+.mob-panel-title {
+  font-family: var(--badge);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--ink);
+}
+.mob-panel-close {
+  background: none;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--ink);
+  touch-action: manipulation;
+}
+
+.mob-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Brush grid in mobile panel */
+.mob-brush-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.mob-brush-card {
+  background: var(--paper-sticky);
+  border: 1.8px solid var(--ink);
+  border-radius: 10px;
+  padding: 8px 6px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--hand);
+  font-size: 0.8rem;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: all 0.15s;
+}
+.mob-brush-card .mob-b-icon { font-size: 1.5rem; }
+.mob-brush-card.active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Size + opacity sliders */
+.mob-slider-row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.mob-slider-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--hand);
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+}
+input[type=range].mob-range {
+  width: 100%;
+  height: 8px;
+  accent-color: var(--ink);
+  cursor: pointer;
+}
+
+/* Color swatches in panel */
+.mob-swatches {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px;
+}
+.mob-swatch {
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid var(--ink);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.mob-swatch.active {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--ink);
+}
+
+/* Stamp grid in panel */
+.mob-stamps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.mob-stamp {
+  background: var(--paper-sticky);
+  border: 1.5px dashed var(--ink);
+  border-radius: 10px;
+  font-size: 1.5rem;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.mob-stamp.active {
+  background: var(--ink);
+  border-style: solid;
+}
+
+/* Paper pattern in panel */
+.mob-patterns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.mob-pattern-btn {
+  background: var(--paper-sticky);
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  padding: 8px;
+  font-family: var(--hand);
+  font-size: 0.85rem;
+  text-align: center;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.mob-pattern-btn.active {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* Palette selector in panel */
+.mob-palettes {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.mob-palette-pill {
+  font-family: var(--badge);
+  font-size: 0.85rem;
+  background: transparent;
+  border: 1.5px dashed var(--ink);
+  padding: 3px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--ink);
+  touch-action: manipulation;
+}
+.mob-palette-pill.active {
+  background: var(--ink);
+  color: var(--paper);
+  border-style: solid;
 }
 
 /* Android GPU Acceleration & Smooth Touch Response */
 html.is-android .studio-container,
 html.is-android .canvas-card,
-html.is-android .toolbox {
+html.is-android .toolbox,
+html.is-android .mobile-toolbar,
+html.is-android .mobile-settings-panel {
   transform: translateZ(0);
   will-change: transform;
 }
@@ -698,6 +1001,145 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
     </button>
   </div>
 </header>
+
+<!-- ═══ MOBILE BOTTOM TOOLBAR (shown only on ≤768px) ═══ -->
+<div class="mobile-toolbar" id="mobileToolbar" aria-label="Drawing tools">
+
+  <!-- Back -->
+  <button class="mob-tool-btn" id="mobBackBtn" title="Back to portfolio">
+    <span class="mob-icon">←</span>
+    <span>Back</span>
+  </button>
+
+  <!-- Active brush indicator -->
+  <button class="mob-tool-btn" id="mobBrushBtn" title="Open settings">
+    <span class="mob-icon" id="mobBrushIcon">✒️</span>
+    <span id="mobBrushLabel">Pen</span>
+  </button>
+
+  <!-- Color swatch (tap to open color panel) -->
+  <button class="mob-tool-btn" id="mobColorBtn" title="Pick color" style="flex-direction:row;gap:6px;">
+    <span class="mob-color-swatch" id="mobColorSwatch"></span>
+  </button>
+
+  <!-- Size indicator -->
+  <button class="mob-tool-btn" id="mobSizeBtn" title="Adjust size">
+    <span class="mob-icon">⬤</span>
+    <span>Size</span>
+  </button>
+
+  <!-- Eraser -->
+  <button class="mob-tool-btn" id="mobEraserBtn" title="Eraser">
+    <span class="mob-icon">🧽</span>
+    <span>Erase</span>
+  </button>
+
+  <!-- Undo -->
+  <button class="mob-tool-btn" id="mobUndoBtn" title="Undo" disabled>
+    <span class="mob-icon">↺</span>
+    <span>Undo</span>
+  </button>
+
+  <!-- More (settings sheet) -->
+  <button class="mob-tool-btn accent-btn" id="mobSettingsBtn" title="All tools">
+    <span class="mob-icon">⚙️</span>
+    <span>Tools</span>
+  </button>
+
+</div>
+
+<!-- ═══ MOBILE SETTINGS PANEL (slide-up sheet) ═══ -->
+<div class="mobile-settings-panel" id="mobileSettingsPanel" role="dialog" aria-label="Tool settings">
+
+  <div class="mob-panel-header">
+    <span class="mob-panel-title">🎨 Doodle Tools</span>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <button class="mob-tool-btn accent-btn" id="mobClearFromPanel" style="min-width:auto;padding:4px 10px;min-height:auto;flex-direction:row;gap:4px;font-size:0.75rem;border-radius:8px;">🧹 Clear</button>
+      <button class="mob-tool-btn accent-btn" id="mobDownloadFromPanel" style="min-width:auto;padding:4px 10px;min-height:auto;flex-direction:row;gap:4px;font-size:0.75rem;border-radius:8px;">💾 Save</button>
+      <button class="mob-panel-close" id="mobPanelClose">✕</button>
+    </div>
+  </div>
+
+  <div class="mob-panel-body">
+
+    <!-- Brush Types -->
+    <div>
+      <div class="mob-panel-title" style="font-size:0.95rem;margin-bottom:8px;">Brush Type</div>
+      <div class="mob-brush-grid">
+        <button class="mob-brush-card active" data-brush="fountain"><span class="mob-b-icon">✒️</span>Fountain</button>
+        <button class="mob-brush-card" data-brush="calligraphy"><span class="mob-b-icon">🖌️</span>Calligraphy</button>
+        <button class="mob-brush-card" data-brush="pencil"><span class="mob-b-icon">✏️</span>Pencil</button>
+        <button class="mob-brush-card" data-brush="marker"><span class="mob-b-icon">🖍️</span>Marker</button>
+        <button class="mob-brush-card" data-brush="splatter"><span class="mob-b-icon">🎨</span>Splatter</button>
+        <button class="mob-brush-card" data-brush="eraser"><span class="mob-b-icon">🧽</span>Eraser</button>
+      </div>
+    </div>
+
+    <!-- Size & Opacity -->
+    <div class="mob-slider-row">
+      <div>
+        <div class="mob-slider-label"><span>Nib Size</span><span id="mobSizeDisplay">4 px</span></div>
+        <input type="range" class="mob-range" id="mobSizeSlider" min="1" max="40" value="4">
+      </div>
+      <div>
+        <div class="mob-slider-label"><span>Opacity</span><span id="mobOpacityDisplay">100%</span></div>
+        <input type="range" class="mob-range" id="mobOpacitySlider" min="10" max="100" value="100">
+      </div>
+    </div>
+
+    <!-- Ink Palette -->
+    <div>
+      <div class="mob-panel-title" style="font-size:0.95rem;margin-bottom:6px;">Ink Colors</div>
+      <div class="mob-palettes" id="mobPaletteRow">
+        <button class="mob-palette-pill active" data-palette="strawhat">Straw Hat</button>
+        <button class="mob-palette-pill" data-palette="classic">Classic</button>
+        <button class="mob-palette-pill" data-palette="marine">Marine</button>
+        <button class="mob-palette-pill" data-palette="botanical">Wano</button>
+      </div>
+      <div class="mob-swatches" id="mobSwatchesGrid" style="margin-top:10px;"></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-top:8px;">
+        <input type="color" id="mobColorInput" value="#2d2a9c" style="width:34px;height:34px;border:2px solid var(--ink);border-radius:50%;padding:0;cursor:pointer;">
+        <span style="font-family:monospace;font-size:0.85rem;" id="mobHexLabel">#2D2A9C</span>
+      </div>
+    </div>
+
+    <!-- Stamps -->
+    <div>
+      <div class="mob-panel-title" style="font-size:0.95rem;margin-bottom:6px;">Stamps &amp; Seals</div>
+      <div class="mob-stamps">
+        <button class="mob-stamp" data-stamp="hat">👒</button>
+        <button class="mob-stamp" data-stamp="skull">☠️</button>
+        <button class="mob-stamp" data-stamp="anchor">⚓</button>
+        <button class="mob-stamp" data-stamp="tea">☕</button>
+        <button class="mob-stamp" data-stamp="star">✨</button>
+        <button class="mob-stamp" data-stamp="heart">💛</button>
+        <button class="mob-stamp" data-stamp="flame">🔥</button>
+        <button class="mob-stamp" data-stamp="meat">🍖</button>
+      </div>
+    </div>
+
+    <!-- Paper Pattern -->
+    <div>
+      <div class="mob-panel-title" style="font-size:0.95rem;margin-bottom:6px;">Paper Sheet</div>
+      <div class="mob-patterns">
+        <button class="mob-pattern-btn active" data-pattern="grid">📓 Grid</button>
+        <button class="mob-pattern-btn" data-pattern="lined">📄 Lined</button>
+        <button class="mob-pattern-btn" data-pattern="dots">🫧 Dots</button>
+        <button class="mob-pattern-btn" data-pattern="plain">⬜ Plain</button>
+      </div>
+    </div>
+
+    <!-- Sound toggle -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 0;">
+      <span style="font-family:var(--hand);font-size:0.95rem;">🔊 Sound Effects</span>
+      <button class="mob-tool-btn" id="mobSoundBtn" style="flex-direction:row;gap:6px;padding:6px 12px;border:1.5px solid var(--ink);border-radius:999px;min-height:auto;">On</button>
+    </div>
+
+    <!-- Safe bottom padding -->
+    <div style="height:16px;flex-shrink:0;"></div>
+
+  </div>
+</div>
 
 <!-- MAIN STUDIO CONTAINER -->
 <main class="studio-container">
@@ -1514,6 +1956,271 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
 
 })();
 </script>
-<script src="js/page-transition.js"></script>
+<script src="js/page-transition.js">
+
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE TOOLBAR & SETTINGS PANEL CONTROLLER
+   ═══════════════════════════════════════════════════════════════ */
+(function() {
+  'use strict';
+
+  // Only activate on mobile viewport
+  function isMobile() { return window.innerWidth <= 768; }
+
+  const BRUSH_ICONS = {
+    fountain: '✒️', calligraphy: '🖌️', pencil: '✏️',
+    marker: '🖍️', splatter: '🎨', eraser: '🧽'
+  };
+  const BRUSH_LABELS = {
+    fountain: 'Pen', calligraphy: 'Ink', pencil: 'Pencil',
+    marker: 'Marker', splatter: 'Splat', eraser: 'Erase'
+  };
+  const PALETTES = {
+    strawhat: ['#2d2a9c','#dc2626','#dc2626','#b91c1c','#18181b','#ffffff'],
+    classic:  ['#2d2a9c','#442817','#166534','#991b1b','#334155','#000000'],
+    marine:   ['#0284c7','#0f172a','#38bdf8','#475569','#dc2626','#f8fafc'],
+    botanical:['#166534','#4ade80','#65a30d','#78350f','#b45309','#dc2626']
+  };
+
+  const panel = document.getElementById('mobileSettingsPanel');
+  const mobColorSwatch = document.getElementById('mobColorSwatch');
+  const mobBrushIcon = document.getElementById('mobBrushIcon');
+  const mobBrushLabel = document.getElementById('mobBrushLabel');
+  const mobUndoBtn = document.getElementById('mobUndoBtn');
+  const mobSizeDisplay = document.getElementById('mobSizeDisplay');
+  const mobOpacityDisplay = document.getElementById('mobOpacityDisplay');
+  const mobSizeSlider = document.getElementById('mobSizeSlider');
+  const mobOpacitySlider = document.getElementById('mobOpacitySlider');
+  const mobColorInput = document.getElementById('mobColorInput');
+  const mobHexLabel = document.getElementById('mobHexLabel');
+  const mobSwatchesGrid = document.getElementById('mobSwatchesGrid');
+  const mobSoundBtn = document.getElementById('mobSoundBtn');
+
+  if (!panel) return; // Not on doodle page
+
+  // Sync colour swatch in toolbar
+  function syncMobColor(hex) {
+    if (mobColorSwatch) mobColorSwatch.style.background = hex;
+    if (mobColorInput) mobColorInput.value = hex;
+    if (mobHexLabel) mobHexLabel.textContent = hex.toUpperCase();
+  }
+
+  // Sync brush icon in toolbar
+  function syncMobBrush(brushName) {
+    if (mobBrushIcon) mobBrushIcon.textContent = BRUSH_ICONS[brushName] || '✒️';
+    if (mobBrushLabel) mobBrushLabel.textContent = BRUSH_LABELS[brushName] || brushName;
+    document.querySelectorAll('.mob-brush-card').forEach(c => {
+      c.classList.toggle('active', c.dataset.brush === brushName);
+    });
+    document.querySelectorAll('.mob-tool-btn').forEach(b => {
+      if (b.id === 'mobEraserBtn') b.classList.toggle('active', brushName === 'eraser');
+    });
+  }
+
+  // Open / close panel
+  function openPanel() {
+    if (!panel) return;
+    panel.style.display = 'flex';
+    requestAnimationFrame(() => panel.classList.add('open'));
+  }
+  function closePanel() {
+    if (!panel) return;
+    panel.classList.remove('open');
+    setTimeout(() => { panel.style.display = 'none'; }, 320);
+  }
+
+  document.getElementById('mobSettingsBtn')?.addEventListener('click', openPanel);
+  document.getElementById('mobBrushBtn')?.addEventListener('click', openPanel);
+  document.getElementById('mobColorBtn')?.addEventListener('click', openPanel);
+  document.getElementById('mobSizeBtn')?.addEventListener('click', openPanel);
+  document.getElementById('mobPanelClose')?.addEventListener('click', closePanel);
+
+  // Clear canvas
+  document.getElementById('mobClearFromPanel')?.addEventListener('click', function() {
+    document.getElementById('clearBtn')?.click();
+    closePanel();
+  });
+
+  // Download
+  document.getElementById('mobDownloadFromPanel')?.addEventListener('click', function() {
+    document.getElementById('downloadBtn')?.click();
+    closePanel();
+  });
+
+  // Undo from toolbar
+  document.getElementById('mobUndoBtn')?.addEventListener('click', function() {
+    document.getElementById('undoBtn')?.click();
+  });
+
+  // Eraser shortcut in toolbar
+  document.getElementById('mobEraserBtn')?.addEventListener('click', function() {
+    const eraserCard = document.querySelector('.brush-card[data-brush="eraser"]');
+    if (eraserCard) eraserCard.click();
+    syncMobBrush('eraser');
+  });
+
+  // Back button
+  document.getElementById('mobBackBtn')?.addEventListener('click', function() {
+    document.getElementById('studioBackBtn')?.click();
+  });
+
+  // Sound toggle
+  document.getElementById('mobSoundBtn')?.addEventListener('click', function() {
+    const mainSound = document.getElementById('soundToggle');
+    if (mainSound) mainSound.click();
+    const isOn = mainSound?.textContent?.includes('On') || this.textContent === 'Off';
+    this.textContent = isOn ? 'Off' : 'On';
+  });
+
+  // Mobile brush cards in panel
+  document.querySelectorAll('.mob-brush-card').forEach(card => {
+    card.addEventListener('click', function() {
+      const brushName = this.dataset.brush;
+      const desktopCard = document.querySelector('.brush-card[data-brush="' + brushName + '"]');
+      if (desktopCard) desktopCard.click();
+      syncMobBrush(brushName);
+      closePanel();
+    });
+  });
+
+  // Mirror desktop brush selection to mobile
+  document.querySelectorAll('.brush-card').forEach(card => {
+    card.addEventListener('click', function() {
+      syncMobBrush(this.dataset.brush);
+    });
+  });
+
+  // Mobile size slider
+  if (mobSizeSlider) {
+    mobSizeSlider.addEventListener('input', function() {
+      const desktopSlider = document.getElementById('brushSizeSlider');
+      if (desktopSlider) {
+        desktopSlider.value = this.value;
+        desktopSlider.dispatchEvent(new Event('input'));
+      }
+      if (mobSizeDisplay) mobSizeDisplay.textContent = this.value + ' px';
+    });
+  }
+
+  // Mobile opacity slider
+  if (mobOpacitySlider) {
+    mobOpacitySlider.addEventListener('input', function() {
+      const desktopSlider = document.getElementById('brushOpacitySlider');
+      if (desktopSlider) {
+        desktopSlider.value = this.value;
+        desktopSlider.dispatchEvent(new Event('input'));
+      }
+      if (mobOpacityDisplay) mobOpacityDisplay.textContent = this.value + '%';
+    });
+  }
+
+  // Mobile custom color input
+  if (mobColorInput) {
+    mobColorInput.addEventListener('input', function() {
+      const desktopInput = document.getElementById('customColorInput');
+      if (desktopInput) {
+        desktopInput.value = this.value;
+        desktopInput.dispatchEvent(new Event('input'));
+      }
+      syncMobColor(this.value);
+    });
+  }
+
+  // Palettes in mobile panel
+  function buildMobSwatches(paletteKey) {
+    if (!mobSwatchesGrid) return;
+    const colors = PALETTES[paletteKey] || PALETTES.strawhat;
+    mobSwatchesGrid.innerHTML = '';
+    colors.forEach(c => {
+      const btn = document.createElement('button');
+      btn.className = 'mob-swatch';
+      btn.style.background = c;
+      btn.title = c;
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.mob-swatch').forEach(s => s.classList.remove('active'));
+        this.classList.add('active');
+        // Sync to desktop swatches
+        const desktopSwatch = document.querySelector('.swatch-btn[style*="' + c + '"]');
+        if (desktopSwatch) desktopSwatch.click();
+        // Also set color directly on canvas state
+        const ev = new CustomEvent('mob-color-pick', { detail: { color: c } });
+        document.dispatchEvent(ev);
+        syncMobColor(c);
+      });
+      mobSwatchesGrid.appendChild(btn);
+    });
+    // Mark first active
+    const first = mobSwatchesGrid.querySelector('.mob-swatch');
+    if (first) first.classList.add('active');
+  }
+  buildMobSwatches('strawhat');
+
+  document.querySelectorAll('.mob-palette-pill').forEach(pill => {
+    pill.addEventListener('click', function() {
+      document.querySelectorAll('.mob-palette-pill').forEach(p => p.classList.remove('active'));
+      this.classList.add('active');
+      buildMobSwatches(this.dataset.palette);
+      // Sync desktop palette
+      const desktopPill = document.querySelector('.palette-pill[data-palette="' + this.dataset.palette + '"]');
+      if (desktopPill) desktopPill.click();
+    });
+  });
+
+  // Mobile stamps in panel
+  document.querySelectorAll('.mob-stamp').forEach(stamp => {
+    stamp.addEventListener('click', function() {
+      const stampName = this.dataset.stamp;
+      const desktopStamp = document.querySelector('.stamp-btn[data-stamp="' + stampName + '"]');
+      if (desktopStamp) desktopStamp.click();
+      document.querySelectorAll('.mob-stamp').forEach(s => s.classList.remove('active'));
+      this.classList.toggle('active', true);
+      closePanel();
+    });
+  });
+
+  // Mobile paper patterns
+  document.querySelectorAll('.mob-pattern-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.mob-pattern-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      const desktopBtn = document.querySelector('.pattern-btn[data-pattern="' + this.dataset.pattern + '"]');
+      if (desktopBtn) desktopBtn.click();
+    });
+  });
+
+  // Sync undo button enabled state
+  const desktopUndo = document.getElementById('undoBtn');
+  if (desktopUndo && mobUndoBtn) {
+    const obs = new MutationObserver(() => {
+      mobUndoBtn.disabled = desktopUndo.disabled;
+    });
+    obs.observe(desktopUndo, { attributes: true });
+  }
+
+  // Listen to mob-color-pick events from mobile panel to set canvas state
+  document.addEventListener('mob-color-pick', function(e) {
+    // The main drawing engine reads from state.color; we need to trigger a swatch click
+    const targetColor = e.detail.color;
+    // Try matching any desktop swatch and clicking it
+    const allSwatches = document.querySelectorAll('.swatch-btn');
+    let matched = false;
+    allSwatches.forEach(s => {
+      if (s.style.background === targetColor || s.style.backgroundColor === targetColor) {
+        s.click(); matched = true;
+      }
+    });
+    if (!matched) {
+      // Update custom color input as fallback
+      const ci = document.getElementById('customColorInput');
+      if (ci) { ci.value = targetColor; ci.dispatchEvent(new Event('input')); }
+    }
+  });
+
+  // Initial sync
+  syncMobColor('#2d2a9c');
+  syncMobBrush('fountain');
+
+})();
+</script>
 </body>
 </html>
