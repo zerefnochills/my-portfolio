@@ -648,7 +648,7 @@ header.studio-header {
 
   /* ── SETTINGS PANEL (slide-up sheet, mobile-only) ── */
   .mobile-settings-panel {
-    display: flex !important;
+    display: flex;
   }
 }
 
@@ -733,13 +733,13 @@ header.studio-header {
 
 /* ── MOBILE SETTINGS PANEL (bottom sheet) ── */
 .mobile-settings-panel {
-  display: none;
+  display: flex;
   position: fixed;
   bottom: 56px;
   left: 0;
   right: 0;
-  max-height: 60dvh;
-  max-height: 60vh;
+  max-height: 64dvh;
+  max-height: 64vh;
   background: var(--paper-card);
   border-top: 2.5px solid var(--ink);
   border-radius: 20px 20px 0 0;
@@ -747,11 +747,15 @@ header.studio-header {
   flex-direction: column;
   overflow: hidden;
   box-shadow: 0 -8px 24px rgba(0,0,0,0.18);
-  transform: translateY(110%);
+  transform: translateY(115%);
+  visibility: hidden;
+  pointer-events: none;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .mobile-settings-panel.open {
-  transform: translateY(0);
+  transform: translateY(0) !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
 }
 
 .mob-panel-header {
@@ -1965,6 +1969,27 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
   // Expose APIs for mobile controller & external integrations
   window._studioSetColor = setColor;
   window._studioSetBrush = setBrush;
+  window._studioSetStamp = function(stampName) {
+    if (state.activeStamp === stampName) {
+      state.activeStamp = null;
+      stampBtns.forEach(function(b) { b.classList.remove("active"); });
+      canvasStats.textContent = "Brush mode active · " + activeBrushLabel.textContent;
+    } else {
+      stampBtns.forEach(function(b) { b.classList.remove("active"); });
+      const targetBtn = Array.from(stampBtns).find(b => b.dataset.stamp === stampName);
+      if (targetBtn) targetBtn.classList.add("active");
+      state.activeStamp = stampName;
+      canvasStats.textContent = "Stamp mode active · Tap canvas to place " + stampName + "!";
+    }
+    playScratchSound();
+  };
+  window._studioSetPattern = function(pat) {
+    patternBtns.forEach(function(b) { b.classList.remove("active"); });
+    const targetBtn = Array.from(patternBtns).find(b => b.dataset.pattern === pat);
+    if (targetBtn) targetBtn.classList.add("active");
+    canvasCard.className = "canvas-card pattern-" + pat;
+    playPaperRustle();
+  };
   window._studioGetBrush = function() { return state.brush; };
   window._studioGetColor = function() { return state.color; };
   window._studioSetSize = function(sz) {
@@ -2056,13 +2081,11 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
 
   function openPanel() {
     if (!panel) return;
-    panel.style.display = 'flex';
-    requestAnimationFrame(() => panel.classList.add('open'));
+    panel.classList.add('open');
   }
   function closePanel() {
     if (!panel) return;
     panel.classList.remove('open');
-    setTimeout(() => { panel.style.display = 'none'; }, 320);
   }
 
   document.getElementById('mobSettingsBtn')?.addEventListener('click', openPanel);
@@ -2070,6 +2093,17 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
   document.getElementById('mobColorBtn')?.addEventListener('click', openPanel);
   document.getElementById('mobSizeBtn')?.addEventListener('click', openPanel);
   document.getElementById('mobPanelClose')?.addEventListener('click', closePanel);
+
+  // Close panel on canvas touch so user has clean drawing space
+  const mainCanvas = document.getElementById('mainCanvas') || document.querySelector('canvas');
+  if (mainCanvas) {
+    mainCanvas.addEventListener('touchstart', function() {
+      if (panel.classList.contains('open')) closePanel();
+    }, { passive: true });
+    mainCanvas.addEventListener('mousedown', function() {
+      if (panel.classList.contains('open')) closePanel();
+    });
+  }
 
   // Clear canvas
   document.getElementById('mobClearFromPanel')?.addEventListener('click', function() {
@@ -2107,9 +2141,13 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
     }
   });
 
-  // Back button
+  // Back button (rock solid navigation)
   document.getElementById('mobBackBtn')?.addEventListener('click', function() {
-    document.getElementById('studioBackBtn')?.click();
+    if (window.PageTransition && typeof window.PageTransition.navigate === 'function') {
+      window.PageTransition.navigate("index.html");
+    } else {
+      window.location.href = "index.html";
+    }
   });
 
   // Sound toggle
@@ -2190,12 +2228,37 @@ a, button, [role="button"], select, summary, .color-swatch, .tool-btn {
     });
   }
 
-  // Palette tabs in mobile panel
-  document.querySelectorAll('.mob-palette-tab').forEach(tab => {
-    tab.addEventListener('click', function() {
-      document.querySelectorAll('.mob-palette-tab').forEach(t => t.classList.remove('active'));
+  // Palette tabs in mobile panel - FIXED querySelector to match .mob-palette-pill in HTML
+  document.querySelectorAll('.mob-palette-pill').forEach(pill => {
+    pill.addEventListener('click', function() {
+      document.querySelectorAll('.mob-palette-pill').forEach(p => p.classList.remove('active'));
       this.classList.add('active');
       buildMobSwatches(this.dataset.palette);
+    });
+  });
+
+  // Mobile Stamps in panel - WIRED!
+  document.querySelectorAll('.mob-stamp').forEach(stamp => {
+    stamp.addEventListener('click', function() {
+      const stampName = this.dataset.stamp;
+      if (typeof window._studioSetStamp === 'function') {
+        window._studioSetStamp(stampName);
+      }
+      document.querySelectorAll('.mob-stamp').forEach(s => s.classList.remove('active'));
+      this.classList.add('active');
+      closePanel();
+    });
+  });
+
+  // Mobile Paper Sheet patterns in panel - WIRED!
+  document.querySelectorAll('.mob-pattern-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const pat = this.dataset.pattern;
+      if (typeof window._studioSetPattern === 'function') {
+        window._studioSetPattern(pat);
+      }
+      document.querySelectorAll('.mob-pattern-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
     });
   });
 
